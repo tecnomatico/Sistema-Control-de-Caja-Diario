@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09/08/2013 15:08:02 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="co.tecnomati.java.controlcaja.dominio.TipoFormulario" table="tipo_formulario" catalog="control_caja">
+        <id name="codigo" type="int">
+            <column name="CODIGO" />
+            <generator class="assigned" />
+        </id>
+        <property name="formulario" type="string">
+            <column name="FORMULARIO" length="100" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="TIPO" length="100" />
+        </property>
+        <property name="accion" type="string">
+            <column name="ACCION" length="100" />
+        </property>
+        <set name="formularios" inverse="true">
+            <key>
+                <column name="CODIGO_FORMULARIO" />
+            </key>
+            <one-to-many class="co.tecnomati.java.controlcaja.dominio.Formulario" />
+        </set>
+    </class>
+</hibernate-mapping>

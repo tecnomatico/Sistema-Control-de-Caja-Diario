@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09/08/2013 15:08:02 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="co.tecnomati.java.controlcaja.dominio.Formulario" table="formulario" catalog="control_caja">
+        <id name="numeroSerie" type="int">
+            <column name="NUMERO_SERIE" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipoFormulario" class="co.tecnomati.java.controlcaja.dominio.TipoFormulario" fetch="select">
+            <column name="CODIGO_FORMULARIO" />
+        </many-to-one>
+        <many-to-one name="concepto" class="co.tecnomati.java.controlcaja.dominio.Concepto" fetch="select">
+            <column name="CODIGO_CONCEPTO" />
+        </many-to-one>
+        <many-to-one name="diario" class="co.tecnomati.java.controlcaja.dominio.Diario" fetch="select">
+            <column name="FECHA" length="10" />
+        </many-to-one>
+        <property name="cuit" type="java.lang.Integer">
+            <column name="CUIT" />
+        </property>
+        <property name="monto" type="java.lang.Double">
+            <column name="MONTO" precision="22" scale="0" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

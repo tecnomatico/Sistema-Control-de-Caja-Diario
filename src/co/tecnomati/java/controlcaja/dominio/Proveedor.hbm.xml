@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09/08/2013 15:08:02 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="co.tecnomati.java.controlcaja.dominio.Proveedor" table="proveedor" catalog="control_caja">
+        <id name="cuit" type="int">
+            <column name="CUIT" />
+            <generator class="assigned" />
+        </id>
+        <property name="razonSocial" type="string">
+            <column name="RAZON_SOCIAL" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

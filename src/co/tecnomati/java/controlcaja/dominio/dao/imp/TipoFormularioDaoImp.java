@@ -16,7 +16,7 @@ import org.hibernate.Session;
  *
  * @author Joel
  */
-public class TipoFormularioDaoImp implements TipoFormularioDAO{
+public class TipoFormularioDaoImp extends  HibernateUtil implements TipoFormularioDAO{
 
     @Override
     public List<TipoFormulario> listarTipoFormulario() {
@@ -31,11 +31,11 @@ public class TipoFormularioDaoImp implements TipoFormularioDAO{
 
     @Override
     public void addTipoFormulario(TipoFormulario a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = getSessionFactory().openSession();
         session.beginTransaction();
         session.save(a);
         session.getTransaction().commit();
-        session.close();    }
+        session.close();   }
 
     @Override
     public void deleteTipoFormulario(TipoFormulario a) {

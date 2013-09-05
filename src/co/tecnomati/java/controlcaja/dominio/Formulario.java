@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 09/08/2013 15:08:02 by Hibernate Tools 3.2.1.GA
+// Generated 21/08/2013 18:13:09 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -14,6 +14,7 @@ public class Formulario  implements java.io.Serializable {
      private Concepto concepto;
      private Diario diario;
      private Integer cuit;
+     private String tipoProceso;
      private Double monto;
      private String nombre;
 
@@ -24,12 +25,13 @@ public class Formulario  implements java.io.Serializable {
     public Formulario(int numeroSerie) {
         this.numeroSerie = numeroSerie;
     }
-    public Formulario(int numeroSerie, TipoFormulario tipoFormulario, Concepto concepto, Diario diario, Integer cuit, Double monto, String nombre) {
+    public Formulario(int numeroSerie, TipoFormulario tipoFormulario, Concepto concepto, Diario diario, Integer cuit, String tipoProceso, Double monto, String nombre) {
        this.numeroSerie = numeroSerie;
        this.tipoFormulario = tipoFormulario;
        this.concepto = concepto;
        this.diario = diario;
        this.cuit = cuit;
+       this.tipoProceso = tipoProceso;
        this.monto = monto;
        this.nombre = nombre;
     }
@@ -68,6 +70,13 @@ public class Formulario  implements java.io.Serializable {
     
     public void setCuit(Integer cuit) {
         this.cuit = cuit;
+    }
+    public String getTipoProceso() {
+        return this.tipoProceso;
+    }
+    
+    public void setTipoProceso(String tipoProceso) {
+        this.tipoProceso = tipoProceso;
     }
     public Double getMonto() {
         return this.monto;

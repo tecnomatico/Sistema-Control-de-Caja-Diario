@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 09/08/2013 15:08:02 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 21/08/2013 18:13:10 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="co.tecnomati.java.controlcaja.dominio.Concepto" table="concepto" catalog="control_caja">
-        <id name="codigo" type="int">
+        <id name="codigo" type="java.lang.Integer">
             <column name="CODIGO" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="descripcion" type="string">
             <column name="DESCRIPCION" length="100" />

@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 09/08/2013 15:08:02 by Hibernate Tools 3.2.1.GA
+// Generated 21/08/2013 18:13:09 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -11,32 +11,25 @@ import java.util.Set;
 public class TipoFormulario  implements java.io.Serializable {
 
 
-     private int codigo;
+     private Integer codigo;
      private String formulario;
-     private String tipo;
-     private String accion;
+     private String atajo;
      private Set<Formulario> formularios = new HashSet<Formulario>(0);
 
     public TipoFormulario() {
     }
 
-	
-    public TipoFormulario(int codigo) {
-        this.codigo = codigo;
-    }
-    public TipoFormulario(int codigo, String formulario, String tipo, String accion, Set<Formulario> formularios) {
-       this.codigo = codigo;
+    public TipoFormulario(String formulario, String atajo, Set<Formulario> formularios) {
        this.formulario = formulario;
-       this.tipo = tipo;
-       this.accion = accion;
+       this.atajo = atajo;
        this.formularios = formularios;
     }
    
-    public int getCodigo() {
+    public Integer getCodigo() {
         return this.codigo;
     }
     
-    public void setCodigo(int codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
     public String getFormulario() {
@@ -46,19 +39,12 @@ public class TipoFormulario  implements java.io.Serializable {
     public void setFormulario(String formulario) {
         this.formulario = formulario;
     }
-    public String getTipo() {
-        return this.tipo;
+    public String getAtajo() {
+        return this.atajo;
     }
     
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-    public String getAccion() {
-        return this.accion;
-    }
-    
-    public void setAccion(String accion) {
-        this.accion = accion;
+    public void setAtajo(String atajo) {
+        this.atajo = atajo;
     }
     public Set<Formulario> getFormularios() {
         return this.formularios;

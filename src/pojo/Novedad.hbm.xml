@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/09/2013 17:08:29 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="pojo.Novedad" table="novedad" catalog="novedades">
+        <id name="fecha" type="date">
+            <column name="fecha" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="empleados" class="pojo.Empleados" fetch="select">
+            <column name="legajo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="concepto" class="pojo.Concepto" fetch="select">
+            <column name="cod_con" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="40" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

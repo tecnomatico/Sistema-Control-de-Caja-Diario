@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/09/2013 17:08:29 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="pojo.Empleados" table="empleados" catalog="novedades">
+        <id name="legajo" type="java.lang.Integer">
+            <column name="LEGAJO" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="sucursal" class="pojo.Sucursal" fetch="select">
+            <column name="COD_SUC" not-null="true" />
+        </many-to-one>
+        <many-to-one name="empresa" class="pojo.Empresa" fetch="select">
+            <column name="COD_EMP" not-null="true" />
+        </many-to-one>
+        <property name="apellido" type="string">
+            <column name="APELLIDO" length="30" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="30" not-null="true" />
+        </property>
+        <property name="cuit" type="int">
+            <column name="CUIT" not-null="true" />
+        </property>
+        <property name="convenio" type="string">
+            <column name="convenio" length="30" not-null="true" />
+        </property>
+        <property name="tarea" type="string">
+            <column name="tarea" length="30" not-null="true" />
+        </property>
+        <set name="usuarios" inverse="true">
+            <key>
+                <column name="LEGAJO" not-null="true" />
+            </key>
+            <one-to-many class="pojo.Usuario" />
+        </set>
+        <set name="novedads" inverse="true">
+            <key>
+                <column name="legajo" not-null="true" />
+            </key>
+            <one-to-many class="pojo.Novedad" />
+        </set>
+        <set name="sucursals" inverse="true">
+            <key>
+                <column name="legajo" not-null="true" />
+            </key>
+            <one-to-many class="pojo.Sucursal" />
+        </set>
+    </class>
+</hibernate-mapping>

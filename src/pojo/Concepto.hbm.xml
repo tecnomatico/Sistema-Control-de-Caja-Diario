@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/09/2013 17:08:29 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="pojo.Concepto" table="concepto" catalog="novedades">
+        <id name="codCon" type="int">
+            <column name="cod_con" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" not-null="true" />
+        </property>
+        <property name="cargaUsuario" type="boolean">
+            <column name="carga_usuario" not-null="true" />
+        </property>
+        <property name="tipo" type="boolean">
+            <column name="tipo" not-null="true" />
+        </property>
+        <set name="novedads" inverse="true">
+            <key>
+                <column name="cod_con" not-null="true" />
+            </key>
+            <one-to-many class="pojo.Novedad" />
+        </set>
+    </class>
+</hibernate-mapping>

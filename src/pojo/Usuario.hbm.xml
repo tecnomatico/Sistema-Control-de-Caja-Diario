@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/09/2013 17:08:29 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="pojo.Usuario" table="usuario" catalog="novedades">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="empleados" class="pojo.Empleados" fetch="select">
+            <column name="LEGAJO" not-null="true" />
+        </many-to-one>
+        <property name="usuario" type="string">
+            <column name="USUARIO" length="10" not-null="true" />
+        </property>
+        <property name="contrase&#241;a" type="string">
+            <column name="CONTRASE&#209;A" length="10" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="30" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="TIPO" length="13" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

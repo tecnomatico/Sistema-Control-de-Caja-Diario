@@ -16,7 +16,7 @@ public class Empleado  implements java.io.Serializable {
      private Empresa empresa;
      private String apellido;
      private String nombre;
-     private int cuit;
+     private String cuit;
      private String convenio;
      private String tarea;
      private Set usuarios = new HashSet(0);
@@ -27,7 +27,7 @@ public class Empleado  implements java.io.Serializable {
     }
 
 	
-    public Empleado(Sucursal sucursal, Empresa empresa, String apellido, String nombre, int cuit, String convenio, String tarea) {
+    public Empleado(Sucursal sucursal, Empresa empresa, String apellido, String nombre, String cuit, String convenio, String tarea) {
         this.sucursal = sucursal;
         this.empresa = empresa;
         this.apellido = apellido;
@@ -36,7 +36,7 @@ public class Empleado  implements java.io.Serializable {
         this.convenio = convenio;
         this.tarea = tarea;
     }
-    public Empleado(Sucursal sucursal, Empresa empresa, String apellido, String nombre, int cuit, String convenio, String tarea, Set usuarios, Set novedads, Set sucursals) {
+    public Empleado(Sucursal sucursal, Empresa empresa, String apellido, String nombre, String cuit, String convenio, String tarea, Set usuarios, Set novedads, Set sucursals) {
        this.sucursal = sucursal;
        this.empresa = empresa;
        this.apellido = apellido;
@@ -84,11 +84,11 @@ public class Empleado  implements java.io.Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public int getCuit() {
+    public String getCuit() {
         return this.cuit;
     }
     
-    public void setCuit(int cuit) {
+    public void setCuit(String cuit) {
         this.cuit = cuit;
     }
     public String getConvenio() {

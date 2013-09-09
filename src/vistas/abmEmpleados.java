@@ -4,6 +4,10 @@
  */
 package vistas;
 
+import pojo.Empleado;
+import pojo.Empresa;
+import pojo.Sucursal;
+
 /**
  *
  * @author usuario
@@ -96,8 +100,13 @@ public class abmEmpleados extends javax.swing.JDialog {
         panelTranslucidoComplete1.setOpaque(false);
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Tick (1).png"))); // NOI18N
-        btnAceptar.setText("Aceptar");
+        btnAceptar.setText("Guardar");
         btnAceptar.setToolTipText("");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/adduser.png"))); // NOI18N
         btnNuevo.setText("Nuevo");
@@ -298,6 +307,23 @@ public class abmEmpleados extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        Empleado empleado = new Empleado();
+        Empresa empresa = new Empresa();
+        Sucursal sucursal = new Sucursal();
+                
+                empleado.setLegajo(Integer.parseInt(txtLegajo.getText()));
+                empleado.setApellido(txtApellido.getText());
+                empleado.setNombre(txtNombre.getText());
+                empleado.setCuit(txtCuit.getText());
+                empresa.setNombre(txtEmpresa.getText());
+                sucursal.setNombre(txtSucursal.getText());
+                empleado.setConvenio(txtConvenio.getText());
+                empleado.setTarea(txtTarea.getText());
+                // todos los empleados que se den de alta aqi no seran administradores
+           
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments

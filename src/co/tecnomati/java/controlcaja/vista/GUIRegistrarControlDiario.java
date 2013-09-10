@@ -51,19 +51,7 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
         this.setVisible(true);
         
     }
-// 
-//    public void setDatosNombreEntidad(){
-//        String[] vector= null; 
-//        int i;
-//        for (TipoFormulario o : new TipoFormularioDaoImp().listarTipoFormulario()) {
-//            i=1;
-//            vector[i] = o.getFormulario();
-//            i++;
-//        }
-//        
-//        new ajTextField.autocompleterText(txtNombre, vector);
-//        
-//    }
+
     public void setDatosCmbTipoFormulario(){
     cmbTipoComprobante.removeAllItems();
                 System.out.print(new TipoFormularioDaoImp().listarTipoFormulario().size());
@@ -328,6 +316,7 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
         });
 
         dateComprobante.setDate(new Date());
+        dateComprobante.setMaxSelectableDate(new Date());
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -462,20 +451,24 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
                 //completar los datos
                 formulario.setTipoProceso(cmbTipoProceso.getSelectedItem().toString());
                 formulario.setTipoFormulario(tipoForm);
-                formulario.setNumeroSerie(Integer.valueOf(txtnumSerie1.getText().trim()+txtNumSerie2.getText().trim()));
+                formulario.setNumeroSerie(Integer.valueOf(txtnumSerie1.getText().trim()));
                 formulario.setConcepto(concepto);
                 formulario.setCuit(entidad.getId());
                 formulario.setNombre(entidad.getDescripcion());
                 formulario.setMonto(Double.valueOf(txtMonto.getText().trim()));
                 //falta el diario
                 Diario diario;
+                Date fecha = dateComprobante.getDate();
                 try{
-                 diario= new DiarioDaoImp().getDiario(dateComprobante.getDate());  
+                
+                 diario= new DiarioDaoImp().getDiario(fecha);  
+                 // que linea mas rara  gracias a este system se pudo guardar
+                 System.out.println(diario.getFecha());
                  formulario.setDiario(diario);
-                 System.out.println("entro por el try");
+                 
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Se creo una nueva Caja debido a q No se encontro registro de caja para la fecha");
-                   diario = new Diario(dateComprobante.getDate());
+                   diario = new Diario(fecha);
                    new DiarioDaoImp().addDiario(diario);
                      System.out.println("entro por el catch");
                 }

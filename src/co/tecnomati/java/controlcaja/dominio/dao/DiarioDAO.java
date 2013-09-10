@@ -12,7 +12,7 @@ import java.util.Date;
  * @author Joel
  */
 public interface DiarioDAO {
-       java.util.List<Diario> listarDiario();
+  java.util.List<Diario> listarDiario();
   public void addDiario(Diario a);
   public void deleteDiario(Diario a);
   public void upDateDiario(Diario a);

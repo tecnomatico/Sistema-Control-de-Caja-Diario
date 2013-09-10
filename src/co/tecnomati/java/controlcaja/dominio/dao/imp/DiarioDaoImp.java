@@ -17,7 +17,7 @@ import org.hibernate.Session;
  *
  * @author Joel
  */
-public class DiarioDaoImp implements DiarioDAO{
+public class DiarioDaoImp extends HibernateUtil implements DiarioDAO{
 
     @Override
     public List<Diario> listarDiario() {
@@ -25,9 +25,9 @@ public class DiarioDaoImp implements DiarioDAO{
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Diario.class);
         
-        ArrayList<Diario> parroquia = (ArrayList<Diario>)criteria.list();
+        ArrayList<Diario> diario = (ArrayList<Diario>)criteria.list();
         session.close();
-        return parroquia;
+        return diario;
     }
 
     @Override

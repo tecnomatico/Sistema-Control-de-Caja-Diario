@@ -20,9 +20,19 @@ import javax.swing.table.TableRowSorter;
 public class GUIGestorAsociado extends javax.swing.JDialog {
     int numeroSeleccion;
     Asociado asociado;
-    ModeloAsociado modeloasociado = new ModeloAsociado();
+    ModeloAsociado modeloasociado ;
+    boolean agregado = false;
+
+    public boolean isAgregado() {
+        return agregado;
+    }
+
+    public void setAgregado(boolean agregado) {
+        this.agregado = agregado;
+    }
     
-    private final TableRowSorter sorter;
+    
+    private  TableRowSorter sorter;
     GUIGestorAsociado parent;
     //private final JTextField tipoPersona;
     //private final Strng qPersonas;
@@ -35,19 +45,22 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
     /**
      * Creates new form GUIGestorAsociado
      */
-    public GUIGestorAsociado
-            //(Asociado asociado, GUIGestorAsociado parent, boolean modal) {
-           (java.awt.Frame parent, boolean modal){
+    public GUIGestorAsociado(java.awt.Frame parent, boolean modal){
         super(parent, modal);
         initComponents();
         this.setTitle(Constantes.NAME_GESTOR_ASOCIADO);
-        sorter = new TableRowSorter(modeloasociado);
-        tblAsociado.setModel(modeloasociado);
+        inicializarTabla();
 //        this.parent = parent;//Estoy creando una variable global, le asigno el parent 
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 }
 
+    public void inicializarTabla(){
+        modeloasociado = new ModeloAsociado();
+        sorter = new TableRowSorter(modeloasociado);
+        tblAsociado.setModel(modeloasociado);  
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -58,6 +71,7 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
         btnCancelar = new org.edisoncor.gui.button.ButtonIpod();
         btnNuevo = new org.edisoncor.gui.button.ButtonIpod();
         btnEditar = new org.edisoncor.gui.button.ButtonIpod();
+        btnSeleccionar = new org.edisoncor.gui.button.ButtonIpod();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -108,6 +122,13 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
             }
         });
 
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -115,27 +136,29 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
+                        .addGap(51, 51, 51)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
+                        .addGap(51, 51, 51)
                         .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 85, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -146,9 +169,7 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -160,27 +181,27 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
        GUIAsociados nuevoAsociado = new GUIAsociados(null, true);
-       this.dispose();
-        GUIGestorAsociado bp = new GUIGestorAsociado(null, rootPaneCheckingEnabled);
+        if (nuevoAsociado.isAgregado()) {
+            inicializarTabla();
+        }
+       
+      
+        
 
 
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-/*Asociado a= new Asociado(5);
-a.setApellido("aramayo");
-AsociadoDaoImp adi= new AsociadoDaoImp();
-adi.addAsociado(a);
-GUIAsociados vasociado = new GUIAsociados(null, true, a);*/
+
          if (tblAsociado.getSelectedRow() != -1) {
             numeroSeleccion = sorter.convertRowIndexToModel(tblAsociado.getSelectedRow());
             asociado = modeloasociado.getAsociado(numeroSeleccion);
             // abrir el formulario alta de persona para editar los datos de persona
             GUIAsociados modificarPersona = new GUIAsociados(null, true, asociado);
             // actulizar la tabla con los datos modificados
-            this.dispose();
-           GUIGestorAsociado bp = new GUIGestorAsociado(null, rootPaneCheckingEnabled);
-           // GUIGestorAsociado bp =  new GUIGestorAsociado(asociado, parent, rootPaneCheckingEnabled);
+             if (modificarPersona.isAgregado()) {
+                 inicializarTabla();
+             }
            
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione una fila");
@@ -190,6 +211,19 @@ GUIAsociados vasociado = new GUIAsociados(null, true, a);*/
     private void tblAsociadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAsociadoMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tblAsociadoMouseClicked
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        
+        if (tblAsociado.getSelectedRow() != -1) {
+            numeroSeleccion = sorter.convertRowIndexToModel(tblAsociado.getSelectedRow());
+            asociado = modeloasociado.getAsociado(numeroSeleccion);
+            setAgregado(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una fila");
+        }
+        
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,6 +271,7 @@ GUIAsociados vasociado = new GUIAsociados(null, true, a);*/
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnEditar;
     private org.edisoncor.gui.button.ButtonIpod btnNuevo;
+    private org.edisoncor.gui.button.ButtonIpod btnSeleccionar;
     private javax.swing.JScrollPane jScrollPane2;
     private org.edisoncor.gui.panel.Panel panel1;
     private javax.swing.JTable tblAsociado;

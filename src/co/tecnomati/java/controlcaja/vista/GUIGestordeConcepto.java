@@ -22,9 +22,9 @@ int numeroSeleccion;
     Concepto asociado;
     ModeloConcepto modeloasociado = new ModeloConcepto();
     
-    private final TableRowSorter sorter;
+    private  TableRowSorter sorter;
     GUIGestorAsociado parent;
-
+    boolean agregado= false;
     
     /**
      * Creates new form GUIGestordeConcepto
@@ -32,19 +32,32 @@ int numeroSeleccion;
 public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        sorter = new TableRowSorter(modeloasociado);
-        tblConcepto.setModel(modeloasociado);
+       
         this.setTitle(Constantes.NAME_GESTOR_CONCEPTOS);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
+    public void inicializarTabla(){
+        modeloasociado= new ModeloConcepto();
+        sorter = new TableRowSorter(modeloasociado);
+        tblConcepto.setModel(modeloasociado);
+    }
     public Concepto getAsociado() {
         return asociado;
     }
     public void setAsociado(Concepto asociado) {
         this.asociado = asociado;
     }
+
+    public boolean isAgregado() {
+        return agregado;
+    }
+
+    public void setAgregado(boolean agregado) {
+        this.agregado = agregado;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,6 +73,7 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         btnCancelar = new org.edisoncor.gui.button.ButtonIpod();
         btnNuevoConcepto = new org.edisoncor.gui.button.ButtonIpod();
         btnEditar = new org.edisoncor.gui.button.ButtonIpod();
+        btnSeleccionar = new org.edisoncor.gui.button.ButtonIpod();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -109,6 +123,13 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
             }
         });
 
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -119,11 +140,13 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
+                        .addGap(18, 18, 18)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnNuevoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 28, Short.MAX_VALUE)))
+                        .addGap(26, 26, 26)
+                        .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 24, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
@@ -135,8 +158,9 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,9 +184,11 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnNuevoConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoConceptoActionPerformed
-           new GUIConceptos(null, true);
-           this.dispose();
-           new GUIGestordeConcepto(null, true);
+          GUIConceptos guiConcepto =  new GUIConceptos(null, true);
+          if (guiConcepto.isAgregado()) {
+            inicializarTabla();
+        }
+ 
            
     }//GEN-LAST:event_btnNuevoConceptoActionPerformed
 
@@ -172,16 +198,28 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
             numeroSeleccion = sorter.convertRowIndexToModel(tblConcepto.getSelectedRow());
             asociado = modeloasociado.getConcepto(numeroSeleccion);
             // abrir el formulario alta de persona para editar los datos de persona
-            GUIConceptos modificarPersona = new GUIConceptos(null, true, asociado);
+            GUIConceptos guiConceptos = new GUIConceptos(null, true, asociado);
             // actulizar la tabla con los datos modificados
-            this.dispose();
-           GUIGestordeConcepto bp = new GUIGestordeConcepto(null, rootPaneCheckingEnabled);
+            if (guiConceptos.isAgregado()) {
+                 inicializarTabla();
+            }
             
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione una fila");
        }
            
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        
+         if (tblConcepto.getSelectedRow() != -1) {
+            numeroSeleccion = sorter.convertRowIndexToModel(tblConcepto.getSelectedRow());
+            asociado = modeloasociado.getConcepto(numeroSeleccion);
+            setAgregado(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una fila");
+       }
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,6 +266,7 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnEditar;
     private org.edisoncor.gui.button.ButtonIpod btnNuevoConcepto;
+    private org.edisoncor.gui.button.ButtonIpod btnSeleccionar;
     private javax.swing.JScrollPane jScrollPane2;
     private org.edisoncor.gui.panel.Panel panel1;
     private javax.swing.JTable tblConcepto;

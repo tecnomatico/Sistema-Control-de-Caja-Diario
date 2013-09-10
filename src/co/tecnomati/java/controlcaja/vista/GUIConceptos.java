@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 public class GUIConceptos extends javax.swing.JDialog {
 private boolean modificar=false;
     Concepto asociado;
+    boolean agregado= false;
+    
     /**
      * Creates new form GUIConceptos
      */
@@ -51,7 +53,18 @@ private boolean modificar=false;
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 }
+
+    public boolean isAgregado() {
+        return agregado;
+    }
+
+    public void setAgregado(boolean agregado) {
+        this.agregado = agregado;
+    }
     
+       
+       
+       
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -152,6 +165,7 @@ private boolean modificar=false;
             } else {
                 conceptoDAO.addConcepto(asociado);
             }
+            setAgregado(true);
             JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
             this.dispose();
 //        }

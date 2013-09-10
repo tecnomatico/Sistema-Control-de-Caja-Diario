@@ -17,7 +17,7 @@ import org.hibernate.Session;
  *
  * @author Joel
  */
-public class FormualrioDaoImp implements FormularioDAO{
+public class FormularioDaoImp implements FormularioDAO{
 
     @Override
     public List<Formulario> listarFormulario() {

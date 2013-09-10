@@ -28,7 +28,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panel1" min="-2" max="-2" attributes="0"/>
+          <Component id="panel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -43,53 +43,51 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="labelMetric2" min="-2" pref="62" max="-2" attributes="1"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="dateComprobante" min="-2" pref="131" max="-2" attributes="0"/>
+                      <Component id="panelEntidad" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="labelMetric2" min="-2" pref="62" max="-2" attributes="1"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="dateComprobante" min="-2" pref="131" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                                  <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="panel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="panel4" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="panel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="panelComprobante" alignment="0" max="32767" attributes="0"/>
+                      <Component id="panelConcepto" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="labelMetric2" min="-2" max="-2" attributes="0"/>
-                              <Component id="dateComprobante" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="panel2" alignment="3" min="-2" pref="149" max="-2" attributes="0"/>
-                              <Component id="panel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="panel3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="labelMetric2" min="-2" max="-2" attributes="0"/>
+                      <Component id="dateComprobante" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="panelComprobante" min="-2" pref="149" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="panelEntidad" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="panelConcepto" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -102,7 +100,7 @@
             <Property name="text" type="java.lang.String" value="Fecha"/>
           </Properties>
         </Component>
-        <Container class="org.edisoncor.gui.panel.Panel" name="panel2">
+        <Container class="org.edisoncor.gui.panel.Panel" name="panelComprobante">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -123,29 +121,29 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
+                              <Component id="labelMetric5" min="-2" max="-2" attributes="1"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="txtnumSerie1" min="-2" pref="62" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txtNumSerie2" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="cmbTipoComprobante" min="-2" pref="139" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="labelMetric3" alignment="0" min="-2" max="-2" attributes="1"/>
                                   <Component id="labelMetric4" alignment="0" min="-2" max="-2" attributes="1"/>
                               </Group>
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="cmbTipoProceso" min="-2" pref="103" max="-2" attributes="0"/>
+                                  <Component id="txtTipoComprobante" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="cmbTipoProceso" min="-2" pref="116" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="cmbTipoComprobante" min="-2" pref="139" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="btnNuevoTipoComprobante" min="-2" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="labelMetric5" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                              <Component id="dateFecha1" min="-2" pref="62" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="dateFecha2" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -163,14 +161,15 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelMetric4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbTipoComprobante" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnNuevoTipoComprobante" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTipoComprobante" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Component id="cmbTipoComprobante" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelMetric5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="dateFecha1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="dateFecha2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtnumSerie1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNumSerie2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                   </Group>
@@ -201,7 +200,7 @@
                 <Property name="text" type="java.lang.String" value="Serie-Numero"/>
               </Properties>
             </Component>
-            <Component class="org.edisoncor.gui.textField.TextField" name="dateFecha1">
+            <Component class="org.edisoncor.gui.textField.TextField" name="txtnumSerie1">
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric3">
               <Properties>
@@ -217,20 +216,17 @@
                   </StringArray>
                 </Property>
               </Properties>
-            </Component>
-            <Component class="org.edisoncor.gui.textField.TextField" name="dateFecha2">
-            </Component>
-            <Component class="javax.swing.JButton" name="btnNuevoTipoComprobante">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="nuevo"/>
-              </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoTipoComprobanteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbTipoProcesoActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="org.edisoncor.gui.textField.TextField" name="txtNumSerie2">
+            </Component>
+            <Component class="org.edisoncor.gui.textField.TextField" name="txtTipoComprobante">
             </Component>
           </SubComponents>
         </Container>
-        <Container class="org.edisoncor.gui.panel.Panel" name="panel3">
+        <Container class="org.edisoncor.gui.panel.Panel" name="panelEntidad">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -249,19 +245,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="labelMetric8" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txtCuitDni" min="-2" pref="103" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="labelMetric9" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txtNombre" min="-2" pref="103" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="labelMetric9" alignment="0" min="-2" max="-2" attributes="1"/>
+                          <Component id="labelMetric8" alignment="0" min="-2" max="-2" attributes="1"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtCuitDni" min="-2" pref="103" max="-2" attributes="0"/>
+                          <Component id="txtNombre" min="-2" pref="186" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="37" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -278,7 +271,7 @@
                           <Component id="labelMetric8" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCuitDni" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -287,6 +280,9 @@
             <Component class="org.edisoncor.gui.textField.TextField" name="txtCuitDni">
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtNombre">
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreKeyPressed"/>
+              </Events>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric9">
               <Properties>
@@ -300,7 +296,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="org.edisoncor.gui.panel.Panel" name="panel4">
+        <Container class="org.edisoncor.gui.panel.Panel" name="panelConcepto">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -320,24 +316,22 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="labelMetric6" alignment="0" min="-2" max="-2" attributes="1"/>
+                          <Component id="labelMetric10" alignment="0" min="-2" max="-2" attributes="1"/>
+                          <Component id="labelMetric7" alignment="0" min="-2" max="-2" attributes="1"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtDescripcionConcepto" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="labelMetric10" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txtConcepto1" min="-2" pref="103" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="labelMetric6" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="txtCodigoConcepto" min="-2" pref="103" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtCodigoConcepto" min="-2" pref="79" max="-2" attributes="0"/>
+                                  <Component id="txtMonto" min="-2" pref="79" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="labelMetric7" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txtMonto" min="-2" pref="103" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -349,15 +343,24 @@
                           <Component id="labelMetric6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCodigoConcepto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelMetric10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtConcepto1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labelMetric7" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtMonto" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="labelMetric10" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="txtDescripcionConcepto" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                              <Component id="labelMetric7" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="txtMonto" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -376,6 +379,9 @@
               </Properties>
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtCodigoConcepto">
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoConceptoKeyPressed"/>
+              </Events>
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtMonto">
             </Component>
@@ -384,7 +390,7 @@
                 <Property name="text" type="java.lang.String" value="Concepto"/>
               </Properties>
             </Component>
-            <Component class="org.edisoncor.gui.textField.TextField" name="txtConcepto1">
+            <Component class="org.edisoncor.gui.textField.TextField" name="txtDescripcionConcepto">
             </Component>
           </SubComponents>
         </Container>
@@ -392,6 +398,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnCancelar">
           <Properties>

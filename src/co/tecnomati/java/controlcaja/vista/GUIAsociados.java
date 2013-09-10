@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class GUIAsociados extends javax.swing.JDialog {
     private boolean modificar=false;
     Asociado asociado;
-    
+    boolean agregado=false;
          /**
      * Creates new form GUIAsociados
      */
@@ -47,6 +47,15 @@ public class GUIAsociados extends javax.swing.JDialog {
         this.setVisible(true);
 }
 
+    public boolean isAgregado() {
+        return agregado;
+    }
+
+    public void setAgregado(boolean agregado) {
+        this.agregado = agregado;
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -237,6 +246,7 @@ public class GUIAsociados extends javax.swing.JDialog {
             } else {
                 asociadoDAO.addAsociado(asociado);
             }
+            setAgregado(true);
             JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
             this.dispose();
 //        }

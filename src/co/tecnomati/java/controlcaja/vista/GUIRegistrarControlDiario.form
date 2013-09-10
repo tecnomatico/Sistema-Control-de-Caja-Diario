@@ -192,7 +192,7 @@
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tipo Comprobante"/>
+                <Property name="text" type="java.lang.String" value="Tipo Comprobante: F1 search"/>
               </Properties>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric5">
@@ -257,7 +257,7 @@
                           <Component id="txtCuitDni" min="-2" pref="103" max="-2" attributes="0"/>
                           <Component id="txtNombre" min="-2" pref="186" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="37" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -289,7 +289,7 @@
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric9">
               <Properties>
-                <Property name="text" type="java.lang.String" value="RAZON SOCIAL"/>
+                <Property name="text" type="java.lang.String" value="RAZON SOCIAL:    F1 search"/>
               </Properties>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric8">
@@ -373,7 +373,7 @@
           <SubComponents>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="codigo Concepto"/>
+                <Property name="text" type="java.lang.String" value="codigo Concepto: F1 search"/>
               </Properties>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric7">

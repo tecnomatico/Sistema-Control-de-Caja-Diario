@@ -132,7 +132,7 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
             }
         });
 
-        labelMetric4.setText("Tipo Comprobante");
+        labelMetric4.setText("Tipo Comprobante: F1 search");
 
         labelMetric5.setText("Serie-Numero");
 
@@ -209,7 +209,7 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
             }
         });
 
-        labelMetric9.setText("RAZON SOCIAL");
+        labelMetric9.setText("RAZON SOCIAL:    F1 search");
 
         labelMetric8.setText("CUIT");
 
@@ -226,7 +226,7 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
                 .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCuitDni, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelEntidadLayout.setVerticalGroup(
             panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,7 +245,7 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
         panelConcepto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle de Concepto", 0, 0, null, new java.awt.Color(255, 255, 255)));
         panelConcepto.setColorPrimario(new java.awt.Color(153, 153, 153));
 
-        labelMetric6.setText("codigo Concepto");
+        labelMetric6.setText("codigo Concepto: F1 search");
 
         labelMetric7.setText("Monto ");
 

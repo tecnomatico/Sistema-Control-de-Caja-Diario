@@ -5,6 +5,7 @@
 package co.tecnomati.java.controlcaja.dominio.dao;
 
 import co.tecnomati.java.controlcaja.dominio.Diario;
+import java.util.Date;
 
 /**
  *
@@ -15,5 +16,5 @@ public interface DiarioDAO {
   public void addDiario(Diario a);
   public void deleteDiario(Diario a);
   public void upDateDiario(Diario a);
-  public Diario getDiario(int idDiario);
+  public Diario getDiario(Date idDiario);
 }

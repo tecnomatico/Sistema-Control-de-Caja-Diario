@@ -8,6 +8,7 @@ import co.tecnomati.java.controlcaja.dominio.Diario;
 import co.tecnomati.java.controlcaja.dominio.dao.DiarioDAO;
 import co.tecnomati.java.controlcaja.hibernateUtil.HibernateUtil;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -54,7 +55,7 @@ public class DiarioDaoImp implements DiarioDAO{
         session.close();     }
 
     @Override
-    public Diario getDiario(int idDiario) {
+    public Diario getDiario(Date idDiario) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Diario a = (Diario) session.get(Diario.class,idDiario);

@@ -16,12 +16,13 @@ import javax.swing.table.TableRowSorter;
  * @author Joel
  */
 public class GUIGestorTipoFormulario extends javax.swing.JDialog {
-   int numeroSeleccion;
-    TipoFormulario tipoComp;
-    ModeloTipoFormulario modeloTipoComp = new ModeloTipoFormulario();
+    private int numeroSeleccion;
+    private TipoFormulario tipoComp;
+    private ModeloTipoFormulario modeloTipoComp = new ModeloTipoFormulario();
     
-    private final TableRowSorter sorter;
+    private  TableRowSorter sorter;
 
+    private boolean agregado= false;
     /**
      * Creates new form GUIGestorTipoFormulario
      */
@@ -29,15 +30,26 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        sorter = new TableRowSorter(modeloTipoComp);
-        tblDocumento.setModel(modeloTipoComp);
+        inicializarTabla();
         this.setTitle(Constantes.NAME_GESTOR_TIPO_DOCUMENTO);
          this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
-   
+    public boolean isAgregado() {
+        return agregado;
+    }
 
+    public void setAgregado(boolean agregado) {
+        this.agregado = agregado;
+    }
+
+    public TipoFormulario getTipoComp() {
+        return tipoComp;
+    }
+
+   
+ 
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +66,7 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
         btnCancelar = new org.edisoncor.gui.button.ButtonIpod();
         btnNuevo = new org.edisoncor.gui.button.ButtonIpod();
         btnEditar = new org.edisoncor.gui.button.ButtonIpod();
+        btnSeleccionar = new org.edisoncor.gui.button.ButtonIpod();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -98,6 +111,13 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
             }
         });
 
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -105,14 +125,16 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
+                        .addGap(53, 53, 53)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
+                        .addGap(48, 48, 48)
                         .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 28, Short.MAX_VALUE)))
+                        .addGap(33, 33, 33)
+                        .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
@@ -124,7 +146,8 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -150,8 +173,9 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
        GUITipoFormulario nuevoDocumento = new GUITipoFormulario(null, true);
-       this.dispose();
-       new GUIGestorTipoFormulario(null, true);
+        if (nuevoDocumento.isAgregado()) {
+            inicializarTabla();
+        }
        
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -162,14 +186,30 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
             // abrir el formulario alta de persona para editar los datos de persona
             GUITipoFormulario modificarPersona = new GUITipoFormulario(null, true, tipoComp);
             // actulizar la tabla con los datos modificados
-            this.dispose();
-             new  GUIGestorTipoFormulario(null, true);
+                if (modificarPersona.isAgregado()) {
+                    inicializarTabla();
+                }
             
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione una fila");
        }
 
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+          if (tblDocumento.getSelectedRow() != -1) {
+            numeroSeleccion = sorter.convertRowIndexToModel(tblDocumento.getSelectedRow());
+            tipoComp = modeloTipoComp.getTipoComp(numeroSeleccion);
+            
+            //indico qe si se selecciono
+            setAgregado(true);
+                       
+            // cierro la ventna
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una fila");
+       }
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,8 +256,15 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnEditar;
     private org.edisoncor.gui.button.ButtonIpod btnNuevo;
+    private org.edisoncor.gui.button.ButtonIpod btnSeleccionar;
     private javax.swing.JScrollPane jScrollPane2;
     private org.edisoncor.gui.panel.Panel panel1;
     private javax.swing.JTable tblDocumento;
     // End of variables declaration//GEN-END:variables
+
+    private void inicializarTabla() {
+        modeloTipoComp = new ModeloTipoFormulario();
+        sorter = new TableRowSorter(modeloTipoComp);
+        tblDocumento.setModel(modeloTipoComp);
+    }
 }

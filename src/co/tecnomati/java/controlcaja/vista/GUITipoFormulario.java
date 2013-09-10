@@ -19,6 +19,7 @@ public class GUITipoFormulario extends javax.swing.JDialog {
    boolean modificar= false;
     private TipoFormulario doc;
     
+    boolean agregado=false;
     
     public GUITipoFormulario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -40,6 +41,14 @@ public class GUITipoFormulario extends javax.swing.JDialog {
         this.setTitle(Constantes.NAME_NUEVO_DOCUMENTO);
          this.setLocationRelativeTo(null);
          this.setVisible(true);
+    }
+
+    public boolean isAgregado() {
+        return agregado;
+    }
+
+    public void setAgregado(boolean agregado) {
+        this.agregado = agregado;
     }
 
     
@@ -153,6 +162,7 @@ public class GUITipoFormulario extends javax.swing.JDialog {
              new TipoFormularioDaoImp().addTipoFormulario(doc);
 
         }
+            setAgregado(true);
             JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
             this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed

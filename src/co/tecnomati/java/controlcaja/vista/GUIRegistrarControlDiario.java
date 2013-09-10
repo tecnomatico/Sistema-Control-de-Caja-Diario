@@ -7,10 +7,12 @@ package co.tecnomati.java.controlcaja.vista;
 import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Asociado;
 import co.tecnomati.java.controlcaja.dominio.Concepto;
+import co.tecnomati.java.controlcaja.dominio.Diario;
 import co.tecnomati.java.controlcaja.dominio.Entidad;
 import co.tecnomati.java.controlcaja.dominio.Formulario;
 import co.tecnomati.java.controlcaja.dominio.TipoFormulario;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ConceptoDaoImp;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.DiarioDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.FormularioDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoFormularioDaoImp;
 import java.awt.event.KeyAdapter;
@@ -152,6 +154,12 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
         cmbTipoProceso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbTipoProcesoActionPerformed(evt);
+            }
+        });
+
+        txtTipoComprobante.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTipoComprobanteKeyPressed(evt);
             }
         });
 
@@ -458,8 +466,20 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
                 formulario.setConcepto(concepto);
                 formulario.setCuit(entidad.getId());
                 formulario.setNombre(entidad.getDescripcion());
+                formulario.setMonto(Double.valueOf(txtMonto.getText().trim()));
                 //falta el diario
-                
+                Diario diario;
+                try{
+                 diario= new DiarioDaoImp().getDiario(dateComprobante.getDate());  
+                 formulario.setDiario(diario);
+                 System.out.println("entro por el try");
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, "Se creo una nueva Caja debido a q No se encontro registro de caja para la fecha");
+                   diario = new Diario(dateComprobante.getDate());
+                   new DiarioDaoImp().addDiario(diario);
+                     System.out.println("entro por el catch");
+                }
+//                
                 setAgregado(true);
 
                 if (modificar) {
@@ -510,6 +530,20 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_txtCodigoConceptoKeyPressed
+
+    private void txtTipoComprobanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoComprobanteKeyPressed
+         if (evt.getKeyCode()==KeyEvent.VK_F1){
+             GUIGestorTipoFormulario guiGestorTipoFormulario = new GUIGestorTipoFormulario(null, true);
+             if (guiGestorTipoFormulario.isAgregado()) {
+                 tipoForm = guiGestorTipoFormulario.getTipoComp();
+                  
+                 txtTipoComprobante.setText(tipoForm.getFormulario());
+                 // para que obtenga el foco 
+                 txtnumSerie1.requestFocus();
+             }
+             
+         }
+    }//GEN-LAST:event_txtTipoComprobanteKeyPressed
 
     private void setEscuchadorDeEventosCmboTipoComprobante(){
          cmbTipoComprobante.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {

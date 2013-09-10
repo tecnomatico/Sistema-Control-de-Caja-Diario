@@ -32,7 +32,7 @@ int numeroSeleccion;
 public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-       
+        inicializarTabla();
         this.setTitle(Constantes.NAME_GESTOR_CONCEPTOS);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -216,6 +216,7 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
             numeroSeleccion = sorter.convertRowIndexToModel(tblConcepto.getSelectedRow());
             asociado = modeloasociado.getConcepto(numeroSeleccion);
             setAgregado(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione una fila");
        }

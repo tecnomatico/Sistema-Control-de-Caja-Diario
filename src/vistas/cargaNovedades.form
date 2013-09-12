@@ -112,9 +112,10 @@
         <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonIpod1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/GUARDAR.jpg"/>
+              <Image iconType="3" name="/imagenes/cargar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cargar"/>
+            <Property name="distanciaDeSombra" type="int" value="45"/>
           </Properties>
         </Component>
         <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonIpod2">

@@ -69,8 +69,9 @@ public class cargaNovedades extends javax.swing.JDialog {
         panel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         panel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Floorboard & Wall - Green by ABH 1680x1050.jpg"))); // NOI18N
 
-        buttonIpod1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/GUARDAR.jpg"))); // NOI18N
+        buttonIpod1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cargar.png"))); // NOI18N
         buttonIpod1.setText("Cargar");
+        buttonIpod1.setDistanciaDeSombra(45);
 
         buttonIpod2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar.png"))); // NOI18N
         buttonIpod2.setText("Salir");

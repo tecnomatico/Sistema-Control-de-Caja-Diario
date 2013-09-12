@@ -16,7 +16,7 @@ public interface ConceptoDao {
     
   java.util.List<Concepto> listarConcepto();
   public java.util.List<Concepto> listarAsistencia(Empleado e);
-  public void addAsistencia(Concepto a);
+  public void addConcepto(Concepto a);
   public void deleteAsistencia(Concepto a);
   public void upDateAsistencia(Concepto a);
   public Concepto getAsistencia(int idAsistencia);

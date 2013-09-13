@@ -20,8 +20,8 @@ public interface ConceptoDao {
   public void deleteConcepto(Concepto a);
   public void updateConcepto(Concepto a);
   public Concepto getConcepto(int idAsistencia);
-  public Object[] getLegajoYNombreEmpleadoDeNovedades(int idConcepto);
-  public java.util.List<Concepto> listarAsistencia(Date fechaInicio ,Date fechaFin);
-  public java.util.List<Concepto> listarAsistencia(Empleado e ,Date fechaInicio, Date fechaFin);
+  public Object[] getLegajoYNombreEmpleadoDeConcepto(int idConcepto);
+  public java.util.List<Concepto> listarConcepto(Date fechaInicio ,Date fechaFin);
+  public java.util.List<Concepto> listarConcepto(Empleado e ,Date fechaInicio, Date fechaFin);
     
 }

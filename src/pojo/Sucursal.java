@@ -12,7 +12,7 @@ public class Sucursal  implements java.io.Serializable {
 
 
      private int codSuc;
-     private Empleados empleados;
+     private Empleado empleados;
      private Empresa empresa;
      private String nombre;
      private Set empleadoses = new HashSet(0);
@@ -21,13 +21,13 @@ public class Sucursal  implements java.io.Serializable {
     }
 
 	
-    public Sucursal(int codSuc, Empleados empleados, Empresa empresa, String nombre) {
+    public Sucursal(int codSuc, Empleado empleados, Empresa empresa, String nombre) {
         this.codSuc = codSuc;
         this.empleados = empleados;
         this.empresa = empresa;
         this.nombre = nombre;
     }
-    public Sucursal(int codSuc, Empleados empleados, Empresa empresa, String nombre, Set empleadoses) {
+    public Sucursal(int codSuc, Empleado empleados, Empresa empresa, String nombre, Set empleadoses) {
        this.codSuc = codSuc;
        this.empleados = empleados;
        this.empresa = empresa;
@@ -42,11 +42,11 @@ public class Sucursal  implements java.io.Serializable {
     public void setCodSuc(int codSuc) {
         this.codSuc = codSuc;
     }
-    public Empleados getEmpleados() {
+    public Empleado getEmpleados() {
         return this.empleados;
     }
     
-    public void setEmpleados(Empleados empleados) {
+    public void setEmpleados(Empleado empleados) {
         this.empleados = empleados;
     }
     public Empresa getEmpresa() {

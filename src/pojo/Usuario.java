@@ -10,7 +10,7 @@ public class Usuario  implements java.io.Serializable {
 
 
      private int id;
-     private Empleados empleados;
+     private Empleado empleados;
      private String usuario;
      private String contrasenia;
      private String descripcion;
@@ -19,7 +19,7 @@ public class Usuario  implements java.io.Serializable {
     public Usuario() {
     }
 
-    public Usuario(int id, Empleados empleados, String usuario, String contrasenia, String descripcion, String tipo) {
+    public Usuario(int id, Empleado empleados, String usuario, String contrasenia, String descripcion, String tipo) {
        this.id = id;
        this.empleados = empleados;
        this.usuario = usuario;
@@ -35,11 +35,11 @@ public class Usuario  implements java.io.Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    public Empleados getEmpleados() {
+    public Empleado getEmpleados() {
         return this.empleados;
     }
     
-    public void setEmpleados(Empleados empleados) {
+    public void setEmpleados(Empleado empleados) {
         this.empleados = empleados;
     }
     public String getUsuario() {

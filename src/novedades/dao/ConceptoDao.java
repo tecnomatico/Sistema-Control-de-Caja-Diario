@@ -17,9 +17,9 @@ public interface ConceptoDao {
   java.util.List<Concepto> listarConcepto();
   public java.util.List<Concepto> listarAsistencia(Empleado e);
   public void addConcepto(Concepto a);
-  public void deleteAsistencia(Concepto a);
-  public void upDateAsistencia(Concepto a);
-  public Concepto getAsistencia(int idAsistencia);
+  public void deleteConcepto(Concepto a);
+  public void updateConcepto(Concepto a);
+  public Concepto getConcepto(int idAsistencia);
   public Object[] getLegajoYNombreEmpleadoDeNovedades(int idConcepto);
   public java.util.List<Concepto> listarAsistencia(Date fechaInicio ,Date fechaFin);
   public java.util.List<Concepto> listarAsistencia(Empleado e ,Date fechaInicio, Date fechaFin);

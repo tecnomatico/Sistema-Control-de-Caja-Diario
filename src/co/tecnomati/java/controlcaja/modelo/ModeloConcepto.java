@@ -48,7 +48,7 @@ public class ModeloConcepto extends AbstractTableModel{
         
         switch (columnIndex) {
           
-            case 0:objeto = concepto.getCodigo();break;
+            case 0:objeto = concepto.getCodigoConcepto();break;
             case 1:objeto = concepto.getDescripcion();break;
 
             

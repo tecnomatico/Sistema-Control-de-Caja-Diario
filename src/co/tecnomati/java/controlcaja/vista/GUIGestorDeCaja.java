@@ -34,10 +34,6 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
 
         panelImage1 = new org.edisoncor.gui.panel.PanelImage();
         tabbedSelector21 = new org.edisoncor.gui.tabbedPane.TabbedSelector2();
-        panel2 = new org.edisoncor.gui.panel.Panel();
-        btnIncioCaja = new org.edisoncor.gui.button.ButtonIpod();
-        btnCierreCaja = new org.edisoncor.gui.button.ButtonIpod();
-        labelMetric1 = new org.edisoncor.gui.label.LabelMetric();
         panel1 = new org.edisoncor.gui.panel.Panel();
         btnControlDiario = new org.edisoncor.gui.button.ButtonIpod();
         btnConsultarControlDiario = new org.edisoncor.gui.button.ButtonIpod();
@@ -68,60 +64,17 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
 
         tabbedSelector21.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        btnIncioCaja.setText("Inicio de Caja");
-        btnIncioCaja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIncioCajaActionPerformed(evt);
-            }
-        });
-
-        btnCierreCaja.setText("Cierre Caja");
-
-        labelMetric1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelMetric1.setText("Registro de Incio y Cierre de Caja");
-        labelMetric1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-
-        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
-        panel2.setLayout(panel2Layout);
-        panel2Layout.setHorizontalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                        .addComponent(btnIncioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addComponent(btnCierreCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(97, 97, 97))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                        .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-        panel2Layout.setVerticalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIncioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCierreCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
-        );
-
-        tabbedSelector21.addTab("Caja", panel2);
-
-        btnControlDiario.setText("Control Diario");
+        btnControlDiario.setText("Nuevo Registro");
         btnControlDiario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnControlDiarioActionPerformed(evt);
             }
         });
 
-        btnConsultarControlDiario.setText("Consultar Control Diario");
+        btnConsultarControlDiario.setText("Busqueda ");
 
         labelMetric2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelMetric2.setText("Registrar Control Diario");
+        labelMetric2.setText("Registro de Comprobantes");
         labelMetric2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
@@ -129,12 +82,13 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labelMetric2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(btnControlDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(labelMetric2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(btnControlDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52)
                         .addComponent(btnConsultarControlDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(70, Short.MAX_VALUE))
@@ -284,42 +238,38 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIncioCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncioCajaActionPerformed
-        GUIInicioCaja inicioCaja = new GUIInicioCaja(this, true);
-    }//GEN-LAST:event_btnIncioCajaActionPerformed
-
     private void btnDatosCoopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatosCoopActionPerformed
         GUIDatosCooperativa datosCoop = new GUIDatosCooperativa(this, true);
-        
+
     }//GEN-LAST:event_btnDatosCoopActionPerformed
+
+    private void btnGestorAsociadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestorAsociadoActionPerformed
+        GUIGestorAsociado gestorAsosciado = new GUIGestorAsociado(this, true);
+    }//GEN-LAST:event_btnGestorAsociadoActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
         GUIGestorProveedores gestorProveedor = new GUIGestorProveedores(this, true);
-        
+
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnClientesActionPerformed
 
-    private void btnGestorAsociadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestorAsociadoActionPerformed
-         GUIGestorAsociado gestorAsosciado = new GUIGestorAsociado(this, true);
-    }//GEN-LAST:event_btnGestorAsociadoActionPerformed
-
-    private void btnControlDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnControlDiarioActionPerformed
-        GUIRegistrarControlDiario registrarControlDiario = new GUIRegistrarControlDiario(this, true);
-        
-    }//GEN-LAST:event_btnControlDiarioActionPerformed
-
     private void btnGestorConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestorConceptoActionPerformed
-       GUIGestordeConcepto gestorConcepto = new GUIGestordeConcepto(this, true);
-       
+        GUIGestordeConcepto gestorConcepto = new GUIGestordeConcepto(this, true);
+
     }//GEN-LAST:event_btnGestorConceptoActionPerformed
 
     private void btnDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentoActionPerformed
-       GUIGestorTipoFormulario gestorDocumento = new GUIGestorTipoFormulario(this, true);
-       
+        GUIGestorTipoComprobante gestorDocumento = new GUIGestorTipoComprobante(this, true);
+
     }//GEN-LAST:event_btnDocumentoActionPerformed
+
+    private void btnControlDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnControlDiarioActionPerformed
+        GUIRegistrarControlDiario registrarControlDiario = new GUIRegistrarControlDiario(this, true);
+
+    }//GEN-LAST:event_btnControlDiarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,7 +306,6 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.edisoncor.gui.button.ButtonIpod btnCierreCaja;
     private org.edisoncor.gui.button.ButtonIpod btnClientes;
     private org.edisoncor.gui.button.ButtonIpod btnConsultarControlDiario;
     private org.edisoncor.gui.button.ButtonIpod btnControlDiario;
@@ -364,12 +313,9 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonIpod btnDocumento;
     private org.edisoncor.gui.button.ButtonIpod btnGestorAsociado;
     private org.edisoncor.gui.button.ButtonIpod btnGestorConcepto;
-    private org.edisoncor.gui.button.ButtonIpod btnIncioCaja;
     private org.edisoncor.gui.button.ButtonIpod btnProveedores;
-    private org.edisoncor.gui.label.LabelMetric labelMetric1;
     private org.edisoncor.gui.label.LabelMetric labelMetric2;
     private org.edisoncor.gui.panel.Panel panel1;
-    private org.edisoncor.gui.panel.Panel panel2;
     private org.edisoncor.gui.panel.Panel panel3;
     private org.edisoncor.gui.panel.Panel panel4;
     private org.edisoncor.gui.panel.Panel panel6;

@@ -7,14 +7,12 @@ package co.tecnomati.java.controlcaja.vista;
 import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Asociado;
 import co.tecnomati.java.controlcaja.dominio.Concepto;
-import co.tecnomati.java.controlcaja.dominio.Diario;
-import co.tecnomati.java.controlcaja.dominio.Entidad;
-import co.tecnomati.java.controlcaja.dominio.Formulario;
-import co.tecnomati.java.controlcaja.dominio.TipoFormulario;
+
+import co.tecnomati.java.controlcaja.dominio.Comprobante;
+import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ConceptoDaoImp;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.DiarioDaoImp;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.FormularioDaoImp;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoFormularioDaoImp;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Date;
@@ -26,10 +24,9 @@ import org.jdesktop.swingx.autocomplete.*;
  */
 public class GUIRegistrarControlDiario extends javax.swing.JDialog {
     private boolean modificar;
-    private Formulario formulario;
-    private TipoFormulario tipoForm;
+    private Comprobante formulario;
+    private Tipocomprobante tipoForm;
     private Concepto concepto;
-    private Entidad entidad ;
     private boolean agregado;
     
     /**
@@ -54,13 +51,13 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
 
     public void setDatosCmbTipoFormulario(){
     cmbTipoComprobante.removeAllItems();
-                System.out.print(new TipoFormularioDaoImp().listarTipoFormulario().size());
+                System.out.print(new TipoComprobanteDaoImp().listarTipoFormulario().size());
 
-    if (new TipoFormularioDaoImp().listarTipoFormulario().isEmpty()) {
+    if (new TipoComprobanteDaoImp().listarTipoFormulario().isEmpty()) {
         cmbTipoComprobante.setEditable(false);
     }else{
                   cmbTipoComprobante.setEditable(true);   
-           for (TipoFormulario o : new TipoFormularioDaoImp().listarTipoFormulario()) {
+           for (Tipocomprobante o : new TipoComprobanteDaoImp().listarTipoFormulario()) {
         cmbTipoComprobante.addItem( o.getFormulario());
     }
     AutoCompleteDecorator.decorate(this.cmbTipoComprobante);
@@ -441,53 +438,40 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
     
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
        
-
-        if (!modificar) {
-            //si se ingresa un nueva persona
-            formulario = new Formulario();
-
-        } 
-
-                //completar los datos
-                formulario.setTipoProceso(cmbTipoProceso.getSelectedItem().toString());
-                formulario.setTipoFormulario(tipoForm);
-                formulario.setNumeroSerie(Integer.valueOf(txtnumSerie1.getText().trim()));
-                formulario.setConcepto(concepto);
-                formulario.setCuit(entidad.getId());
-                formulario.setNombre(entidad.getDescripcion());
-                formulario.setMonto(Double.valueOf(txtMonto.getText().trim()));
-                //falta el diario
-                Diario diario;
-                Date fecha = dateComprobante.getDate();
-                try{
-                
-                 diario= new DiarioDaoImp().getDiario(fecha);  
-                 // que linea mas rara  gracias a este system se pudo guardar
-                 System.out.println(diario.getFecha());
-                 formulario.setDiario(diario);
-                 
-                }catch(Exception e){
-                    JOptionPane.showMessageDialog(null, "Se creo una nueva Caja debido a q No se encontro registro de caja para la fecha");
-                   diario = new Diario(fecha);
-                   new DiarioDaoImp().addDiario(diario);
-                     System.out.println("entro por el catch");
-                }
+//
+//        if (!modificar) {
+//            //si se ingresa un nueva persona
+//            formulario = new Comprobante();
+//
+//        } 
+//
+//                //completar los datos
+//                formulario.setTipoProceso(cmbTipoProceso.getSelectedItem().toString());
+//                formulario.setTipoFormulario(tipoForm);
+//                formulario.setNumeroSerie(Integer.valueOf(txtnumSerie1.getText().trim()));
+//                formulario.setConcepto(concepto);
+//                formulario.setCuit(entidad.getId());
+//                formulario.setNombre(entidad.getDescripcion());
+//                formulario.setMonto(Double.valueOf(txtMonto.getText().trim()));
+//                //falta el diario
 //                
-                setAgregado(true);
-
-                if (modificar) {
-                     new FormularioDaoImp().upDateFormulario(formulario);
-                  
-                 } else {
-                     new FormularioDaoImp().addFormulario(formulario);
-                            
-                        }
-
-                   
-                    
-                    JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
-                    modificar = false;
-                    this.dispose();
+//               
+////                
+//                setAgregado(true);
+//
+//                if (modificar) {
+//                     new ComprobanteDaoImp().upDateFormulario(formulario);
+//                  
+//                 } else {
+//                     new ComprobanteDaoImp().addFormulario(formulario);
+//                            
+//                        }
+//
+//                   
+//                    
+//                    JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
+//                    modificar = false;
+//                    this.dispose();
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -498,35 +482,35 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
              if (gestorEntidades.isAgregado()) {
                  Asociado a = gestorEntidades.getAsociado();
                  // vuelco en la clase aux entidad
-                 entidad = new Entidad();
-                 entidad.setId(a.getCuit());
-                 entidad.setDescripcion(a.getNombre());
+//                 entidad = new Entidad();
+//                 entidad.setId(a.getCuit());
+//                 entidad.setDescripcion(a.getNombre());
                  // muestro en el formulario recibo
-                 txtCuitDni.setText(String.valueOf(entidad.getId()));
-                 txtNombre.setText(entidad.getDescripcion());
+//                 txtCuitDni.setText(String.valueOf(entidad.getId()));
+//                 txtNombre.setText(entidad.getDescripcion());
              }
          }
             
     }//GEN-LAST:event_txtNombreKeyPressed
 
     private void txtCodigoConceptoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoConceptoKeyPressed
-          if (evt.getKeyCode()==KeyEvent.VK_F1){
-              // ir al gestor de concepto para seleccionar un concetp
-              GUIGestordeConcepto gestorConcepto = new GUIGestordeConcepto(null, true);
-              // si eligio un concepto debe ser reflejado 
-              if (gestorConcepto.isAgregado()) {
-                 concepto = gestorConcepto.getAsociado();
-                 txtCodigoConcepto.setText(String.valueOf(concepto.getCodigo()));
-                 txtDescripcionConcepto.setText(concepto.getDescripcion());
-              }
-          }
+//          if (evt.getKeyCode()==KeyEvent.VK_F1){
+//              // ir al gestor de concepto para seleccionar un concetp
+//              GUIGestordeConcepto gestorConcepto = new GUIGestordeConcepto(null, true);
+//              // si eligio un concepto debe ser reflejado 
+//              if (gestorConcepto.isAgregado()) {
+//                 concepto = gestorConcepto.getAsociado();
+//                 txtCodigoConcepto.setText(String.valueOf(concepto.getCodigo()));
+//                 txtDescripcionConcepto.setText(concepto.getDescripcion());
+//              }
+//          }
         
         
     }//GEN-LAST:event_txtCodigoConceptoKeyPressed
 
     private void txtTipoComprobanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoComprobanteKeyPressed
          if (evt.getKeyCode()==KeyEvent.VK_F1){
-             GUIGestorTipoFormulario guiGestorTipoFormulario = new GUIGestorTipoFormulario(null, true);
+             GUIGestorTipoComprobante guiGestorTipoFormulario = new GUIGestorTipoComprobante(null, true);
              if (guiGestorTipoFormulario.isAgregado()) {
                  tipoForm = guiGestorTipoFormulario.getTipoComp();
                   
@@ -554,7 +538,7 @@ public class GUIRegistrarControlDiario extends javax.swing.JDialog {
                  break;
              case KeyEvent.VK_F2: 
                  //nuevo comprobante
-                 GUITipoFormulario ventanaDoc = new GUITipoFormulario(null, true);
+                 GUITipoComprobante ventanaDoc = new GUITipoComprobante(null, true);
                  
                  // actualizar los datos del combobox
                  setDatosCmbTipoFormulario();

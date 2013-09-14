@@ -5,8 +5,8 @@
 package co.tecnomati.java.controlcaja.vista;
 
 import co.tecnomati.java.controlcaja.cons.Constantes;
-import co.tecnomati.java.controlcaja.dominio.TipoFormulario;
-import co.tecnomati.java.controlcaja.modelo.ModeloTipoFormulario;
+import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
+import co.tecnomati.java.controlcaja.modelo.ModeloTipoComprobante;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
@@ -15,18 +15,18 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Joel
  */
-public class GUIGestorTipoFormulario extends javax.swing.JDialog {
+public class GUIGestorTipoComprobante extends javax.swing.JDialog {
     private int numeroSeleccion;
-    private TipoFormulario tipoComp;
-    private ModeloTipoFormulario modeloTipoComp = new ModeloTipoFormulario();
+    private Tipocomprobante tipoComp;
+    private ModeloTipoComprobante modeloTipoComp = new ModeloTipoComprobante();
     
     private  TableRowSorter sorter;
 
     private boolean agregado= false;
     /**
-     * Creates new form GUIGestorTipoFormulario
+     * Creates new form GUIGestorTipoComprobante
      */
-    public GUIGestorTipoFormulario(java.awt.Frame parent, boolean modal) {
+    public GUIGestorTipoComprobante(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
@@ -44,7 +44,7 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
         this.agregado = agregado;
     }
 
-    public TipoFormulario getTipoComp() {
+    public Tipocomprobante getTipoComp() {
         return tipoComp;
     }
 
@@ -172,7 +172,7 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-       GUITipoFormulario nuevoDocumento = new GUITipoFormulario(null, true);
+       GUITipoComprobante nuevoDocumento = new GUITipoComprobante(null, true);
         if (nuevoDocumento.isAgregado()) {
             inicializarTabla();
         }
@@ -184,7 +184,7 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
             numeroSeleccion = sorter.convertRowIndexToModel(tblDocumento.getSelectedRow());
             tipoComp = modeloTipoComp.getTipoComp(numeroSeleccion);
             // abrir el formulario alta de persona para editar los datos de persona
-            GUITipoFormulario modificarPersona = new GUITipoFormulario(null, true, tipoComp);
+            GUITipoComprobante modificarPersona = new GUITipoComprobante(null, true, tipoComp);
             // actulizar la tabla con los datos modificados
                 if (modificarPersona.isAgregado()) {
                     inicializarTabla();
@@ -228,20 +228,20 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIGestorTipoFormulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIGestorTipoComprobante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIGestorTipoFormulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIGestorTipoComprobante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIGestorTipoFormulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIGestorTipoComprobante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIGestorTipoFormulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIGestorTipoComprobante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                GUIGestorTipoFormulario dialog = new GUIGestorTipoFormulario(new javax.swing.JFrame(), true);
+                GUIGestorTipoComprobante dialog = new GUIGestorTipoComprobante(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -263,7 +263,7 @@ public class GUIGestorTipoFormulario extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void inicializarTabla() {
-        modeloTipoComp = new ModeloTipoFormulario();
+        modeloTipoComp = new ModeloTipoComprobante();
         sorter = new TableRowSorter(modeloTipoComp);
         tblDocumento.setModel(modeloTipoComp);
     }

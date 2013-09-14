@@ -4,28 +4,27 @@
  */
 package co.tecnomati.java.controlcaja.modelo;
 
-import co.tecnomati.java.controlcaja.dominio.TipoFormulario;
-import co.tecnomati.java.controlcaja.dominio.dao.TipoFormularioDAO;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoFormularioDaoImp;
+import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
+import co.tecnomati.java.controlcaja.dominio.dao.TipoComprobanteDAO;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
-import org.jdesktop.swingx.treetable.AbstractTreeTableModel;
 
 /**
  *
  * @author joel
  */
-public class ModeloTipoFormulario extends AbstractTableModel {
+public class ModeloTipoComprobante extends AbstractTableModel {
         
-    TipoFormulario tipoComp = new TipoFormulario();
-    TipoFormularioDAO tipoCompDAO = new TipoFormularioDaoImp();
-    ArrayList<TipoFormulario> listaTipoComp = new ArrayList<TipoFormulario>();
+    Tipocomprobante tipoComp = new Tipocomprobante();
+    TipoComprobanteDAO tipoCompDAO = new TipoComprobanteDaoImp();
+    ArrayList<Tipocomprobante> listaTipoComp = new ArrayList<Tipocomprobante>();
 
-    public ModeloTipoFormulario() {
+    public ModeloTipoComprobante() {
         try {
-            listaTipoComp = (ArrayList<TipoFormulario>) tipoCompDAO.listarTipoFormulario();
+            listaTipoComp = (ArrayList<Tipocomprobante>) tipoCompDAO.listarTipoFormulario();
       } catch (ClassCastException ex) {
-            listaTipoComp = new ArrayList<TipoFormulario>();            
+            listaTipoComp = new ArrayList<Tipocomprobante>();            
       }
     
     
@@ -45,14 +44,14 @@ public class ModeloTipoFormulario extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Object objeto = new Object();
-        tipoComp = (TipoFormulario) listaTipoComp.get(rowIndex);
+        tipoComp = (Tipocomprobante) listaTipoComp.get(rowIndex);
         
         switch (columnIndex) {
             case 0:objeto = tipoComp.getCodigo();break;
             
             case 1:objeto = tipoComp.getFormulario();break;
             
-            case 2:objeto = tipoComp.getAtajo();break;
+            case 2:objeto = tipoComp.getReferencia();break;
                       
         }      
         return objeto;    }
@@ -60,10 +59,10 @@ public class ModeloTipoFormulario extends AbstractTableModel {
     public final void actualizar() {
         fireTableDataChanged();
     }    
-    public TipoFormulario Consulta(int col) {
-     return (TipoFormulario) listaTipoComp.get(col);
+    public Tipocomprobante Consulta(int col) {
+     return (Tipocomprobante) listaTipoComp.get(col);
     }
- public TipoFormulario getTipoComp(int fila){
+ public Tipocomprobante getTipoComp(int fila){
         return listaTipoComp.get(fila);
         
     }

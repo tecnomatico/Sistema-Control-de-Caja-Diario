@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 10/09/2013 18:55:27 by Hibernate Tools 3.2.1.GA
+// Generated 14/09/2013 06:55:51 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -10,14 +10,16 @@ import java.util.Date;
 public class Asociado  implements java.io.Serializable {
 
 
-     private int legajo;
+     private Integer idAsociado;
      private Cooperativa cooperativa;
-     private Integer cuit;
+     private int legajo;
+     private Long cuit;
      private Integer dni;
      private String apellido;
      private String nombre;
-     private Date fechaIngreso;
+     private Date ingreso;
      private String telefono;
+     private Integer estado;
 
     public Asociado() {
     }
@@ -26,23 +28,24 @@ public class Asociado  implements java.io.Serializable {
     public Asociado(int legajo) {
         this.legajo = legajo;
     }
-    public Asociado(int legajo, Cooperativa cooperativa, Integer cuit, Integer dni, String apellido, String nombre, Date fechaIngreso, String telefono) {
-       this.legajo = legajo;
+    public Asociado(Cooperativa cooperativa, int legajo, Long cuit, Integer dni, String apellido, String nombre, Date ingreso, String telefono, Integer estado) {
        this.cooperativa = cooperativa;
+       this.legajo = legajo;
        this.cuit = cuit;
        this.dni = dni;
        this.apellido = apellido;
        this.nombre = nombre;
-       this.fechaIngreso = fechaIngreso;
+       this.ingreso = ingreso;
        this.telefono = telefono;
+       this.estado = estado;
     }
    
-    public int getLegajo() {
-        return this.legajo;
+    public Integer getIdAsociado() {
+        return this.idAsociado;
     }
     
-    public void setLegajo(int legajo) {
-        this.legajo = legajo;
+    public void setIdAsociado(Integer idAsociado) {
+        this.idAsociado = idAsociado;
     }
     public Cooperativa getCooperativa() {
         return this.cooperativa;
@@ -51,11 +54,18 @@ public class Asociado  implements java.io.Serializable {
     public void setCooperativa(Cooperativa cooperativa) {
         this.cooperativa = cooperativa;
     }
-    public Integer getCuit() {
+    public int getLegajo() {
+        return this.legajo;
+    }
+    
+    public void setLegajo(int legajo) {
+        this.legajo = legajo;
+    }
+    public Long getCuit() {
         return this.cuit;
     }
     
-    public void setCuit(Integer cuit) {
+    public void setCuit(Long cuit) {
         this.cuit = cuit;
     }
     public Integer getDni() {
@@ -79,12 +89,12 @@ public class Asociado  implements java.io.Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public Date getFechaIngreso() {
-        return this.fechaIngreso;
+    public Date getIngreso() {
+        return this.ingreso;
     }
     
-    public void setFechaIngreso(Date fechaIngreso) {
-        this.fechaIngreso = fechaIngreso;
+    public void setIngreso(Date ingreso) {
+        this.ingreso = ingreso;
     }
     public String getTelefono() {
         return this.telefono;
@@ -92,6 +102,13 @@ public class Asociado  implements java.io.Serializable {
     
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+    public Integer getEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(Integer estado) {
+        this.estado = estado;
     }
 
 

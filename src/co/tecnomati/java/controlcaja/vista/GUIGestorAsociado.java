@@ -87,7 +87,15 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
             new String [] {
                 "LEGAJO", "CUIT", "NOMBRE", "FECHA INGRESO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblAsociado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblAsociadoMouseClicked(evt);

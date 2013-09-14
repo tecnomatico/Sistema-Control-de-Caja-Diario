@@ -4,8 +4,8 @@
  */
 package co.tecnomati.java.controlcaja.dominio.dao.imp;
 
-import co.tecnomati.java.controlcaja.dominio.TipoFormulario;
-import co.tecnomati.java.controlcaja.dominio.dao.TipoFormularioDAO;
+import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
+import co.tecnomati.java.controlcaja.dominio.dao.TipoComprobanteDAO;
 import co.tecnomati.java.controlcaja.hibernateUtil.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,21 +16,21 @@ import org.hibernate.Session;
  *
  * @author Joel
  */
-public class TipoFormularioDaoImp extends  HibernateUtil implements TipoFormularioDAO{
+public class TipoComprobanteDaoImp extends  HibernateUtil implements TipoComprobanteDAO{
 
     @Override
-    public List<TipoFormulario> listarTipoFormulario() {
+    public List<Tipocomprobante> listarTipoFormulario() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(TipoFormulario.class);
+        Criteria criteria = session.createCriteria(Tipocomprobante.class);
         
-        ArrayList<TipoFormulario> parroquia = (ArrayList<TipoFormulario>)criteria.list();
+        ArrayList<Tipocomprobante> tipocomprobante = (ArrayList<Tipocomprobante>)criteria.list();
         session.close();
-        return parroquia;
+        return tipocomprobante;
     }
 
     @Override
-    public void addTipoFormulario(TipoFormulario a) {
+    public void addTipoFormulario(Tipocomprobante a) {
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
         session.save(a);
@@ -38,7 +38,7 @@ public class TipoFormularioDaoImp extends  HibernateUtil implements TipoFormular
         session.close();   }
 
     @Override
-    public void deleteTipoFormulario(TipoFormulario a) {
+    public void deleteTipoFormulario(Tipocomprobante a) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(a);
@@ -46,7 +46,7 @@ public class TipoFormularioDaoImp extends  HibernateUtil implements TipoFormular
         session.close();    }
 
     @Override
-    public void upDateTipoFormulario(TipoFormulario a) {
+    public void upDateTipoFormulario(Tipocomprobante a) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(a);
@@ -54,10 +54,10 @@ public class TipoFormularioDaoImp extends  HibernateUtil implements TipoFormular
         session.close();     }
 
     @Override
-    public TipoFormulario getTipoFormulario(int idTipoFormulario) {
+    public Tipocomprobante getTipoFormulario(int idTipoFormulario) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-       TipoFormulario a = (TipoFormulario) session.get(TipoFormulario.class,idTipoFormulario);
+       Tipocomprobante a = (Tipocomprobante) session.get(Tipocomprobante.class,idTipoFormulario);
         session.getTransaction().commit();
         session.close();
         return a;      }

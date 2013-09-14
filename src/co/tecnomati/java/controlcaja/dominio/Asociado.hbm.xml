@@ -1,33 +1,39 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/09/2013 18:55:28 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 14/09/2013 06:55:54 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="co.tecnomati.java.controlcaja.dominio.Asociado" table="asociado" catalog="control_caja">
-        <id name="legajo" type="int">
-            <column name="LEGAJO" />
-            <generator class="assigned" />
+        <id name="idAsociado" type="java.lang.Integer">
+            <column name="idAsociado" />
+            <generator class="identity" />
         </id>
         <many-to-one name="cooperativa" class="co.tecnomati.java.controlcaja.dominio.Cooperativa" fetch="select">
-            <column name="MATRICULA" />
+            <column name="idCoop" />
         </many-to-one>
-        <property name="cuit" type="java.lang.Integer">
-            <column name="CUIT" />
+        <property name="legajo" type="int">
+            <column name="legajo" not-null="true" unique="true" />
+        </property>
+        <property name="cuit" type="java.lang.Long">
+            <column name="cuit" unique="true" />
         </property>
         <property name="dni" type="java.lang.Integer">
-            <column name="DNI" />
+            <column name="dni" unique="true" />
         </property>
         <property name="apellido" type="string">
-            <column name="APELLIDO" length="100" />
+            <column name="apellido" length="100" />
         </property>
         <property name="nombre" type="string">
-            <column name="NOMBRE" length="100" />
+            <column name="nombre" length="100" />
         </property>
-        <property name="fechaIngreso" type="date">
-            <column name="FECHA_INGRESO" length="10" />
+        <property name="ingreso" type="date">
+            <column name="ingreso" length="10" />
         </property>
         <property name="telefono" type="string">
-            <column name="TELEFONO" length="20" />
+            <column name="telefono" length="20" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado" />
         </property>
     </class>
 </hibernate-mapping>

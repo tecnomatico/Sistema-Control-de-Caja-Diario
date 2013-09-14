@@ -66,75 +66,6 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="org.edisoncor.gui.panel.Panel" name="panel2">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Caja">
-                <Property name="tabTitle" type="java.lang.String" value="Caja"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnIncioCaja" min="-2" pref="144" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                              <Component id="btnCierreCaja" min="-2" pref="144" max="-2" attributes="0"/>
-                              <EmptySpace min="97" pref="97" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="labelMetric1" min="-2" pref="531" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="labelMetric1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnIncioCaja" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnCierreCaja" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="59" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnIncioCaja">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Inicio de Caja"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIncioCajaActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnCierreCaja">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cierre Caja"/>
-              </Properties>
-            </Component>
-            <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric1">
-              <Properties>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Registro de Incio y Cierre de Caja"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="24" style="1"/>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
         <Container class="org.edisoncor.gui.panel.Panel" name="panel1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
@@ -148,12 +79,14 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="labelMetric2" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Component id="btnControlDiario" min="-2" pref="174" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                              <Component id="labelMetric2" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="btnControlDiario" min="-2" pref="205" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                               <Component id="btnConsultarControlDiario" min="-2" pref="188" max="-2" attributes="0"/>
                           </Group>
@@ -180,7 +113,7 @@
           <SubComponents>
             <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnControlDiario">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Control Diario"/>
+                <Property name="text" type="java.lang.String" value="Nuevo Registro"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnControlDiarioActionPerformed"/>
@@ -188,13 +121,13 @@
             </Component>
             <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnConsultarControlDiario">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Consultar Control Diario"/>
+                <Property name="text" type="java.lang.String" value="Busqueda "/>
               </Properties>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric2">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Registrar Control Diario"/>
+                <Property name="text" type="java.lang.String" value="Registro de Comprobantes"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="24" style="1"/>
                 </Property>

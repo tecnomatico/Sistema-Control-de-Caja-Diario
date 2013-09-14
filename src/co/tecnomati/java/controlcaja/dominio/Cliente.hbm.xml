@@ -3,9 +3,9 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 14/09/2013 06:55:54 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="co.tecnomati.java.controlcaja.dominio.Proveedor" table="proveedor" catalog="control_caja">
-        <id name="idProveedor" type="java.lang.Integer">
-            <column name="idProveedor" />
+    <class name="co.tecnomati.java.controlcaja.dominio.Cliente" table="cliente" catalog="control_caja">
+        <id name="idCliente" type="java.lang.Integer">
+            <column name="idCliente" />
             <generator class="identity" />
         </id>
         <property name="cuit" type="long">

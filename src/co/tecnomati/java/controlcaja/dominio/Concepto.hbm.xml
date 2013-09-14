@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/09/2013 18:55:28 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 14/09/2013 06:55:54 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="co.tecnomati.java.controlcaja.dominio.Concepto" table="concepto" catalog="control_caja">
-        <id name="codigo" type="java.lang.Integer">
-            <column name="CODIGO" />
+        <id name="codigoConcepto" type="java.lang.Integer">
+            <column name="codigoConcepto" />
             <generator class="identity" />
         </id>
         <property name="descripcion" type="string">
-            <column name="DESCRIPCION" length="100" />
+            <column name="descripcion" length="100" />
         </property>
-        <set name="formularios" inverse="true">
+        <set name="comprobanteconceptos" inverse="true">
             <key>
-                <column name="CODIGO_CONCEPTO" />
+                <column name="idConcepto" />
             </key>
-            <one-to-many class="co.tecnomati.java.controlcaja.dominio.Formulario" />
+            <one-to-many class="co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto" />
         </set>
     </class>
 </hibernate-mapping>

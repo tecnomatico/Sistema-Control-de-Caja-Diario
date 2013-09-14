@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/09/2013 06:55:54 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto" table="comprobanteconcepto" catalog="control_caja">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="concepto" class="co.tecnomati.java.controlcaja.dominio.Concepto" fetch="select">
+            <column name="idConcepto" />
+        </many-to-one>
+        <many-to-one name="comprobante" class="co.tecnomati.java.controlcaja.dominio.Comprobante" fetch="select">
+            <column name="idComprobante" />
+        </many-to-one>
+        <property name="monto" type="java.lang.Double">
+            <column name="monto" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

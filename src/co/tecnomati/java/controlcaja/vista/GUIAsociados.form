@@ -49,11 +49,15 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="Apellido1" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                               <Component id="Apellido2" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                              <Component id="Apellido3" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                              <Component id="Apellido4" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtNombre" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                              <Component id="txtApellido" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtNombre" alignment="0" pref="141" max="32767" attributes="0"/>
+                              <Component id="txtApellido" alignment="0" pref="141" max="32767" attributes="0"/>
+                              <Component id="txtTelefono" alignment="0" pref="141" max="32767" attributes="0"/>
+                              <Component id="dateIngreso" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -111,12 +115,22 @@
                       <Component id="Apellido2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="Apellido3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dateIngreso" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="Apellido4" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTelefono" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -184,6 +198,20 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDNIActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="org.edisoncor.gui.label.LabelMetric" name="Apellido3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha Ingreso"/>
+          </Properties>
+        </Component>
+        <Component class="org.edisoncor.gui.textField.TextField" name="txtTelefono">
+        </Component>
+        <Component class="org.edisoncor.gui.label.LabelMetric" name="Apellido4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Telefono"/>
+          </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="dateIngreso">
         </Component>
       </SubComponents>
     </Container>

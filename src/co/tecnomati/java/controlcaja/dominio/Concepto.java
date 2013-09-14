@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 10/09/2013 18:55:27 by Hibernate Tools 3.2.1.GA
+// Generated 14/09/2013 06:55:51 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -11,24 +11,24 @@ import java.util.Set;
 public class Concepto  implements java.io.Serializable {
 
 
-     private Integer codigo;
+     private Integer codigoConcepto;
      private String descripcion;
-     private Set<Formulario> formularios = new HashSet<Formulario>(0);
+     private Set<Comprobanteconcepto> comprobanteconceptos = new HashSet<Comprobanteconcepto>(0);
 
     public Concepto() {
     }
 
-    public Concepto(String descripcion, Set<Formulario> formularios) {
+    public Concepto(String descripcion, Set<Comprobanteconcepto> comprobanteconceptos) {
        this.descripcion = descripcion;
-       this.formularios = formularios;
+       this.comprobanteconceptos = comprobanteconceptos;
     }
    
-    public Integer getCodigo() {
-        return this.codigo;
+    public Integer getCodigoConcepto() {
+        return this.codigoConcepto;
     }
     
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public void setCodigoConcepto(Integer codigoConcepto) {
+        this.codigoConcepto = codigoConcepto;
     }
     public String getDescripcion() {
         return this.descripcion;
@@ -37,12 +37,12 @@ public class Concepto  implements java.io.Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public Set<Formulario> getFormularios() {
-        return this.formularios;
+    public Set<Comprobanteconcepto> getComprobanteconceptos() {
+        return this.comprobanteconceptos;
     }
     
-    public void setFormularios(Set<Formulario> formularios) {
-        this.formularios = formularios;
+    public void setComprobanteconceptos(Set<Comprobanteconcepto> comprobanteconceptos) {
+        this.comprobanteconceptos = comprobanteconceptos;
     }
 
 

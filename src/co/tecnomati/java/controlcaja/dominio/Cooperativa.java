@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 10/09/2013 18:55:27 by Hibernate Tools 3.2.1.GA
+// Generated 14/09/2013 06:55:51 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -12,12 +12,15 @@ import java.util.Set;
 public class Cooperativa  implements java.io.Serializable {
 
 
+     private Integer idCoop;
      private int matricula;
-     private Integer cuit;
-     private String nombre;
-     private Date fechaIngreso;
+     private Long cuit;
+     private String razonSocial;
+     private Date inicioActividad;
      private String telefono;
      private String domicilio;
+     private Double inicioCaja;
+     private String ingresoBruto;
      private Set<Asociado> asociados = new HashSet<Asociado>(0);
 
     public Cooperativa() {
@@ -27,16 +30,25 @@ public class Cooperativa  implements java.io.Serializable {
     public Cooperativa(int matricula) {
         this.matricula = matricula;
     }
-    public Cooperativa(int matricula, Integer cuit, String nombre, Date fechaIngreso, String telefono, String domicilio, Set<Asociado> asociados) {
+    public Cooperativa(int matricula, Long cuit, String razonSocial, Date inicioActividad, String telefono, String domicilio, Double inicioCaja, String ingresoBruto, Set<Asociado> asociados) {
        this.matricula = matricula;
        this.cuit = cuit;
-       this.nombre = nombre;
-       this.fechaIngreso = fechaIngreso;
+       this.razonSocial = razonSocial;
+       this.inicioActividad = inicioActividad;
        this.telefono = telefono;
        this.domicilio = domicilio;
+       this.inicioCaja = inicioCaja;
+       this.ingresoBruto = ingresoBruto;
        this.asociados = asociados;
     }
    
+    public Integer getIdCoop() {
+        return this.idCoop;
+    }
+    
+    public void setIdCoop(Integer idCoop) {
+        this.idCoop = idCoop;
+    }
     public int getMatricula() {
         return this.matricula;
     }
@@ -44,26 +56,26 @@ public class Cooperativa  implements java.io.Serializable {
     public void setMatricula(int matricula) {
         this.matricula = matricula;
     }
-    public Integer getCuit() {
+    public Long getCuit() {
         return this.cuit;
     }
     
-    public void setCuit(Integer cuit) {
+    public void setCuit(Long cuit) {
         this.cuit = cuit;
     }
-    public String getNombre() {
-        return this.nombre;
+    public String getRazonSocial() {
+        return this.razonSocial;
     }
     
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
     }
-    public Date getFechaIngreso() {
-        return this.fechaIngreso;
+    public Date getInicioActividad() {
+        return this.inicioActividad;
     }
     
-    public void setFechaIngreso(Date fechaIngreso) {
-        this.fechaIngreso = fechaIngreso;
+    public void setInicioActividad(Date inicioActividad) {
+        this.inicioActividad = inicioActividad;
     }
     public String getTelefono() {
         return this.telefono;
@@ -78,6 +90,20 @@ public class Cooperativa  implements java.io.Serializable {
     
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
+    }
+    public Double getInicioCaja() {
+        return this.inicioCaja;
+    }
+    
+    public void setInicioCaja(Double inicioCaja) {
+        this.inicioCaja = inicioCaja;
+    }
+    public String getIngresoBruto() {
+        return this.ingresoBruto;
+    }
+    
+    public void setIngresoBruto(String ingresoBruto) {
+        this.ingresoBruto = ingresoBruto;
     }
     public Set<Asociado> getAsociados() {
         return this.asociados;

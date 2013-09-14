@@ -5,8 +5,8 @@
 package co.tecnomati.java.controlcaja.vista;
 
 import co.tecnomati.java.controlcaja.cons.Constantes;
-import co.tecnomati.java.controlcaja.dominio.TipoFormulario;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoFormularioDaoImp;
+import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 
@@ -14,14 +14,14 @@ import javax.swing.JOptionPane;
  *
  * @author Joel
  */
-public class GUITipoFormulario extends javax.swing.JDialog {
+public class GUITipoComprobante extends javax.swing.JDialog {
 
    boolean modificar= false;
-    private TipoFormulario doc;
+    private Tipocomprobante doc;
     
     boolean agregado=false;
     
-    public GUITipoFormulario(java.awt.Frame parent, boolean modal) {
+    public GUITipoComprobante(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
@@ -30,13 +30,13 @@ public class GUITipoFormulario extends javax.swing.JDialog {
          this.setVisible(true);
     }
 
-    public GUITipoFormulario( Frame owner, boolean modal,TipoFormulario doc) {
+    public GUITipoComprobante( Frame owner, boolean modal,Tipocomprobante doc) {
         super(owner, modal);
         initComponents();
         this.doc = doc;
-        
+        modificar = true;  
         txtDescripcion.setText(doc.getFormulario());
-//        txtAtajo.setText(doc.getAtajo());
+        txtAtajo.setText(doc.getReferencia());
         
         this.setTitle(Constantes.NAME_NUEVO_DOCUMENTO);
          this.setLocationRelativeTo(null);
@@ -150,16 +150,16 @@ public class GUITipoFormulario extends javax.swing.JDialog {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (!modificar) {
-             doc = new TipoFormulario();
+             doc = new Tipocomprobante();
         }
         //almacena los datos   
         doc.setFormulario(txtDescripcion.getText().toUpperCase());
-        doc.setAtajo(txtDescripcion.getText().toUpperCase());
+        doc.setReferencia(txtAtajo.getText().toUpperCase());
         
         if (modificar) {
-             new TipoFormularioDaoImp().upDateTipoFormulario(doc);
+             new TipoComprobanteDaoImp().upDateTipoFormulario(doc);
         } else {
-             new TipoFormularioDaoImp().addTipoFormulario(doc);
+             new TipoComprobanteDaoImp().addTipoFormulario(doc);
 
         }
             setAgregado(true);
@@ -184,20 +184,20 @@ public class GUITipoFormulario extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUITipoFormulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUITipoComprobante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUITipoFormulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUITipoComprobante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUITipoFormulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUITipoComprobante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUITipoFormulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUITipoComprobante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                GUITipoFormulario dialog = new GUITipoFormulario(new javax.swing.JFrame(), true);
+                GUITipoComprobante dialog = new GUITipoComprobante(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -218,7 +218,7 @@ public class GUITipoFormulario extends javax.swing.JDialog {
     private org.edisoncor.gui.textField.TextField txtDescripcion;
     // End of variables declaration//GEN-END:variables
 
-    public TipoFormulario getDoc() {
+    public Tipocomprobante getDoc() {
         return doc;
     }
 }

@@ -1,31 +1,40 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/09/2013 18:55:28 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 14/09/2013 06:55:54 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="co.tecnomati.java.controlcaja.dominio.Cooperativa" table="cooperativa" catalog="control_caja">
-        <id name="matricula" type="int">
-            <column name="MATRICULA" />
-            <generator class="assigned" />
+        <id name="idCoop" type="java.lang.Integer">
+            <column name="idCoop" />
+            <generator class="identity" />
         </id>
-        <property name="cuit" type="java.lang.Integer">
-            <column name="CUIT" />
+        <property name="matricula" type="int">
+            <column name="matricula" not-null="true" unique="true" />
         </property>
-        <property name="nombre" type="string">
-            <column name="NOMBRE" length="100" />
+        <property name="cuit" type="java.lang.Long">
+            <column name="cuit" unique="true" />
         </property>
-        <property name="fechaIngreso" type="date">
-            <column name="FECHA_INGRESO" length="10" />
+        <property name="razonSocial" type="string">
+            <column name="razonSocial" length="100" />
+        </property>
+        <property name="inicioActividad" type="date">
+            <column name="inicioActividad" length="10" />
         </property>
         <property name="telefono" type="string">
-            <column name="TELEFONO" length="20" />
+            <column name="telefono" length="20" />
         </property>
         <property name="domicilio" type="string">
-            <column name="DOMICILIO" length="200" />
+            <column name="domicilio" length="200" />
+        </property>
+        <property name="inicioCaja" type="java.lang.Double">
+            <column name="inicioCaja" precision="22" scale="0" />
+        </property>
+        <property name="ingresoBruto" type="string">
+            <column name="ingresoBruto" length="100" />
         </property>
         <set name="asociados" inverse="true">
             <key>
-                <column name="MATRICULA" />
+                <column name="idCoop" />
             </key>
             <one-to-many class="co.tecnomati.java.controlcaja.dominio.Asociado" />
         </set>

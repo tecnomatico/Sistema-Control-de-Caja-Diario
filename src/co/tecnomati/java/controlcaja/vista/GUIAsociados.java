@@ -40,9 +40,12 @@ public class GUIAsociados extends javax.swing.JDialog {
          modificar = true;
         this.setTitle(Constantes.NAME_EDITAR_ASOCIADO);
         txtLegajo.setText(String.valueOf(asociado.getLegajo()));
-        txtCuit.setText(asociado.getCuit()+"");
+        txtCuit.setText(String.valueOf(asociado.getCuit()));
+        txtDNI.setText(String.valueOf(asociado.getDni()));
         txtApellido.setText(asociado.getApellido());
         txtNombre.setText(asociado.getNombre());
+        txtTelefono.setText(asociado.getTelefono());
+        dateIngreso.setDate(asociado.getIngreso());
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 }
@@ -78,6 +81,10 @@ public class GUIAsociados extends javax.swing.JDialog {
         txtCuit = new org.edisoncor.gui.textField.TextField();
         labelMetric5 = new org.edisoncor.gui.label.LabelMetric();
         txtDNI = new org.edisoncor.gui.textField.TextField();
+        Apellido3 = new org.edisoncor.gui.label.LabelMetric();
+        txtTelefono = new org.edisoncor.gui.textField.TextField();
+        Apellido4 = new org.edisoncor.gui.label.LabelMetric();
+        dateIngreso = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Asociado");
@@ -130,6 +137,10 @@ public class GUIAsociados extends javax.swing.JDialog {
             }
         });
 
+        Apellido3.setText("Fecha Ingreso");
+
+        Apellido4.setText("Telefono");
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -140,11 +151,15 @@ public class GUIAsociados extends javax.swing.JDialog {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Apellido3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Apellido4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(dateIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,11 +202,19 @@ public class GUIAsociados extends javax.swing.JDialog {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Apellido3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Apellido4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,9 +258,12 @@ public class GUIAsociados extends javax.swing.JDialog {
         }
         //asociado.
         asociado.setLegajo(Integer.parseInt(txtLegajo.getText()));
-        asociado.setCuit(Integer.parseInt(txtCuit.getText()));
+        asociado.setCuit(Long.parseLong(txtCuit.getText()));
+        asociado.setDni(Integer.valueOf(txtDNI.getText()));
         asociado.setApellido(txtApellido.getText());
         asociado.setNombre(txtNombre.getText());
+        asociado.setIngreso(dateIngreso.getDate());
+        asociado.setTelefono(txtTelefono.getText());
         //if (validacion()) {
 //      JOptionPane.showMessageDialog(null, "Debe completar todos los campos...");
 //        } else {
@@ -302,8 +328,11 @@ public class GUIAsociados extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.label.LabelMetric Apellido1;
     private org.edisoncor.gui.label.LabelMetric Apellido2;
+    private org.edisoncor.gui.label.LabelMetric Apellido3;
+    private org.edisoncor.gui.label.LabelMetric Apellido4;
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnGuardar;
+    private com.toedter.calendar.JDateChooser dateIngreso;
     private org.edisoncor.gui.label.LabelMetric labelMetric3;
     private org.edisoncor.gui.label.LabelMetric labelMetric4;
     private org.edisoncor.gui.label.LabelMetric labelMetric5;
@@ -313,5 +342,6 @@ public class GUIAsociados extends javax.swing.JDialog {
     private org.edisoncor.gui.textField.TextField txtDNI;
     private org.edisoncor.gui.textField.TextField txtLegajo;
     private org.edisoncor.gui.textField.TextField txtNombre;
+    private org.edisoncor.gui.textField.TextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

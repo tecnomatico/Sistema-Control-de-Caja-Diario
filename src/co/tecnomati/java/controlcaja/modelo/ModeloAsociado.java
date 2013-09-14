@@ -53,8 +53,8 @@ public class ModeloAsociado extends AbstractTableModel{
             
             case 1:objeto = persona.getCuit();break;
             
-            case 2:objeto = persona.getNombre();break;
-            case 3:objeto = persona.getFechaIngreso();break;
+            case 2:objeto = persona.getApellido()+" "+persona.getNombre();break;
+            case 3:objeto = persona.getIngreso();break;
             
         }      
         return objeto;

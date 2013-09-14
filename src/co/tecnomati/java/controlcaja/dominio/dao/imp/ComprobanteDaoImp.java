@@ -4,34 +4,35 @@
  */
 package co.tecnomati.java.controlcaja.dominio.dao.imp;
 
-import co.tecnomati.java.controlcaja.dominio.Diario;
-import co.tecnomati.java.controlcaja.dominio.dao.DiarioDAO;
+
+import co.tecnomati.java.controlcaja.dominio.Comprobante;
+import co.tecnomati.java.controlcaja.dominio.dao.ComprobanteDAO;
 import co.tecnomati.java.controlcaja.hibernateUtil.HibernateUtil;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+
 
 /**
  *
  * @author Joel
  */
-public class DiarioDaoImp extends HibernateUtil implements DiarioDAO{
+public class ComprobanteDaoImp implements ComprobanteDAO{
 
     @Override
-    public List<Diario> listarDiario() {
+    public List<Comprobante> listarFormulario() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(Diario.class);
+        Criteria criteria = session.createCriteria(Comprobante.class);
         
-        ArrayList<Diario> diario = (ArrayList<Diario>)criteria.list();
+        ArrayList<Comprobante> parroquia = (ArrayList<Comprobante>)criteria.list();
         session.close();
-        return diario;
+        return parroquia;
     }
 
     @Override
-    public void addDiario(Diario a) {
+    public void addFormulario(Comprobante a) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(a);
@@ -39,7 +40,7 @@ public class DiarioDaoImp extends HibernateUtil implements DiarioDAO{
         session.close();    }
 
     @Override
-    public void deleteDiario(Diario a) {
+    public void deleteFormulario(Comprobante a) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(a);
@@ -47,7 +48,7 @@ public class DiarioDaoImp extends HibernateUtil implements DiarioDAO{
         session.close();    }
 
     @Override
-    public void upDateDiario(Diario a) {
+    public void upDateFormulario(Comprobante a) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(a);
@@ -55,12 +56,13 @@ public class DiarioDaoImp extends HibernateUtil implements DiarioDAO{
         session.close();     }
 
     @Override
-    public Diario getDiario(Date idDiario) {
+    public Comprobante getFormulario(int idComprobante) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Diario a = (Diario) session.get(Diario.class,idDiario);
+        Comprobante a = (Comprobante) session.get(Comprobante.class,idComprobante);
         session.getTransaction().commit();
         session.close();
         return a;      }
+
     
 }

@@ -152,7 +152,7 @@
         </Component>
         <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Id"/>
+            <Property name="text" type="java.lang.String" value="CUIT"/>
           </Properties>
         </Component>
         <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnCancelar">

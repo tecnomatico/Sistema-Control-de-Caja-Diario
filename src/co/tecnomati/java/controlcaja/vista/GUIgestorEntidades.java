@@ -66,7 +66,7 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
 
         labelMetric2.setText("Razon Social");
 
-        labelMetric3.setText("Id");
+        labelMetric3.setText("CUIT");
 
         btnCancelar.setText("Cancelar");
 

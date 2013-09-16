@@ -71,6 +71,15 @@ public class Concepto  implements java.io.Serializable {
         this.novedads = novedads;
     }
 
+    public Empleado getApellido(Empleado a){
+         return a;
+        
+    }
+
+    public Empleado getApellido() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+            
 
 
 

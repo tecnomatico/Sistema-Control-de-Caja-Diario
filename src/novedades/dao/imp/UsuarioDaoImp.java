@@ -8,7 +8,9 @@ import hibernateUtil.Conexion;
 import static hibernateUtil.Conexion.getSessionFactory;
 import java.util.List;
 import novedades.dao.UsuarioDao;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import pojo.Empleado;
 import pojo.Usuario;
 
 /**
@@ -18,8 +20,15 @@ import pojo.Usuario;
 public class UsuarioDaoImp extends Conexion implements UsuarioDao{
 
     @Override
-    public List<UsuarioDao> listarUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Usuario> listarUsuario() {
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Usuario.class);
+//        criteria.addOrder(Order.asc("legajo"));
+        List<Usuario> lista = (List<Usuario>)criteria.list();
+        session.getTransaction().commit();
+        session.close();
+        return lista;
     }
 
     /**
@@ -35,21 +44,34 @@ public class UsuarioDaoImp extends Conexion implements UsuarioDao{
         session.close();
     }
 
-        public void deleteUsuario(UsuarioDao a) {
+    @Override
+        public void deleteUsuario(Usuario a) {
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(a);
         session.getTransaction().commit();
         session.close();
     }
-
-        public void upDateUsuario(UsuarioDao a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+        public void upDateUsuario(Usuario a) {
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        session.saveOrUpdate(a);
+//        session.update(a);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
-    public UsuarioDao getUsuario(int legajo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public Usuario getUsuario(int legajo) {
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        Usuario a = (Usuario) session.get(Empleado.class, legajo);
+        session.getTransaction().commit();
+        session.close();
+        return a;
     }
+
+    
     
 }

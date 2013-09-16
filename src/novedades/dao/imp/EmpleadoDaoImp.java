@@ -43,7 +43,7 @@ public class EmpleadoDaoImp extends Conexion implements EmpleadoDao {
 
     @Override
     public Set<Concepto> getConcepto(int idConcepto) {
-        Set<Concepto> setConcepto = new HashSet<Concepto>();
+       Set<Concepto> setConcepto = new HashSet<Concepto>();
        Session session = getSessionFactory().openSession();
         session.beginTransaction();
         Empleado a = (Empleado) session.get(Empleado.class, idConcepto);

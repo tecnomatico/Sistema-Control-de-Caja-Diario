@@ -4,6 +4,8 @@
  */
 package vistas;
 
+import javax.swing.JOptionPane;
+import novedades.dao.imp.EmpleadoDaoImp;
 import pojo.Empleado;
 import pojo.Empresa;
 import pojo.Sucursal;
@@ -14,9 +16,8 @@ import pojo.Sucursal;
  */
 public class abmEmpleados extends javax.swing.JDialog {
 
-    /**
-     * Creates new form abmEmpleados
-     */
+    private int legajo=0;
+    
     public abmEmpleados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -113,12 +114,22 @@ public class abmEmpleados extends javax.swing.JDialog {
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Editar.png"))); // NOI18N
         btnModificar.setText("Modificar");
 
         buttonIpod1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         buttonIpod1.setText("Eliminar");
+        buttonIpod1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonIpod1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelTranslucidoComplete1Layout = new javax.swing.GroupLayout(panelTranslucidoComplete1);
         panelTranslucidoComplete1.setLayout(panelTranslucidoComplete1Layout);
@@ -312,18 +323,31 @@ public class abmEmpleados extends javax.swing.JDialog {
         Empleado empleado = new Empleado();
         Empresa empresa = new Empresa();
         Sucursal sucursal = new Sucursal();
-                
-                empleado.setLegajo(Integer.parseInt(txtLegajo.getText()));
-                empleado.setApellido(txtApellido.getText());
-                empleado.setNombre(txtNombre.getText());
-                empleado.setCuit(txtCuit.getText());
-                empresa.setNombre(txtEmpresa.getText());
-                sucursal.setNombre(txtSucursal.getText());
-                empleado.setConvenio(txtConvenio.getText());
-                empleado.setTarea(txtTarea.getText());
-                // todos los empleados que se den de alta aqi no seran administradores
+        empleado.setLegajo(Integer.parseInt(txtLegajo.getText()));
+        empleado.setApellido(txtApellido.getText());
+        empleado.setNombre(txtNombre.getText());
+        empleado.setCuit(txtCuit.getText());
+        empresa.setNombre(txtEmpresa.getText());
+        sucursal.setNombre(txtSucursal.getText());
+        empleado.setConvenio(txtConvenio.getText());
+        empleado.setTarea(txtTarea.getText());
+        // todos los empleados que se den de alta aqi no seran administradores
            
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void buttonIpod1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonIpod1ActionPerformed
+        int resp =JOptionPane.showConfirmDialog(rootPane,"Esta seguro de eliminar el Empleado: \n"+txtApellido.getText()+txtNombre.getText()+" ?", "ELIMINAR EMPLEADO",JOptionPane.OK_CANCEL_OPTION);
+          if (resp==JOptionPane.OK_OPTION) {
+              Empleado e = new EmpleadoDaoImp().getEmpleado(legajo);
+              new EmpleadoDaoImp().deleteEmpleado(e);
+              JOptionPane.showMessageDialog(rootPane, "La Eliminacion se realizo exitosamente ", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+              this.dispose();
+          }
+    }//GEN-LAST:event_buttonIpod1ActionPerformed
 
     /**
      * @param args the command line arguments

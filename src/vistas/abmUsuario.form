@@ -71,7 +71,7 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="txtDescripcion" alignment="1" min="-2" pref="373" max="-2" attributes="0"/>
                               <Component id="txtUsuario" min="-2" pref="283" max="-2" attributes="0"/>
-                              <Component id="passContraseña" alignment="1" min="-2" pref="192" max="-2" attributes="0"/>
+                              <Component id="txtpassContraseña" alignment="1" min="-2" pref="192" max="-2" attributes="0"/>
                               <Component id="txtTipo" min="-2" pref="172" max="-2" attributes="0"/>
                               <Component id="txtId" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -106,7 +106,7 @@
                   <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="passContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtpassContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -338,6 +338,9 @@
                     <Property name="text" type="java.lang.String" value="Aceptar"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAceptarActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnNuevo">
                   <Properties>
@@ -384,7 +387,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Component class="org.edisoncor.gui.passwordField.PasswordFieldRoundIcon" name="passContrase&#xf1;a">
+        <Component class="org.edisoncor.gui.passwordField.PasswordFieldRoundIcon" name="txtpassContrase&#xf1;a">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="66" type="rgb"/>

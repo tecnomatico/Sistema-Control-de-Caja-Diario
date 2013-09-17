@@ -45,7 +45,7 @@ public class abmEmpleados extends javax.swing.JDialog {
         btnNuevo = new org.edisoncor.gui.button.ButtonIpod();
         btnCancelar = new org.edisoncor.gui.button.ButtonIpod();
         btnModificar = new org.edisoncor.gui.button.ButtonIpod();
-        buttonIpod1 = new org.edisoncor.gui.button.ButtonIpod();
+        btnEliminar = new org.edisoncor.gui.button.ButtonIpod();
         labelMetric1 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric2 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric3 = new org.edisoncor.gui.label.LabelMetric();
@@ -66,21 +66,28 @@ public class abmEmpleados extends javax.swing.JDialog {
         panel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/textura-metallica-2.jpg"))); // NOI18N
 
         txtApellido.setBackground(new java.awt.Color(102, 102, 102));
-        txtApellido.setBorder(null);
         txtApellido.setForeground(new java.awt.Color(255, 255, 255));
         txtApellido.setCaretColor(new java.awt.Color(102, 102, 102));
         txtApellido.setColorDeBorde(new java.awt.Color(255, 102, 0));
         txtApellido.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyTyped(evt);
+            }
+        });
 
         txtNombre.setBackground(new java.awt.Color(102, 102, 102));
-        txtNombre.setBorder(null);
         txtNombre.setForeground(new java.awt.Color(255, 255, 255));
         txtNombre.setCaretColor(new java.awt.Color(102, 102, 102));
         txtNombre.setColorDeBorde(new java.awt.Color(255, 102, 0));
         txtNombre.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         txtCuit.setBackground(new java.awt.Color(102, 102, 102));
-        txtCuit.setBorder(null);
         txtCuit.setForeground(new java.awt.Color(255, 255, 255));
         txtCuit.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtCuit.setCaretColor(new java.awt.Color(102, 102, 102));
@@ -88,12 +95,16 @@ public class abmEmpleados extends javax.swing.JDialog {
         txtCuit.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
 
         txtLegajo.setBackground(new java.awt.Color(102, 102, 102));
-        txtLegajo.setBorder(null);
         txtLegajo.setForeground(new java.awt.Color(255, 255, 255));
         txtLegajo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtLegajo.setCaretColor(new java.awt.Color(102, 102, 102));
         txtLegajo.setColorDeBorde(new java.awt.Color(255, 102, 0));
         txtLegajo.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        txtLegajo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLegajoKeyTyped(evt);
+            }
+        });
 
         panelShadow1.setDistance(10);
 
@@ -123,11 +134,11 @@ public class abmEmpleados extends javax.swing.JDialog {
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Editar.png"))); // NOI18N
         btnModificar.setText("Modificar");
 
-        buttonIpod1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
-        buttonIpod1.setText("Eliminar");
-        buttonIpod1.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonIpod1ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -137,7 +148,7 @@ public class abmEmpleados extends javax.swing.JDialog {
             panelTranslucidoComplete1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTranslucidoComplete1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buttonIpod1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -157,7 +168,7 @@ public class abmEmpleados extends javax.swing.JDialog {
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonIpod1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -193,7 +204,6 @@ public class abmEmpleados extends javax.swing.JDialog {
         labelMetric5.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
 
         txtConvenio.setBackground(new java.awt.Color(102, 102, 102));
-        txtConvenio.setBorder(null);
         txtConvenio.setForeground(new java.awt.Color(255, 255, 255));
         txtConvenio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtConvenio.setCaretColor(new java.awt.Color(102, 102, 102));
@@ -204,7 +214,6 @@ public class abmEmpleados extends javax.swing.JDialog {
         labelMetric7.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
 
         txtTarea.setBackground(new java.awt.Color(102, 102, 102));
-        txtTarea.setBorder(null);
         txtTarea.setForeground(new java.awt.Color(255, 255, 255));
         txtTarea.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTarea.setCaretColor(new java.awt.Color(102, 102, 102));
@@ -215,7 +224,6 @@ public class abmEmpleados extends javax.swing.JDialog {
         labelMetric8.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
 
         txtEmpresa.setBackground(new java.awt.Color(102, 102, 102));
-        txtEmpresa.setBorder(null);
         txtEmpresa.setForeground(new java.awt.Color(255, 255, 255));
         txtEmpresa.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtEmpresa.setCaretColor(new java.awt.Color(102, 102, 102));
@@ -223,7 +231,6 @@ public class abmEmpleados extends javax.swing.JDialog {
         txtEmpresa.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
 
         txtSucursal.setBackground(new java.awt.Color(102, 102, 102));
-        txtSucursal.setBorder(null);
         txtSucursal.setForeground(new java.awt.Color(255, 255, 255));
         txtSucursal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSucursal.setCaretColor(new java.awt.Color(102, 102, 102));
@@ -339,7 +346,7 @@ public class abmEmpleados extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void buttonIpod1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonIpod1ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int resp =JOptionPane.showConfirmDialog(rootPane,"Esta seguro de eliminar el Empleado: \n"+txtApellido.getText()+txtNombre.getText()+" ?", "ELIMINAR EMPLEADO",JOptionPane.OK_CANCEL_OPTION);
           if (resp==JOptionPane.OK_OPTION) {
               Empleado e = new EmpleadoDaoImp().getEmpleado(legajo);
@@ -347,7 +354,19 @@ public class abmEmpleados extends javax.swing.JDialog {
               JOptionPane.showMessageDialog(rootPane, "La Eliminacion se realizo exitosamente ", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
               this.dispose();
           }
-    }//GEN-LAST:event_buttonIpod1ActionPerformed
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtLegajoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLegajoKeyTyped
+        permitirSoloNumero(evt);
+    }//GEN-LAST:event_txtLegajoKeyTyped
+
+    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
+        permitirSoloLetra(evt);
+    }//GEN-LAST:event_txtApellidoKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        permitirSoloLetra(evt);
+    }//GEN-LAST:event_txtNombreKeyTyped
 
     /**
      * @param args the command line arguments
@@ -393,9 +412,9 @@ public class abmEmpleados extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonIpod btnAceptar;
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
+    private org.edisoncor.gui.button.ButtonIpod btnEliminar;
     private org.edisoncor.gui.button.ButtonIpod btnModificar;
     private org.edisoncor.gui.button.ButtonIpod btnNuevo;
-    private org.edisoncor.gui.button.ButtonIpod buttonIpod1;
     private org.edisoncor.gui.label.LabelMetric labelMetric1;
     private org.edisoncor.gui.label.LabelMetric labelMetric2;
     private org.edisoncor.gui.label.LabelMetric labelMetric3;
@@ -416,4 +435,40 @@ public class abmEmpleados extends javax.swing.JDialog {
     private org.edisoncor.gui.textField.TextFieldRoundIcon txtSucursal;
     private org.edisoncor.gui.textField.TextFieldRoundIcon txtTarea;
     // End of variables declaration//GEN-END:variables
+    private void permitirSoloNumero(java.awt.event.KeyEvent evt) {
+          // permitir solo el ingreso de numero
+         char caracter = evt.getKeyChar();
+        if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)){
+         evt.consume();  // ignorar el evento de teclado
+      }
+    }
+    
+    private void permitirSoloLetra(java.awt.event.KeyEvent evt) {
+          // permitir solo el ingreso de numero
+         char caracter = evt.getKeyChar();
+         if(((caracter < 'a') ||(caracter > 'z')) && (caracter < 'A') ||(caracter > 'Z') && (caracter != '\b' /*corresponde a BACK_SPACE*/)){
+         evt.consume();  // ignorar el evento de teclado
+      }
+    }
+    
+    public boolean validarEmpleadoNuevo(){
+         boolean todoOk=false;
+         try{
+         Empleado empLeg = new EmpleadoDaoImp().getEmpleado(Integer.parseInt(txtLegajo.getText().trim()));
+           
+             //actualizar
+             
+             if (empLeg ==null){
+                 todoOk= true;
+             }else{
+                 if (empLeg!=null) {
+                   JOptionPane.showMessageDialog(this, "El LEGAJO ya existe");
+                } 
+             }
+           }catch(Exception ex){
+              JOptionPane.showMessageDialog(this, "El campo LEGAJO no puede estar Vacío");
+              todoOk=false;
+         }   
+         return todoOk;
+     }
 }

@@ -4,20 +4,57 @@
  */
 package vistas;
 
+import javax.swing.JOptionPane;
+import novedades.dao.imp.UsuarioDaoImp;
+import pojo.Usuario;
+
 /**
  *
  * @author usuario
  */
 public class abmUsuario extends javax.swing.JDialog {
 
-    /**
-     * Creates new form abmUsuario
-     */
-    public abmUsuario(java.awt.Frame parent, boolean modal) {
+   Usuario usuario; //  este objeto contien los datos del usuario que llenas en el formulario  para crear o modificar 
+   boolean agregado= false;   // se pone en true: si se presiono el boton guardar para registrar la operacion . y False en otro caso
+   boolean nuevo; // se encarga de chequear si esta pantalla se usa para agregar un nuevo usuario .. true: nuevo ..false:modificar
+   
+   
+   /**  Este constructo lo ussas para cargar un usuario nuevo
+    * 
+    * @param parent
+    * @param modal 
+    */
+   public abmUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        // modifico la variable nuevo para que indiqe que se utilizara este formulario para hacer una nueva carga
+        nuevo= true;
+       // le damos vida al usuario
+        usuario= new Usuario();
+         //  centro y muesttro la pantalla
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
-
+    
+ /**
+  *  Este constructor lo usas cuando quieras realizar una modificacion de datos  del usuario  
+  * @param parent  // no les de bola  a esto
+  * @param modal            " 
+  * @param usuario es el usuario que queres que se modifique
+  */
+    
+ public abmUsuario(java.awt.Frame parent, boolean modal, Usuario usuario) {
+        super(parent, modal);
+        initComponents();
+        // lo seteo al usuario con los datos pasados como parametro
+        this.usuario = usuario; 
+        // indica que este formualrio se usara para editar un usuario
+        nuevo= false;
+        
+        //  centro y muesttro la pantalla
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +81,7 @@ public class abmUsuario extends javax.swing.JDialog {
         btnCancelar = new org.edisoncor.gui.button.ButtonIpod();
         btnModificar = new org.edisoncor.gui.button.ButtonIpod();
         buttonIpod2 = new org.edisoncor.gui.button.ButtonIpod();
-        passContraseña = new org.edisoncor.gui.passwordField.PasswordFieldRoundIcon();
+        txtpassContraseña = new org.edisoncor.gui.passwordField.PasswordFieldRoundIcon();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -107,6 +144,11 @@ public class abmUsuario extends javax.swing.JDialog {
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Tick (1).png"))); // NOI18N
         btnAceptar.setText("Aceptar");
         btnAceptar.setToolTipText("");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnNuevo.setBorder(new org.edisoncor.gui.util.DropShadowBorder());
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/adduser.png"))); // NOI18N
@@ -169,9 +211,9 @@ public class abmUsuario extends javax.swing.JDialog {
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
-        passContraseña.setBackground(new java.awt.Color(102, 102, 102));
-        passContraseña.setForeground(new java.awt.Color(255, 255, 255));
-        passContraseña.setColorDeBorde(new java.awt.Color(255, 102, 0));
+        txtpassContraseña.setBackground(new java.awt.Color(102, 102, 102));
+        txtpassContraseña.setForeground(new java.awt.Color(255, 255, 255));
+        txtpassContraseña.setColorDeBorde(new java.awt.Color(255, 102, 0));
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -191,7 +233,7 @@ public class abmUsuario extends javax.swing.JDialog {
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtpassContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -217,7 +259,7 @@ public class abmUsuario extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(passContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtpassContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -240,6 +282,29 @@ public class abmUsuario extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+         // guarda un empleado
+              
+        //le pasamos los datos objeto usuario para q contenga los datos de usuario
+        usuario.setContrasenia(txtpassContraseña.getText());
+        usuario.setDescripcion(txtDescripcion.getText());
+        usuario.setTipo(txtTipo.getText());
+        usuario.setUsuario(txtUsuario.getText());
+
+        // pregunto de nuevo si se realizara la carga de un nuevo usuario entonces add
+        if (nuevo) {
+            new UsuarioDaoImp().addUsuario(usuario);
+        } else {
+            // sino es porque se esta por editar un usuario
+            new UsuarioDaoImp().upDateUsuario(usuario);
+        }
+        // estas lineas lo ejecuta cuando todo sale bien, 
+        // entonces indico que si se realizo la operacion mediante la variable booleanda agregado
+        agregado= true;
+        // mensajito que indica todo ok
+        JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,10 +361,10 @@ public class abmUsuario extends javax.swing.JDialog {
     private org.edisoncor.gui.panel.Panel panel1;
     private org.edisoncor.gui.panel.PanelShadow panelShadow1;
     private org.edisoncor.gui.panel.PanelTranslucidoComplete panelTranslucidoComplete1;
-    private org.edisoncor.gui.passwordField.PasswordFieldRoundIcon passContraseña;
     private org.edisoncor.gui.textField.TextFieldRoundIcon txtDescripcion;
     private org.edisoncor.gui.textField.TextFieldRoundIcon txtId;
     private org.edisoncor.gui.textField.TextFieldRoundIcon txtTipo;
     private org.edisoncor.gui.textField.TextFieldRoundIcon txtUsuario;
+    private org.edisoncor.gui.passwordField.PasswordFieldRoundIcon txtpassContraseña;
     // End of variables declaration//GEN-END:variables
 }

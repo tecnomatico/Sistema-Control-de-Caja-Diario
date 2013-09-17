@@ -171,6 +171,11 @@ public class principal extends javax.swing.JFrame {
         mnuABM.add(mnuABMEmpleados);
 
         mnuABMUsuario.setText("ABMUsuarios");
+        mnuABMUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuABMUsuarioActionPerformed(evt);
+            }
+        });
         mnuABM.add(mnuABMUsuario);
 
         mnuEmpresas.setText("ABMEmpresas");
@@ -217,6 +222,10 @@ public class principal extends javax.swing.JFrame {
     private void mnuEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuEmpresasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuEmpresasActionPerformed
+
+    private void mnuABMUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuABMUsuarioActionPerformed
+        new abmUsuario(this, true);
+    }//GEN-LAST:event_mnuABMUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

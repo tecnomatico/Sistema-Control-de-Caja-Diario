@@ -32,6 +32,7 @@ public class abmUsuario extends javax.swing.JDialog {
        // le damos vida al usuario
         usuario= new Usuario();
          //  centro y muesttro la pantalla
+        this.setTitle("CARGA DE USUARIO");
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -52,6 +53,7 @@ public class abmUsuario extends javax.swing.JDialog {
         nuevo= false;
         
         //  centro y muesttro la pantalla
+        this.setTitle("MODIFICACION DE USUARIO");
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -81,7 +83,7 @@ public class abmUsuario extends javax.swing.JDialog {
         btnCancelar = new org.edisoncor.gui.button.ButtonIpod();
         btnModificar = new org.edisoncor.gui.button.ButtonIpod();
         buttonIpod2 = new org.edisoncor.gui.button.ButtonIpod();
-        txtpassContraseña = new org.edisoncor.gui.passwordField.PasswordFieldRoundIcon();
+        txtContraseña = new org.edisoncor.gui.passwordField.PasswordFieldRoundIcon();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -211,9 +213,9 @@ public class abmUsuario extends javax.swing.JDialog {
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
-        txtpassContraseña.setBackground(new java.awt.Color(102, 102, 102));
-        txtpassContraseña.setForeground(new java.awt.Color(255, 255, 255));
-        txtpassContraseña.setColorDeBorde(new java.awt.Color(255, 102, 0));
+        txtContraseña.setBackground(new java.awt.Color(102, 102, 102));
+        txtContraseña.setForeground(new java.awt.Color(255, 255, 255));
+        txtContraseña.setColorDeBorde(new java.awt.Color(255, 102, 0));
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -233,7 +235,7 @@ public class abmUsuario extends javax.swing.JDialog {
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtpassContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -259,7 +261,7 @@ public class abmUsuario extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtpassContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -284,10 +286,10 @@ public class abmUsuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-         // guarda un empleado
+         // guarda un usuario
               
         //le pasamos los datos objeto usuario para q contenga los datos de usuario
-        usuario.setContrasenia(txtpassContraseña.getText());
+        usuario.setContrasenia(txtContraseña.getText());
         usuario.setDescripcion(txtDescripcion.getText());
         usuario.setTipo(txtTipo.getText());
         usuario.setUsuario(txtUsuario.getText());
@@ -361,10 +363,10 @@ public class abmUsuario extends javax.swing.JDialog {
     private org.edisoncor.gui.panel.Panel panel1;
     private org.edisoncor.gui.panel.PanelShadow panelShadow1;
     private org.edisoncor.gui.panel.PanelTranslucidoComplete panelTranslucidoComplete1;
+    private org.edisoncor.gui.passwordField.PasswordFieldRoundIcon txtContraseña;
     private org.edisoncor.gui.textField.TextFieldRoundIcon txtDescripcion;
     private org.edisoncor.gui.textField.TextFieldRoundIcon txtId;
     private org.edisoncor.gui.textField.TextFieldRoundIcon txtTipo;
     private org.edisoncor.gui.textField.TextFieldRoundIcon txtUsuario;
-    private org.edisoncor.gui.passwordField.PasswordFieldRoundIcon txtpassContraseña;
     // End of variables declaration//GEN-END:variables
 }

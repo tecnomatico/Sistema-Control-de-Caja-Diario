@@ -53,7 +53,6 @@ public class cargaNovedades extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTableAdapterProvider1 = new org.jdesktop.swingbinding.adapters.JTableAdapterProvider();
         panel1 = new org.edisoncor.gui.panel.Panel();
         buttonIpod1 = new org.edisoncor.gui.button.ButtonIpod();
         buttonIpod2 = new org.edisoncor.gui.button.ButtonIpod();
@@ -207,7 +206,6 @@ public class cargaNovedades extends javax.swing.JDialog {
     private org.edisoncor.gui.button.ButtonIpod buttonIpod2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
-    private org.jdesktop.swingbinding.adapters.JTableAdapterProvider jTableAdapterProvider1;
     private org.edisoncor.gui.label.LabelMetric lblEmpresa;
     private org.edisoncor.gui.label.LabelMetric lblFecha;
     private org.edisoncor.gui.label.LabelMetric lblSucursal;

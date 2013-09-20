@@ -135,7 +135,7 @@ public class GUIGestorClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelar2ActionPerformed
 
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
-        GUIProveedor nuevoProveedor = new GUIProveedor(null, true);
+        GUICliente nuevoCliente = new GUICliente(null, true);
 
     }//GEN-LAST:event_btnCancelar1ActionPerformed
 

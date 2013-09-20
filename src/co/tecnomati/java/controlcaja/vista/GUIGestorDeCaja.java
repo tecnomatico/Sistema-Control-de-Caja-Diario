@@ -253,8 +253,7 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        // AnahiAramayo
-           GUIGestorClientes gestorClientes = new GUIGestorClientes(this, true);
+       GUIGestorClientes gestorCliente = new GUIGestorClientes(this, true);
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnGestorConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestorConceptoActionPerformed
@@ -268,7 +267,7 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDocumentoActionPerformed
 
     private void btnControlDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnControlDiarioActionPerformed
-        GUIRegistrarControlDiario registrarControlDiario = new GUIRegistrarControlDiario(this, true);
+        GUIComprobante registrarControlDiario = new GUIComprobante(this, true);
 
     }//GEN-LAST:event_btnControlDiarioActionPerformed
 

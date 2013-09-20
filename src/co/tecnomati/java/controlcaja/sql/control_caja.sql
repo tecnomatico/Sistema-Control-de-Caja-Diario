@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-09-2013 a las 15:29:02
+-- Tiempo de generación: 20-09-2013 a las 15:48:16
 -- Versión del servidor: 5.5.32
 -- Versión de PHP: 5.4.16
 
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `concepto` (
   `codigoConcepto` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`codigoConcepto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `concepto`
@@ -124,7 +124,8 @@ CREATE TABLE IF NOT EXISTS `concepto` (
 
 INSERT INTO `concepto` (`codigoConcepto`, `descripcion`) VALUES
 (1, 'monotributo'),
-(2, 'desarrollo de software a medida');
+(2, 'desarrollo de software a medida'),
+(3, 'capacitacion');
 
 -- --------------------------------------------------------
 

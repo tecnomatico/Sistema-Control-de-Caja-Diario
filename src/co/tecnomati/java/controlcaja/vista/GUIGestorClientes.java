@@ -157,6 +157,8 @@ int numeroSeleccion;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+                setAgregado(false);
+
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 

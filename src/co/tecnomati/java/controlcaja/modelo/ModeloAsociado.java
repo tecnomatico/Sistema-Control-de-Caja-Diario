@@ -1,5 +1,6 @@
 /*
- * Cooperativa de Trabajo Tecnomática Ltda.
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
 package co.tecnomati.java.controlcaja.modelo;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.*;
 import java.util.Iterator;
+
 
 /**
  *
@@ -18,7 +20,10 @@ public class ModeloAsociado extends AbstractTableModel{
     AsociadoDaoImp personaDAO = new AsociadoDaoImp();
     ArrayList<Asociado> listaPersonas = new ArrayList<Asociado>();
     
-    public ModeloAsociado() {            
+    
+  
+   // Asociado ahijado = new Asociado();
+            public ModeloAsociado() {            
         try {
             listaPersonas = (ArrayList<Asociado>) personaDAO.listarAsociado();
         } catch (ClassCastException ex) {

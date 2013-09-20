@@ -62,4 +62,16 @@ public class ConceptoDaoImp extends HibernateUtil implements ConceptoDAO{
         session.close();
         return a;      }
     
+    public Concepto getConceptoCod(int ref) {
+        Concepto a = null;
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql= "from Concepto where referencia ='"+ref+"'";     
+        session.getTransaction().commit();
+        a =(Concepto) session.createQuery(sql).uniqueResult();
+        session.close();
+        return a; 
+    }
+    
+    
 }

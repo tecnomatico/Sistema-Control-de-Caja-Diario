@@ -17,7 +17,7 @@ public class ModeloProveedor extends AbstractTableModel{
  Proveedor persona = new Proveedor();
     ProveedorDaoImp personaDAO = new ProveedorDaoImp();
     ArrayList<Proveedor> listaPersonas = new ArrayList<Proveedor>();
-    
+    boolean hola;
     public ModeloProveedor() {            
      try {
         listaPersonas = (ArrayList<Proveedor>) personaDAO.listarProveedor();

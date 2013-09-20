@@ -4,12 +4,26 @@
  */
 package co.tecnomati.java.controlcaja.vista;
 
+import co.tecnomati.java.controlcaja.modelo.ModeloAsociado;
+import co.tecnomati.java.controlcaja.modelo.ModeloCliente;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author joel
  */
 public class GUIgestorEntidades extends javax.swing.JDialog {
-
+     
+    
+   boolean agregado; //esta variable nos dice si el usuario selecciono una entidad del formulario
+   Object entidad; // guardara la entidad que se selecciono .Puede ser un cliente,proveedor, asociado.
+   
+    private  TableRowSorter sorter;
+   
+    ModeloAsociado modeloAsociado= new ModeloAsociado();
+    ModeloCliente modeloCliente= new ModeloCliente();
+   
     /**
      * Creates new form GUIgestorEntidades
      */
@@ -43,13 +57,12 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
 
         tblEntidad.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id", "cuit", "razon Social"
             }
         ));
         jScrollPane1.setViewportView(tblEntidad);
@@ -60,6 +73,12 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
         cmbFiltroEntidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbFiltroEntidadActionPerformed(evt);
+            }
+        });
+
+        txtRazonSocial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRazonSocialKeyPressed(evt);
             }
         });
 
@@ -91,13 +110,12 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
                         .addGap(124, 124, 124)
                         .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtRazonSocial))
                     .addGroup(panelEntidadLayout.createSequentialGroup()
                         .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(118, 118, 118)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(142, 142, 142))
             .addGroup(panelEntidadLayout.createSequentialGroup()
                 .addGap(0, 10, Short.MAX_VALUE)
                 .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,13 +162,51 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public boolean isAgregado() {
+        return agregado;
+    }
+
+    public void setAgregado(boolean agregado) {
+        this.agregado = agregado;
+    }
+
+    
+    
+    
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void cmbFiltroEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroEntidadActionPerformed
-        // TODO add your handling code here:
+         if (cmbFiltroEntidad.getSelectedItem().equals("PROVEEDOR")) {
+             
+         }else if(cmbFiltroEntidad.getSelectedItem().equals("CLIENTE")){
+             
+             
+         }else if(cmbFiltroEntidad.getSelectedItem().equals("ASOCIADO")){
+             
+         }
+         
+    
+
     }//GEN-LAST:event_cmbFiltroEntidadActionPerformed
+
+    private void txtRazonSocialKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRazonSocialKeyPressed
+         if (cmbFiltroEntidad.getSelectedItem().equals("PROVEEDOR")) {
+             
+         }else if (cmbFiltroEntidad.getSelectedItem().equals("CLIENTE")) {
+            if (modeloCliente.getRowCount() != 0) {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i).*" + txtRazonSocial.getText() + ".*"));
+            tblEntidad.setRowSorter(sorter);
+            }
+        } else if(cmbFiltroEntidad.getSelectedItem().equals("ASOCIADO")) {
+             if (modeloAsociado.getRowCount() != 0) {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i).*" + txtRazonSocial.getText() + ".*"));
+            tblEntidad.setRowSorter(sorter);
+        }     
+        }
+        
+    }//GEN-LAST:event_txtRazonSocialKeyPressed
 
     /**
      * @param args the command line arguments

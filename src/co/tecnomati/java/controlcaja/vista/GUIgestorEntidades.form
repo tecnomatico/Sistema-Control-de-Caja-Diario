@@ -48,16 +48,15 @@
                           <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
                           <Component id="labelMetric2" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtRazonSocial" min="-2" pref="266" max="-2" attributes="0"/>
+                          <Component id="txtRazonSocial" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="labelMetric3" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="txtId" min="-2" pref="148" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
@@ -111,11 +110,10 @@
             <Component class="javax.swing.JTable" name="tblEntidad">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                  <Table columnCount="3" rowCount="3">
+                    <Column editable="true" title="id" type="java.lang.Object"/>
+                    <Column editable="true" title="cuit" type="java.lang.Object"/>
+                    <Column editable="true" title="razon Social" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>
@@ -142,6 +140,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtRazonSocial">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRazonSocialKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtId">
           <Events>

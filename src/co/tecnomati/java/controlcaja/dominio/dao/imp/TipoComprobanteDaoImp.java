@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -60,6 +61,17 @@ public class TipoComprobanteDaoImp extends  HibernateUtil implements TipoComprob
        Tipocomprobante a = (Tipocomprobante) session.get(Tipocomprobante.class,idTipoFormulario);
         session.getTransaction().commit();
         session.close();
-        return a;      }
+        return a;   
+    }
+    public Tipocomprobante getTipoFormularioRef(String ref) {
+       Tipocomprobante a = null;
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql= "from Tipocomprobante where referencia ='"+ref+"'";     
+        session.getTransaction().commit();
+        a =(Tipocomprobante) session.createQuery(sql).uniqueResult();
+        session.close();
+        return a; 
+    }
     
 }

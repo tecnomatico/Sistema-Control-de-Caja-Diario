@@ -166,7 +166,8 @@ public GUICliente(java.awt.Frame parent, boolean modal,Cliente cliente ) {
     }//GEN-LAST:event_txtCuitActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-     this.dispose();
+  setAgregado(false);
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtRazonSocialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRazonSocialActionPerformed

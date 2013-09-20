@@ -15,17 +15,14 @@ import javax.swing.table.TableRowSorter;
  * @author joel
  */
 public class GUIgestorEntidades extends javax.swing.JDialog {
-     
-    
-   boolean agregado; //esta variable nos dice si el usuario selecciono una entidad del formulario
-   Object entidad; // guardara la entidad que se selecciono .Puede ser un cliente,proveedor, asociado.
-   
-    private  TableRowSorter sorter;
-   
-    ModeloAsociado modeloAsociado= new ModeloAsociado();
-    ModeloCliente modeloCliente= new ModeloCliente();
-    ModeloProveedor modeloProveedor= new ModeloProveedor();
-   
+
+    boolean agregado; //esta variable nos dice si el usuario selecciono una entidad del formulario
+    Object entidad; // guardara la entidad que se selecciono .Puede ser un cliente,proveedor, asociado.
+    private TableRowSorter sorter;
+    ModeloAsociado modeloAsociado = new ModeloAsociado();
+    ModeloCliente modeloCliente = new ModeloCliente();
+    ModeloProveedor modeloProveedor = new ModeloProveedor();
+
     /**
      * Creates new form GUIgestorEntidades
      */
@@ -33,7 +30,7 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         inicializarTablaProveedor();
-        
+
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -176,59 +173,55 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
         this.agregado = agregado;
     }
 
-     public void inicializarTablaAsociado(){
-        
+    public void inicializarTablaAsociado() {
+
         modeloAsociado = new ModeloAsociado();
         sorter = new TableRowSorter(modeloAsociado);
-        tblEntidad.setModel(modeloAsociado);  
+        tblEntidad.setModel(modeloAsociado);
     }
-     public void inicializarTablaCliente(){
-        
+
+    public void inicializarTablaCliente() {
+
         modeloCliente = new ModeloCliente();
         sorter = new TableRowSorter(modeloCliente);
-        tblEntidad.setModel(modeloCliente);  
+        tblEntidad.setModel(modeloCliente);
     }
-     public void inicializarTablaProveedor(){
-        
-         modeloProveedor = new ModeloProveedor();
+
+    public void inicializarTablaProveedor() {
+
+        modeloProveedor = new ModeloProveedor();
         sorter = new TableRowSorter(modeloProveedor);
-        tblEntidad.setModel(modeloProveedor);  
+        tblEntidad.setModel(modeloProveedor);
     }
-    
-    
+
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void cmbFiltroEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroEntidadActionPerformed
-         if (cmbFiltroEntidad.getSelectedItem().equals("PROVEEDOR")) {
-             inicializarTablaProveedor();
-         }else if(cmbFiltroEntidad.getSelectedItem().equals("CLIENTE")){
-             inicializarTablaCliente();
-             
-         }else if(cmbFiltroEntidad.getSelectedItem().equals("ASOCIADO")){
-             inicializarTablaAsociado();
-         }
-         
-    
+        if (cmbFiltroEntidad.getSelectedItem().equals("PROVEEDOR")) {
+            inicializarTablaProveedor();
+        } else if (cmbFiltroEntidad.getSelectedItem().equals("CLIENTE")) {
+            inicializarTablaCliente();
+
+        } else if (cmbFiltroEntidad.getSelectedItem().equals("ASOCIADO")) {
+            inicializarTablaAsociado();
+        }
+
+
 
     }//GEN-LAST:event_cmbFiltroEntidadActionPerformed
 
     private void txtRazonSocialKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRazonSocialKeyPressed
-         if (cmbFiltroEntidad.getSelectedItem().equals("PROVEEDOR")) {
-             
-         }else if (cmbFiltroEntidad.getSelectedItem().equals("CLIENTE")) {
-            if (modeloCliente.getRowCount() != 0) {
+
+
+
+
+        if (tblEntidad.getModel().getRowCount() != 0) {
             sorter.setRowFilter(RowFilter.regexFilter("(?i).*" + txtRazonSocial.getText() + ".*"));
             tblEntidad.setRowSorter(sorter);
-            }
-        } else if(cmbFiltroEntidad.getSelectedItem().equals("ASOCIADO")) {
-             if (modeloAsociado.getRowCount() != 0) {
-            sorter.setRowFilter(RowFilter.regexFilter("(?i).*" + txtRazonSocial.getText() + ".*"));
-            tblEntidad.setRowSorter(sorter);
-        }     
+
         }
-        
     }//GEN-LAST:event_txtRazonSocialKeyPressed
 
     /**

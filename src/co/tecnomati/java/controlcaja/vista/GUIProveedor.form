@@ -43,7 +43,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="labelMetric4" min="-2" pref="115" max="-2" attributes="0"/>
+                              <Component id="labelRazonSocial" min="-2" pref="115" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                   <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
@@ -59,7 +59,7 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="labelMetric3" min="-2" pref="115" max="-2" attributes="0"/>
+                          <Component id="labelCuit" min="-2" pref="115" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtCuit" min="-2" pref="141" max="-2" attributes="0"/>
                       </Group>
@@ -74,11 +74,11 @@
                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtCuit" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelMetric3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelCuit" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labelMetric4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelRazonSocial" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtRazonSocial" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -92,7 +92,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric3">
+        <Component class="org.edisoncor.gui.label.LabelMetric" name="labelCuit">
           <Properties>
             <Property name="text" type="java.lang.String" value="CUIT"/>
           </Properties>
@@ -104,7 +104,7 @@
         </Component>
         <Component class="org.edisoncor.gui.textField.TextField" name="txtRazonSocial">
         </Component>
-        <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric4">
+        <Component class="org.edisoncor.gui.label.LabelMetric" name="labelRazonSocial">
           <Properties>
             <Property name="text" type="java.lang.String" value="Razon Social"/>
           </Properties>
@@ -121,6 +121,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

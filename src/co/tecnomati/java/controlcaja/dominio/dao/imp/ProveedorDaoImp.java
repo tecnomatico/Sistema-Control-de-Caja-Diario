@@ -4,9 +4,9 @@
  */
 package co.tecnomati.java.controlcaja.dominio.dao.imp;
 
+import co.tecnomati.java.controlcaja.dominio.Proveedor;
 import co.tecnomati.java.controlcaja.dominio.dao.ProveedorDAO;
 import co.tecnomati.java.controlcaja.hibernateUtil.HibernateUtil;
-import co.tecnomati.java.controlcaja.vista.GUIProveedor;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -16,21 +16,21 @@ import org.hibernate.Session;
  *
  * @author Joel
  */
-public class ProveedorDaoImp implements ProveedorDAO{
+public class ProveedorDaoImp extends HibernateUtil implements ProveedorDAO {
 
     @Override
-    public List<GUIProveedor> listarProveedor() {
+    public List<Proveedor> listarProveedor() {
        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(GUIProveedor.class);
+        Criteria criteria = session.createCriteria(Proveedor.class);
         
-        ArrayList<GUIProveedor> parroquia = (ArrayList<GUIProveedor>)criteria.list();
+        ArrayList<Proveedor> parroquia = (ArrayList<Proveedor>)criteria.list();
         session.close();
         return parroquia;
     }
 
     @Override
-    public void addProveedor(GUIProveedor a) {
+    public void addProveedor(Proveedor a) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(a);
@@ -38,7 +38,7 @@ public class ProveedorDaoImp implements ProveedorDAO{
         session.close();    }
 
     @Override
-    public void deleteProveedor(GUIProveedor a) {
+    public void deleteProveedor(Proveedor a) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(a);
@@ -46,7 +46,7 @@ public class ProveedorDaoImp implements ProveedorDAO{
         session.close();    }
 
     @Override
-    public void upDateProveedor(GUIProveedor a) {
+    public void upDateProveedor(Proveedor a) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(a);
@@ -54,10 +54,10 @@ public class ProveedorDaoImp implements ProveedorDAO{
         session.close();     }
 
     @Override
-    public GUIProveedor getProveedor(int idProveedor) {
+    public Proveedor getProveedor(int idProveedor) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        GUIProveedor a = (GUIProveedor) session.get(GUIProveedor.class,idProveedor);
+        Proveedor a = (Proveedor) session.get(Proveedor.class,idProveedor);
         session.getTransaction().commit();
         session.close();
         return a;      }

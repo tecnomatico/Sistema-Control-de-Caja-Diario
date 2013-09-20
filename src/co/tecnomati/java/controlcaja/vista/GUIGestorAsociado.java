@@ -8,6 +8,7 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Asociado;
 import co.tecnomati.java.controlcaja.modelo.ModeloAsociado;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.RowFilter.*;
@@ -26,11 +27,9 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
     public boolean isAgregado() {
         return agregado;
     }
-
     public void setAgregado(boolean agregado) {
         this.agregado = agregado;
     }
-    
     
     private  TableRowSorter sorter;
     GUIGestorAsociado parent;
@@ -192,11 +191,6 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
         if (nuevoAsociado.isAgregado()) {
             inicializarTabla();
         }
-       
-      
-        
-
-
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed

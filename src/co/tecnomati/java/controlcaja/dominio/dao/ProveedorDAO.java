@@ -4,16 +4,16 @@
  */
 package co.tecnomati.java.controlcaja.dominio.dao;
 
-import co.tecnomati.java.controlcaja.vista.GUIProveedor;
+import co.tecnomati.java.controlcaja.dominio.Proveedor;
 
 /**
  *
  * @author Joel
  */
 public interface ProveedorDAO {
-     java.util.List<GUIProveedor> listarProveedor();
-  public void addProveedor(GUIProveedor a);
-  public void deleteProveedor(GUIProveedor a);
-  public void upDateProveedor(GUIProveedor a);
-  public GUIProveedor getProveedor(int idProveedor);
+     java.util.List<Proveedor> listarProveedor();
+  public void addProveedor(Proveedor a);
+  public void deleteProveedor(Proveedor a);
+  public void upDateProveedor(Proveedor a);
+  public Proveedor getProveedor(int idProveedor);
 }

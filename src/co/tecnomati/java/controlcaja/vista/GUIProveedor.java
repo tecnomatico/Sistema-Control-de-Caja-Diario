@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Joel
+ * @author AnahiAramayo
  */
 public class GUIProveedor extends javax.swing.JDialog {
     private boolean modificar=false;

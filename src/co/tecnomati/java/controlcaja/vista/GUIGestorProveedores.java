@@ -50,6 +50,7 @@ public class GUIGestorProveedores extends javax.swing.JDialog {
         initComponents();
         
         this.setTitle(Constantes.NAME_GESTOR_PROVEEDOR);
+        inicializarTabla();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         
@@ -78,7 +79,7 @@ public class GUIGestorProveedores extends javax.swing.JDialog {
         tblProveedor.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
         tblProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null}
             },
             new String [] {
                 "CUIT", "RAZON SOCIAL"

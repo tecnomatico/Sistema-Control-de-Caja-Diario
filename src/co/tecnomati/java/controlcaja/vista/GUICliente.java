@@ -5,13 +5,19 @@
 package co.tecnomati.java.controlcaja.vista;
 
 import co.tecnomati.java.controlcaja.cons.Constantes;
-
+import co.tecnomati.java.controlcaja.dominio.Cliente;
+import co.tecnomati.java.controlcaja.dominio.dao.ClienteDAO;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.ClienteDaoImp;
+import java.awt.Frame;
+import javax.swing.JOptionPane;
 /**
  *
- * @author Joel
+ * @author AnahiAramayo
  */
 public class GUICliente extends javax.swing.JDialog {
-
+private boolean modificar=false;
+    Cliente cliente;
+    boolean agregado=false;
     /**
      * Creates new form GUICliente
      */
@@ -23,7 +29,24 @@ public class GUICliente extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+public GUICliente(java.awt.Frame parent, boolean modal,Cliente cliente ) {
+        super(parent, modal);
+        initComponents();
+         this.cliente = cliente;
+         modificar = true;
+        this.setTitle(Constantes.NAME_NUEVO_PROVEEDOR);
+        txtCuit.setText(String.valueOf(cliente.getCuit()));
+        txtRazonSocial.setText(cliente.getRazonSocial());
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+   public boolean isAgregado() {
+        return agregado;
+    }
 
+    public void setAgregado(boolean agregado) {
+        this.agregado = agregado;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,7 +174,24 @@ public class GUICliente extends javax.swing.JDialog {
     }//GEN-LAST:event_txtRazonSocialActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+         ClienteDAO clienteDAO = new ClienteDaoImp();
+        if (!modificar) {
+           cliente = new Cliente();    
+        }
+        cliente.setCuit(Long.parseLong(txtCuit.getText()));
+        cliente.setRazonSocial(txtRazonSocial.getText());
+        //if (validacion()) {
+//      JOptionPane.showMessageDialog(null, "Debe completar todos los campos...");
+//        } else {
+            if (modificar) {
+                clienteDAO.upDateCliente(cliente);
+            } else {
+                clienteDAO.addCliente(cliente);
+            }
+            setAgregado(true);
+            JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
+            this.dispose();
+//        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**

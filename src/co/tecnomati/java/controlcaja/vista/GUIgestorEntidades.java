@@ -57,6 +57,11 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
         labelMetric1.setText("Filtro");
 
         cmbFiltroEntidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PROVEEDOR", "CLIENTE", "ASOCIADO" }));
+        cmbFiltroEntidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFiltroEntidadActionPerformed(evt);
+            }
+        });
 
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +147,10 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
+
+    private void cmbFiltroEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroEntidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbFiltroEntidadActionPerformed
 
     /**
      * @param args the command line arguments

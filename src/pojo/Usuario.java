@@ -1,5 +1,5 @@
 package pojo;
-// Generated 03/09/2013 17:08:28 by Hibernate Tools 3.2.1.GA
+// Generated 17/09/2013 21:47:20 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -12,18 +12,18 @@ public class Usuario  implements java.io.Serializable {
      private int id;
      private Empleado empleados;
      private String usuario;
-     private String contrasenia;
+     private String clave;
      private String descripcion;
      private String tipo;
 
     public Usuario() {
     }
 
-    public Usuario(int id, Empleado empleados, String usuario, String contrasenia, String descripcion, String tipo) {
+    public Usuario(int id, Empleado empleados, String usuario, String clave, String descripcion, String tipo) {
        this.id = id;
        this.empleados = empleados;
        this.usuario = usuario;
-       this.contrasenia = contrasenia;
+       this.clave = clave;
        this.descripcion = descripcion;
        this.tipo = tipo;
     }
@@ -49,12 +49,12 @@ public class Usuario  implements java.io.Serializable {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-    public String getContrasenia() {
-        return this.contrasenia;
+    public String getClave() {
+        return this.clave;
     }
     
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setClave(String clave) {
+        this.clave = clave;
     }
     public String getDescripcion() {
         return this.descripcion;

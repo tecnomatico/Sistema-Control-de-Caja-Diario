@@ -1,5 +1,5 @@
 package pojo;
-// Generated 03/09/2013 17:08:28 by Hibernate Tools 3.2.1.GA
+// Generated 17/09/2013 21:47:20 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -15,7 +15,7 @@ public class Concepto  implements java.io.Serializable {
      private String descripcion;
      private boolean cargaUsuario;
      private boolean tipo;
-     private Set novedads = new HashSet(0);
+     private Set<Novedad> novedads = new HashSet<Novedad>(0);
 
     public Concepto() {
     }
@@ -27,7 +27,7 @@ public class Concepto  implements java.io.Serializable {
         this.cargaUsuario = cargaUsuario;
         this.tipo = tipo;
     }
-    public Concepto(int codCon, String descripcion, boolean cargaUsuario, boolean tipo, Set novedads) {
+    public Concepto(int codCon, String descripcion, boolean cargaUsuario, boolean tipo, Set<Novedad> novedads) {
        this.codCon = codCon;
        this.descripcion = descripcion;
        this.cargaUsuario = cargaUsuario;
@@ -63,23 +63,14 @@ public class Concepto  implements java.io.Serializable {
     public void setTipo(boolean tipo) {
         this.tipo = tipo;
     }
-    public Set getNovedads() {
+    public Set<Novedad> getNovedads() {
         return this.novedads;
     }
     
-    public void setNovedads(Set novedads) {
+    public void setNovedads(Set<Novedad> novedads) {
         this.novedads = novedads;
     }
 
-    public Empleado getApellido(Empleado a){
-         return a;
-        
-    }
-
-    public Empleado getApellido() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-            
 
 
 

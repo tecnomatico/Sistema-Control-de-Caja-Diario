@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 30/08/2013 08:52:30 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 17/09/2013 21:47:20 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
   <class catalog="novedades" name="pojo.Empleado" table="empleados">
     <id name="legajo" type="java.lang.Integer">

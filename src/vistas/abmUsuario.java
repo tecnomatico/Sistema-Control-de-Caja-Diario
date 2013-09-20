@@ -6,6 +6,7 @@ package vistas;
 
 import javax.swing.JOptionPane;
 import novedades.dao.imp.UsuarioDaoImp;
+import pojo.Empleado;
 import pojo.Usuario;
 
 /**
@@ -289,11 +290,11 @@ public class abmUsuario extends javax.swing.JDialog {
          // guarda un usuario
               
         //le pasamos los datos objeto usuario para q contenga los datos de usuario
-        usuario.setContrasenia(txtContraseña.getText());
+        usuario.setClave(txtContraseña.getText());
         usuario.setDescripcion(txtDescripcion.getText());
         usuario.setTipo(txtTipo.getText());
         usuario.setUsuario(txtUsuario.getText());
-
+        usuario.setEmpleados(new Empleado());
         // pregunto de nuevo si se realizara la carga de un nuevo usuario entonces add
         if (nuevo) {
             new UsuarioDaoImp().addUsuario(usuario);

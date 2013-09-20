@@ -1,5 +1,5 @@
 package pojo;
-// Generated 03/09/2013 17:08:28 by Hibernate Tools 3.2.1.GA
+// Generated 17/09/2013 21:47:20 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -15,8 +15,8 @@ public class Empresa  implements java.io.Serializable {
      private String nombre;
      private String gerente;
      private String mailGerente;
-     private Set sucursals = new HashSet(0);
-     private Set empleadoses = new HashSet(0);
+     private Set<Sucursal> sucursals = new HashSet<Sucursal>(0);
+     private Set<Empleado> empleadoses = new HashSet<Empleado>(0);
 
     public Empresa() {
     }
@@ -26,7 +26,7 @@ public class Empresa  implements java.io.Serializable {
         this.gerente = gerente;
         this.mailGerente = mailGerente;
     }
-    public Empresa(String nombre, String gerente, String mailGerente, Set sucursals, Set empleadoses) {
+    public Empresa(String nombre, String gerente, String mailGerente, Set<Sucursal> sucursals, Set<Empleado> empleadoses) {
        this.nombre = nombre;
        this.gerente = gerente;
        this.mailGerente = mailGerente;
@@ -62,18 +62,18 @@ public class Empresa  implements java.io.Serializable {
     public void setMailGerente(String mailGerente) {
         this.mailGerente = mailGerente;
     }
-    public Set getSucursals() {
+    public Set<Sucursal> getSucursals() {
         return this.sucursals;
     }
     
-    public void setSucursals(Set sucursals) {
+    public void setSucursals(Set<Sucursal> sucursals) {
         this.sucursals = sucursals;
     }
-    public Set getEmpleadoses() {
+    public Set<Empleado> getEmpleadoses() {
         return this.empleadoses;
     }
     
-    public void setEmpleadoses(Set empleadoses) {
+    public void setEmpleadoses(Set<Empleado> empleadoses) {
         this.empleadoses = empleadoses;
     }
 

@@ -1,27 +1,26 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 03/09/2013 17:08:29 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/09/2013 21:47:20 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="pojo.Sucursal" table="sucursal" catalog="novedades">
-        <id name="codSuc" type="int">
-            <column name="cod_suc" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="empleados" class="pojo.Empleados" fetch="select">
-            <column name="legajo" not-null="true" />
-        </many-to-one>
-        <many-to-one name="empresa" class="pojo.Empresa" fetch="select">
-            <column name="cod_emp" not-null="true" />
-        </many-to-one>
-        <property name="nombre" type="string">
-            <column name="nombre" length="30" not-null="true" />
-        </property>
-        <set name="empleadoses" inverse="true">
-            <key>
-                <column name="COD_SUC" not-null="true" />
-            </key>
-            <one-to-many class="pojo.Empleados" />
-        </set>
-    </class>
+  <class catalog="novedades" name="pojo.Sucursal" table="sucursal">
+    <id name="codSuc" type="int">
+      <column name="cod_suc"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="pojo.Empleado" fetch="select" name="empleados">
+      <column name="legajo" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="pojo.Empresa" fetch="select" name="empresa">
+      <column name="cod_emp" not-null="true"/>
+    </many-to-one>
+    <property name="nombre" type="string">
+      <column length="30" name="nombre" not-null="true"/>
+    </property>
+    <set inverse="true" name="empleadoses">
+      <key>
+        <column name="COD_SUC" not-null="true"/>
+      </key>
+      <one-to-many class="pojo.Empleado"/>
+    </set>
+  </class>
 </hibernate-mapping>

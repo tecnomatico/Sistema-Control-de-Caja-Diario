@@ -7,6 +7,7 @@ package co.tecnomati.java.controlcaja.vista;
 import co.tecnomati.java.controlcaja.modelo.ModeloAsociado;
 import co.tecnomati.java.controlcaja.modelo.ModeloCliente;
 import co.tecnomati.java.controlcaja.modelo.ModeloProveedor;
+import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
@@ -88,6 +89,11 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);
+            }
+        });
+        txtId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIdKeyPressed(evt);
             }
         });
 
@@ -212,17 +218,22 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
 
     }//GEN-LAST:event_cmbFiltroEntidadActionPerformed
 
+    public void filtro(JTextField caja){
+          if (tblEntidad.getModel().getRowCount() != 0) {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i).*" + caja.getText() + ".*"));
+            tblEntidad.setRowSorter(sorter);
+
+    }
+    }
     private void txtRazonSocialKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRazonSocialKeyPressed
 
 
-
-
-        if (tblEntidad.getModel().getRowCount() != 0) {
-            sorter.setRowFilter(RowFilter.regexFilter("(?i).*" + txtRazonSocial.getText() + ".*"));
-            tblEntidad.setRowSorter(sorter);
-
-        }
+filtro(txtRazonSocial);
     }//GEN-LAST:event_txtRazonSocialKeyPressed
+
+    private void txtIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdKeyPressed
+        filtro(txtId);
+    }//GEN-LAST:event_txtIdKeyPressed
 
     /**
      * @param args the command line arguments

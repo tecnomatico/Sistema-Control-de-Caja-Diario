@@ -9,7 +9,7 @@ import hibernateUtil.Conexion;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import novedades.dao.ConceptoDAO;
+import novedades.dao.ConceptoDAO2;
 
 
 import org.hibernate.Criteria;
@@ -21,7 +21,7 @@ import pojo.Empleado;
  *
  * @author Joel
  */
-public class ConceptoDaoImp extends Conexion implements ConceptoDAO{
+public class ConceptoDaoImp extends Conexion implements ConceptoDAO2{
 
     @Override
     public List<Concepto> listarConcepto() {

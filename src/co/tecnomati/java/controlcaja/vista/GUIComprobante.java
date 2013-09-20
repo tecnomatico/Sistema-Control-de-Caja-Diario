@@ -198,6 +198,15 @@ public class GUIComprobante extends javax.swing.JDialog {
         panelEntidad.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entidad", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(255, 255, 255)));
         panelEntidad.setColorPrimario(new java.awt.Color(153, 153, 153));
 
+        txtCuitDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCuitDniKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCuitDniKeyTyped(evt);
+            }
+        });
+
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNombreKeyPressed(evt);
@@ -552,6 +561,16 @@ public class GUIComprobante extends javax.swing.JDialog {
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void txtCuitDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitDniKeyTyped
+       
+    }//GEN-LAST:event_txtCuitDniKeyTyped
+
+    private void txtCuitDniKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitDniKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_F1) {
+           GUIgestorEntidades gestorEntidad = new GUIgestorEntidades(null, true);
+       }
+    }//GEN-LAST:event_txtCuitDniKeyPressed
 
     private void setEscuchadorDeEventosCmboTipoComprobante() {
 //        cmbTipoComprobante.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {

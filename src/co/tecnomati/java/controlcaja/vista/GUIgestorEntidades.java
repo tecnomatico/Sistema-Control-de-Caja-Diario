@@ -6,6 +6,7 @@ package co.tecnomati.java.controlcaja.vista;
 
 import co.tecnomati.java.controlcaja.modelo.ModeloAsociado;
 import co.tecnomati.java.controlcaja.modelo.ModeloCliente;
+import co.tecnomati.java.controlcaja.modelo.ModeloProveedor;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
@@ -23,6 +24,7 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
    
     ModeloAsociado modeloAsociado= new ModeloAsociado();
     ModeloCliente modeloCliente= new ModeloCliente();
+    ModeloProveedor modeloProveedor= new ModeloProveedor();
    
     /**
      * Creates new form GUIgestorEntidades
@@ -30,6 +32,10 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
     public GUIgestorEntidades(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        inicializarTablaProveedor();
+        
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
@@ -170,7 +176,24 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
         this.agregado = agregado;
     }
 
-    
+     public void inicializarTablaAsociado(){
+        
+        modeloAsociado = new ModeloAsociado();
+        sorter = new TableRowSorter(modeloAsociado);
+        tblEntidad.setModel(modeloAsociado);  
+    }
+     public void inicializarTablaCliente(){
+        
+        modeloCliente = new ModeloCliente();
+        sorter = new TableRowSorter(modeloCliente);
+        tblEntidad.setModel(modeloCliente);  
+    }
+     public void inicializarTablaProveedor(){
+        
+         modeloProveedor = new ModeloProveedor();
+        sorter = new TableRowSorter(modeloProveedor);
+        tblEntidad.setModel(modeloProveedor);  
+    }
     
     
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
@@ -179,12 +202,12 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
 
     private void cmbFiltroEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroEntidadActionPerformed
          if (cmbFiltroEntidad.getSelectedItem().equals("PROVEEDOR")) {
-             
+             inicializarTablaProveedor();
          }else if(cmbFiltroEntidad.getSelectedItem().equals("CLIENTE")){
-             
+             inicializarTablaCliente();
              
          }else if(cmbFiltroEntidad.getSelectedItem().equals("ASOCIADO")){
-             
+             inicializarTablaAsociado();
          }
          
     

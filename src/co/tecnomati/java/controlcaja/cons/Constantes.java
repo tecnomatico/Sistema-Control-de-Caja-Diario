@@ -18,7 +18,7 @@ public class Constantes {
      public static final String NAME_GESTOR_TIPO_DOCUMENTO = " TIPO DE COMPROBANTES";
      public static final String NAME_GESTOR_CLIENTE = "GESTOR DE CLIENTES";
      public static final String NAME_GESTOR_CONTROL_DIARIO = "CONTROL DIARIO";
-     
+       public static final String NAME_GESTOR_ENTIDAD = "CONTROL ENTIDAD";
      
      public static final String NAME_REGISTRO_DATOS_COOPERATIVA = "DATOS DE COOPERATIVA";
      

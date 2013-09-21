@@ -49,8 +49,10 @@ public class ModeloProveedor extends AbstractTableModel{
              /* No hay necesidad de mostrar este campo a menos q se 
              pida para nosotros seria nuestra manera de manejarlo*/ 
             case 1:objeto = persona.getCuit();break;
-            case 2:objeto = persona.getRazonSocial()+" ";break;
-            case 3:objeto = persona.getDomicilio()+" ";break;
+            case 2:objeto = persona.getRazonSocial()+" ";
+                            break;
+            case 3:objeto = persona.getDomicilio()+" ";
+                            break;
             case 4:objeto = persona.getEstado();break;
         }      
         return objeto;

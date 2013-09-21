@@ -72,6 +72,11 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
         });
 
         btnConsultarControlDiario.setText("Busqueda ");
+        btnConsultarControlDiario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarControlDiarioActionPerformed(evt);
+            }
+        });
 
         labelMetric2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelMetric2.setText("Registro de Comprobantes");
@@ -270,6 +275,11 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
         GUIComprobante registrarControlDiario = new GUIComprobante(this, true);
 
     }//GEN-LAST:event_btnControlDiarioActionPerformed
+
+    private void btnConsultarControlDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarControlDiarioActionPerformed
+        GUIGestorComprobante gestorComprobante = new GUIGestorComprobante(this, true);
+        
+    }//GEN-LAST:event_btnConsultarControlDiarioActionPerformed
 
     /**
      * @param args the command line arguments

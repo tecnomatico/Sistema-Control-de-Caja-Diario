@@ -4,6 +4,7 @@
  */
 package co.tecnomati.java.controlcaja.vista;
 
+import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.modelo.ModeloAsociado;
 import co.tecnomati.java.controlcaja.modelo.ModeloCliente;
 import co.tecnomati.java.controlcaja.modelo.ModeloProveedor;
@@ -19,9 +20,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class GUIgestorEntidades extends javax.swing.JDialog {
     
-    public static final String PROVEEDOR = "PROVEEDOR";
-    public static final String CLIENTE = "CLIENTE";
-    public static final String ASOCIADO = "ASOCIADO";
+  
     
    int numeroSeleccion;
     boolean selecciono; //esta variable nos dice si el usuario selecciono una entidad del formulario
@@ -222,12 +221,12 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void cmbFiltroEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroEntidadActionPerformed
-        if (cmbFiltroEntidad.getSelectedItem().equals(PROVEEDOR)) {
+        if (cmbFiltroEntidad.getSelectedItem().equals(Constantes.PROVEEDOR)) {
             inicializarTablaProveedor();
-        } else if (cmbFiltroEntidad.getSelectedItem().equals(CLIENTE)) {
+        } else if (cmbFiltroEntidad.getSelectedItem().equals(Constantes.CLIENTE)) {
             inicializarTablaCliente();
 
-        } else if (cmbFiltroEntidad.getSelectedItem().equals(ASOCIADO)) {
+        } else if (cmbFiltroEntidad.getSelectedItem().equals(Constantes.ASOCIADO)) {
             inicializarTablaAsociado();
         }
 
@@ -259,13 +258,13 @@ filtro(txtRazonSocial);
             numeroSeleccion = sorter.convertRowIndexToModel(tblEntidad.getSelectedRow());
             int id = (int) tblEntidad.getModel().getValueAt(fila, 0);
             entidad.setId(id);
-            if (cmbFiltroEntidad.getSelectedItem().equals(PROVEEDOR)) {
-                entidad.setTipoEntidad(PROVEEDOR);
-            } else if (cmbFiltroEntidad.getSelectedItem().equals(CLIENTE)) {
-                entidad.setTipoEntidad(CLIENTE);
+            if (cmbFiltroEntidad.getSelectedItem().equals(Constantes.PROVEEDOR)) {
+                entidad.setTipoEntidad(Constantes.PROVEEDOR_INT);
+            } else if (cmbFiltroEntidad.getSelectedItem().equals(Constantes.CLIENTE)) {
+                entidad.setTipoEntidad(Constantes.CLIENTE_INT);
 
-            } else if (cmbFiltroEntidad.getSelectedItem().equals(ASOCIADO)) {
-                entidad.setTipoEntidad(ASOCIADO);
+            } else if (cmbFiltroEntidad.getSelectedItem().equals(Constantes.ASOCIADO)) {
+                entidad.setTipoEntidad(Constantes.ASOCIADO_INT);
             } 
         }else {
                 JOptionPane.showMessageDialog(this, "Seleccione una fila");

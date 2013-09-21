@@ -36,4 +36,12 @@ public class Constantes {
      public static final String NAME_EDITAR_PROVEEDOR = "EDITAR PROVEEDOR";
      public static final String NAME_EDITAR_COOPERATIVA = "EDITAR INFORMACION COOPERATIVA";
      public static final String NAME_EDITAR_CLIENTE = "EDITAR CLIENTE";
+ 
+    public static final String PROVEEDOR = "PROVEEDOR";
+    public static final String CLIENTE = "CLIENTE";
+    public static final String ASOCIADO = "ASOCIADO";
+
+     public static final int ASOCIADO_INT=1;
+     public static final int CLIENTE_INT=2;
+     public static final int PROVEEDOR_INT=3;
 }

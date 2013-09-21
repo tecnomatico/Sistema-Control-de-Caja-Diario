@@ -14,6 +14,7 @@ import co.tecnomati.java.controlcaja.dominio.Proveedor;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ClienteDaoImp;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ConceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
@@ -22,6 +23,7 @@ import co.tecnomati.java.controlcaja.util.MyUtil;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import org.jdesktop.swingx.autocomplete.*;
 
 /**
@@ -30,11 +32,12 @@ import org.jdesktop.swingx.autocomplete.*;
  */
 public class GUIComprobante extends javax.swing.JDialog {
 
+    private Comprobante comprobante;
     private boolean modificar;
-    private Comprobante formulario;
     private Tipocomprobante tipoForm;
     private Concepto concepto;
     private boolean agregado;
+    Entidad entidad;
 
     /**
      * Creates new form GUIComprobante
@@ -42,9 +45,25 @@ public class GUIComprobante extends javax.swing.JDialog {
     public GUIComprobante(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        modificar = false;
+        comprobante = new Comprobante();
+        //cargar datos del combobox
+        setDatosCmbTipoFormulario();
+        setEscuchadorDeEventosCmboTipoComprobante();
 
+        //cargar los campos de texto con 
+//        setDatosNombreEntidad();
         this.setTitle(Constantes.NAME_NUEVO_REGISTRO);
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
+
+    }
+
+    public GUIComprobante(java.awt.Frame parent, boolean modal, Comprobante comprobante) {
+        super(parent, modal);
+        initComponents();
+        modificar = true;
+        this.comprobante = comprobante;
 
         //cargar datos del combobox
         setDatosCmbTipoFormulario();
@@ -52,6 +71,8 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         //cargar los campos de texto con 
 //        setDatosNombreEntidad();
+        this.setTitle(Constantes.NAME_NUEVO_REGISTRO);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
 
     }
@@ -68,10 +89,6 @@ public class GUIComprobante extends javax.swing.JDialog {
 //            }
 //            AutoCompleteDecorator.decorate(this.cmbTipoComprobante);
 //        }
-
-
-
-
     }
 
     public boolean isAgregado() {
@@ -439,40 +456,25 @@ public class GUIComprobante extends javax.swing.JDialog {
     }
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-//
-//        if (!modificar) {
-//            //si se ingresa un nueva persona
-//            formulario = new Comprobante();
-//
-//        } 
-//
-//                //completar los datos
-//                formulario.setTipoProceso(cmbTipoProceso.getSelectedItem().toString());
-//                formulario.setTipoFormulario(tipoForm);
-//                formulario.setNumeroSerie(Integer.valueOf(txtnumSerie1.getText().trim()));
-//                formulario.setConcepto(concepto);
-//                formulario.setCuit(entidad.getId());
-//                formulario.setNombre(entidad.getDescripcion());
-//                formulario.setMonto(Double.valueOf(txtMonto.getText().trim()));
-//                //falta el diario
-//                
-//               
-////                
-//                setAgregado(true);
-//
-//                if (modificar) {
-//                     new ComprobanteDaoImp().upDateFormulario(formulario);
-//                  
-//                 } else {
-//                     new ComprobanteDaoImp().addFormulario(formulario);
-//                            
-//                        }
-//
-//                   
-//                    
-//                    JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
-//                    modificar = false;
-//                    this.dispose();
+
+        comprobante.setCuit(Long.parseLong(txtCuit.getText()));
+        comprobante.setFecha(dateComprobante.getDate());
+        comprobante.setNumeroSerie(Long.parseLong(txtnumSerie1.getText()));
+        comprobante.setTipoPersona(entidad.getTipoEntidad());
+        comprobante.setTipoProceso(cmbTipoProceso.getSelectedIndex());
+        comprobante.setTipocomprobante(tipoForm);
+       
+        System.out.println(comprobante.getFecha());
+        if (modificar) {
+            new ComprobanteDaoImp().upDateFormulario(comprobante);
+        } else {
+            new ComprobanteDaoImp().addFormulario(comprobante);
+        }
+        agregado = true;
+
+        JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
+
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
@@ -481,11 +483,11 @@ public class GUIComprobante extends javax.swing.JDialog {
             //si selecciono una persona entonces debe reflejarse aqui 
 //            if (gestorEntidades.isAgregado()) {
 //              
-                // vuelco en la clase aux entidad
+            // vuelco en la clase aux entidad
 //                 entidad = new Entidad();
 //                 entidad.setId(a.getCuit());
 //                 entidad.setDescripcion(a.getNombre());
-                // muestro en el formulario recibo
+            // muestro en el formulario recibo
 //                 txtCuitDni.setText(String.valueOf(entidad.getId()));
 //                 txtNombre.setText(entidad.getDescripcion());
 //            }
@@ -499,24 +501,24 @@ public class GUIComprobante extends javax.swing.JDialog {
             if (!"".equals(codigoConcepto)) {
                 Concepto concepto = new ConceptoDaoImp().getConcepto(codigoConcepto);
                 if (concepto != null) {
-                   txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
-                   txtDescripcionConcepto.setText(concepto.getDescripcion());
-                   txtMonto.requestFocus();
-                }else{  
+                    txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
+                    txtDescripcionConcepto.setText(concepto.getDescripcion());
+                    txtMonto.requestFocus();
+                } else {
                     // llama a la ayuda
-                GUIGestordeConcepto gestorConcepto = new GUIGestordeConcepto(null, true);
-              // si eligio un concepto debe ser reflejado 
-              if (gestorConcepto.isAgregado()) {
-                  concepto =  gestorConcepto.getAsociado();
-                  txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
-                  txtDescripcionConcepto.setText(concepto.getDescripcion());     
-                  txtMonto.requestFocus();
-  
-              }
+                    GUIGestordeConcepto gestorConcepto = new GUIGestordeConcepto(null, true);
+                    // si eligio un concepto debe ser reflejado 
+                    if (gestorConcepto.isAgregado()) {
+                        concepto = gestorConcepto.getAsociado();
+                        txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
+                        txtDescripcionConcepto.setText(concepto.getDescripcion());
+                        txtMonto.requestFocus();
+
+                    }
+                }
             }
-            }
-            
-        }   
+
+        }
     }//GEN-LAST:event_txtCodigoConceptoKeyPressed
 
     private void txtTipoComprobanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoComprobanteKeyPressed
@@ -554,10 +556,9 @@ public class GUIComprobante extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnImprimirActionPerformed
 
-    
     private void txtCodigoConceptoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoConceptoKeyTyped
         MyUtil.consumirLetras(evt, txtCodigoConcepto, 3);
-        
+
     }//GEN-LAST:event_txtCodigoConceptoKeyTyped
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -569,30 +570,28 @@ public class GUIComprobante extends javax.swing.JDialog {
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
-       
     }//GEN-LAST:event_txtCuitKeyTyped
 
     private void txtCuitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyPressed
-       if (evt.getKeyCode() == KeyEvent.VK_F1) {
-           GUIgestorEntidades gestorEntidad = new GUIgestorEntidades(null, true);
-           if (gestorEntidad.isSelecciono()) {
-              Entidad entidad = gestorEntidad.getEntidad();
-              System.out.print(entidad.getTipoEntidad());
-               if (entidad.getTipoEntidad().equals("PROVEEDOR")) {
-                   Proveedor proveedor = new ProveedorDaoImp().getProveedor(entidad.getId());
-                   txtCuit.setText(String.valueOf(proveedor.getCuit()));
-                   txtNombre.setText(proveedor.getRazonSocial());
-               } else if(entidad.getTipoEntidad().equals("CLIENTE")){
-                   Cliente cliente = new ClienteDaoImp().getCliente(entidad.getId());
-                   txtCuit.setText(String.valueOf(cliente.getCuit()));
-                   txtNombre.setText(cliente.getRazonSocial());
-               }else if(entidad.getTipoEntidad().equals("ASOCIADO")){
-                   Asociado asociado = new AsociadoDaoImp().getAsociado(entidad.getId());
-                   txtCuit.setText(String.valueOf(asociado.getCuit()));
-                   txtNombre.setText(asociado.getNombre());
-               }
-           }
-       }
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            GUIgestorEntidades gestorEntidad = new GUIgestorEntidades(null, true);
+            if (gestorEntidad.isSelecciono()) {
+                entidad = gestorEntidad.getEntidad();
+                if (entidad.getTipoEntidad() == Constantes.PROVEEDOR_INT) {
+                    Proveedor proveedor = new ProveedorDaoImp().getProveedor(entidad.getId());
+                    txtCuit.setText(String.valueOf(proveedor.getCuit()));
+                    txtNombre.setText(proveedor.getRazonSocial());
+                } else if (entidad.getTipoEntidad() == Constantes.CLIENTE_INT) {
+                    Cliente cliente = new ClienteDaoImp().getCliente(entidad.getId());
+                    txtCuit.setText(String.valueOf(cliente.getCuit()));
+                    txtNombre.setText(cliente.getRazonSocial());
+                } else if (entidad.getTipoEntidad() == Constantes.ASOCIADO_INT) {
+                    Asociado asociado = new AsociadoDaoImp().getAsociado(entidad.getId());
+                    txtCuit.setText(String.valueOf(asociado.getCuit()));
+                    txtNombre.setText(asociado.getNombre());
+                }
+            }
+        }
     }//GEN-LAST:event_txtCuitKeyPressed
 
     private void setEscuchadorDeEventosCmboTipoComprobante() {

@@ -10,13 +10,13 @@ package co.tecnomati.java.controlcaja.util;
  */
 public class Entidad {
     private int id ;
-    private String tipoEntidad;
+    private int tipoEntidad;
 
-    public String getTipoEntidad() {
+    public int getTipoEntidad() {
         return tipoEntidad;
     }
 
-    public void setTipoEntidad(String tipoEntidad) {
+    public void setTipoEntidad(int tipoEntidad) {
         this.tipoEntidad = tipoEntidad;
     }
 

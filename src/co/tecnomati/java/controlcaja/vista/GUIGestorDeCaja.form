@@ -123,6 +123,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Busqueda "/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsultarControlDiarioActionPerformed"/>
+              </Events>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric2">
               <Properties>

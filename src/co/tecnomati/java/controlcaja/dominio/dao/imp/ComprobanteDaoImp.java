@@ -18,7 +18,7 @@ import org.hibernate.Session;
  *
  * @author Joel
  */
-public class ComprobanteDaoImp implements ComprobanteDAO{
+public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO{
 
     @Override
     public List<Comprobante> listarFormulario() {
@@ -26,9 +26,9 @@ public class ComprobanteDaoImp implements ComprobanteDAO{
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Comprobante.class);
         
-        ArrayList<Comprobante> parroquia = (ArrayList<Comprobante>)criteria.list();
+        ArrayList<Comprobante> comprobante = (ArrayList<Comprobante>)criteria.list();
         session.close();
-        return parroquia;
+        return comprobante;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ComprobanteDaoImp implements ComprobanteDAO{
         session.beginTransaction();
         session.save(a);
         session.getTransaction().commit();
-        session.close();    }
+        session.close();     }
 
     @Override
     public void deleteFormulario(Comprobante a) {
@@ -45,11 +45,11 @@ public class ComprobanteDaoImp implements ComprobanteDAO{
         session.beginTransaction();
         session.delete(a);
         session.getTransaction().commit();
-        session.close();    }
+        session.close();   }
 
     @Override
     public void upDateFormulario(Comprobante a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+       Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(a);
         session.getTransaction().commit();

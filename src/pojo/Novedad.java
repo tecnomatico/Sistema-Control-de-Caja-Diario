@@ -34,11 +34,11 @@ public class Novedad  implements java.io.Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public Empleado getEmpleados() {
+    public Empleado getEmpleado() {
         return this.empleados;
     }
     
-    public void setEmpleados(Empleado empleados) {
+    public void setEmpleado(Empleado empleados) {
         this.empleados = empleados;
     }
     public Concepto getConcepto() {

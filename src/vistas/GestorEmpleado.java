@@ -6,11 +6,9 @@ package vistas;
 
 import pojo.Empleado;
 import novedades.dao.imp.EmpleadoDaoImp;
-import vistas.;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,7 +30,7 @@ public class GestorEmpleado extends javax.swing.JDialog {
     int quienloyamo;
     java.awt.Frame parent;// indica quien es el padre. me sirve para pasar el icono de la aplcacion
   //  EmpleadoDao empleados ;
-   ImageIcon icono;; // correspondiente a la im agen del usuario
+   
     public GestorEmpleado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.parent = parent;
@@ -40,7 +38,7 @@ public class GestorEmpleado extends javax.swing.JDialog {
         
         
         initComponentesVentana();    
-        this.setTitle(Constantes.TITLE_APP);
+        this.setTitle("MODIFICACION DE EMPLEADO");
         setLocationRelativeTo(this);
         setVisible(true);
         
@@ -51,7 +49,7 @@ public class GestorEmpleado extends javax.swing.JDialog {
         this.parent = parent;
         this.quienloyamo = quienloyamo;
         initComponents();
-        this.setTitle(Constantes.TITLE_APP);
+        this.setTitle("ALTA DE EMPLEADO");
 
          
         if (MENU== quienloyamo) {

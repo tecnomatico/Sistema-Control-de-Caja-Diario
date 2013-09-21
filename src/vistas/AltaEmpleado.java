@@ -8,7 +8,10 @@ import pojo.Concepto;
 import pojo.Empleado;
 import novedades.dao.imp.EmpleadoDaoImp;
 import hibernateUtil.Conexion;
+import java.util.List;
 import javax.swing.JOptionPane;
+import novedades.dao.imp.ConceptoDaoImp;
+import pojo.Novedad;
 
 /**
  *
@@ -411,7 +414,7 @@ public class AltaEmpleado extends javax.swing.JDialog {
                        System.out.println(validarEmpleadoNuevo());
                        Empleado e = getDatosEmpleado();
                        // agrego los datos que faltan
-                       e.setAdministrador(false);
+//                       e.setAdministrador(false);
 //                       e.setClave("");
 //                       e.setFechaIngreso(null);
                        new EmpleadoDaoImp().addEmpleado(e);         
@@ -426,16 +429,16 @@ public class AltaEmpleado extends javax.swing.JDialog {
                                 Empleado e = getDatosEmpleado();
                              if (legajo!=Integer.parseInt(txtLegajo.getText().trim())) {
                                  Empleado o = new EmpleadoDaoImp().getEmpleado(legajo);
-                                 List<Asistencia> lista =new AsistenciaDaoImp().listarAsistencia(o); 
+                                 List<Concepto> lista =new ConceptoDaoImp().listarConcepto(o); 
                                  new EmpleadoDaoImp().addEmpleado(e);
                                  // aqui va borrar el empleado o   porque se modiico la clave primario 
                              
                                  new EmpleadoDaoImp().deleteEmpleado(o); 
                                  Empleado emplUp = new EmpleadoDaoImp().getEmpleado(e.getLegajo());
                                 
-                                for (Asistencia asistencia : lista) {
-                                    asistencia.setEmpleado(emplUp);                
-                                    new AsistenciaDaoImp().addAsistencia(asistencia);
+                                for (Novedad novedad : lista) {
+                                    Novedad.(emplUp);                
+                                    new ConceptoDaoImp().addConcepto(novedad);
                                  }
                                 
                            }else{

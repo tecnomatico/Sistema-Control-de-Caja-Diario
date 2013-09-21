@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RboIntegracionCuotas" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="caf02fa3-b20f-4a74-9c05-4bbe715dc0d6">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="331"/>
+	<field name="nroRecibo" class="java.lang.String"/>
+	<field name="inicioActividades" class="java.lang.String"/>
+	<field name="cantidadPago" class="java.lang.String"/>
+	<field name="conceptoDe" class="java.lang.String"/>
+	<field name="sonPesos" class="java.lang.String"/>
+	<field name="fechaPago" class="java.lang.String"/>
+	<field name="nombreApellido" class="java.lang.String"/>
+	<field name="nroDNI" class="java.lang.String"/>
+	<field name="fechaIngreso" class="java.lang.String"/>
+	<field name="nroAsociado" class="java.lang.String"/>
+	<field name="cuitAsociado" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="517" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="3f170695-af63-483f-9012-4acf6918ba5f" x="1" y="288" width="360" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b415b1c2-646b-4294-bf49-5106e16b50e2" x="1" y="88" width="360" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="28d6f71b-6e27-42a5-880b-caa44366090c" x="90" y="268" width="91" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="9e690f1f-bc5e-4c86-ade8-487c9bc4c55c" x="108" y="21" width="253" height="67"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="0fdb8904-a55f-40ec-91b3-5cab4b607fb6" x="91" y="248" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c8cfe992-0c40-481e-8365-c7008ef30e5b" x="91" y="168" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c8a4c814-5f32-4d15-9786-144c6e611892" x="1" y="268" width="90" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="fb2c0fa8-e5f9-4d39-9f95-c6c3f21342b9" x="7" y="354" width="343" height="16"/>
+				<textElement/>
+				<text><![CDATA[cicio y en relacion directa al trabajo aportado por mi en el periodo en ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fb7aa3cf-cdba-40dd-853e-efd973ecc745" x="7" y="339" width="343" height="16"/>
+				<textElement/>
+				<text><![CDATA[cedentes aprobada por resolucion asamblearia, correspondiente al ejer-]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="e286dc5f-9cfa-464c-8de6-b36c36f74609" x="181" y="268" width="90" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="9ded1bbc-dd5f-46a1-af9d-3091f7377366" x="7" y="249" width="81" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Asociado Nro.:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="fc3bcf97-5522-4007-bdcc-e00caf4ffcd8" x="1" y="248" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="208287f8-dd35-434e-a5d5-199195f3f15e" x="1" y="128" width="360" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c3e6a02a-b4d3-49e3-aaba-a96256af9a27" x="181" y="248" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="eb0e2a64-fecd-4691-89cf-1335a92cd6e5" x="1" y="148" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6aa023b4-303c-49f1-8e5f-c57b7a3e8abe" x="271" y="268" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="143609ae-e37e-466f-8d23-30fd941e02a4" x="1" y="188" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="019ddf0d-6bfc-4bf0-8697-0589598b7a87" x="1" y="308" width="360" height="60"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="9336513a-74e0-4549-aa41-09552a21651e" x="91" y="228" width="270" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="ce81930c-f338-497b-af32-33a55946c7d7" x="1" y="1" width="360" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c3ca6f4e-c8aa-4a31-bc69-76721cc6edcd" x="271" y="168" width="90" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="476618fa-1d0b-4451-b817-00773c69c7e8" x="7" y="309" width="192" height="16"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Recibiconforme la suma de pesos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2801258d-fe83-48f6-9e40-cce125d85cde" x="7" y="268" width="84" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nro de Asociado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="db7f1620-b824-4591-a64a-4fc5a4305607" x="6" y="188" width="72" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Domicilio:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="983174d7-d1e9-46e8-8d21-202f7d99f6fb" x="1" y="168" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b4952484-8c61-446b-978d-31712dc31971" x="181" y="148" width="90" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="515e54f4-2e4c-4dd7-80f7-b4bdf6679c59" x="187" y="268" width="84" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[C.U.I.T:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="28db97f7-35d6-46ae-9e93-c6b53c92210d" x="7" y="249" width="83" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nro de DNI:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="79e7d6c5-03f6-43f7-a99d-092a4d3f8f63" x="271" y="248" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="58a61dda-151f-491b-83a1-754e1a305364" x="1" y="208" width="360" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8bcd4e4c-0ea3-4762-8dc5-7daeded6aeb2" x="181" y="108" width="180" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d2ceadf8-8cfb-4583-9166-e64c1af81a18" x="1" y="228" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="0371a876-70e7-4284-af5d-4d10f1f07b66" x="1" y="21" width="107" height="67"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="bb65c43a-6431-4cd4-9a96-21edce0c89ec" x="181" y="168" width="90" height="20"/>
+			</rectangle>
+			<image>
+				<reportElement uuid="db92cc1c-4b14-4cac-95ce-862cf1f935ff" x="24" y="24" width="80" height="60"/>
+				<imageExpression><![CDATA["C:\\Users\\dario\\Desktop\\theend\\jpgLogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="c454aa88-d136-4409-8e5f-22a661242790" x="277" y="168" width="76" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[A-1-51004]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="36c08fcc-4122-48dc-b504-f59055c0736b" x="7" y="344" width="344" height="16"/>
+				<textElement/>
+				<text><![CDATA[En concepto de integracion de la scuotas sociales suscriptas.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="bf32a35f-4dce-423e-b050-a288029ebf1a" x="1" y="108" width="180" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="75c6e138-4d26-4e4f-8021-3f44c979445b" x="181" y="368" width="180" height="60"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="b8796a05-abc7-49e1-91e6-102061b5daa9" x="7" y="229" width="84" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Apellido y Nomb:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="9722958d-c5fe-415f-8557-7b45cae357fc" x="239" y="410" width="67" height="1"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="828164c8-17e2-42b7-a055-74a1acce7037" x="271" y="148" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="7a3cbd88-78c7-4c37-9d92-8b7b523b8afa" x="1" y="368" width="180" height="60"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="86cbccbe-30e4-496d-b9b2-8ed8ec63a779" x="110" y="21" width="253" height="67"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Coop. de Trabajo Tecnomatica Ltda.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="67a076c6-81b3-44f8-aae4-9e887d6d8065" x="91" y="188" width="270" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="55491f39-be27-436f-91e4-fa1a4f5291a1" x="91" y="148" width="90" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="e94edbdb-2ace-4d4d-b928-0929e9f911cc" x="8" y="88" width="346" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIBO DE INTEGRACION DE CUOTAS SOCIALES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d326d5fb-560a-4a4f-a533-45ec91b434ef" x="7" y="403" width="71" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha de Pago:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="27b23223-aca5-4830-9081-cae0797ca48e" x="255" y="1" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[ORIGINAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="385c1539-ea68-4cee-af67-5a418e3a0b5c" x="187" y="169" width="74" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Ing. Brutos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="efddcd32-8c95-4e16-947e-aec097699bab" x="7" y="385" width="158" height="16"/>
+				<textElement/>
+				<text><![CDATA[Av.Rio BambaN°144 - Jujuy]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b5398b0-e7da-4d62-9aee-bf06988160d3" x="7" y="369" width="174" height="16"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Lugar de Pago: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="57fc5087-bca4-439e-bf26-ccf96d4717bc" x="277" y="148" width="76" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[30-71417115-8]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="411a3ee4-4976-484d-8b6f-74e30f28a89b" x="187" y="148" width="54" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[C.U.I.T]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1181852a-58bc-4c06-9cc0-d98f7349d2a4" x="187" y="108" width="68" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibo Nro.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9c3b8be-52cf-47a4-83fb-a84823c984d8" x="6" y="148" width="85" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matricula INAES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2ccf0cfc-9b44-44e0-b412-fe68d945bc73" x="5" y="168" width="83" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Inicio de Act.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d22bdf0e-f391-458e-9ad5-750c6d114d23" x="97" y="148" width="55" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[47.735]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="24564c95-3764-4461-a590-961a85cef830" x="186" y="248" width="85" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha de Ingreso:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="da27efc0-4b0f-4af0-9c1f-92302f157fb0" x="240" y="408" width="67" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tesorero]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="1be05b32-9a61-4816-812e-aa098c9eb8b4" x="711" y="147" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d68a9f60-9b56-4c7e-9b46-98a7f6536809" x="621" y="247" width="90" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="c345209e-3601-4608-821e-411e3bce74cf" x="447" y="248" width="81" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Asociado Nro.:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="e969df16-f7ef-4edc-a8f8-d034385fbeae" x="621" y="267" width="90" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="3249db1a-6b02-4474-809c-5d2ab296ab01" x="446" y="187" width="72" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Domicilio:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="1573df23-9d1f-448f-83bc-3a21459d4301" x="711" y="247" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c6dc01d8-8667-405e-a3b8-011b0230e8f7" x="531" y="147" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d68c9b14-7486-4868-81c4-6def5c2ce512" x="441" y="207" width="360" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b6eba7c1-5653-42bd-9b69-f804c9527cde" x="621" y="367" width="180" height="60"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d738b2c6-3ccb-4a12-b542-adcd377ac257" x="441" y="127" width="360" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6d3a044a-75be-486f-8298-14b5ae204681" x="441" y="167" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8f9effed-4283-4753-8181-504f08aaae64" x="441" y="287" width="360" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="06df4a6f-f7ec-4e4c-b695-18c3525363a1" x="441" y="107" width="180" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="3ca6b5c4-f3f5-4d93-abe2-a8cf58f03eb3" x="441" y="147" width="90" height="20"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="17df79f8-acac-4d93-8ead-53831ccd99fe" x="679" y="409" width="67" height="1"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="3f7f47eb-0ecc-4876-aba2-ee69cad45d8e" x="531" y="187" width="270" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="6c73c665-9a13-454f-80b7-63e881a30e4d" x="626" y="247" width="85" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha de Ingreso:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="57a2df2f-3fac-4600-8427-cc57e25c9c0c" x="441" y="227" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="bee7a7ef-5382-48df-b243-9bcfe47031c4" x="441" y="0" width="360" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a5e63882-21a4-4474-896a-3069cafbceff" x="531" y="227" width="270" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="54919617-5df9-479f-a5d6-5e47c34a8fea" x="621" y="147" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="00f6d8c2-1bf5-4b19-a291-fc0fe5e4a0cf" x="441" y="247" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="1173ea5f-1c63-40e1-a974-d091436a4b6b" x="441" y="87" width="360" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b7e636a5-c9fe-4265-b629-a74c19d88fe4" x="711" y="167" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="0ebef819-805f-47ea-89b5-cce3b0d94214" x="548" y="20" width="253" height="67"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="106e0a27-9cee-4dcd-b103-8a01e1e796fb" x="695" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[DUPLICADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="567b8eb2-ed42-4e63-9b05-515a6ecaf579" x="627" y="267" width="84" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[C.U.I.T:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ee9362cb-30c0-4780-8b88-4d0f6c759905" x="447" y="248" width="83" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nro de DNI:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7537b459-d4a5-4c3c-9a20-53b479d5ab13" x="537" y="187" width="248" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Av. Rio Bamba N°44 - Cnel Arias - S.S. de Jujuy]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="3e2e8906-97c8-4e82-abc5-3ac3d9ac7724" x="530" y="267" width="91" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="67f05f94-4fdb-4422-a0ef-2880e28c608c" x="531" y="167" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a2b65d2d-98e2-4f99-af52-056afe52c841" x="441" y="307" width="360" height="60"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="e484f8bf-0f70-45dd-855a-1dda759045c8" x="711" y="267" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="fa6e2d1d-8e1d-4b62-a2b2-0ea87f50df16" x="441" y="367" width="180" height="60"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a262adb8-32f1-48ca-89cb-adfd424a5249" x="531" y="247" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="3482248d-1b02-472c-a551-fac205d88a92" x="621" y="167" width="90" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="f39f66ec-458e-4d07-a05b-401f2ade89ba" x="447" y="228" width="84" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Apellido y Nomb:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ac830fd1-b1c1-4448-82bf-ba19c6ba98bd" x="550" y="20" width="253" height="67"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Coop. de Trabajo Tecnomatica Ltda.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0653477d-fcdd-43fe-a498-e3d739ff5afc" x="627" y="168" width="74" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Ing. Brutos:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="d5a323a3-e64a-4346-a3ff-cda2965ce8cf" x="621" y="107" width="180" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="92082fc6-035c-4754-8cfa-5e71b0bbe6c3" x="441" y="187" width="90" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="5f2acbdd-700b-478f-8412-c32bb7807ab9" x="627" y="107" width="74" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibo Nro.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6b055995-b0a4-49af-95d1-029491d64f78" x="717" y="147" width="76" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[30-71417115-8]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="2886232f-8576-4217-a6b0-64e4c90dcf91" x="441" y="267" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a41253c5-fcde-46b6-844b-6a790b0830bd" x="441" y="20" width="107" height="67"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="acf45a44-7496-4d66-8dc9-ac5e9ac05698" x="97" y="188" width="248" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Av. Rio Bamba N°44 - Cnel Arias - S.S. de Jujuy]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b70d087f-6351-44b9-b310-d53a8248dccf" x="447" y="343" width="344" height="16"/>
+				<textElement/>
+				<text><![CDATA[En concepto de integracion de la scuotas sociales suscriptas.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ff22b7e9-154d-4e2a-8762-5db7ace0eeb0" x="447" y="308" width="192" height="16"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Recibiconforme la suma de pesos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ae662ec-c494-42b3-a70e-3d5e0aac42c0" x="447" y="402" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha de Pago:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="69152f13-cfe4-4cb0-937e-e622e4d4d976" x="680" y="407" width="67" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tesorero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2d9f97be-f7d4-48c9-abe6-bcdd1ca43aca" x="445" y="167" width="83" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Inicio de Act.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c7a3a06d-c5d6-4ec4-aab0-a9aca0250117" x="627" y="147" width="54" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[C.U.I.T]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="822a94b3-7e35-4ce2-9664-df24f5d89850" x="464" y="23" width="80" height="60"/>
+				<imageExpression><![CDATA["C:\\Users\\dario\\Desktop\\theend\\jpgLogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="02a4c98d-c53f-435e-8c1f-0d6667456126" x="448" y="87" width="346" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIBO DE INTEGRACION DE CUOTAS SOCIALES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e18b8bab-bac5-475a-a85f-5df8e7a56c76" x="446" y="147" width="85" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matricula INAES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3e96cb10-5224-4881-a5bc-53970b838f67" x="537" y="147" width="55" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[47.735]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="80a5aeac-3229-40d7-ba2b-3fa823c4b86e" x="717" y="167" width="76" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[A-1-51004]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e050bcf6-d9f3-4e4e-bfb8-46a96f3b455d" x="447" y="267" width="84" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nro de Asociado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b8a53fc0-75c7-4bfd-9e9b-ab5dc6501327" x="447" y="368" width="174" height="16"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Lugar de Pago: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bdeba30c-19e6-452f-892e-1f92e05499c4" x="447" y="384" width="158" height="16"/>
+				<textElement/>
+				<text><![CDATA[Av.Rio BambaN°144 - Jujuy]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e321042b-247a-49fb-a3f9-e5c95b02af23" x="255" y="108" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroRecibo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="39fb3e66-d4db-4b9e-9bf1-8e81c59993be" x="97" y="168" width="78" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{inicioActividades}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1f4f610d-ac39-4683-bfff-6c23710ba3f7" x="97" y="228" width="258" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombreApellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dc2a0e81-2ee5-43e5-87fb-fc07d1e4e7f3" x="97" y="248" width="78" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroDNI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4daf0103-6395-4b79-a58c-7765566464f1" x="277" y="248" width="78" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaIngreso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8abb4c3a-701b-48fe-8b80-e24b8dda0df5" x="97" y="268" width="78" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroAsociado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d5357f49-467a-4bc0-8208-8623187deb71" x="277" y="268" width="78" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cuitAsociado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="46831e76-700f-4d3b-bbed-c68fbad39511" x="7" y="324" width="348" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cantidadPago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5cb9f11c-f179-4902-84b3-8a4d57030810" x="78" y="403" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaPago}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reciboDePago" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67ddf0f8-02b9-4bf1-94dc-470dc5dbe8c1">
-	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="679"/>
 	<field name="nroRecibo" class="java.lang.String"/>
+	<field name="inicioActividades" class="java.lang.String"/>
+	<field name="cantidadPago" class="java.lang.String"/>
+	<field name="conceptoDe" class="java.lang.String"/>
+	<field name="sonPesos" class="java.lang.String"/>
+	<field name="fechaPago" class="java.lang.String"/>
+	<field name="nombreApellido" class="java.lang.String"/>
+	<field name="nroDNI" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -108,7 +115,7 @@
 					<text><![CDATA[47.735]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="42c4d512-2ca9-4449-bb1e-58bd0358c75e" x="186" y="370" width="67" height="20"/>
+					<reportElement uuid="42c4d512-2ca9-4449-bb1e-58bd0358c75e" x="186" y="370" width="34" height="20"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[N y A:]]></text>
 				</staticText>
@@ -122,7 +129,7 @@
 					<reportElement uuid="c3dfab88-c005-4812-8f76-6cc57c172b8d" x="180" y="130" width="90" height="20"/>
 				</rectangle>
 				<staticText>
-					<reportElement uuid="96b306a7-a11b-4f6f-9d4c-c8945d25911a" x="185" y="390" width="67" height="20"/>
+					<reportElement uuid="96b306a7-a11b-4f6f-9d4c-c8945d25911a" x="185" y="390" width="35" height="20"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[DNI:]]></text>
 				</staticText>
@@ -134,7 +141,7 @@
 					<text><![CDATA[30-71417115-8]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="cad5d2b7-2ac8-448b-8299-3b4b0c722d2d" x="6" y="331" width="100" height="20"/>
+					<reportElement uuid="cad5d2b7-2ac8-448b-8299-3b4b0c722d2d" x="6" y="362" width="83" height="20"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Fecha de Pago:]]></text>
 				</staticText>
@@ -191,22 +198,22 @@
 					<text><![CDATA[C.U.I.T]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="3cfbdc0f-3df3-42df-a0c4-eb08ee37142d" x="6" y="210" width="346" height="39"/>
-					<textElement verticalAlignment="Top"/>
+					<reportElement uuid="3cfbdc0f-3df3-42df-a0c4-eb08ee37142d" x="6" y="210" width="346" height="20"/>
+					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Recibi conforme de la Cooperativa Tecnomatica Limitada la suma de pesos:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="ac33bb28-6eff-4840-8a5d-89f531968dc3" x="6" y="270" width="100" height="20"/>
+					<reportElement uuid="ac33bb28-6eff-4840-8a5d-89f531968dc3" x="6" y="270" width="35" height="20"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Son $:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="aa325de6-60d3-41f3-be89-051c7928bbe7" x="6" y="310" width="100" height="20"/>
+					<reportElement uuid="aa325de6-60d3-41f3-be89-051c7928bbe7" x="6" y="310" width="83" height="20"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Lugar de Pago:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="39246645-69f0-4282-9a62-54a2fa6a9eb2" x="186" y="90" width="111" height="20"/>
+					<reportElement uuid="39246645-69f0-4282-9a62-54a2fa6a9eb2" x="186" y="90" width="67" height="20"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
@@ -241,7 +248,7 @@
 				<reportElement uuid="d57f9507-d1e8-41c5-bcf5-0c54c87293f8" x="442" y="23" width="107" height="67"/>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="e4c1bd88-d1eb-4841-bcee-75f605a53f12" x="448" y="270" width="100" height="20"/>
+				<reportElement uuid="e4c1bd88-d1eb-4841-bcee-75f605a53f12" x="448" y="270" width="35" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Son $:]]></text>
 			</staticText>
@@ -263,7 +270,7 @@
 				<reportElement uuid="ec68424a-5cb8-479a-84be-12939018081a" x="622" y="150" width="90" height="20"/>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="c07eb30c-e71c-4c68-838d-ea6daff3832d" x="627" y="390" width="67" height="20"/>
+				<reportElement uuid="c07eb30c-e71c-4c68-838d-ea6daff3832d" x="627" y="390" width="30" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[DNI:]]></text>
 			</staticText>
@@ -335,7 +342,7 @@
 				<text><![CDATA[Inicio de Act.:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b37865c2-5618-41ea-aa19-905e7d5a301a" x="448" y="331" width="100" height="20"/>
+				<reportElement uuid="b37865c2-5618-41ea-aa19-905e7d5a301a" x="448" y="363" width="83" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Fecha de Pago:]]></text>
 			</staticText>
@@ -373,12 +380,12 @@
 				<text><![CDATA[C.U.I.T]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ae3da306-c927-4e81-b38f-2a5defa717c9" x="628" y="370" width="67" height="20"/>
+				<reportElement uuid="ae3da306-c927-4e81-b38f-2a5defa717c9" x="628" y="370" width="29" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[N y A:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="000a7f27-7c70-4d3e-b30f-16dcc942fce3" x="628" y="90" width="111" height="20"/>
+				<reportElement uuid="000a7f27-7c70-4d3e-b30f-16dcc942fce3" x="628" y="90" width="66" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
@@ -392,8 +399,8 @@
 				<text><![CDATA[RECIBO DE PAGO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="46b68ec5-4a5f-45f6-872e-c33db800a72e" x="448" y="210" width="346" height="39"/>
-				<textElement verticalAlignment="Top"/>
+				<reportElement uuid="46b68ec5-4a5f-45f6-872e-c33db800a72e" x="448" y="210" width="346" height="20"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Recibi conforme de la Cooperativa Tecnomatica Limitada la suma de pesos:]]></text>
 			</staticText>
 			<image>
@@ -412,10 +419,105 @@
 				</textElement>
 				<text><![CDATA[30-71417115-8]]></text>
 			</staticText>
-			<textField>
-				<reportElement uuid="c7258810-225c-41fb-a691-994cdfd53966" x="260" y="90" width="100" height="20"/>
+			<staticText>
+				<reportElement uuid="3dcdf568-4c4b-46a9-8a4a-671819e75003" x="289" y="4" width="65" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[ORIGINAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5fb219da-a590-4344-891b-b4aa94b6df86" x="697" y="3" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[DUPLICADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="abee209d-3fd6-4df1-8927-c27facdeedf3" x="7" y="335" width="166" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Av. Rio Bamba N°44 - S.S. de Jujuy]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6a964e61-496c-4cf5-bf43-14467be5ec3c" x="449" y="335" width="165" height="20"/>
 				<textElement/>
+				<text><![CDATA[Av. Rio Bamba N°44 - S.S. de Jujuy]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="2758a328-faa1-458d-a1ac-cb7ebdc2b7ef" x="251" y="90" width="101" height="20"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nroRecibo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ceb92d60-9e86-43cf-bdb4-6a2cd6da8c9b" x="693" y="90" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NroRecibo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6376019b-4717-47b1-abcd-0907db1ec533" x="96" y="151" width="78" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{inicioActividades}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d43b0bd8-8300-4e98-8d22-acd6ba970401" x="538" y="151" width="78" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{InicoActividades}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6ef8fda3-3324-4c98-9a61-2db5aba9534e" x="7" y="229" width="345" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cantidadPago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="401a9499-43e7-4421-9165-124f247dc678" x="449" y="229" width="344" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CantDePago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ba219ca0-2109-46c4-bfbc-1463c0fc629b" x="97" y="250" width="255" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{conceptoDe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c3820a72-7424-4bd7-89a3-70fa9d4c82ad" x="538" y="250" width="255" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ConceptoDe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="aec8e2ee-9456-4a78-9841-7041935520d9" x="42" y="270" width="310" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{sonPesos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="218f2cc8-ad5a-4ad6-a863-d881cc4a27e0" x="483" y="270" width="310" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SonPesos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="45a71016-7003-4c3d-a287-573f17824a4b" x="7" y="383" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaPago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f2f15a83-73a9-4ae3-ae32-b27e1cfaa134" x="449" y="383" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FechaPago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="be323d88-b2ec-4da0-ae25-1d8d1cb63e19" x="222" y="369" width="132" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombreApellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="baeb2c6e-d31b-4716-93b7-56ce67d8498a" x="664" y="370" width="132" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NombreyApellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="759709de-a749-4bc2-9b1a-d360f7587330" x="222" y="390" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroDNI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="87a25be1-3d4b-4ce2-9945-49cdfec5d258" x="659" y="390" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DNI}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

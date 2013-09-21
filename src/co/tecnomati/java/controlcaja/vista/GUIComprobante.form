@@ -246,7 +246,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtNombre" min="-2" pref="186" max="-2" attributes="0"/>
-                          <Component id="txtCuitDni" min="-2" pref="103" max="-2" attributes="0"/>
+                          <Component id="txtCuit" min="-2" pref="103" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="127" max="32767" attributes="0"/>
                   </Group>
@@ -258,7 +258,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelMetric8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCuitDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCuit" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -271,10 +271,10 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="org.edisoncor.gui.textField.TextField" name="txtCuitDni">
+            <Component class="org.edisoncor.gui.textField.TextField" name="txtCuit">
               <Events>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCuitDniKeyPressed"/>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCuitDniKeyTyped"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCuitKeyPressed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCuitKeyTyped"/>
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtNombre">

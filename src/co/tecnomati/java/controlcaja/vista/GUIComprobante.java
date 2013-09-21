@@ -6,12 +6,18 @@ package co.tecnomati.java.controlcaja.vista;
 
 import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Asociado;
+import co.tecnomati.java.controlcaja.dominio.Cliente;
 import co.tecnomati.java.controlcaja.dominio.Concepto;
 
 import co.tecnomati.java.controlcaja.dominio.Comprobante;
+import co.tecnomati.java.controlcaja.dominio.Proveedor;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.ClienteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ConceptoDaoImp;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
+import co.tecnomati.java.controlcaja.util.Entidad;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -97,7 +103,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         txtTipoComprobante = new org.edisoncor.gui.textField.TextField();
         txtRefTipoCompr = new org.edisoncor.gui.textField.TextField();
         panelEntidad = new org.edisoncor.gui.panel.Panel();
-        txtCuitDni = new org.edisoncor.gui.textField.TextField();
+        txtCuit = new org.edisoncor.gui.textField.TextField();
         txtNombre = new org.edisoncor.gui.textField.TextField();
         labelMetric9 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric8 = new org.edisoncor.gui.label.LabelMetric();
@@ -198,12 +204,12 @@ public class GUIComprobante extends javax.swing.JDialog {
         panelEntidad.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entidad", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(255, 255, 255)));
         panelEntidad.setColorPrimario(new java.awt.Color(153, 153, 153));
 
-        txtCuitDni.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCuit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCuitDniKeyPressed(evt);
+                txtCuitKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCuitDniKeyTyped(evt);
+                txtCuitKeyTyped(evt);
             }
         });
 
@@ -229,7 +235,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCuitDni, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(127, Short.MAX_VALUE))
         );
         panelEntidadLayout.setVerticalGroup(
@@ -238,7 +244,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCuitDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -473,8 +479,8 @@ public class GUIComprobante extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             GUIgestorEntidades gestorEntidades = new GUIgestorEntidades(null, true);
             //si selecciono una persona entonces debe reflejarse aqui 
-            if (gestorEntidades.isAgregado()) {
-              
+//            if (gestorEntidades.isAgregado()) {
+//              
                 // vuelco en la clase aux entidad
 //                 entidad = new Entidad();
 //                 entidad.setId(a.getCuit());
@@ -482,7 +488,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 // muestro en el formulario recibo
 //                 txtCuitDni.setText(String.valueOf(entidad.getId()));
 //                 txtNombre.setText(entidad.getDescripcion());
-            }
+//            }
         }
 
     }//GEN-LAST:event_txtNombreKeyPressed
@@ -562,15 +568,32 @@ public class GUIComprobante extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
-    private void txtCuitDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitDniKeyTyped
+    private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
        
-    }//GEN-LAST:event_txtCuitDniKeyTyped
+    }//GEN-LAST:event_txtCuitKeyTyped
 
-    private void txtCuitDniKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitDniKeyPressed
+    private void txtCuitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyPressed
        if (evt.getKeyCode() == KeyEvent.VK_F1) {
            GUIgestorEntidades gestorEntidad = new GUIgestorEntidades(null, true);
+           if (gestorEntidad.isSelecciono()) {
+              Entidad entidad = gestorEntidad.getEntidad();
+              System.out.print(entidad.getTipoEntidad());
+               if (entidad.getTipoEntidad().equals("PROVEEDOR")) {
+                   Proveedor proveedor = new ProveedorDaoImp().getProveedor(entidad.getId());
+                   txtCuit.setText(String.valueOf(proveedor.getCuit()));
+                   txtNombre.setText(proveedor.getRazonSocial());
+               } else if(entidad.getTipoEntidad().equals("CLIENTE")){
+                   Cliente cliente = new ClienteDaoImp().getCliente(entidad.getId());
+                   txtCuit.setText(String.valueOf(cliente.getCuit()));
+                   txtNombre.setText(cliente.getRazonSocial());
+               }else if(entidad.getTipoEntidad().equals("ASOCIADO")){
+                   Asociado asociado = new AsociadoDaoImp().getAsociado(entidad.getId());
+                   txtCuit.setText(String.valueOf(asociado.getCuit()));
+                   txtNombre.setText(asociado.getNombre());
+               }
+           }
        }
-    }//GEN-LAST:event_txtCuitDniKeyPressed
+    }//GEN-LAST:event_txtCuitKeyPressed
 
     private void setEscuchadorDeEventosCmboTipoComprobante() {
 //        cmbTipoComprobante.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
@@ -663,7 +686,7 @@ public class GUIComprobante extends javax.swing.JDialog {
     private org.edisoncor.gui.panel.Panel panelConcepto;
     private org.edisoncor.gui.panel.Panel panelEntidad;
     private org.edisoncor.gui.textField.TextField txtCodigoConcepto;
-    private org.edisoncor.gui.textField.TextField txtCuitDni;
+    private org.edisoncor.gui.textField.TextField txtCuit;
     private org.edisoncor.gui.textField.TextField txtDescripcionConcepto;
     private org.edisoncor.gui.textField.TextField txtMonto;
     private org.edisoncor.gui.textField.TextField txtNombre;

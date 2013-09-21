@@ -7,6 +7,8 @@ package co.tecnomati.java.controlcaja.vista;
 import co.tecnomati.java.controlcaja.modelo.ModeloAsociado;
 import co.tecnomati.java.controlcaja.modelo.ModeloCliente;
 import co.tecnomati.java.controlcaja.modelo.ModeloProveedor;
+import co.tecnomati.java.controlcaja.util.Entidad;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
@@ -16,14 +18,24 @@ import javax.swing.table.TableRowSorter;
  * @author joel
  */
 public class GUIgestorEntidades extends javax.swing.JDialog {
-
-    boolean agregado; //esta variable nos dice si el usuario selecciono una entidad del formulario
-    Object entidad; // guardara la entidad que se selecciono .Puede ser un cliente,proveedor, asociado.
+    
+    public static final String PROVEEDOR = "PROVEEDOR";
+    public static final String CLIENTE = "CLIENTE";
+    public static final String ASOCIADO = "ASOCIADO";
+    
+   int numeroSeleccion;
+    boolean selecciono; //esta variable nos dice si el usuario selecciono una entidad del formulario
+    Entidad entidad= new Entidad(); // guardara la entidad que se selecciono .Puede ser un cliente,proveedor, asociado.
     private TableRowSorter sorter;
     ModeloAsociado modeloAsociado = new ModeloAsociado();
     ModeloCliente modeloCliente = new ModeloCliente();
     ModeloProveedor modeloProveedor = new ModeloProveedor();
 
+    public Entidad getEntidad() {
+        return entidad;
+    }
+
+    
     /**
      * Creates new form GUIgestorEntidades
      */
@@ -104,6 +116,11 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
         btnCancelar.setText("Cancelar");
 
         btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelEntidadLayout = new javax.swing.GroupLayout(panelEntidad);
         panelEntidad.setLayout(panelEntidadLayout);
@@ -171,12 +188,12 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public boolean isAgregado() {
-        return agregado;
+    public boolean isSelecciono() {
+        return selecciono;
     }
 
-    public void setAgregado(boolean agregado) {
-        this.agregado = agregado;
+    public void setSelecciono(boolean seleccionado) {
+        this.selecciono = seleccionado;
     }
 
     public void inicializarTablaAsociado() {
@@ -205,12 +222,12 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void cmbFiltroEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroEntidadActionPerformed
-        if (cmbFiltroEntidad.getSelectedItem().equals("PROVEEDOR")) {
+        if (cmbFiltroEntidad.getSelectedItem().equals(PROVEEDOR)) {
             inicializarTablaProveedor();
-        } else if (cmbFiltroEntidad.getSelectedItem().equals("CLIENTE")) {
+        } else if (cmbFiltroEntidad.getSelectedItem().equals(CLIENTE)) {
             inicializarTablaCliente();
 
-        } else if (cmbFiltroEntidad.getSelectedItem().equals("ASOCIADO")) {
+        } else if (cmbFiltroEntidad.getSelectedItem().equals(ASOCIADO)) {
             inicializarTablaAsociado();
         }
 
@@ -232,8 +249,31 @@ filtro(txtRazonSocial);
     }//GEN-LAST:event_txtRazonSocialKeyPressed
 
     private void txtIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdKeyPressed
+        
         filtro(txtId);
     }//GEN-LAST:event_txtIdKeyPressed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+          int fila = tblEntidad.getSelectedRow();
+        if (tblEntidad.getSelectedRow() != -1) {
+            numeroSeleccion = sorter.convertRowIndexToModel(tblEntidad.getSelectedRow());
+            int id = (int) tblEntidad.getModel().getValueAt(fila, 0);
+            entidad.setId(id);
+            if (cmbFiltroEntidad.getSelectedItem().equals(PROVEEDOR)) {
+                entidad.setTipoEntidad(PROVEEDOR);
+            } else if (cmbFiltroEntidad.getSelectedItem().equals(CLIENTE)) {
+                entidad.setTipoEntidad(CLIENTE);
+
+            } else if (cmbFiltroEntidad.getSelectedItem().equals(ASOCIADO)) {
+                entidad.setTipoEntidad(ASOCIADO);
+            } 
+        }else {
+                JOptionPane.showMessageDialog(this, "Seleccione una fila");
+                setSelecciono(false);
+            }
+            setSelecciono(true);
+            this.dispose();
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     /**
      * @param args the command line arguments

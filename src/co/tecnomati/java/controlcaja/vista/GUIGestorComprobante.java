@@ -148,8 +148,8 @@ public class GUIGestorComprobante extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        GUIComprobante nuevoAsociado = new GUIComprobante(null, true);
-        if (nuevoAsociado.isAgregado()) {
+        GUIComprobante nuevoComprobante = new GUIComprobante(null, true);
+        if (nuevoComprobante.isAgregado()) {
             inicializarTabla();
         }
 

@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 14/09/2013 06:55:51 by Hibernate Tools 3.2.1.GA
+// Generated 23/09/2013 14:41:58 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -14,6 +14,7 @@ public class Cliente  implements java.io.Serializable {
      private String razonSocial;
      private String domicilio;
      private Integer estado;
+     private String telefono;
 
     public Cliente() {
     }
@@ -22,11 +23,12 @@ public class Cliente  implements java.io.Serializable {
     public Cliente(long cuit) {
         this.cuit = cuit;
     }
-    public Cliente(long cuit, String razonSocial, String domicilio, Integer estado) {
+    public Cliente(long cuit, String razonSocial, String domicilio, Integer estado, String telefono) {
        this.cuit = cuit;
        this.razonSocial = razonSocial;
        this.domicilio = domicilio;
        this.estado = estado;
+       this.telefono = telefono;
     }
    
     public Integer getIdCliente() {
@@ -63,6 +65,13 @@ public class Cliente  implements java.io.Serializable {
     
     public void setEstado(Integer estado) {
         this.estado = estado;
+    }
+    public String getTelefono() {
+        return this.telefono;
+    }
+    
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
 

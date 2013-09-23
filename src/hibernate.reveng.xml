@@ -2,12 +2,12 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="control_caja"/>
+  <table-filter match-name="proveedor"/>
+  <table-filter match-name="cliente"/>
+  <table-filter match-name="asociado"/>
+  <table-filter match-name="cooperativa"/>
+  <table-filter match-name="comprobanteconcepto"/>
+  <table-filter match-name="comprobante"/>
   <table-filter match-name="concepto"/>
   <table-filter match-name="tipocomprobante"/>
-  <table-filter match-name="proveedor"/>
-  <table-filter match-name="cooperativa"/>
-  <table-filter match-name="comprobante"/>
-  <table-filter match-name="comprobanteconcepto"/>
-  <table-filter match-name="asociado"/>
-  <table-filter match-name="cliente"/>
 </hibernate-reverse-engineering>

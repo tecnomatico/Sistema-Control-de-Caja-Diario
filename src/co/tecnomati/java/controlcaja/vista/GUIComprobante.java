@@ -151,6 +151,12 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         labelMetric5.setText("Serie-Numero");
 
+        txtnumSerie1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnumSerie1KeyTyped(evt);
+            }
+        });
+
         labelMetric3.setText("Tipo Proceso");
 
         cmbTipoProceso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ENTRADA", "SALIDA" }));
@@ -457,6 +463,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
+        //cargo los datos en el objeto comprobante
         comprobante.setCuit(Long.parseLong(txtCuit.getText()));
         comprobante.setFecha(dateComprobante.getDate());
         comprobante.setNumeroSerie(Long.parseLong(txtnumSerie1.getText()));
@@ -464,7 +471,11 @@ public class GUIComprobante extends javax.swing.JDialog {
         comprobante.setTipoProceso(cmbTipoProceso.getSelectedIndex());
         comprobante.setTipocomprobante(tipoForm);
        
+        //falta la validacion de los datos
+        
         System.out.println(comprobante.getFecha());
+        
+        //realizo el almacenamiento o actualizacion de los datos segun corresponda
         if (modificar) {
             new ComprobanteDaoImp().upDateFormulario(comprobante);
         } else {
@@ -593,6 +604,11 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_txtCuitKeyPressed
+
+    private void txtnumSerie1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumSerie1KeyTyped
+       MyUtil.consumirLetras(evt, txtnumSerie1, 3);
+              
+    }//GEN-LAST:event_txtnumSerie1KeyTyped
 
     private void setEscuchadorDeEventosCmboTipoComprobante() {
 //        cmbTipoComprobante.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {

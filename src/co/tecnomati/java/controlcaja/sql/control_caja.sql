@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `razonSocial` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `domicilio` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `estado` int(2) DEFAULT NULL,
+ `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,  
   PRIMARY KEY (`idCliente`),
   UNIQUE KEY `cuit` (`cuit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
@@ -86,7 +87,6 @@ CREATE TABLE IF NOT EXISTS `comprobante` (
   `ejercicioEconomico` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `numeroSerie` (`numeroSerie`),
-  UNIQUE KEY `cuit` (`cuit`),
   KEY `codigoTipoComprob` (`codigoTipoComprob`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
@@ -160,7 +160,8 @@ CREATE TABLE IF NOT EXISTS `proveedor` (
   `razonSocial` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `domicilio` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `estado` int(2) DEFAULT NULL,
-  PRIMARY KEY (`idProveedor`),
+  `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,  
+PRIMARY KEY (`idProveedor`),
   UNIQUE KEY `cuit` (`cuit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 

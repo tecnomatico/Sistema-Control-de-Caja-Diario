@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 14/09/2013 06:55:54 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 23/09/2013 14:41:59 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="co.tecnomati.java.controlcaja.dominio.Cliente" table="cliente" catalog="control_caja">
         <id name="idCliente" type="java.lang.Integer">
@@ -19,6 +19,9 @@
         </property>
         <property name="estado" type="java.lang.Integer">
             <column name="estado" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="20" />
         </property>
     </class>
 </hibernate-mapping>

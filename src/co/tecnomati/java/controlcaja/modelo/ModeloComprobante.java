@@ -122,10 +122,10 @@ public class ModeloComprobante extends AbstractTableModel {
      public Object getRazonSocial(){
         Object objeto= null;
          //  determinar de que tipo de persona es para 
-        System.out.println(comprobante.getTipoPersona());
-        System.out.println(Constantes.ASOCIADO_INT);
-        System.out.println(Constantes.PROVEEDOR_INT);
-        System.out.println(Constantes.CLIENTE_INT);
+//        System.out.println(comprobante.getTipoPersona());
+//        System.out.println(Constantes.ASOCIADO_INT);
+//        System.out.println(Constantes.PROVEEDOR_INT);
+//        System.out.println(Constantes.CLIENTE_INT);
        
         switch (comprobante.getTipoPersona().intValue()) {
             

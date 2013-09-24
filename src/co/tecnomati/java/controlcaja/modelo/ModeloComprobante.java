@@ -13,7 +13,9 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteconceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -68,13 +70,22 @@ public class ModeloComprobante extends AbstractTableModel {
             case 3:objeto = comprobante.getNumeroSerie();break;
             case 4:objeto = getRazonSocial();break;
             case 5:objeto = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getFormulario();break; //ver aqui
-           case 6:objeto = new ComprobanteconceptoDaoImp().getMontoTotal(comprobante.getId());break; // ver aqui
+           case 6:objeto =  getMontoTotal(comprobante.getId());break; // ver aqui
 
             
         }      
         return objeto;
     }
-    
+    public double getMontoTotal(int idComprobante){
+        double total=0;
+        Set<Comprobanteconcepto> conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(idComprobante);
+        for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
+            Comprobanteconcepto comprobanteconcepto = it.next();
+            total= total+comprobanteconcepto.getMonto();
+
+        }
+        return total;
+    }
      public Comprobante Consulta(int col) {
         return (Comprobante) listaComprobante.get(col);
     }

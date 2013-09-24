@@ -4,6 +4,7 @@
  */
 package co.tecnomati.java.controlcaja.dominio.dao;
 
+import co.tecnomati.java.controlcaja.dominio.Comprobante;
 import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public interface ComprobanteConceptoDAO {
   public void deleteComprobanteconcepto(Comprobanteconcepto a);
   public void upDateComprobanteconcepto(Comprobanteconcepto a);
   public Comprobanteconcepto getComprobanteconcepto(int idComprobanteconcepto);
-  public List<Comprobanteconcepto> listComprobanteconceptos(int idComprobante);
+  public List<Comprobanteconcepto> listComprobanteconceptos(int idConcepto);
+//  public List<Comprobanteconcepto> listComprobanteconceptos(Comprobante c);
    public double getMontoTotal(int idComprobante);
 }

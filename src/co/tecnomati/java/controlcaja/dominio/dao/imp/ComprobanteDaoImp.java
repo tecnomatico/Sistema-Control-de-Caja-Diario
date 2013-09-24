@@ -6,11 +6,13 @@ package co.tecnomati.java.controlcaja.dominio.dao.imp;
 
 
 import co.tecnomati.java.controlcaja.dominio.Comprobante;
+import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.dominio.dao.ComprobanteDAO;
 import co.tecnomati.java.controlcaja.hibernateUtil.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 
@@ -74,6 +76,19 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO{
         session.getTransaction().commit();
         
         return tipoCom;      }
+
+    @Override
+    public Set<Comprobanteconcepto> listarConcepto(int idComprobante) {
+  
+     Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Comprobante a = (Comprobante) session.get(Comprobante.class,idComprobante);
+        Set<Comprobanteconcepto> conjuntoConceptos = a.getComprobanteconceptos();
+        session.getTransaction().commit();
+        
+        return conjuntoConceptos; 
+    
+    }
 
     
 }

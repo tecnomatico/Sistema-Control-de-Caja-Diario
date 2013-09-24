@@ -27,6 +27,8 @@ import java.awt.event.KeyEvent;
 import java.util.AbstractSet;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.autocomplete.*;
@@ -74,11 +76,19 @@ public class GUIComprobante extends javax.swing.JDialog {
         // cargos los datos para editar
        dateComprobante.setDate(comprobante.getFecha());
        cmbTipoProceso.setSelectedIndex(comprobante.getTipoProceso());
+       txtnumSerie1.setText(String.valueOf(comprobante.getNumeroSerie()));
        //tipo de comprobante
        txtTipoComprobante.setText(new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getFormulario());
        txtRefTipoCompr.setText(new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getReferencia());
-       //entidad
-        Object objeto =null;
+       //Conceptoss
+       Set<Comprobanteconcepto> conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(comprobante.getId());
+        for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
+            Comprobanteconcepto comprobanteconcepto = it.next();
+            txtCodigoConcepto.setText(String.valueOf(comprobanteconcepto.getConcepto().getCodigoConcepto()));
+            txtDescripcionConcepto.setText(comprobanteconcepto.getConcepto().getDescripcion());
+            txtMonto.setText(String.valueOf(comprobanteconcepto.getMonto()));
+        }
+        
         switch (comprobante.getTipoPersona()) {
            
              case Constantes.ASOCIADO_INT : Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());

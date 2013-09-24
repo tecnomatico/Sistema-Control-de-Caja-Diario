@@ -5,9 +5,11 @@
 package co.tecnomati.java.controlcaja.dominio.dao.imp;
 
 import co.tecnomati.java.controlcaja.dominio.Asociado;
+import co.tecnomati.java.controlcaja.dominio.Comprobante;
 import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.dao.ComprobanteConceptoDAO;
 import co.tecnomati.java.controlcaja.hibernateUtil.HibernateUtil;
+import static co.tecnomati.java.controlcaja.hibernateUtil.HibernateUtil.getSessionFactory;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -87,6 +89,16 @@ Session session = HibernateUtil.getSessionFactory().openSession();
 //         session.close();
           return total;
     }
+
+//    @Override
+//    public List<Comprobanteconcepto> listComprobanteconceptos(Comprobante c) {
+//         Session session = getSessionFactory().openSession();
+//         Criteria criteria = session.createCriteria(Comprobanteconcepto.class);
+//         criteria.addOrder(Order.asc("comprobante"));
+//         List<Comprobanteconcepto> lista = criteria.list();
+////         session.close();
+//          return lista;
+//    }
 
     
 }

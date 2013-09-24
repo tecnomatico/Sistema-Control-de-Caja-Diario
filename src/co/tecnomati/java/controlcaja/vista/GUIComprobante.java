@@ -44,9 +44,11 @@ public class GUIComprobante extends javax.swing.JDialog {
     private boolean modificar;
     private Concepto concepto;
     private boolean agregado;
-    Entidad entidad;
+    
+    Entidad entidad=new Entidad();
     private Tipocomprobante tipoComprobante;
-
+    Set<Comprobanteconcepto> conjuntoConceptos;
+    Comprobanteconcepto comprobanteconcepto;
     /**
      * Creates new form GUIComprobante
      */
@@ -77,13 +79,20 @@ public class GUIComprobante extends javax.swing.JDialog {
        dateComprobante.setDate(comprobante.getFecha());
        cmbTipoProceso.setSelectedIndex(comprobante.getTipoProceso());
        txtnumSerie1.setText(String.valueOf(comprobante.getNumeroSerie()));
+       
+       // entidad
+       entidad.setId(comprobante.getIdEntidad());
+       entidad.setTipoEntidad(comprobante.getTipoPersona());
+       
        //tipo de comprobante
-       txtTipoComprobante.setText(new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getFormulario());
-       txtRefTipoCompr.setText(new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getReferencia());
+       tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId());
+       txtTipoComprobante.setText(tipoComprobante.getFormulario());
+       txtRefTipoCompr.setText(tipoComprobante.getReferencia());
+       
        //Conceptoss
-       Set<Comprobanteconcepto> conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(comprobante.getId());
+        conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(comprobante.getId());
         for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
-            Comprobanteconcepto comprobanteconcepto = it.next();
+            comprobanteconcepto = it.next();
             txtCodigoConcepto.setText(String.valueOf(comprobanteconcepto.getConcepto().getCodigoConcepto()));
             txtDescripcionConcepto.setText(comprobanteconcepto.getConcepto().getDescripcion());
             txtMonto.setText(String.valueOf(comprobanteconcepto.getMonto()));
@@ -174,8 +183,8 @@ public class GUIComprobante extends javax.swing.JDialog {
         txtMonto = new org.edisoncor.gui.textField.TextField();
         labelMetric10 = new org.edisoncor.gui.label.LabelMetric();
         txtDescripcionConcepto = new org.edisoncor.gui.textField.TextField();
+        panel2 = new org.edisoncor.gui.panel.Panel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
         btnGuardar = new org.edisoncor.gui.button.ButtonIpod();
         btnCancelar = new org.edisoncor.gui.button.ButtonIpod();
         dateComprobante = new com.toedter.calendar.JDateChooser();
@@ -343,12 +352,22 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
         });
 
-        jCheckBox2.setText("Otro");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
+        panel2.setLayout(panel2Layout);
+        panel2Layout.setHorizontalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBox1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panel2Layout.setVerticalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jCheckBox1)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panelConceptoLayout = new javax.swing.GroupLayout(panelConcepto);
         panelConcepto.setLayout(panelConceptoLayout);
@@ -357,21 +376,20 @@ public class GUIComprobante extends javax.swing.JDialog {
             .addGroup(panelConceptoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDescripcionConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelConceptoLayout.createSequentialGroup()
                         .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelMetric10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(115, 115, 115)
+                        .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDescripcionConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(panelConceptoLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jCheckBox2))
-                            .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodigoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCodigoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 122, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         panelConceptoLayout.setVerticalGroup(
@@ -389,11 +407,9 @@ public class GUIComprobante extends javax.swing.JDialog {
                 .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         btnGuardar.setText("Guardar");
@@ -464,7 +480,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -507,17 +523,26 @@ public class GUIComprobante extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         //cargo los datos en el objeto comprobante
-        comprobante.setIdEntidad(entidad.getId());
+         comprobante.setIdEntidad(entidad.getId());
+        comprobante.setTipoPersona(entidad.getTipoEntidad());
         comprobante.setFecha(dateComprobante.getDate());
         comprobante.setNumeroSerie(Long.parseLong(txtnumSerie1.getText()));
-        comprobante.setTipoPersona(entidad.getTipoEntidad());
         comprobante.setTipoProceso(cmbTipoProceso.getSelectedIndex());
         comprobante.setTipocomprobante(tipoComprobante);
 
         //realizo el almacenamiento o actualizacion de los datos segun corresponda
         if (modificar) {
+            
+            //modificar
             new ComprobanteDaoImp().upDateFormulario(comprobante);
+            //update comprobante concepto para 1 solo concepto
+            comprobanteconcepto.setConcepto(new ConceptoDaoImp().getConcepto(Integer.parseInt(txtCodigoConcepto.getText())));
+            comprobanteconcepto.setMonto(Double.parseDouble(txtMonto.getText()));
+            new ComprobanteconceptoDaoImp().upDateComprobanteconcepto(comprobanteconcepto);
         } else {
+            //el objeto entidad solo se cargara cuando es nuevo
+           
+            
             new ComprobanteDaoImp().addFormulario(comprobante);
             Comprobanteconcepto detalle = new Comprobanteconcepto();
             detalle.setConcepto(concepto);
@@ -639,10 +664,6 @@ public class GUIComprobante extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
-
     private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
     }//GEN-LAST:event_txtCuitKeyTyped
 
@@ -726,7 +747,6 @@ public class GUIComprobante extends javax.swing.JDialog {
     private org.edisoncor.gui.comboBox.ComboBoxRect cmbTipoProceso;
     private com.toedter.calendar.JDateChooser dateComprobante;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private org.edisoncor.gui.label.LabelMetric labelMetric10;
     private org.edisoncor.gui.label.LabelMetric labelMetric2;
     private org.edisoncor.gui.label.LabelMetric labelMetric3;
@@ -737,6 +757,7 @@ public class GUIComprobante extends javax.swing.JDialog {
     private org.edisoncor.gui.label.LabelMetric labelMetric8;
     private org.edisoncor.gui.label.LabelMetric labelMetric9;
     private org.edisoncor.gui.panel.Panel panel1;
+    private org.edisoncor.gui.panel.Panel panel2;
     private org.edisoncor.gui.panel.Panel panelComprobante;
     private org.edisoncor.gui.panel.Panel panelConcepto;
     private org.edisoncor.gui.panel.Panel panelEntidad;

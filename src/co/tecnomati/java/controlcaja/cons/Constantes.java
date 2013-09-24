@@ -40,8 +40,14 @@ public class Constantes {
     public static final String PROVEEDOR = "PROVEEDOR";
     public static final String CLIENTE = "CLIENTE";
     public static final String ASOCIADO = "ASOCIADO";
+    
+    
+    public static final int OP_ENTRADA = 0;
+    public static final int OP_SALIDA = 1;
 
-     public static final int ASOCIADO_INT=1;
-     public static final int CLIENTE_INT=2;
-     public static final int PROVEEDOR_INT=3;
+     public static final int ASOCIADO_INT=0;
+     public static final int CLIENTE_INT=1;
+     public static final int PROVEEDOR_INT=2;
+     
+     
 }

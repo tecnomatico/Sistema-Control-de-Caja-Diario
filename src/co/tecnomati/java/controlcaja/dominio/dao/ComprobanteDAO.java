@@ -5,6 +5,7 @@
 package co.tecnomati.java.controlcaja.dominio.dao;
 
 import co.tecnomati.java.controlcaja.dominio.Comprobante;
+import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 
 /**
  *
@@ -16,5 +17,6 @@ public interface ComprobanteDAO {
   public void deleteFormulario(Comprobante a);
   public void upDateFormulario(Comprobante a);
   public Comprobante getFormulario(int idFormulario);
+  public Tipocomprobante getTipocomprobante(int idComprobante);
           
   }

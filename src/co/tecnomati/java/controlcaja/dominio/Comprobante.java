@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 23/09/2013 14:41:58 by Hibernate Tools 3.2.1.GA
+// Generated 23/09/2013 20:39:06 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -15,7 +15,7 @@ public class Comprobante  implements java.io.Serializable {
      private Integer id;
      private Tipocomprobante tipocomprobante;
      private long numeroSerie;
-     private Long cuit;
+     private int idEntidad;
      private Integer tipoPersona;
      private Date fecha;
      private Integer tipoProceso;
@@ -26,13 +26,14 @@ public class Comprobante  implements java.io.Serializable {
     }
 
 	
-    public Comprobante(long numeroSerie) {
+    public Comprobante(long numeroSerie, int idEntidad) {
         this.numeroSerie = numeroSerie;
+        this.idEntidad = idEntidad;
     }
-    public Comprobante(Tipocomprobante tipocomprobante, long numeroSerie, Long cuit, Integer tipoPersona, Date fecha, Integer tipoProceso, Date ejercicioEconomico, Set<Comprobanteconcepto> comprobanteconceptos) {
+    public Comprobante(Tipocomprobante tipocomprobante, long numeroSerie, int idEntidad, Integer tipoPersona, Date fecha, Integer tipoProceso, Date ejercicioEconomico, Set<Comprobanteconcepto> comprobanteconceptos) {
        this.tipocomprobante = tipocomprobante;
        this.numeroSerie = numeroSerie;
-       this.cuit = cuit;
+       this.idEntidad = idEntidad;
        this.tipoPersona = tipoPersona;
        this.fecha = fecha;
        this.tipoProceso = tipoProceso;
@@ -61,12 +62,12 @@ public class Comprobante  implements java.io.Serializable {
     public void setNumeroSerie(long numeroSerie) {
         this.numeroSerie = numeroSerie;
     }
-    public Long getCuit() {
-        return this.cuit;
+    public int getIdEntidad() {
+        return this.idEntidad;
     }
     
-    public void setCuit(Long cuit) {
-        this.cuit = cuit;
+    public void setIdEntidad(int idEntidad) {
+        this.idEntidad = idEntidad;
     }
     public Integer getTipoPersona() {
         return this.tipoPersona;

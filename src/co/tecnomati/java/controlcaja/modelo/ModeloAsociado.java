@@ -51,7 +51,7 @@ public class ModeloAsociado extends AbstractTableModel{
         persona = (Asociado) listaPersonas.get(rowIndex);
         
         switch (columnIndex) {
-            case 0:objeto = persona.getLegajo();break;
+            case 0:objeto = persona.getIdAsociado();break;
             
             case 1:objeto = persona.getCuit();break;
             
@@ -63,7 +63,7 @@ public class ModeloAsociado extends AbstractTableModel{
     }
     
     private String[] cabeceras = {
-        "Legajo", "Cuit", "Nombre", "FechaIngreso",
+        "id", "Cuit", "Nombre", "FechaIngreso",
     };
     
     public Asociado Consulta(int col) {

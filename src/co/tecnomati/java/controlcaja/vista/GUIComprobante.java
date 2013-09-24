@@ -10,11 +10,13 @@ import co.tecnomati.java.controlcaja.dominio.Cliente;
 import co.tecnomati.java.controlcaja.dominio.Concepto;
 
 import co.tecnomati.java.controlcaja.dominio.Comprobante;
+import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.Proveedor;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ClienteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteconceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ConceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
@@ -22,9 +24,13 @@ import co.tecnomati.java.controlcaja.util.Entidad;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.AbstractSet;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.autocomplete.*;
+import org.jfree.data.time.Month;
 
 /**
  *
@@ -34,10 +40,10 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     private Comprobante comprobante;
     private boolean modificar;
-    private Tipocomprobante tipoForm;
     private Concepto concepto;
     private boolean agregado;
     Entidad entidad;
+    private Tipocomprobante tipoComprobante;
 
     /**
      * Creates new form GUIComprobante
@@ -49,7 +55,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         comprobante = new Comprobante();
         //cargar datos del combobox
         setDatosCmbTipoFormulario();
-        setEscuchadorDeEventosCmboTipoComprobante();
+//        setEscuchadorDeEventosCmboTipoComprobante();
 
         //cargar los campos de texto con 
 //        setDatosNombreEntidad();
@@ -64,10 +70,37 @@ public class GUIComprobante extends javax.swing.JDialog {
         initComponents();
         modificar = true;
         this.comprobante = comprobante;
+        
+        // cargos los datos para editar
+       dateComprobante.setDate(comprobante.getFecha());
+       cmbTipoProceso.setSelectedIndex(comprobante.getTipoProceso());
+       //tipo de comprobante
+       txtTipoComprobante.setText(new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getFormulario());
+       txtRefTipoCompr.setText(new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getReferencia());
+       //entidad
+        Object objeto =null;
+        switch (comprobante.getTipoPersona()) {
+           
+             case Constantes.ASOCIADO_INT : Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+                                            txtCuit.setText(String.valueOf(a.getCuit()));
+                                            txtNombre.setText(a.getNombre());
+                                            break;
+             case Constantes.PROVEEDOR_INT :Proveedor p = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad());
+                                            txtCuit.setText(String.valueOf(p.getCuit()));
+                                            txtNombre.setText(p.getRazonSocial());
+                                            break;
+             case Constantes.CLIENTE_INT : Cliente c = new ClienteDaoImp().getCliente(comprobante.getIdEntidad());
+                                           txtCuit.setText(String.valueOf(c.getCuit()));
+                                           txtNombre.setText(c.getRazonSocial());
+                                           break;
 
+         }
+        
+       
+       
         //cargar datos del combobox
         setDatosCmbTipoFormulario();
-        setEscuchadorDeEventosCmboTipoComprobante();
+//        setEscuchadorDeEventosCmboTipoComprobante();
 
         //cargar los campos de texto con 
 //        setDatosNombreEntidad();
@@ -464,23 +497,43 @@ public class GUIComprobante extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         //cargo los datos en el objeto comprobante
-        comprobante.setCuit(Long.parseLong(txtCuit.getText()));
+        comprobante.setIdEntidad(entidad.getId());
         comprobante.setFecha(dateComprobante.getDate());
         comprobante.setNumeroSerie(Long.parseLong(txtnumSerie1.getText()));
         comprobante.setTipoPersona(entidad.getTipoEntidad());
         comprobante.setTipoProceso(cmbTipoProceso.getSelectedIndex());
-        comprobante.setTipocomprobante(tipoForm);
-       
-        //falta la validacion de los datos
-        
-        System.out.println(comprobante.getFecha());
-        
+        comprobante.setTipocomprobante(tipoComprobante);
+
         //realizo el almacenamiento o actualizacion de los datos segun corresponda
         if (modificar) {
             new ComprobanteDaoImp().upDateFormulario(comprobante);
         } else {
             new ComprobanteDaoImp().addFormulario(comprobante);
+            Comprobanteconcepto detalle = new Comprobanteconcepto();
+            detalle.setConcepto(concepto);
+            detalle.setComprobante(comprobante);
+            detalle.setMonto(Double.parseDouble(txtMonto.getText()));
+            new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalle);
         }
+        // agregar los conceptos en un conjunto
+        Set<Comprobanteconcepto> conjuntoDetalle = new HashSet<Comprobanteconcepto>();
+
+        //agregar los conceptos al detalle
+
+
+
+
+        //         conjuntoDetalle.add(detalle);
+//         comprobante.setComprobanteconceptos(conjuntoDetalle);
+        // agregar mas conceptos si es neceario
+        //pregunto si esta tildado el combo
+
+        //
+        //falta la validacion de los datos
+
+
+
+
         agregado = true;
 
         JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
@@ -510,7 +563,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             int codigoConcepto = Integer.parseInt(txtCodigoConcepto.getText().trim());
             if (!"".equals(codigoConcepto)) {
-                Concepto concepto = new ConceptoDaoImp().getConcepto(codigoConcepto);
+                concepto = new ConceptoDaoImp().getConcepto(codigoConcepto);
                 if (concepto != null) {
                     txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
                     txtDescripcionConcepto.setText(concepto.getDescripcion());
@@ -536,10 +589,10 @@ public class GUIComprobante extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             GUIGestorTipoComprobante guiGestorTipoFormulario = new GUIGestorTipoComprobante(null, true);
             if (guiGestorTipoFormulario.isAgregado()) {
-                tipoForm = guiGestorTipoFormulario.getTipoComp();
+                tipoComprobante = guiGestorTipoFormulario.getTipoComp();
 
-                txtTipoComprobante.setText(tipoForm.getFormulario());
-                txtRefTipoCompr.setText(tipoForm.getReferencia());
+                txtTipoComprobante.setText(tipoComprobante.getFormulario());
+                txtRefTipoCompr.setText(tipoComprobante.getReferencia());
                 // para que obtenga el foco 
                 txtnumSerie1.requestFocus();
             }
@@ -551,10 +604,10 @@ public class GUIComprobante extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String tipo = txtRefTipoCompr.getText().trim();
             if (!"".equals(tipo)) {
-                Tipocomprobante tc = new TipoComprobanteDaoImp().getTipoFormularioRef(tipo);
-                if (tc != null) {
+                tipoComprobante = new TipoComprobanteDaoImp().getTipoFormularioRef(tipo);
+                if (tipoComprobante != null) {
 
-                    txtTipoComprobante.setText(tc.getFormulario());
+                    txtTipoComprobante.setText(tipoComprobante.getFormulario());
                     txtnumSerie1.requestFocus();
                 }
             }
@@ -597,6 +650,10 @@ public class GUIComprobante extends javax.swing.JDialog {
                     txtCuit.setText(String.valueOf(cliente.getCuit()));
                     txtNombre.setText(cliente.getRazonSocial());
                 } else if (entidad.getTipoEntidad() == Constantes.ASOCIADO_INT) {
+                    System.out.println(entidad.getTipoEntidad()+" ..tip entidadq");
+                    System.out.println(Constantes.ASOCIADO_INT+" ..tipo entidadq");
+                    System.out.println("id entidadd"+entidad.getId());
+                    
                     Asociado asociado = new AsociadoDaoImp().getAsociado(entidad.getId());
                     txtCuit.setText(String.valueOf(asociado.getCuit()));
                     txtNombre.setText(asociado.getNombre());
@@ -606,38 +663,11 @@ public class GUIComprobante extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCuitKeyPressed
 
     private void txtnumSerie1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumSerie1KeyTyped
-       MyUtil.consumirLetras(evt, txtnumSerie1, 3);
-              
+        MyUtil.consumirLetras(evt, txtnumSerie1, 3);
+
     }//GEN-LAST:event_txtnumSerie1KeyTyped
 
-    private void setEscuchadorDeEventosCmboTipoComprobante() {
-//        cmbTipoComprobante.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyTyped(KeyEvent e) {
-//                switch (e.getKeyChar()) {
-//
-//                    case KeyEvent.VK_ENTER:
-//                        System.out.println("enter");
-//                        break;
-//                    case KeyEvent.VK_DOWN:
-//                        //gestor de comprobante
-//                        System.out.println("f1");
-//
-//                        break;
-//                    case KeyEvent.VK_F2:
-//                        //nuevo comprobante
-//                        GUITipoComprobante ventanaDoc = new GUITipoComprobante(null, true);
-//
-//                        // actualizar los datos del combobox
-//                        setDatosCmbTipoFormulario();
-//                        cmbTipoComprobante.setSelectedItem(ventanaDoc.getDoc().getFormulario());
-//                        break;
-//
-//                }
-//            }
-//        });
-    }
-
+   
     /**
      * @param args the command line arguments
      */

@@ -24,7 +24,7 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
     
    int numeroSeleccion;
     boolean selecciono; //esta variable nos dice si el usuario selecciono una entidad del formulario
-    Entidad entidad= new Entidad(); // guardara la entidad que se selecciono .Puede ser un cliente,proveedor, asociado.
+    Entidad entidad; // guardara la entidad que se selecciono .Puede ser un cliente,proveedor, asociado.
     private TableRowSorter sorter;
     ModeloAsociado modeloAsociado = new ModeloAsociado();
     ModeloCliente modeloCliente = new ModeloCliente();
@@ -41,7 +41,8 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
     public GUIgestorEntidades(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        inicializarTablaProveedor();
+        
+        inicializarTablaAsociado();
 
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -84,7 +85,7 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
 
         labelMetric1.setText("Filtro");
 
-        cmbFiltroEntidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PROVEEDOR", "CLIENTE", "ASOCIADO" }));
+        cmbFiltroEntidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ASOCIADO", "CLIENTE", "PROVEEDOR" }));
         cmbFiltroEntidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbFiltroEntidadActionPerformed(evt);
@@ -221,12 +222,13 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void cmbFiltroEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroEntidadActionPerformed
-        if (cmbFiltroEntidad.getSelectedItem().equals(Constantes.PROVEEDOR)) {
+
+        if (cmbFiltroEntidad.getSelectedIndex()==Constantes.PROVEEDOR_INT) {
             inicializarTablaProveedor();
-        } else if (cmbFiltroEntidad.getSelectedItem().equals(Constantes.CLIENTE)) {
+        } else if (cmbFiltroEntidad.getSelectedIndex()==Constantes.CLIENTE_INT) {
             inicializarTablaCliente();
 
-        } else if (cmbFiltroEntidad.getSelectedItem().equals(Constantes.ASOCIADO)) {
+        } else if (cmbFiltroEntidad.getSelectedIndex()==Constantes.ASOCIADO_INT) {
             inicializarTablaAsociado();
         }
 
@@ -256,16 +258,19 @@ filtro(txtRazonSocial);
           int fila = tblEntidad.getSelectedRow();
         if (tblEntidad.getSelectedRow() != -1) {
             numeroSeleccion = sorter.convertRowIndexToModel(tblEntidad.getSelectedRow());
-            int id = (int) tblEntidad.getModel().getValueAt(fila, 0);
-            entidad.setId(id);
-            if (cmbFiltroEntidad.getSelectedItem().equals(Constantes.PROVEEDOR)) {
+             entidad= new Entidad();
+            System.out.print(cmbFiltroEntidad.getSelectedIndex()+"index cmb");
+            if (cmbFiltroEntidad.getSelectedIndex()==Constantes.PROVEEDOR_INT) {
                 entidad.setTipoEntidad(Constantes.PROVEEDOR_INT);
-            } else if (cmbFiltroEntidad.getSelectedItem().equals(Constantes.CLIENTE)) {
+            } else if (cmbFiltroEntidad.getSelectedIndex()==Constantes.CLIENTE_INT) {
                 entidad.setTipoEntidad(Constantes.CLIENTE_INT);
 
-            } else if (cmbFiltroEntidad.getSelectedItem().equals(Constantes.ASOCIADO)) {
+            } else if (cmbFiltroEntidad.getSelectedIndex()==Constantes.ASOCIADO_INT) {
                 entidad.setTipoEntidad(Constantes.ASOCIADO_INT);
-            } 
+            }
+            int id = (int) tblEntidad.getModel().getValueAt(fila, 0);
+           
+            entidad.setId(id);
         }else {
                 JOptionPane.showMessageDialog(this, "Seleccione una fila");
                 setSelecciono(false);

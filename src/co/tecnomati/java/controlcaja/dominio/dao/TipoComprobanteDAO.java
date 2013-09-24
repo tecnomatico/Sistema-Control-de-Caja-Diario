@@ -16,4 +16,5 @@ public interface TipoComprobanteDAO {
   public void deleteTipoFormulario(Tipocomprobante a);
   public void upDateTipoFormulario(Tipocomprobante a);
   public Tipocomprobante getTipoFormulario(int idTipoFormulario);
+  
 }

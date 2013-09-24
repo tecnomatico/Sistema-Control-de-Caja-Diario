@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 23/09/2013 14:41:59 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 23/09/2013 20:39:13 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="co.tecnomati.java.controlcaja.dominio.Comprobante" table="comprobante" catalog="control_caja">
         <id name="id" type="java.lang.Integer">
@@ -14,8 +14,8 @@
         <property name="numeroSerie" type="long">
             <column name="numeroSerie" not-null="true" unique="true" />
         </property>
-        <property name="cuit" type="java.lang.Long">
-            <column name="cuit" />
+        <property name="idEntidad" type="int">
+            <column name="idEntidad" not-null="true" />
         </property>
         <property name="tipoPersona" type="java.lang.Integer">
             <column name="tipoPersona" />

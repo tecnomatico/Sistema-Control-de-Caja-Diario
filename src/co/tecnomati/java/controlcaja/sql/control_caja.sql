@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 CREATE TABLE IF NOT EXISTS `comprobante` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeroSerie` bigint(20) NOT NULL,
-  `cuit` bigint(20) DEFAULT NULL,
+  `idEntidad` int(11) NOT NULL ,
   `tipoPersona` int(2) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `codigoTipoComprob` int(11) DEFAULT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `comprobante` (
 --
 
 CREATE TABLE IF NOT EXISTS `comprobanteconcepto` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idComprobante` int(11) DEFAULT NULL,
   `idConcepto` int(11) DEFAULT NULL,
   `monto` double DEFAULT NULL,

@@ -207,18 +207,11 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbTipoProcesoActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cmbTipoProcesoKeyPressed"/>
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtNumSerie2">
-              <Events>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumSerie2KeyTyped"/>
-              </Events>
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtTipoComprobante">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-              </Properties>
               <Events>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTipoComprobanteKeyPressed"/>
               </Events>
@@ -226,7 +219,6 @@
             <Component class="org.edisoncor.gui.textField.TextField" name="txtRefTipoCompr">
               <Events>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRefTipoComprKeyPressed"/>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRefTipoComprKeyTyped"/>
               </Events>
             </Component>
           </SubComponents>
@@ -289,9 +281,6 @@
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtNombre">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-              </Properties>
               <Events>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreKeyPressed"/>
               </Events>
@@ -402,9 +391,6 @@
               </Properties>
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtDescripcionConcepto">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-              </Properties>
             </Component>
             <Container class="org.edisoncor.gui.panel.Panel" name="panel2">
 

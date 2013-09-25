@@ -12,7 +12,6 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.ClienteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteconceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
-import co.tecnomati.java.controlcaja.util.MyUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -66,7 +65,7 @@ public class ModeloComprobante extends AbstractTableModel {
         switch (columnIndex) {
           
             case 0:objeto = comprobante.getId();break;
-            case 1:objeto = MyUtil.getFechaString10DDMMAAAA(comprobante.getFecha());break;
+            case 1:objeto = comprobante.getFecha();break;
             case 2:objeto = getTipoOperacion();break;
             case 3:objeto = comprobante.getNumeroSerie();break;
             case 4:objeto = getRazonSocial();break;

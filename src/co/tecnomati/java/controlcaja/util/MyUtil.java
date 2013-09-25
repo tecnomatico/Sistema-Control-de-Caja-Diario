@@ -4,8 +4,6 @@
  */
 package co.tecnomati.java.controlcaja.util;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JTextField;
 
 /**
@@ -42,10 +40,5 @@ public class MyUtil {
         }
      }
      
-     public static String getFechaString10DDMMAAAA (Date fecha){
-        
-         Date date = new Date();
-         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");     
-         return sdf.format(fecha);
-    }
+    
 }

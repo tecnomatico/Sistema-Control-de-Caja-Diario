@@ -20,26 +20,17 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteconceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ConceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
-import co.tecnomati.java.controlcaja.reporte.jrdatasource.ModeloReciboJRDataSource;
 import co.tecnomati.java.controlcaja.util.Entidad;
 import co.tecnomati.java.controlcaja.util.MyUtil;
-import co.tecnomati.java.controlcaja.util.mensajero;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.AbstractSet;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperPrintManager;
 import org.jdesktop.swingx.autocomplete.*;
 import org.jfree.data.time.Month;
 
@@ -226,19 +217,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 cmbTipoProcesoActionPerformed(evt);
             }
         });
-        cmbTipoProceso.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmbTipoProcesoKeyPressed(evt);
-            }
-        });
 
-        txtNumSerie2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNumSerie2KeyTyped(evt);
-            }
-        });
-
-        txtTipoComprobante.setEditable(false);
         txtTipoComprobante.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTipoComprobanteKeyPressed(evt);
@@ -248,9 +227,6 @@ public class GUIComprobante extends javax.swing.JDialog {
         txtRefTipoCompr.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtRefTipoComprKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtRefTipoComprKeyTyped(evt);
             }
         });
 
@@ -312,7 +288,6 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
         });
 
-        txtNombre.setEditable(false);
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNombreKeyPressed(evt);
@@ -369,8 +344,6 @@ public class GUIComprobante extends javax.swing.JDialog {
         });
 
         labelMetric10.setText("Concepto");
-
-        txtDescripcionConcepto.setEditable(false);
 
         jCheckBox1.setText("Aporte de Monotributo");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -600,7 +573,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
 
-//        this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
@@ -678,39 +651,8 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     }//GEN-LAST:event_txtRefTipoComprKeyPressed
 
-    public void Imprimir(){
-        Map parametros = new HashMap();
-        String logotipo = "/images/1.jpg";
-
-        ModeloReciboJRDataSource dataSource = new ModeloReciboJRDataSource();
-        List<Comprobante> lista = new ArrayList<Comprobante>();
-        lista.add(comprobante);
-        dataSource.setListCertificado(lista);
-        JasperPrint jPrintt;
-        
-        try {
-            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboDePago.jasper"), (Map) parametros, dataSource);
-          
-            // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
-            // si es false imprime de una con la configuarcion por defecto.
-            JasperPrintManager.printReport(jPrintt, true);
-            // esto es para la vista previa
-//            JDialog reporte = new JDialog();
-//            reporte.setSize(900, 700);
-//            reporte.setLocationRelativeTo(null);
-//            reporte.setModal(true);
-//            reporte.setTitle("INFORME");
-//            JRViewer jv = new JRViewer(jPrintt);
-//            reporte.getContentPane().add(jv);
-//            reporte.setVisible(true);
-
-        } catch (JRException ex) {
-            mensajero.mensajeError(this, "Error de Impresion");
-        }
-
-    }
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        Imprimir();
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void txtCodigoConceptoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoConceptoKeyTyped
@@ -723,7 +665,6 @@ public class GUIComprobante extends javax.swing.JDialog {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
-        MyUtil.consumirLetras(evt, txtCodigoConcepto, 0);
     }//GEN-LAST:event_txtCuitKeyTyped
 
     private void txtCuitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyPressed
@@ -753,33 +694,9 @@ public class GUIComprobante extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCuitKeyPressed
 
     private void txtnumSerie1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumSerie1KeyTyped
-        
-        if (txtnumSerie1.getText().length()==4) {
-            txtNumSerie2.requestFocus();
-        }
-        MyUtil.consumirLetras(evt, txtnumSerie1, 4);
-        
+        MyUtil.consumirLetras(evt, txtnumSerie1, 3);
 
     }//GEN-LAST:event_txtnumSerie1KeyTyped
-
-    private void txtNumSerie2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSerie2KeyTyped
-         MyUtil.consumirLetras(evt, txtNumSerie2, 8);
-         if (txtNumSerie2.getText().length()==8) {
-            txtCuit.requestFocus();
-         }
-    }//GEN-LAST:event_txtNumSerie2KeyTyped
-
-    private void txtRefTipoComprKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRefTipoComprKeyTyped
-         if (txtRefTipoCompr.getText().length()==4 && evt.getKeyCode()!=8) {
-            txtCuit.requestFocus();
-         }
-    }//GEN-LAST:event_txtRefTipoComprKeyTyped
-
-    private void cmbTipoProcesoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbTipoProcesoKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtRefTipoCompr.requestFocus();
-        }
-    }//GEN-LAST:event_cmbTipoProcesoKeyPressed
 
    
     /**

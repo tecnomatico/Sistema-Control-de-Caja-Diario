@@ -27,31 +27,39 @@ import net.sf.jasperreports.engine.JRField;
  */
 public class ModeloReciboJRDataSource implements JRDataSource {
 
+    //indice para recorrer la lista de comprobante
     int index = -1;
+    //comprobante que tendra la lista
     Comprobante comprobante;
-    List<Comprobante> listaComprobante = new ComprobanteDaoImp().listarFormulario();
+    //lista de comprobanates que es pasado desde el guicomprobante
+    List<Comprobante> listaComprobante = new ArrayList<>();
     
-    //datos de la cooperativa
-//    Cooperativa coop = new CooperativaDaoImp().listarCooperativa().get(0);
+//    datos de la cooperativa
+    Cooperativa coop = new CooperativaDaoImp().listarCooperativa().get(0);
     
     Concepto concepto;
     private Double monto=0.0;
     
 
+    
+    //metodo ue recorre la lista de comprobantes mientras el indice sea menor que el tamaño de la lista
     @Override
     public boolean next() throws JRException {
         return ++index < listaComprobante.size();
     }
 
+    //metodo que conecta una variable de nuestro  reporte ireport con un valor que le pasemos 
+    // este metodo va consultando por determinado field  y asignando para ese field un valor (que lo sacamos del comprobnate)
     @Override
     public Object getFieldValue(JRField jrf) throws JRException {
         Object valor = null;
-        
-        Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(listaComprobante.get(index).getId());
-        Set<Comprobanteconcepto> conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(listaComprobante.get(index).getId());
+        comprobante = listaComprobante.get(index);
+        Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId());
+        Set<Comprobanteconcepto> conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(comprobante.getId());
 
-        if ("nroRecibo".equals(jrf.getName())) {
-            valor =  listaComprobante.get(index).getNumeroSerie();
+        if ("nrorecibo".equals(jrf.getName())) {
+            
+            valor =  comprobante.getNumeroSerie();
             
         
         } else if ("cantidadPago".equals(jrf.getName())) {
@@ -74,7 +82,11 @@ public class ModeloReciboJRDataSource implements JRDataSource {
             valor = monto;
         }else if("fechaPago".equals(jrf.getName())){
             
-            valor = MyUtil.getFechaString10DDMMAAAA(listaComprobante.get(index).getFecha());
+            valor = MyUtil.getFechaString10DDMMAAAA(comprobante.getFecha());
+        }
+        else if("matricula".equals(jrf.getName())){
+            
+            valor = coop.getMatricula();
         }
 //        else if("mes".equals(jrf.getName())){
 //            valor = FechaUtil.getMesString(listaCertificado.get(index).getFechaBautizmo());

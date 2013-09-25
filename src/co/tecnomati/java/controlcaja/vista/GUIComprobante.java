@@ -569,13 +569,18 @@ public class GUIComprobante extends javax.swing.JDialog {
         } else {
             //el objeto entidad solo se cargara cuando es nuevo
            
-            
-            new ComprobanteDaoImp().addFormulario(comprobante);
+            for (int i = 0; i < 1000; i++) {
+                new ComprobanteDaoImp().addFormulario(comprobante);
+                comprobante.setNumeroSerie(i+comprobante.getNumeroSerie());
+               System.out.println(i);
+            }
             Comprobanteconcepto detalle = new Comprobanteconcepto();
             detalle.setConcepto(concepto);
             detalle.setComprobante(comprobante);
             detalle.setMonto(Double.parseDouble(txtMonto.getText()));
             new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalle);
+            
+            
         }
         // agregar los conceptos en un conjunto
         Set<Comprobanteconcepto> conjuntoDetalle = new HashSet<Comprobanteconcepto>();

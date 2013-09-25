@@ -20,7 +20,9 @@ public class CooperativaDaoImp  extends  HibernateUtil implements CooperativaDAO
 
     @Override
     public List<Cooperativa> listarCooperativa() {
-       Session session = HibernateUtil.getSessionFactory().openSession();
+//       Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Cooperativa.class);
         
@@ -31,7 +33,9 @@ public class CooperativaDaoImp  extends  HibernateUtil implements CooperativaDAO
 
     @Override
     public void addCooperativa(Cooperativa a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.save(a);
         session.getTransaction().commit();
@@ -39,7 +43,9 @@ public class CooperativaDaoImp  extends  HibernateUtil implements CooperativaDAO
 
     @Override
     public void deleteCooperativa(Cooperativa a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.delete(a);
         session.getTransaction().commit();
@@ -47,7 +53,9 @@ public class CooperativaDaoImp  extends  HibernateUtil implements CooperativaDAO
 
     @Override
     public void upDateCooperativa(Cooperativa a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.update(a);
         session.getTransaction().commit();
@@ -55,7 +63,9 @@ public class CooperativaDaoImp  extends  HibernateUtil implements CooperativaDAO
 
     @Override
     public Cooperativa getCooperativa(int idCooperativa) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         Cooperativa a = (Cooperativa) session.get(Cooperativa.class,idCooperativa);
         session.getTransaction().commit();

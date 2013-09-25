@@ -20,7 +20,9 @@ public class AsociadoDaoImp extends HibernateUtil implements AsociadoDAO {
 
     @Override
     public List<Asociado> listarAsociado() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSession();
+                
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Asociado.class);
         
@@ -31,7 +33,9 @@ public class AsociadoDaoImp extends HibernateUtil implements AsociadoDAO {
 
     @Override
     public void addAsociado(Asociado a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+          Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.save(a);
         session.getTransaction().commit();
@@ -39,7 +43,9 @@ public class AsociadoDaoImp extends HibernateUtil implements AsociadoDAO {
 
     @Override
     public void deleteAsociado(Asociado a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+          Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.delete(a);
         session.getTransaction().commit();
@@ -47,7 +53,9 @@ public class AsociadoDaoImp extends HibernateUtil implements AsociadoDAO {
 
     @Override
     public void upDateAsociado(Asociado a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+             Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.update(a);
         session.getTransaction().commit();
@@ -55,7 +63,9 @@ public class AsociadoDaoImp extends HibernateUtil implements AsociadoDAO {
 
     @Override
     public Asociado getAsociado(int idAsociado) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         Asociado a = (Asociado) session.get(Asociado.class,idAsociado);
         session.getTransaction().commit();

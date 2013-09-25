@@ -9,7 +9,6 @@ import co.tecnomati.java.controlcaja.dominio.Comprobante;
 import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.dao.ComprobanteConceptoDAO;
 import co.tecnomati.java.controlcaja.hibernateUtil.HibernateUtil;
-import static co.tecnomati.java.controlcaja.hibernateUtil.HibernateUtil.getSessionFactory;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -25,7 +24,9 @@ public class ComprobanteconceptoDaoImp extends HibernateUtil implements Comproba
 
     @Override
     public List<Comprobanteconcepto> listarCliente() {
-  Session session = HibernateUtil.getSessionFactory().openSession();
+//  Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Asociado.class);
         
@@ -35,7 +36,9 @@ public class ComprobanteconceptoDaoImp extends HibernateUtil implements Comproba
 
     @Override
     public void addComprobanteconcepto(Comprobanteconcepto a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.save(a);
         session.getTransaction().commit();
@@ -43,7 +46,9 @@ public class ComprobanteconceptoDaoImp extends HibernateUtil implements Comproba
 
     @Override
     public void deleteComprobanteconcepto(Comprobanteconcepto a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.delete(a);
         session.getTransaction().commit();
@@ -51,7 +56,9 @@ public class ComprobanteconceptoDaoImp extends HibernateUtil implements Comproba
 
     @Override
     public void upDateComprobanteconcepto(Comprobanteconcepto a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.update(a);
         session.getTransaction().commit();
@@ -59,7 +66,9 @@ public class ComprobanteconceptoDaoImp extends HibernateUtil implements Comproba
 
     @Override
     public Comprobanteconcepto getComprobanteconcepto(int idComprobanteconcepto) {
-Session session = HibernateUtil.getSessionFactory().openSession();
+//Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         Comprobanteconcepto a = (Comprobanteconcepto) session.get(Asociado.class,idComprobanteconcepto);
         session.getTransaction().commit();
@@ -68,7 +77,9 @@ Session session = HibernateUtil.getSessionFactory().openSession();
 
     @Override
     public List<Comprobanteconcepto> listComprobanteconceptos(int idComprobante) {
-        Session session = getSessionFactory().openSession();
+//        Session session = getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
          Criteria criteria = session.createCriteria(Comprobanteconcepto.class);
          criteria.addOrder(Order.asc("id"));
          List<Comprobanteconcepto> lista = criteria.list();
@@ -78,7 +89,9 @@ Session session = HibernateUtil.getSessionFactory().openSession();
     }
     @Override
     public double getMontoTotal(int idComprobante) {
-        Session session = getSessionFactory().openSession();
+//        Session session = getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
          Criteria criteria = session.createCriteria(Comprobanteconcepto.class);
          criteria.addOrder(Order.asc("id"));
          List<Comprobanteconcepto> lista = criteria.list();

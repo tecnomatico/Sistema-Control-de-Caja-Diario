@@ -18,7 +18,8 @@ public class ClienteDaoImp extends HibernateUtil implements ClienteDAO {
 
     @Override
     public List<Cliente> listarCliente() {
-       Session session = HibernateUtil.getSessionFactory().openSession();
+//       Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Cliente.class);
         
@@ -29,7 +30,9 @@ public class ClienteDaoImp extends HibernateUtil implements ClienteDAO {
 
     @Override
     public void addCliente(Cliente a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.save(a);
         session.getTransaction().commit();
@@ -37,7 +40,9 @@ public class ClienteDaoImp extends HibernateUtil implements ClienteDAO {
 
     @Override
     public void deleteCliente(Cliente a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.delete(a);
         session.getTransaction().commit();
@@ -45,7 +50,9 @@ public class ClienteDaoImp extends HibernateUtil implements ClienteDAO {
 
     @Override
     public void upDateCliente(Cliente a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.update(a);
         session.getTransaction().commit();
@@ -53,7 +60,9 @@ public class ClienteDaoImp extends HibernateUtil implements ClienteDAO {
 
     @Override
     public Cliente getCliente(int idCliente) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         Cliente a = (Cliente) session.get(Cliente.class,idCliente);
         session.getTransaction().commit();

@@ -21,7 +21,9 @@ public class TipoComprobanteDaoImp extends  HibernateUtil implements TipoComprob
 
     @Override
     public List<Tipocomprobante> listarTipoFormulario() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Tipocomprobante.class);
         
@@ -32,7 +34,9 @@ public class TipoComprobanteDaoImp extends  HibernateUtil implements TipoComprob
 
     @Override
     public void addTipoFormulario(Tipocomprobante a) {
-        Session session = getSessionFactory().openSession();
+//        Session session = getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.save(a);
         session.getTransaction().commit();
@@ -40,7 +44,9 @@ public class TipoComprobanteDaoImp extends  HibernateUtil implements TipoComprob
 
     @Override
     public void deleteTipoFormulario(Tipocomprobante a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.delete(a);
         session.getTransaction().commit();
@@ -48,7 +54,9 @@ public class TipoComprobanteDaoImp extends  HibernateUtil implements TipoComprob
 
     @Override
     public void upDateTipoFormulario(Tipocomprobante a) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
         session.update(a);
         session.getTransaction().commit();
@@ -56,7 +64,9 @@ public class TipoComprobanteDaoImp extends  HibernateUtil implements TipoComprob
 
     @Override
     public Tipocomprobante getTipoFormulario(int idTipoFormulario) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.getSession();
+
         session.beginTransaction();
        Tipocomprobante a = (Tipocomprobante) session.get(Tipocomprobante.class,idTipoFormulario);
         session.getTransaction().commit();
@@ -65,8 +75,10 @@ public class TipoComprobanteDaoImp extends  HibernateUtil implements TipoComprob
     }
     public Tipocomprobante getTipoFormularioRef(String ref) {
        Tipocomprobante a = null;
-        Session session = getSessionFactory().openSession();
-        session.beginTransaction();
+//        Session session = getSessionFactory().openSession();
+               Session session = HibernateUtil.getSession();
+
+       session.beginTransaction();
         String sql= "from Tipocomprobante where referencia ='"+ref+"'";     
         session.getTransaction().commit();
         a =(Tipocomprobante) session.createQuery(sql).uniqueResult();

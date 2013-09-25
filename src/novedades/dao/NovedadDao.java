@@ -15,9 +15,9 @@ import pojo.Novedad;
  */
 public interface NovedadDao {
   java.util.List<Novedad> listarNovedad(Empleado o);
-  public void getEmpleado(Empleado a);
+  public Empleado getEmpleado(Empleado a);
   public void deleteEmpleado(Empleado a);
-  public void upDateEmpleado(Novedad a);
-  public void getConcepto(Concepto e);
+  public void upDateEmpleado(Empleado a);
+  public Concepto getConcepto(Concepto e);
 //  public Novedad getNovedad(int idConcepto);
 }

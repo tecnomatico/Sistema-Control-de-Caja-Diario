@@ -50,13 +50,9 @@ public class GestorEmpleado extends javax.swing.JDialog {
         this.quienloyamo = quienloyamo;
         initComponents();
         this.setTitle("ALTA DE EMPLEADO");
-
-         
         if (MENU== quienloyamo) {
             //boton seleccionar no debe aparecer
             btnSeleccion2.setVisible(false);
-           
-            
         }else{
            // buscador de empleado
             this.setSize(this.getWidth(),this.getHeight()-btnModificar.getWidth() );
@@ -97,7 +93,7 @@ public class GestorEmpleado extends javax.swing.JDialog {
     private void initComponents() {
 
         elegirFoto = new javax.swing.JFileChooser();
-        btnSeleccion = new org.edisoncor.gui.button.ButtonIpod();
+        // btnSeleccion = new org.edisoncor.gui.button.ButtonIpod();
         panel1 = new org.edisoncor.gui.panel.Panel();
         btnModificar = new org.edisoncor.gui.button.ButtonIpod();
         btnNuevo = new org.edisoncor.gui.button.ButtonIpod();
@@ -110,20 +106,20 @@ public class GestorEmpleado extends javax.swing.JDialog {
         btnCancelarOperacion = new org.edisoncor.gui.button.ButtonIpod();
         btnReporte = new org.edisoncor.gui.button.ButtonIpod();
 
-        btnSeleccion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/freelancersteam/www/java/tomafoto/images/OK.jpg"))); // NOI18N
-        btnSeleccion.setText("SELECT");
-        btnSeleccion.setAnimacion(false);
-        btnSeleccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSeleccionActionPerformed(evt);
-            }
-        });
+        // btnSeleccion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/freelancersteam/www/java/tomafoto/images/OK.jpg"))); // NOI18N
+        // btnSeleccion.setText("SELECT");
+        // btnSeleccion.setAnimacion(false);
+        // btnSeleccion.addActionListener(new java.awt.event.ActionListener() {
+            // public void actionPerformed(java.awt.event.ActionEvent evt) {
+                // btnSeleccionActionPerformed(evt);
+            // }
+        // });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         panel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GESTOR DE EMPLEADOS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Calibri", 1, 24), new java.awt.Color(204, 204, 204))); // NOI18N
 
-        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/freelancersteam/www/java/tomafoto/images/modificar.png"))); // NOI18N
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Editar.png"))); // NOI18N
         btnModificar.setText("MODIFIC");
         btnModificar.setAnimacion(false);
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +128,7 @@ public class GestorEmpleado extends javax.swing.JDialog {
             }
         });
 
-        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/freelancersteam/www/java/tomafoto/images/user_16.png"))); // NOI18N
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/adduser.png"))); // NOI18N
         btnNuevo.setText("NUEVO");
         btnNuevo.setAnimacion(false);
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -181,7 +177,7 @@ public class GestorEmpleado extends javax.swing.JDialog {
             }
         });
 
-        btnSeleccion2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/freelancersteam/www/java/tomafoto/images/tick_32.png"))); // NOI18N
+        btnSeleccion2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
         btnSeleccion2.setText("  ");
         btnSeleccion2.setAnimacion(false);
         btnSeleccion2.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +186,7 @@ public class GestorEmpleado extends javax.swing.JDialog {
             }
         });
 
-        btnCancelarOperacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/freelancersteam/www/java/tomafoto/images/Atras.png"))); // NOI18N
+        btnCancelarOperacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras.png"))); // NOI18N
         btnCancelarOperacion.setText("ATRAS");
         btnCancelarOperacion.setAnimacion(false);
         btnCancelarOperacion.addActionListener(new java.awt.event.ActionListener() {
@@ -199,7 +195,7 @@ public class GestorEmpleado extends javax.swing.JDialog {
             }
         });
 
-        btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/freelancersteam/www/java/tomafoto/images/PDF1.png"))); // NOI18N
+        btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/excel.png"))); // NOI18N
         btnReporte.setText("REPORTE");
         btnReporte.setAnimacion(false);
         btnReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -222,33 +218,30 @@ public class GestorEmpleado extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSeleccion2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+                        .addComponent(btnSeleccion2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(btnCancelarOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80)
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
+                        .addGap(80, 80, 80)
                         .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                         .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnSeleccion2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGap(1, 1, 1)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccion2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -303,8 +296,8 @@ public class GestorEmpleado extends javax.swing.JDialog {
              listaEmpleado = filtrarPorLegajoEmpleado(listaEmpleado,txtEmpleado.getText()); 
         }
         }
-       com.freelancersteam.www.java.tomafoto.util.TablaUtil.prepararTablaEmpleado(modelo, tblEmpleado);
-       com.freelancersteam.www.java.tomafoto.util.TablaUtil.cargarModeloEmpleado(modelo, listaEmpleado, tblEmpleado);
+//       TablaUtil.prepararTablaEmpleado(modelo, tblEmpleado);
+//       util.TablaUtil.cargarModeloEmpleado(modelo, listaEmpleado, tblEmpleado);
     }//GEN-LAST:event_txtEmpleadoKeyPressed
   
     private void buttonIpod1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonIpod1ActionPerformed
@@ -378,9 +371,9 @@ public class GestorEmpleado extends javax.swing.JDialog {
          
     }//GEN-LAST:event_btnNuevoActionPerformed
 
-    private void btnSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionActionPerformed
+    // private void btnSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionActionPerformed
       
-    }//GEN-LAST:event_btnSeleccionActionPerformed
+    // }//GEN-LAST:event_btnSeleccionActionPerformed
 
     private void btnSeleccion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccion2ActionPerformed
             
@@ -457,7 +450,7 @@ private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private org.edisoncor.gui.button.ButtonIpod btnModificar;
     private org.edisoncor.gui.button.ButtonIpod btnNuevo;
     private org.edisoncor.gui.button.ButtonIpod btnReporte;
-    private org.edisoncor.gui.button.ButtonIpod btnSeleccion;
+    // private org.edisoncor.gui.button.ButtonIpod btnSeleccion;
     private org.edisoncor.gui.button.ButtonIpod btnSeleccion2;
     private org.edisoncor.gui.comboBox.ComboBoxRound comboBoxRound1;
     private javax.swing.JFileChooser elegirFoto;
@@ -474,8 +467,8 @@ private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         private void cargarTablaConEmpleado() {
 
        listaEmpleado =new EmpleadoDaoImp().listarEmpleado();
-       com.freelancersteam.www.java.tomafoto.util.TablaUtil.prepararTablaEmpleado(modelo, tblEmpleado);
-       com.freelancersteam.www.java.tomafoto.util.TablaUtil.cargarModeloEmpleado(modelo, listaEmpleado, tblEmpleado);
+//       com.freelancersteam.www.java.tomafoto.util.TablaUtil.prepararTablaEmpleado(modelo, tblEmpleado);
+//       com.freelancersteam.www.java.tomafoto.util.TablaUtil.cargarModeloEmpleado(modelo, listaEmpleado, tblEmpleado);
     }
 
     private List<Empleado> filtrarPorNombreEmpleado(List<Empleado> listaEmpleado, String text) {

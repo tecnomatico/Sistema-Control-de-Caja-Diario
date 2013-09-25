@@ -66,7 +66,8 @@ public class principal extends javax.swing.JFrame {
         mnuNovedades = new javax.swing.JMenu();
         mnuCargaNovedades = new javax.swing.JMenuItem();
         mnuABM = new javax.swing.JMenu();
-        mnuABMEmpleados = new javax.swing.JMenuItem();
+        mnuAltaEmpleados = new javax.swing.JMenuItem();
+        mnuGestorEmpleados = new javax.swing.JMenuItem();
         mnuABMUsuario = new javax.swing.JMenuItem();
         mnuEmpresas = new javax.swing.JMenuItem();
         mnuABMNovedades = new javax.swing.JMenuItem();
@@ -167,8 +168,21 @@ public class principal extends javax.swing.JFrame {
 
         mnuABM.setText("ABM");
 
-        mnuABMEmpleados.setText("ABMEmpleados");
-        mnuABM.add(mnuABMEmpleados);
+        mnuAltaEmpleados.setText("Alta de Empleados");
+        mnuAltaEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAltaEmpleadosActionPerformed(evt);
+            }
+        });
+        mnuABM.add(mnuAltaEmpleados);
+
+        mnuGestorEmpleados.setText("Gestor Empleados");
+        mnuGestorEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuGestorEmpleadosActionPerformed(evt);
+            }
+        });
+        mnuABM.add(mnuGestorEmpleados);
 
         mnuABMUsuario.setText("ABMUsuarios");
         mnuABMUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -227,6 +241,14 @@ public class principal extends javax.swing.JFrame {
         new abmUsuario(this, true);
     }//GEN-LAST:event_mnuABMUsuarioActionPerformed
 
+    private void mnuAltaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAltaEmpleadosActionPerformed
+        new AltaEmpleado(this, rootPaneCheckingEnabled);
+    }//GEN-LAST:event_mnuAltaEmpleadosActionPerformed
+
+    private void mnuGestorEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuGestorEmpleadosActionPerformed
+        new GestorEmpleado(this, rootPaneCheckingEnabled);
+    }//GEN-LAST:event_mnuGestorEmpleadosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -268,12 +290,13 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu mnuABM;
-    private javax.swing.JMenuItem mnuABMEmpleados;
     private javax.swing.JMenuItem mnuABMNovedades;
     private javax.swing.JMenuItem mnuABMUsuario;
+    private javax.swing.JMenuItem mnuAltaEmpleados;
     private javax.swing.JMenu mnuArchivo;
     private javax.swing.JMenuItem mnuCargaNovedades;
     private javax.swing.JMenuItem mnuEmpresas;
+    private javax.swing.JMenuItem mnuGestorEmpleados;
     private javax.swing.JMenu mnuNovedades;
     private javax.swing.JMenuItem mnuSalir;
     private org.edisoncor.gui.panel.Panel panel1;

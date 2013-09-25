@@ -14,12 +14,12 @@ import pojo.Empleado;
  */
 public interface EmpleadoDao {
   java.util.List<Empleado> listarEmpleado();
-  java.util.List<Empleado> listarEmpleadoAdministradores();
+//  java.util.List<Empleado> listarEmpleadoAdministradores();
   public void addEmpleado(Empleado a);
   public void deleteEmpleado(Empleado a);
   public void upDateEmpleado(Empleado a);
-  public Empleado getEmpleado(int idEmpleado);
+  public Empleado getEmpleado(int legajo);
   public Set<Concepto> getConcepto(int idConcepto);
-  public Empleado getEmpleadoLegajo(int legajo);
-  public Empleado getEmpleadoAdministrador(int legajo, boolean adm,String contrasenias);
+  
+//  public Empleado getEmpleadoAdministrador(int legajo, boolean adm,String contrasenias);
 }

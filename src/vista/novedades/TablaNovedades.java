@@ -77,12 +77,12 @@ manager.addKeyEventDispatcher(new KeyEventDispatcher(){
         panel1 = new org.edisoncor.gui.panel.Panel();
         panelShadow1 = new org.edisoncor.gui.panel.PanelShadow();
         panelTranslucidoComplete1 = new org.edisoncor.gui.panel.PanelTranslucidoComplete();
-        buttonIcon1 = new org.edisoncor.gui.button.ButtonIcon();
-        buttonIcon2 = new org.edisoncor.gui.button.ButtonIcon();
-        buttonIcon3 = new org.edisoncor.gui.button.ButtonIcon();
-        buttonIcon4 = new org.edisoncor.gui.button.ButtonIcon();
-        buttonIcon5 = new org.edisoncor.gui.button.ButtonIcon();
-        buttonIcon6 = new org.edisoncor.gui.button.ButtonIcon();
+        btnCancelar = new org.edisoncor.gui.button.ButtonIcon();
+        btnPDF = new org.edisoncor.gui.button.ButtonIcon();
+        btnExcel = new org.edisoncor.gui.button.ButtonIcon();
+        btnImprimir = new org.edisoncor.gui.button.ButtonIcon();
+        btnNuevo = new org.edisoncor.gui.button.ButtonIcon();
+        btnGuardar = new org.edisoncor.gui.button.ButtonIcon();
         panelShadow2 = new org.edisoncor.gui.panel.PanelShadow();
         panelTranslucidoComplete2 = new org.edisoncor.gui.panel.PanelTranslucidoComplete();
         labelMetric1 = new org.edisoncor.gui.label.LabelMetric();
@@ -110,41 +110,41 @@ manager.addKeyEventDispatcher(new KeyEventDispatcher(){
 
         panelTranslucidoComplete1.setOpaque(false);
 
-        buttonIcon1.setBackground(new java.awt.Color(51, 51, 51));
-        buttonIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar.png"))); // NOI18N
-        buttonIcon1.setText("buttonIcon1");
-        buttonIcon1.setAngulo(120);
-        buttonIcon1.setDistanciaDeSombra(45);
+        btnCancelar.setBackground(new java.awt.Color(51, 51, 51));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar.png"))); // NOI18N
+        btnCancelar.setText("buttonIcon1");
+        btnCancelar.setAngulo(120);
+        btnCancelar.setDistanciaDeSombra(45);
 
-        buttonIcon2.setBackground(new java.awt.Color(51, 51, 51));
-        buttonIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pdf.png"))); // NOI18N
-        buttonIcon2.setText("buttonIcon2");
-        buttonIcon2.setAngulo(120);
-        buttonIcon2.setDistanciaDeSombra(45);
+        btnPDF.setBackground(new java.awt.Color(51, 51, 51));
+        btnPDF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pdf.png"))); // NOI18N
+        btnPDF.setText("buttonIcon2");
+        btnPDF.setAngulo(120);
+        btnPDF.setDistanciaDeSombra(45);
 
-        buttonIcon3.setBackground(new java.awt.Color(51, 51, 51));
-        buttonIcon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/excel.png"))); // NOI18N
-        buttonIcon3.setText("buttonIcon3");
-        buttonIcon3.setAngulo(120);
-        buttonIcon3.setDistanciaDeSombra(45);
+        btnExcel.setBackground(new java.awt.Color(51, 51, 51));
+        btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/excel.png"))); // NOI18N
+        btnExcel.setText("buttonIcon3");
+        btnExcel.setAngulo(120);
+        btnExcel.setDistanciaDeSombra(45);
 
-        buttonIcon4.setBackground(new java.awt.Color(51, 51, 51));
-        buttonIcon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/imprimir.png"))); // NOI18N
-        buttonIcon4.setText("Imprimir");
-        buttonIcon4.setAngulo(120);
-        buttonIcon4.setDistanciaDeSombra(45);
+        btnImprimir.setBackground(new java.awt.Color(51, 51, 51));
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/imprimir.png"))); // NOI18N
+        btnImprimir.setText("Imprimir");
+        btnImprimir.setAngulo(120);
+        btnImprimir.setDistanciaDeSombra(45);
 
-        buttonIcon5.setBackground(new java.awt.Color(51, 51, 51));
-        buttonIcon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agregar_registro.png"))); // NOI18N
-        buttonIcon5.setText("buttonIcon5");
-        buttonIcon5.setAngulo(120);
-        buttonIcon5.setDistanciaDeSombra(45);
+        btnNuevo.setBackground(new java.awt.Color(51, 51, 51));
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agregar_registro.png"))); // NOI18N
+        btnNuevo.setText("buttonIcon5");
+        btnNuevo.setAngulo(120);
+        btnNuevo.setDistanciaDeSombra(45);
 
-        buttonIcon6.setBackground(new java.awt.Color(51, 51, 51));
-        buttonIcon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/GUARDAR.png"))); // NOI18N
-        buttonIcon6.setText("buttonIcon6");
-        buttonIcon6.setAngulo(120);
-        buttonIcon6.setDistanciaDeSombra(45);
+        btnGuardar.setBackground(new java.awt.Color(51, 51, 51));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/GUARDAR.png"))); // NOI18N
+        btnGuardar.setText("buttonIcon6");
+        btnGuardar.setAngulo(120);
+        btnGuardar.setDistanciaDeSombra(45);
 
         javax.swing.GroupLayout panelTranslucidoComplete1Layout = new javax.swing.GroupLayout(panelTranslucidoComplete1);
         panelTranslucidoComplete1.setLayout(panelTranslucidoComplete1Layout);
@@ -152,17 +152,17 @@ manager.addKeyEventDispatcher(new KeyEventDispatcher(){
             panelTranslucidoComplete1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTranslucidoComplete1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(buttonIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162)
-                .addComponent(buttonIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162)
-                .addComponent(buttonIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162)
-                .addComponent(buttonIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162)
-                .addComponent(buttonIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162)
-                .addComponent(buttonIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelTranslucidoComplete1Layout.setVerticalGroup(
@@ -171,13 +171,13 @@ manager.addKeyEventDispatcher(new KeyEventDispatcher(){
                 .addGap(5, 5, 5)
                 .addGroup(panelTranslucidoComplete1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelTranslucidoComplete1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buttonIcon3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelTranslucidoComplete1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buttonIcon4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buttonIcon6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buttonIcon5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout panelShadow1Layout = new javax.swing.GroupLayout(panelShadow1);
@@ -532,13 +532,13 @@ manager.addKeyEventDispatcher(new KeyEventDispatcher(){
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonIcon btnBuscar;
+    private org.edisoncor.gui.button.ButtonIcon btnCancelar;
+    private org.edisoncor.gui.button.ButtonIcon btnExcel;
+    private org.edisoncor.gui.button.ButtonIcon btnGuardar;
+    private org.edisoncor.gui.button.ButtonIcon btnImprimir;
+    private org.edisoncor.gui.button.ButtonIcon btnNuevo;
+    private org.edisoncor.gui.button.ButtonIcon btnPDF;
     private javax.swing.ButtonGroup buttonGroup1;
-    private org.edisoncor.gui.button.ButtonIcon buttonIcon1;
-    private org.edisoncor.gui.button.ButtonIcon buttonIcon2;
-    private org.edisoncor.gui.button.ButtonIcon buttonIcon3;
-    private org.edisoncor.gui.button.ButtonIcon buttonIcon4;
-    private org.edisoncor.gui.button.ButtonIcon buttonIcon5;
-    private org.edisoncor.gui.button.ButtonIcon buttonIcon6;
     private org.edisoncor.gui.comboBox.ComboBoxRound cmbBusqueda;
     private com.toedter.calendar.JDateChooser fechaFin;
     private com.toedter.calendar.JDateChooser fechaInicio;

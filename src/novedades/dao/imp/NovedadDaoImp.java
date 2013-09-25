@@ -7,62 +7,66 @@ package novedades.dao.imp;
 import hibernateUtil.Conexion;
 import java.util.ArrayList;
 import java.util.List;
-import novedades.dao.UsuarioDao;
+import novedades.dao.NovedadDao;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import pojo.Concepto;
+import pojo.Empleado;
+import pojo.Novedad;
 import pojo.Usuario;
 
 /**
  *
- * @author joel
+ * @author usuario
  */
-public class UsuarioDaoImp extends Conexion implements UsuarioDao{
+public class NovedadDaoImp extends Conexion implements NovedadDao {
 
     @Override
-    public List<Usuario> listarUsuario() {
+    public List<Novedad> listarNovedad(Empleado o) {
         Session session = Conexion.getSessionFactory().openSession();
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(Usuario.class);
-        
-        ArrayList<Usuario> usuario = (ArrayList<Usuario>)criteria.list();
+        Criteria criteria = session.createCriteria(Novedad.class);
+        ArrayList<Novedad> novedad = (ArrayList<Novedad>)criteria.list();
         session.close();
-        return usuario;
+        return novedad;
     }
 
-
     @Override
-    public void addUsuario(Usuario a) {
+    public Empleado getEmpleado(Empleado a) {
         Session session = Conexion.getSessionFactory().openSession();
         session.beginTransaction();
-        session.save(a);
+        Empleado e = (Empleado) session.get(Empleado.class,a);
         session.getTransaction().commit();
-        session.close();       }
+        session.close();
+        return e;
+    }
 
     @Override
-    public void deleteUsuario(Usuario a) {
+    public void deleteEmpleado(Empleado a) {
         Session session = Conexion.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(a);
         session.getTransaction().commit();
-        session.close();       
+        session.close(); 
     }
 
     @Override
-    public void upDateUsuario(Usuario a) {
-Session session = Conexion.getSessionFactory().openSession();
+    public void upDateEmpleado(Empleado a) {
+        Session session = Conexion.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(a);
         session.getTransaction().commit();
-        session.close();      }
+        session.close();
+    }
 
     @Override
-    public Usuario getUsuario(int legajo) {
+    public Concepto getConcepto(Concepto e) {
         Session session = Conexion.getSessionFactory().openSession();
         session.beginTransaction();
-        Usuario a = (Usuario) session.get(Usuario.class,legajo);
+        Concepto con = (Concepto) session.get(Usuario.class,e);
         session.getTransaction().commit();
         session.close();
-        return a;     
+        return con; 
     }
     
 }

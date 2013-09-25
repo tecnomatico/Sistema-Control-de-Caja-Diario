@@ -24,28 +24,41 @@ public class EmpleadoDaoImp extends Conexion implements EmpleadoDao{
     
 
     @Override
-    public List<Empleado> listarEmpleadoAdministradores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void addEmpleado(Empleado a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(a);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     public void deleteEmpleado(Empleado a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        session.delete(a);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     public void upDateEmpleado(Empleado a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        session.saveOrUpdate(a);
+//        session.update(a);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     public Empleado getEmpleado(int idEmpleado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        Empleado a = (Empleado) session.get(Empleado.class, idEmpleado);
+        session.getTransaction().commit();
+        session.close();
+        return a;
     }
 
     @Override
@@ -53,19 +66,21 @@ public class EmpleadoDaoImp extends Conexion implements EmpleadoDao{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Empleado getEmpleadoLegajo(int legajo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Empleado getEmpleadoAdministrador(int legajo, boolean adm, String contrasenias) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public Empleado getEmpleadoAdministrador(int legajo, boolean adm, String contrasenias) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     @Override
     public List<Empleado> listarEmpleado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Empleado.class);
+//        criteria.addOrder(Order.asc("legajo"));
+        List<Empleado> lista = (List<Empleado>)criteria.list();
+        session.getTransaction().commit();
+        session.close();
+        return lista;
     }
     
 }

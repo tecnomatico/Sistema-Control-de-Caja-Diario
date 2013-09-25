@@ -112,17 +112,17 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                          <Component id="buttonIcon2" min="-2" pref="67" max="-2" attributes="0"/>
+                          <Component id="btnPDF" min="-2" pref="67" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
-                          <Component id="buttonIcon3" min="-2" pref="67" max="-2" attributes="0"/>
+                          <Component id="btnExcel" min="-2" pref="67" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
-                          <Component id="buttonIcon5" min="-2" pref="67" max="-2" attributes="0"/>
+                          <Component id="btnNuevo" min="-2" pref="67" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
-                          <Component id="buttonIcon6" min="-2" pref="67" max="-2" attributes="0"/>
+                          <Component id="btnGuardar" min="-2" pref="67" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
-                          <Component id="buttonIcon4" min="-2" pref="67" max="-2" attributes="0"/>
+                          <Component id="btnImprimir" min="-2" pref="67" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
-                          <Component id="buttonIcon1" min="-2" pref="67" max="-2" attributes="0"/>
+                          <Component id="btnCancelar" min="-2" pref="67" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -133,14 +133,14 @@
                           <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="buttonIcon2" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
-                                  <Component id="buttonIcon3" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
+                                  <Component id="btnPDF" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
+                                  <Component id="btnExcel" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="buttonIcon1" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
-                                  <Component id="buttonIcon4" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
-                                  <Component id="buttonIcon6" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
-                                  <Component id="buttonIcon5" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
+                                  <Component id="btnCancelar" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
+                                  <Component id="btnImprimir" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
+                                  <Component id="btnGuardar" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
+                                  <Component id="btnNuevo" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -148,7 +148,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="org.edisoncor.gui.button.ButtonIcon" name="buttonIcon1">
+                <Component class="org.edisoncor.gui.button.ButtonIcon" name="btnCancelar">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="33" green="33" red="33" type="rgb"/>
@@ -161,7 +161,7 @@
                     <Property name="distanciaDeSombra" type="int" value="45"/>
                   </Properties>
                 </Component>
-                <Component class="org.edisoncor.gui.button.ButtonIcon" name="buttonIcon2">
+                <Component class="org.edisoncor.gui.button.ButtonIcon" name="btnPDF">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="33" green="33" red="33" type="rgb"/>
@@ -174,7 +174,7 @@
                     <Property name="distanciaDeSombra" type="int" value="45"/>
                   </Properties>
                 </Component>
-                <Component class="org.edisoncor.gui.button.ButtonIcon" name="buttonIcon3">
+                <Component class="org.edisoncor.gui.button.ButtonIcon" name="btnExcel">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="33" green="33" red="33" type="rgb"/>
@@ -187,7 +187,7 @@
                     <Property name="distanciaDeSombra" type="int" value="45"/>
                   </Properties>
                 </Component>
-                <Component class="org.edisoncor.gui.button.ButtonIcon" name="buttonIcon4">
+                <Component class="org.edisoncor.gui.button.ButtonIcon" name="btnImprimir">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="33" green="33" red="33" type="rgb"/>
@@ -200,7 +200,7 @@
                     <Property name="distanciaDeSombra" type="int" value="45"/>
                   </Properties>
                 </Component>
-                <Component class="org.edisoncor.gui.button.ButtonIcon" name="buttonIcon5">
+                <Component class="org.edisoncor.gui.button.ButtonIcon" name="btnNuevo">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="33" green="33" red="33" type="rgb"/>
@@ -213,7 +213,7 @@
                     <Property name="distanciaDeSombra" type="int" value="45"/>
                   </Properties>
                 </Component>
-                <Component class="org.edisoncor.gui.button.ButtonIcon" name="buttonIcon6">
+                <Component class="org.edisoncor.gui.button.ButtonIcon" name="btnGuardar">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="33" green="33" red="33" type="rgb"/>

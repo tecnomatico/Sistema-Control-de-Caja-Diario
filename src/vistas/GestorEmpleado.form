@@ -74,17 +74,18 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="txtEmpleado" min="-2" pref="110" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnSeleccion2" min="-2" pref="48" max="-2" attributes="0"/>
+                          <Component id="btnSeleccion2" min="-2" pref="63" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane2" alignment="0" pref="554" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                           <Component id="btnCancelarOperacion" min="-2" pref="81" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                           <Component id="btnModificar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                           <Component id="btnNuevo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="84" max="32767" attributes="0"/>
+                          <EmptySpace pref="80" max="32767" attributes="0"/>
                           <Component id="btnReporte" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -95,21 +96,14 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="labelMetric1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="comboBoxRound1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnSeleccion2" min="-2" pref="57" max="-2" attributes="0"/>
-                      </Group>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="labelMetric1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboBoxRound1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSeleccion2" alignment="3" min="-2" pref="64" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="217" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -127,7 +121,7 @@
         <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnModificar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/freelancersteam/www/java/tomafoto/images/modificar.png"/>
+              <Image iconType="3" name="/imagenes/Editar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="MODIFIC"/>
             <Property name="animacion" type="boolean" value="false"/>
@@ -139,7 +133,7 @@
         <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnNuevo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/freelancersteam/www/java/tomafoto/images/user_16.png"/>
+              <Image iconType="3" name="/imagenes/adduser.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="NUEVO"/>
             <Property name="animacion" type="boolean" value="false"/>
@@ -203,7 +197,7 @@
         <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnSeleccion2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/freelancersteam/www/java/tomafoto/images/tick_32.png"/>
+              <Image iconType="3" name="/imagenes/buscar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="  "/>
             <Property name="animacion" type="boolean" value="false"/>
@@ -215,7 +209,7 @@
         <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnCancelarOperacion">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/freelancersteam/www/java/tomafoto/images/Atras.png"/>
+              <Image iconType="3" name="/imagenes/atras.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ATRAS"/>
             <Property name="animacion" type="boolean" value="false"/>
@@ -227,7 +221,7 @@
         <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnReporte">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/freelancersteam/www/java/tomafoto/images/PDF1.png"/>
+              <Image iconType="3" name="/imagenes/excel.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="REPORTE"/>
             <Property name="animacion" type="boolean" value="false"/>

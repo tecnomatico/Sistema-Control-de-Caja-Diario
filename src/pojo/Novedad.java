@@ -11,7 +11,7 @@ public class Novedad  implements java.io.Serializable {
 
 
      private Date fecha;
-     private Empleado empleados;
+     private Empleado empleado;
      private Concepto concepto;
      private int cantidad;
      private String observacion;
@@ -19,9 +19,9 @@ public class Novedad  implements java.io.Serializable {
     public Novedad() {
     }
 
-    public Novedad(Date fecha, Empleado empleados, Concepto concepto, int cantidad, String observacion) {
+    public Novedad(Date fecha, Empleado empleado, Concepto concepto, int cantidad, String observacion) {
        this.fecha = fecha;
-       this.empleados = empleados;
+       this.empleado = empleado;
        this.concepto = concepto;
        this.cantidad = cantidad;
        this.observacion = observacion;
@@ -35,11 +35,11 @@ public class Novedad  implements java.io.Serializable {
         this.fecha = fecha;
     }
     public Empleado getEmpleado() {
-        return this.empleados;
+        return this.empleado;
     }
     
-    public void setEmpleado(Empleado empleados) {
-        this.empleados = empleados;
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
     public Concepto getConcepto() {
         return this.concepto;

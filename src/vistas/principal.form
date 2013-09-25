@@ -45,10 +45,21 @@
             <Property name="text" type="java.lang.String" value="ABM"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuABMEmpleados">
+            <MenuItem class="javax.swing.JMenuItem" name="mnuAltaEmpleados">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ABMEmpleados"/>
+                <Property name="text" type="java.lang.String" value="Alta de Empleados"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuAltaEmpleadosActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuGestorEmpleados">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gestor Empleados"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuGestorEmpleadosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnuABMUsuario">
               <Properties>

@@ -1,26 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 17/09/2013 21:47:20 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/09/2013 22:35:04 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class catalog="novedades" name="pojo.Usuario" table="usuario">
-    <id name="id" type="int">
-      <column name="ID"/>
-      <generator class="assigned"/>
-    </id>
-    <many-to-one class="pojo.Empleado" fetch="select" name="empleados">
-      <column name="LEGAJO" not-null="true"/>
-    </many-to-one>
-    <property name="usuario" type="string">
-      <column length="10" name="USUARIO" not-null="true"/>
-    </property>
-    <property name="clave" type="string">
-      <column length="10" name="CLAVE" not-null="true"/>
-    </property>
-    <property name="descripcion" type="string">
-      <column length="30" name="DESCRIPCION" not-null="true"/>
-    </property>
-    <property name="tipo" type="string">
-      <column length="13" name="TIPO" not-null="true"/>
-    </property>
-  </class>
+    <class name="pojo.Usuario" table="usuario" catalog="novedades">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="empleado" class="pojo.Empleado" fetch="select">
+            <column name="LEGAJO" not-null="true" />
+        </many-to-one>
+        <property name="usuario" type="string">
+            <column name="USUARIO" length="10" not-null="true" />
+        </property>
+        <property name="clave" type="string">
+            <column name="CLAVE" length="10" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="30" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="TIPO" length="13" not-null="true" />
+        </property>
+    </class>
 </hibernate-mapping>

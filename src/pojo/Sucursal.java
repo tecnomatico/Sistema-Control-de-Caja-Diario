@@ -1,5 +1,5 @@
 package pojo;
-// Generated 17/09/2013 21:47:20 by Hibernate Tools 3.2.1.GA
+// Generated 25/09/2013 22:35:02 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -12,27 +12,27 @@ public class Sucursal  implements java.io.Serializable {
 
 
      private int codSuc;
-     private Empleado empleados;
+     private Empleado empleado;
      private Empresa empresa;
      private String nombre;
-     private Set<Empleado> empleadoses = new HashSet<Empleado>(0);
+     private Set<Empleado> empleados = new HashSet<Empleado>(0);
 
     public Sucursal() {
     }
 
 	
-    public Sucursal(int codSuc, Empleado empleados, Empresa empresa, String nombre) {
+    public Sucursal(int codSuc, Empleado empleado, Empresa empresa, String nombre) {
         this.codSuc = codSuc;
-        this.empleados = empleados;
+        this.empleado = empleado;
         this.empresa = empresa;
         this.nombre = nombre;
     }
-    public Sucursal(int codSuc, Empleado empleados, Empresa empresa, String nombre, Set<Empleado> empleadoses) {
+    public Sucursal(int codSuc, Empleado empleado, Empresa empresa, String nombre, Set<Empleado> empleados) {
        this.codSuc = codSuc;
-       this.empleados = empleados;
+       this.empleado = empleado;
        this.empresa = empresa;
        this.nombre = nombre;
-       this.empleadoses = empleadoses;
+       this.empleados = empleados;
     }
    
     public int getCodSuc() {
@@ -42,12 +42,12 @@ public class Sucursal  implements java.io.Serializable {
     public void setCodSuc(int codSuc) {
         this.codSuc = codSuc;
     }
-    public Empleado getEmpleados() {
-        return this.empleados;
+    public Empleado getEmpleado() {
+        return this.empleado;
     }
     
-    public void setEmpleados(Empleado empleados) {
-        this.empleados = empleados;
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
     public Empresa getEmpresa() {
         return this.empresa;
@@ -63,12 +63,12 @@ public class Sucursal  implements java.io.Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public Set<Empleado> getEmpleadoses() {
-        return this.empleadoses;
+    public Set<Empleado> getEmpleados() {
+        return this.empleados;
     }
     
-    public void setEmpleadoses(Set<Empleado> empleadoses) {
-        this.empleadoses = empleadoses;
+    public void setEmpleados(Set<Empleado> empleados) {
+        this.empleados = empleados;
     }
 
 

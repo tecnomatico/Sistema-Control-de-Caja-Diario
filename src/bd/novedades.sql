@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 4.0.4.1
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-09-2013 a las 16:17:52
+-- Tiempo de generación: 26-09-2013 a las 03:27:55
 -- Versión del servidor: 5.5.32
 -- Versión de PHP: 5.4.16
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `concepto` (
 -- Estructura de tabla para la tabla `empleados`
 --
 
-CREATE TABLE IF NOT EXISTS `empleados` (
+CREATE TABLE IF NOT EXISTS `empleado` (
   `LEGAJO` int(4) NOT NULL AUTO_INCREMENT,
   `APELLIDO` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `NOMBRE` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `ID` int(11) NOT NULL,
   `LEGAJO` int(4) NOT NULL,
   `USUARIO` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `CONTRASEÑA` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `CLAVE` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `DESCRIPCION` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `TIPO` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`),
@@ -128,29 +128,29 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --
 -- Filtros para la tabla `empleados`
 --
-ALTER TABLE `empleados`
-  ADD CONSTRAINT `empleados_ibfk_1` FOREIGN KEY (`COD_EMP`) REFERENCES `empresa` (`COD_EMP`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `empleados_ibfk_2` FOREIGN KEY (`COD_SUC`) REFERENCES `sucursal` (`cod_suc`) ON UPDATE CASCADE;
+ALTER TABLE `empleado`
+  ADD CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`COD_EMP`) REFERENCES `empresa` (`COD_EMP`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `empleado_ibfk_2` FOREIGN KEY (`COD_SUC`) REFERENCES `sucursal` (`cod_suc`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `novedad`
 --
 ALTER TABLE `novedad`
-  ADD CONSTRAINT `novedad_ibfk_3` FOREIGN KEY (`legajo`) REFERENCES `empleados` (`LEGAJO`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `novedad_ibfk_3` FOREIGN KEY (`legajo`) REFERENCES `empleado` (`LEGAJO`) ON UPDATE CASCADE,
   ADD CONSTRAINT `novedad_ibfk_4` FOREIGN KEY (`cod_con`) REFERENCES `concepto` (`cod_con`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `sucursal`
 --
 ALTER TABLE `sucursal`
-  ADD CONSTRAINT `sucursal_ibfk_2` FOREIGN KEY (`legajo`) REFERENCES `empleados` (`LEGAJO`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `sucursal_ibfk_1` FOREIGN KEY (`cod_emp`) REFERENCES `empresa` (`COD_EMP`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `sucursal_ibfk_1` FOREIGN KEY (`cod_emp`) REFERENCES `empresa` (`COD_EMP`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `sucursal_ibfk_2` FOREIGN KEY (`legajo`) REFERENCES `empleado` (`LEGAJO`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`LEGAJO`) REFERENCES `empleados` (`LEGAJO`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`LEGAJO`) REFERENCES `empleado` (`LEGAJO`) ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

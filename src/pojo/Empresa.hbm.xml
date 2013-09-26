@@ -1,32 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 17/09/2013 21:47:20 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/09/2013 22:35:04 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class catalog="novedades" name="pojo.Empresa" table="empresa">
-    <id name="codEmp" type="java.lang.Integer">
-      <column name="COD_EMP"/>
-      <generator class="identity"/>
-    </id>
-    <property name="nombre" type="string">
-      <column length="30" name="NOMBRE"/>
-    </property>
-    <property name="gerente" type="string">
-      <column length="50" name="GERENTE" not-null="true"/>
-    </property>
-    <property name="mailGerente" type="string">
-      <column length="20" name="MAIL_GERENTE" not-null="true"/>
-    </property>
-    <set inverse="true" name="sucursals">
-      <key>
-        <column name="cod_emp" not-null="true"/>
-      </key>
-      <one-to-many class="pojo.Sucursal"/>
-    </set>
-    <set inverse="true" name="empleadoses">
-      <key>
-        <column name="COD_EMP" not-null="true"/>
-      </key>
-      <one-to-many class="pojo.Empleado"/>
-    </set>
-  </class>
+    <class name="pojo.Empresa" table="empresa" catalog="novedades">
+        <id name="codEmp" type="java.lang.Integer">
+            <column name="COD_EMP" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="30" />
+        </property>
+        <property name="gerente" type="string">
+            <column name="GERENTE" length="50" not-null="true" />
+        </property>
+        <property name="mailGerente" type="string">
+            <column name="MAIL_GERENTE" length="20" not-null="true" />
+        </property>
+        <set name="sucursals" inverse="true">
+            <key>
+                <column name="cod_emp" not-null="true" />
+            </key>
+            <one-to-many class="pojo.Sucursal" />
+        </set>
+        <set name="empleados" inverse="true">
+            <key>
+                <column name="COD_EMP" not-null="true" />
+            </key>
+            <one-to-many class="pojo.Empleado" />
+        </set>
+    </class>
 </hibernate-mapping>

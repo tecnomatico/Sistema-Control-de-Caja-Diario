@@ -294,7 +294,7 @@ public class abmUsuario extends javax.swing.JDialog {
         usuario.setDescripcion(txtDescripcion.getText());
         usuario.setTipo(txtTipo.getText());
         usuario.setUsuario(txtUsuario.getText());
-        usuario.setEmpleados(new Empleado());
+        usuario.setEmpleado(new Empleado());
         // pregunto de nuevo si se realizara la carga de un nuevo usuario entonces add
         if (nuevo) {
             new UsuarioDaoImp().addUsuario(usuario);

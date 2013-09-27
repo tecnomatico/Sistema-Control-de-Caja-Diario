@@ -3,77 +3,62 @@
  * and open the template in the editor.
  */
 package co.tecnomati.java.controlcaja.reporte.jrdatasource;
-
-import co.tecnomati.java.controlcaja.dominio.Asociado;
-import co.tecnomati.java.controlcaja.dominio.dao.AsociadoDAO;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
 import java.util.ArrayList;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRField;
 import java.util.List;
-import co.tecnomati.java.controlcaja.util.*;
+
+import co.tecnomati.java.controlcaja.dominio.Asociado;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
 
 import co.tecnomati.java.controlcaja.dominio.Comprobante;
-import co.tecnomati.java.controlcaja.dominio.Cooperativa;
-import co.tecnomati.java.controlcaja.dominio.dao.ComprobanteDAO;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 
+import co.tecnomati.java.controlcaja.dominio.Cooperativa;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
 /**
  *
  * @author AnahiAramayo
  */
 public class RboIntegCuotaSocialJRDataSource implements JRDataSource
 {
- private List<Comprobante> listacomprobante = new ArrayList<Comprobante>();
-    private int index = -1;//actual
-    Comprobante cc;
-    Cooperativa c;
-    
-    public Object getFieldValue(JRField jrf) throws JRException
-    {
+List<Comprobante> listacomprobante = new ArrayList<>();
+Comprobante cc;
+private int index = -1;//actual
+Cooperativa c = new CooperativaDaoImp().listarCooperativa().get(0);
+
+@Override
+public Object getFieldValue(JRField jrf) throws JRException
+{
         Object valor = null;
-        Asociado asociado = new AsociadoDaoImp().getAsociado(listacomprobante.get(index).getIdAsociado());
+      cc = listacomprobante.get(index);
+        /*ASOCIADO_INT=0; CLIENTE_INT=1; PROVEEDOR_INT=2;*/
+        if (cc.getTipoPersona().equals(0)) {
+           Asociado asociado = new AsociadoDaoImp().getAsociado(cc.getIdEntidad());
+                switch (jrf.getName()){
+                    case "inicioActividad": valor = c.getInicioActividad();
+                    case "nombreApellido": valor = asociado.getApellido()+" "+ asociado.getNombre();
+                    case "nro": valor = asociado.getLegajo();
+                    case "fechaIngreso": valor = asociado.getIngreso();
+                    case "nroDNI": valor = asociado.getDni();
+                    case "cuit": valor = asociado.getCuit();
+                    case "cantidadPago": valor = cc.hashCode();
+                    case "fechaPago": valor = cc.getFecha();
+                }
+                }
         
-       if ("inicioActividad".equals(jrf.getName()))
-        {
-            valor = c.getInicioActividad();
-        }
-        else if ("nombreApellido".equals(jrf.getName()))
-        {
-            valor = comprobante.get(index).getUsername();
-        }
-        else if ("nroAsociado".equals(jrf.getName()))
-        {
-            valor = comprobante.get(index).getPassword();
-        }
-        else if ("fechaIngreso".equals(jrf.getName()))
-        {
-            valor = comprobante.get(index).getComentarios();
-        }
-        else if ("nroDNI".equals(jrf.getName()))
-        {
-            valor = comprobante.get(index).getComentarios();
-        }else if ("cuit".equals(jrf.getName()))
-        {
-            valor = comprobante.get(index).getComentarios();
-        }else if ("cantidadPago".equals(jrf.getName()))
-        {
-            valor = comprobante.get(index).getComentarios();
-        }else if ("fechaPago".equals(jrf.getName()))
-        {
-            valor = comprobante.get(index).getComentarios();
-        }
-        return valor;
+return valor;
+}
+
+@Override
+public boolean next() throws JRException
+    {
+        return ++index < listacomprobante.size();
     }
 
-    public boolean next() throws JRException
+public void addComprobante(Comprobante listacomprobante)
     {
-        return ++index < comprobante.size();
+        this.listacomprobante.add(listacomprobante);
     }
 
-    public void addComprobante(Comprobante comprobante)
-    {
-        this.comprobante.add(comprobante);
-    }
 }

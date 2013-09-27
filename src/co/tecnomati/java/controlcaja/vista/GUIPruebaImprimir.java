@@ -688,7 +688,7 @@ public class GUIPruebaImprimir extends javax.swing.JDialog {
         JasperPrint jPrintt;
         
         try {
-            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboIntegCuotaSocialJRDataSource.jasper"), (Map) parametros, dataSource);
+            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboIntegracionCuotas.jasper"), (Map) parametros, dataSource);
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
             JasperPrintManager.printReport(jPrintt, true);

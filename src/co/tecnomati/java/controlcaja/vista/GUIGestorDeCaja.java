@@ -249,7 +249,7 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDatosCoopActionPerformed
 
     private void btnGestorAsociadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestorAsociadoActionPerformed
-        GUIGestorAsociado gestorAsosciado = new GUIGestorAsociado(this, true);
+        GUIGestorAsociado gestorAsociado = new GUIGestorAsociado(this, true);
     }//GEN-LAST:event_btnGestorAsociadoActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed

@@ -14,13 +14,13 @@ public class Comprobante  implements java.io.Serializable {
 
      private Integer id;
      private Tipocomprobante tipocomprobante;
-     private long numeroSerie; // numero de recibo
-     private int idEntidad;  // identificador de la persona autoincremental
-     private Integer tipoPersona; //0 asociado 1proveedor o 2cliente
-     private Date fecha;  // de emision de recibo
-     private Integer tipoProceso; //0 entrada o 1 salida
-     private Date ejercicioEconomico;  // que es un dato de un recibo 
-     private Set<Comprobanteconcepto> comprobanteconceptos = new HashSet<Comprobanteconcepto>(0); // conjunto de conceptos(detalle) que tiene el recibo
+     private long numeroSerie;
+     private int idEntidad;
+     private Integer tipoPersona;
+     private Date fecha;
+     private Integer tipoProceso;
+     private Date ejercicioEconomico;
+     private Set<Comprobanteconcepto> comprobanteconceptos = new HashSet<Comprobanteconcepto>(0);
 
     public Comprobante() {
     }

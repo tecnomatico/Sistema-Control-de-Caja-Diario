@@ -9,10 +9,10 @@ package co.tecnomati.java.controlcaja.dominio;
 public class Comprobanteconcepto  implements java.io.Serializable {
 
 
-     private Integer id;
-     private Concepto concepto;
-     private Comprobante comprobante;
-     private Double monto;
+     private Integer id; // autoincremental
+     private Concepto concepto; // el concepto
+     private Comprobante comprobante; // a q comprobante representa este 
+     private Double monto;// monto
 
     public Comprobanteconcepto() {
     }

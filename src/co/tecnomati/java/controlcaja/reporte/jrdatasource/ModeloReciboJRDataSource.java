@@ -35,7 +35,7 @@ public class ModeloReciboJRDataSource implements JRDataSource {
     List<Comprobante> listaComprobante = new ArrayList<>();
     
 //    datos de la cooperativa
-    Cooperativa coop = new CooperativaDaoImp().listarCooperativa().get(0);
+//    Cooperativa coop = new CooperativaDaoImp().listarCooperativa().get(0);
     
     Concepto concepto;
     private Double monto=0.0;
@@ -86,7 +86,7 @@ public class ModeloReciboJRDataSource implements JRDataSource {
         }
         else if("matricula".equals(jrf.getName())){
             
-            valor = coop.getMatricula();
+//            valor = coop.getMatricula();
         }
 //        else if("mes".equals(jrf.getName())){
 //            valor = FechaUtil.getMesString(listaCertificado.get(index).getFechaBautizmo());

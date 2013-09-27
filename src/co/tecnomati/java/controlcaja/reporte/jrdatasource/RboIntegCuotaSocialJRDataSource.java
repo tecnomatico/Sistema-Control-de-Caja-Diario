@@ -52,11 +52,11 @@ public Object getFieldValue(JRField jrf) throws JRException{
       Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(listaComprobante.get(index).getId());
       Set<Comprobanteconcepto> conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(listaComprobante.get(index).getId());
 
-      if ("inicioActividad".equals(jrf.getName())) {
+if ("inicioActividad".equals(jrf.getName())) {
        valor = c.getInicioActividad();
-      } else if ("nombreApellido".equals(jrf.getName())) {
+      } /* else if ("nombreApellido".equals(jrf.getName())) {
              valor = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad()).getApellido();
-      } else if("nro".equals(jrf.getName())){
+      } else if("nroAsociado".equals(jrf.getName())){
             // Dato constante para la configuarcion
             valor = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad()).getLegajo();
         }else if("fechaIngreso".equals(jrf.getName())){
@@ -68,28 +68,28 @@ public Object getFieldValue(JRField jrf) throws JRException{
         }else if("cuit".equals(jrf.getName())){
             // Dato constante para la configuarcion
             valor = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad()).getCuit();
-        }else if("cuit".equals(jrf.getName())){
-            // Dato constante para la configuarcion
-            valor = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad()).getCuit();
         }else if("cantidadPago".equals(jrf.getName())){
-              Comprobanteconcepto comprobanteconcepto=null;
+              /*Comprobanteconcepto comprobanteconcepto=null;
               for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
               comprobanteconcepto = it.next();
         }
          monto = comprobanteconcepto.getMonto();
          valor= NumberToLetterConverter.getConvertirPesosEnString(monto);
-        }else if("fechaPago".equals(jrf.getName())){
+            valor= 123;*/
+        else if("fechaPago".equals(jrf.getName())){
             valor=MyUtil.getFechaString10DDMMAAAA(listaComprobante.get(index).getFecha());
         }
 return valor;
 }
-public void addComprobante(Comprobante listacomprobante)
-    {
-        this.listaComprobante.add(listacomprobante);
+
+    public void addComprobante(Comprobante c) {
+        this.comprobante = c;
     }
 
- public void setListComprobante(List<Comprobante> l) {
+    public void setListComprobante(List<Comprobante> l) {
         this.listaComprobante = l;
     }
-
+ 
+ 
+ 
 }

@@ -674,7 +674,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_txtRefTipoComprKeyPressed
-
+/*
     public void Imprimir(){
         Map parametros = new HashMap();
         String logotipo = "/images/1.jpg";
@@ -702,7 +702,7 @@ public class GUIComprobante extends javax.swing.JDialog {
             mensajero.mensajeError(this, "Error de Impresion");
         }
 
-    }
+    }*/
  
     /*Prueba*/
     public void Imprimirec(){
@@ -715,7 +715,8 @@ public class GUIComprobante extends javax.swing.JDialog {
         JasperPrint jPrintt;
         try {
             jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboIntegracionCuotas.jasper"), (Map) parametros, dataSource);
-            // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
+            // este metodo imprime el reporte , recibe el jprint(el informe, )
+//            y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
             JasperPrintManager.printReport(jPrintt, true);
             // esto es para la vista previa

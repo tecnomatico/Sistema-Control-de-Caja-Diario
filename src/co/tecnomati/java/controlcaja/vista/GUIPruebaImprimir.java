@@ -36,11 +36,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.swing.JRViewer;
 import org.jdesktop.swingx.autocomplete.*;
 //import org.jfree.data.time.Month;
 
@@ -48,7 +50,7 @@ import org.jdesktop.swingx.autocomplete.*;
  *
  * @author Joel
  */
-public class GUIComprobante extends javax.swing.JDialog {
+public class GUIPruebaImprimir extends javax.swing.JDialog {
 
     private Comprobante comprobante;
     private boolean modificar;
@@ -62,7 +64,7 @@ public class GUIComprobante extends javax.swing.JDialog {
     /**
      * Creates new form GUIComprobante
      */
-    public GUIComprobante(java.awt.Frame parent, boolean modal) {
+    public GUIPruebaImprimir(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         modificar = false;
@@ -79,7 +81,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     }
 
-    public GUIComprobante(java.awt.Frame parent, boolean modal, Comprobante comprobante) {
+    public GUIPruebaImprimir(java.awt.Frame parent, boolean modal, Comprobante comprobante) {
         super(parent, modal);
         initComponents();
         modificar = true;
@@ -206,7 +208,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         labelMetric2.setText("Fecha");
 
-        panelComprobante.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Comprobante", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(255, 255, 255)));
+        panelComprobante.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Comprobante", 0, 0, null, new java.awt.Color(255, 255, 255)));
         panelComprobante.setColorPrimario(new java.awt.Color(153, 153, 153));
 
         labelMetric4.setText("Tipo Comprobante: ");
@@ -301,7 +303,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 .addGap(58, 58, 58))
         );
 
-        panelEntidad.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entidad", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(255, 255, 255)));
+        panelEntidad.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entidad", 0, 0, null, new java.awt.Color(255, 255, 255)));
         panelEntidad.setColorPrimario(new java.awt.Color(153, 153, 153));
 
         txtCuit.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -353,7 +355,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        panelConcepto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle de Concepto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(255, 255, 255)));
+        panelConcepto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle de Concepto", 0, 0, null, new java.awt.Color(255, 255, 255)));
         panelConcepto.setColorPrimario(new java.awt.Color(153, 153, 153));
 
         labelMetric6.setText("codigo Concepto: ");
@@ -529,10 +531,6 @@ public class GUIComprobante extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void cmbTipoProcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoProcesoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbTipoProcesoActionPerformed
-
     public boolean validarCamposVacio() {
         boolean b = false;
 
@@ -683,27 +681,26 @@ public class GUIComprobante extends javax.swing.JDialog {
         Map parametros = new HashMap();
         String logotipo = "/images/1.jpg";
 
-        ModeloReciboJRDataSource dataSource = new ModeloReciboJRDataSource();
+        RboIntegCuotaSocialJRDataSource dataSource = new RboIntegCuotaSocialJRDataSource();
         List<Comprobante> lista = new ArrayList<Comprobante>();
         lista.add(comprobante);
-        dataSource.setListCertificado(lista);
+        dataSource.setListComprobante(lista);
         JasperPrint jPrintt;
         
         try {
-            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboDePago.jasper"), (Map) parametros, dataSource);
-          
+            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboIntegCuotaSocialJRDataSource.jasper"), (Map) parametros, dataSource);
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
             JasperPrintManager.printReport(jPrintt, true);
             // esto es para la vista previa
-//            JDialog reporte = new JDialog();
-//            reporte.setSize(900, 700);
-//            reporte.setLocationRelativeTo(null);
-//            reporte.setModal(true);
-//            reporte.setTitle("INFORME");
-//            JRViewer jv = new JRViewer(jPrintt);
-//            reporte.getContentPane().add(jv);
-//            reporte.setVisible(true);
+            JDialog reporte = new JDialog();
+            reporte.setSize(900, 700);
+            reporte.setLocationRelativeTo(null);
+            reporte.setModal(true);
+            reporte.setTitle("INFORME");
+            JRViewer jv = new JRViewer(jPrintt);
+            reporte.getContentPane().add(jv);
+            reporte.setVisible(true);
 
         } catch (JRException ex) {
             mensajero.mensajeError(this, "Error de Impresion");
@@ -783,6 +780,10 @@ public class GUIComprobante extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cmbTipoProcesoKeyPressed
 
+    private void cmbTipoProcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoProcesoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTipoProcesoActionPerformed
+
    
     /**
      * @param args the command line arguments
@@ -801,20 +802,20 @@ public class GUIComprobante extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIComprobante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIPruebaImprimir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIComprobante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIPruebaImprimir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIComprobante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIPruebaImprimir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIComprobante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIPruebaImprimir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                GUIComprobante dialog = new GUIComprobante(new javax.swing.JFrame(), true);
+                GUIPruebaImprimir dialog = new GUIPruebaImprimir(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

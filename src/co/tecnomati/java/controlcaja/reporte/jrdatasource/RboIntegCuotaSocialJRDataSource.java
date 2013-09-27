@@ -13,9 +13,17 @@ import co.tecnomati.java.controlcaja.dominio.Asociado;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
 
 import co.tecnomati.java.controlcaja.dominio.Comprobante;
+import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
+import co.tecnomati.java.controlcaja.dominio.Concepto;
 
 import co.tecnomati.java.controlcaja.dominio.Cooperativa;
+import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
+import co.tecnomati.java.controlcaja.util.MyUtil;
+import co.tecnomati.java.controlcaja.util.NumberToLetterConverter;
+import java.util.Iterator;
+import java.util.Set;
 /**
  *
  * @author AnahiAramayo
@@ -26,15 +34,21 @@ List<Comprobante> listacomprobante = new ArrayList<>();
 Comprobante cc;
 private int index = -1;//actual
 Cooperativa c = new CooperativaDaoImp().listarCooperativa().get(0);
-
+ Concepto concepto;
+    private Double monto=0.0;
 @Override
 public Object getFieldValue(JRField jrf) throws JRException
 {
         Object valor = null;
       cc = listacomprobante.get(index);
         /*ASOCIADO_INT=0; CLIENTE_INT=1; PROVEEDOR_INT=2;*/
+      Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(listacomprobante.get(index).getId());
+        Set<Comprobanteconcepto> conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(listacomprobante.get(index).getId());
+
+      
         if (cc.getTipoPersona().equals(0)) {
            Asociado asociado = new AsociadoDaoImp().getAsociado(cc.getIdEntidad());
+           //Este corresponde al reporte y trae los datos q necesita
                 switch (jrf.getName()){
                     case "inicioActividad": valor = c.getInicioActividad();
                     case "nombreApellido": valor = asociado.getApellido()+" "+ asociado.getNombre();
@@ -42,8 +56,13 @@ public Object getFieldValue(JRField jrf) throws JRException
                     case "fechaIngreso": valor = asociado.getIngreso();
                     case "nroDNI": valor = asociado.getDni();
                     case "cuit": valor = asociado.getCuit();
-                    case "cantidadPago": valor = cc.hashCode();
-                    case "fechaPago": valor = cc.getFecha();
+                    case "cantidadPago":    {Comprobanteconcepto comprobanteconcepto=null;
+                                        for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
+                                            comprobanteconcepto = it.next();
+                                        }
+                                         monto = comprobanteconcepto.getMonto();
+                                       valor= NumberToLetterConverter.getConvertirPesosEnString(monto);}
+                    case "fechaPago": MyUtil.getFechaString10DDMMAAAA(listacomprobante.get(index).getFecha());
                 }
                 }
         
@@ -59,6 +78,10 @@ public boolean next() throws JRException
 public void addComprobante(Comprobante listacomprobante)
     {
         this.listacomprobante.add(listacomprobante);
+    }
+
+ public void setListComprobante(List<Comprobante> l) {
+        this.listacomprobante = l;
     }
 
 }

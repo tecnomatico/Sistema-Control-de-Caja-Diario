@@ -38,7 +38,6 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
         btnControlDiario = new org.edisoncor.gui.button.ButtonIpod();
         btnConsultarControlDiario = new org.edisoncor.gui.button.ButtonIpod();
         labelMetric2 = new org.edisoncor.gui.label.LabelMetric();
-        btnConsultarControlDiario1 = new org.edisoncor.gui.button.ButtonIpod();
         panel3 = new org.edisoncor.gui.panel.Panel();
         btnDocumento = new org.edisoncor.gui.button.ButtonIpod();
         btnGestorConcepto = new org.edisoncor.gui.button.ButtonIpod();
@@ -83,13 +82,6 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
         labelMetric2.setText("Registro de Comprobantes");
         labelMetric2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
 
-        btnConsultarControlDiario1.setText("prueba");
-        btnConsultarControlDiario1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrueba(evt);
-            }
-        });
-
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -105,17 +97,11 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
                         .addGap(52, 52, 52)
                         .addComponent(btnConsultarControlDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(70, Short.MAX_VALUE))
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addComponent(btnConsultarControlDiario1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(btnConsultarControlDiario1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(57, 57, 57)
                 .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -295,11 +281,6 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnConsultarControlDiarioActionPerformed
 
-    private void btnPrueba(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrueba
-        // TODO add your handling code here:
-        GUIPruebaImprimir gprueba = new GUIPruebaImprimir(this, true);
-    }//GEN-LAST:event_btnPrueba
-
     /**
      * @param args the command line arguments
      */
@@ -337,7 +318,6 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonIpod btnClientes;
     private org.edisoncor.gui.button.ButtonIpod btnConsultarControlDiario;
-    private org.edisoncor.gui.button.ButtonIpod btnConsultarControlDiario1;
     private org.edisoncor.gui.button.ButtonIpod btnControlDiario;
     private org.edisoncor.gui.button.ButtonIpod btnDatosCoop;
     private org.edisoncor.gui.button.ButtonIpod btnDocumento;

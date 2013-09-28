@@ -22,6 +22,7 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.reporte.jrdatasource.ModeloReciboJRDataSource;
 import co.tecnomati.java.controlcaja.reporte.jrdatasource.RboIntegCuotaSocialJRDataSource;
+import co.tecnomati.java.controlcaja.reporte.jrdatasource.RboReembolsoCuotaSocial;
 import co.tecnomati.java.controlcaja.util.Entidad;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import co.tecnomati.java.controlcaja.util.mensajero;
@@ -674,17 +675,26 @@ public class GUIComprobante extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_txtRefTipoComprKeyPressed
-/*
+
     public void Imprimir(){
         Map parametros = new HashMap();
         String logotipo = "/images/1.jpg";
-        ModeloReciboJRDataSource dataSource = new ModeloReciboJRDataSource();
+//        ModeloReciboJRDataSource dataSource = new ModeloReciboJRDataSource();
+        RboReembolsoCuotaSocial dataSource = new RboReembolsoCuotaSocial();
+        
         List<Comprobante> lista = new ArrayList<Comprobante>();
         lista.add(comprobante);
-        dataSource.setListCertificado(lista);
+        
+//        dataSource.setListCertificado(lista);
+        dataSource.setListComprobante(lista);
         JasperPrint jPrintt;
         try {
-            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboDePago.jasper"), (Map) parametros, dataSource);
+//            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboDePago.jasper"), (Map) parametros, dataSource);
+jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboReembolsoCuotasSociales.jasper"), (Map) parametros, dataSource);            
+            
+            
+            
+            
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
             JasperPrintManager.printReport(jPrintt, true);
@@ -702,42 +712,11 @@ public class GUIComprobante extends javax.swing.JDialog {
             mensajero.mensajeError(this, "Error de Impresion");
         }
 
-    }*/
- 
-    /*Prueba*/
-    public void Imprimirec(){
-        Map parametros = new HashMap();
-        String logotipo = "/images/1.jpg";
-        RboIntegCuotaSocialJRDataSource dataSource = new RboIntegCuotaSocialJRDataSource();
-        List<Comprobante> lista = new ArrayList<Comprobante>();
-        lista.add(comprobante);
-        dataSource.setListComprobante(lista);
-        JasperPrint jPrintt;
-        try {
-            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboIntegracionCuotas.jasper"), (Map) parametros, dataSource);
-            // este metodo imprime el reporte , recibe el jprint(el informe, )
-//            y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
-            // si es false imprime de una con la configuarcion por defecto.
-            JasperPrintManager.printReport(jPrintt, true);
-            // esto es para la vista previa
-//            JDialog reporte = new JDialog();
-//            reporte.setSize(900, 700);
-//            reporte.setLocationRelativeTo(null);
-//            reporte.setModal(true);
-//            reporte.setTitle("INFORME");
-//            JRViewer jv = new JRViewer(jPrintt);
-//            reporte.getContentPane().add(jv);
-//            reporte.setVisible(true);
-
-        } catch (JRException ex) {
-            mensajero.mensajeError(this, "Error de Impresion");
-        }
-
     }
-    /*Fin de Prueba*/
+ 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-//        Imprimir();
-        Imprimirec();
+        Imprimir();
+
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void txtCodigoConceptoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoConceptoKeyTyped

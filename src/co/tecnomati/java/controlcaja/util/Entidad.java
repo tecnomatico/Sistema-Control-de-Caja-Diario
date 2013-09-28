@@ -14,11 +14,20 @@ public class Entidad {
     private int id ;
     private int tipoEntidad;
     private String nombre;
+    private String apellido;
+
     private Date fechaIngreso;
     private Long cuit;
     private Integer dni;
     
 
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
     public int getTipoEntidad() {
         return tipoEntidad;
     }

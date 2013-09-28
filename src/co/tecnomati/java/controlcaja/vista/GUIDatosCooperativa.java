@@ -247,7 +247,6 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
             new CooperativaDaoImp().addCooperativa(cooperativa);
             } else {
                  System.out.println("entro a modificar");
-                    cooperativa= new Cooperativa();
                  cooperativa.setRazonSocial(txtNombre.getText());
                  cooperativa.setMatricula(Integer.parseInt(txtMatricula.getText()));
                  cooperativa.setCuit(Long.parseLong(txtCuit.getText()));

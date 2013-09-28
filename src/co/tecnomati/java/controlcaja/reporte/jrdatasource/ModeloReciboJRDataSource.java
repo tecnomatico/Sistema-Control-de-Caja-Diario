@@ -47,12 +47,11 @@ public class ModeloReciboJRDataSource implements JRDataSource {
     public Object getFieldValue(JRField jrf) throws JRException {
         Object valor = null;
         
-        Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(listaComprobante.get(index).getId());
+        //Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(listaComprobante.get(index).getId());
         Set<Comprobanteconcepto> conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(listaComprobante.get(index).getId());
 
         if ("nroRecibo".equals(jrf.getName())) {
-            valor =  listaComprobante.get(index).getNumeroSerie();
-            
+            valor =  listaComprobante.get(index).getNumeroSerie();            
         
         } else if ("cantidadPago".equals(jrf.getName())) {
             Comprobanteconcepto comprobanteconcepto=null;

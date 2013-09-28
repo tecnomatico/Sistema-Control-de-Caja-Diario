@@ -49,10 +49,12 @@ public class ModeloReciboJRDataSource implements JRDataSource {
         
         //Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(listaComprobante.get(index).getId());
         Set<Comprobanteconcepto> conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(listaComprobante.get(index).getId());
-
-        if ("nroRecibo".equals(jrf.getName())) {
-            valor =  listaComprobante.get(index).getNumeroSerie();            
         
+        if ("nroRecibo".equals(jrf.getName())) {
+
+
+            valor =  listaComprobante.get(index).getNumeroSerie();
+
         } else if ("cantidadPago".equals(jrf.getName())) {
             Comprobanteconcepto comprobanteconcepto=null;
             for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
@@ -60,8 +62,6 @@ public class ModeloReciboJRDataSource implements JRDataSource {
             }
             monto = comprobanteconcepto.getMonto();
            valor= NumberToLetterConverter.getConvertirPesosEnString(monto);
-
-
         }else if("conceptoDe".equals(jrf.getName())){
             Comprobanteconcepto comprobanteconcepto2=null;
             for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
@@ -72,83 +72,8 @@ public class ModeloReciboJRDataSource implements JRDataSource {
             // Dato constante para la configuarcion
             valor = monto;
         }else if("fechaPago".equals(jrf.getName())){
-            
             valor = MyUtil.getFechaString10DDMMAAAA(listaComprobante.get(index).getFecha());
         }
-//        else if("mes".equals(jrf.getName())){
-//            valor = FechaUtil.getMesString(listaCertificado.get(index).getFechaBautizmo());
-//        }
-//        else if("anio".equals(jrf.getName())){
-//            valor = FechaUtil.getAnio(listaCertificado.get(index).getFechaBautizmo());
-//        }
-//        else if("cura".equals(jrf.getName())){
-//            // Dato constante para la configuarcion
-//            
-//            valor = p.getApellidoCura()+" "+p.getNombreCura();
-//        }
-//        else if("baut".equals(jrf.getName())){
-//            valor = bautizado.getApellido()+" "+bautizado.getNombre();
-//        }
-//        else if("dniBaut".equals(jrf.getName())){
-//            valor = bautizado.getDni();
-//        }
-//        else if("lugarNacimBaut".equals(jrf.getName())){
-//            valor = bautizado.getLugarNacimiento();
-//        }
-//        else if("provinciaNacimBaut".equals(jrf.getName())){
-//            valor = bautizado.getProvNacimiento();
-//        }
-//        else if("nacionBaut".equals(jrf.getName())){
-//            valor = bautizado.getNacionalidad();
-//        }
-//        else if("diaNacimBaut".equals(jrf.getName())){
-//            valor = FechaUtil.getDia(bautizado.getFechaNaciemiento());
-//        }
-//        else if("mesNacimBaut".equals(jrf.getName())){
-//            valor = FechaUtil.getMesString(bautizado.getFechaNaciemiento());
-//        }
-//        else if("anioNacimBaut".equals(jrf.getName())){
-//            valor = FechaUtil.getAnio(bautizado.getFechaNaciemiento());
-//        }
-//        else if("hijo".equals(jrf.getName())){
-//            // ver si este es el filtro 
-//            valor = bautizado.getTipoDeHijo();
-//           
-//            
-//        }
-//        else if("padreBaut".equals(jrf.getName())){
-//            valor = tutor.getApellido()+" "+tutor.getNombre();
-//        }
-//        else if("nacionPadre".equals(jrf.getName())){
-//            valor = tutor.getNacionalidad();
-//        }
-//        else if("madreBaut".equals(jrf.getName())){
-//            valor = tutora.getApellido()+" "+tutora.getNombre();
-//        }
-//        else if("nacionMadre".equals(jrf.getName())){
-//            valor = tutora.getNacionalidad();
-//        }
-//        else if("domicilioPadres".equals(jrf.getName())){
-//           
-//            valor = listaCertificado.get(index).getDomicilioPadres();
-//        }
-//        else if("nombrePadrino".equals(jrf.getName())){
-//            valor = padrino.getApellido()+" "+padrino.getNombre();
-//        }
-//        else if("nombreMadrina".equals(jrf.getName())){
-//            valor = madrina.getApellido()+" "+madrina.getNombre();
-//        }
-//        else if("parroquia".equals(jrf.getName())){
-//            // si va a ver una configuracion de datos constantes
-//            valor = p.getNombreParroquia();
-//        }
-//        else if("fechaNacimBaut".equals(jrf.getName())){
-//            valor = FechaUtil.getDateDD_MM_AAAA(bautizado.getFechaNaciemiento());
-//        }
-//        else if("fechaBautismo".equals(jrf.getName())){
-//            valor = FechaUtil.getDateDD_MM_AAAA(listaCertificado.get(index).getFechaBautizmo());
-//        }
-        
         return valor;
     }
 

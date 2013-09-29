@@ -5,6 +5,9 @@
 package co.tecnomati.java.controlcaja.vista;
 
 import co.tecnomati.java.controlcaja.cons.Constantes;
+import co.tecnomati.java.controlcaja.dominio.Cooperativa;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
+import java.util.List;
 
 /**
  *
@@ -12,12 +15,32 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
  */
 public class GUIDatosCooperativa extends javax.swing.JDialog {
 
+    Cooperativa cooperativa=null;
+    boolean operacionOk = false; // este es una variable que se pone en verdadero si se guardo con exito los datos 
     /**
      * Creates new form GUIDatosCooperativa
      */
+    public boolean isOperacionOk() {
+        return operacionOk;
+    }
+    
     public GUIDatosCooperativa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        List<Cooperativa> lista = new CooperativaDaoImp().listarCooperativa();
+        if (!lista.isEmpty()) {
+            cooperativa = lista.get(0);
+
+              txtNombre.setText(cooperativa.getRazonSocial());
+              txtMatricula.setText(String.valueOf(cooperativa.getMatricula()));
+              txtCuit.setText(String.valueOf(cooperativa.getCuit()));
+              txtIngresoBruto.setText(cooperativa.getIngresoBruto());
+              dateIncioActividad.setDate(cooperativa.getInicioActividad());
+              txtInicioCaja.setText(String.valueOf(cooperativa.getInicioCaja()));
+              txtTelefono.setText(cooperativa.getTelefono());
+              txtDomicilio.setText(cooperativa.getDomicilio());
+        }
         
         this.setTitle(Constantes.NAME_REGISTRO_DATOS_COOPERATIVA);
         this.setLocationRelativeTo(null);
@@ -48,6 +71,10 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         txtIngresoBruto = new org.edisoncor.gui.textField.TextField();
         labelMetric6 = new org.edisoncor.gui.label.LabelMetric();
         dateIncioActividad = new com.toedter.calendar.JDateChooser();
+        txtTelefono = new org.edisoncor.gui.textField.TextField();
+        labelMetric7 = new org.edisoncor.gui.label.LabelMetric();
+        labelMetric8 = new org.edisoncor.gui.label.LabelMetric();
+        txtInicioCaja = new org.edisoncor.gui.textField.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -89,41 +116,52 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
 
         labelMetric6.setText("Inicio de Actividad");
 
+        labelMetric7.setText("Telefono");
+
+        labelMetric8.setText("Inicio de Caja");
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtIngresoBruto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateIncioActividad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panel1Layout.createSequentialGroup()
+                            .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panel1Layout.createSequentialGroup()
+                            .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panel1Layout.createSequentialGroup()
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(114, 114, 114)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                            .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panel1Layout.createSequentialGroup()
+                            .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtIngresoBruto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panel1Layout.createSequentialGroup()
+                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(dateIncioActividad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtInicioCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
@@ -150,14 +188,22 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
                     .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateIncioActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtInicioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -187,6 +233,34 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     }//GEN-LAST:event_txtIngresoBrutoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        if (cooperativa==null) {
+             System.out.println("entro nuevo");
+             cooperativa= new Cooperativa();
+             cooperativa.setRazonSocial(txtNombre.getText());
+             cooperativa.setMatricula(Integer.parseInt(txtMatricula.getText()));
+             cooperativa.setCuit(Long.parseLong(txtCuit.getText()));
+             cooperativa.setIngresoBruto(txtIngresoBruto.getText());
+             cooperativa.setInicioActividad(dateIncioActividad.getDate());
+             cooperativa.setTelefono(txtInicioCaja.getText());
+             cooperativa.setDomicilio(txtInicioCaja.getText());           
+       
+            new CooperativaDaoImp().addCooperativa(cooperativa);
+            } else {
+                 System.out.println("entro a modificar");
+                 cooperativa.setRazonSocial(txtNombre.getText());
+                 cooperativa.setMatricula(Integer.parseInt(txtMatricula.getText()));
+                 cooperativa.setCuit(Long.parseLong(txtCuit.getText()));
+                 cooperativa.setIngresoBruto(txtIngresoBruto.getText());
+                 cooperativa.setInicioActividad(dateIncioActividad.getDate());
+                 cooperativa.setTelefono(txtInicioCaja.getText());
+                 cooperativa.setDomicilio(txtInicioCaja.getText());
+                new CooperativaDaoImp().upDateCooperativa(cooperativa);
+            }
+  
+    
+  
+    operacionOk= true;
+    this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -241,11 +315,15 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     private org.edisoncor.gui.label.LabelMetric labelMetric4;
     private org.edisoncor.gui.label.LabelMetric labelMetric5;
     private org.edisoncor.gui.label.LabelMetric labelMetric6;
+    private org.edisoncor.gui.label.LabelMetric labelMetric7;
+    private org.edisoncor.gui.label.LabelMetric labelMetric8;
     private org.edisoncor.gui.panel.Panel panel1;
     private org.edisoncor.gui.textField.TextField txtCuit;
     private org.edisoncor.gui.textField.TextField txtDomicilio;
     private org.edisoncor.gui.textField.TextField txtIngresoBruto;
+    private org.edisoncor.gui.textField.TextField txtInicioCaja;
     private org.edisoncor.gui.textField.TextField txtMatricula;
     private org.edisoncor.gui.textField.TextField txtNombre;
+    private org.edisoncor.gui.textField.TextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,6 +21,8 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.ConceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.reporte.jrdatasource.ModeloReciboJRDataSource;
+import co.tecnomati.java.controlcaja.reporte.jrdatasource.RboIntegCuotaSocialJRDataSource;
+import co.tecnomati.java.controlcaja.reporte.jrdatasource.RboReembolsoCuotaSocial;
 import co.tecnomati.java.controlcaja.util.Entidad;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import co.tecnomati.java.controlcaja.util.mensajero;
@@ -41,7 +43,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
 import org.jdesktop.swingx.autocomplete.*;
-import org.jfree.data.time.Month;
+//import org.jfree.data.time.Month;
 
 /**
  *
@@ -121,11 +123,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                                            txtCuit.setText(String.valueOf(c.getCuit()));
                                            txtNombre.setText(c.getRazonSocial());
                                            break;
-
          }
-        
-       
-       
         //cargar datos del combobox
         setDatosCmbTipoFormulario();
 //        setEscuchadorDeEventosCmboTipoComprobante();
@@ -686,16 +684,22 @@ public class GUIComprobante extends javax.swing.JDialog {
     public void Imprimir(){
         Map parametros = new HashMap();
         String logotipo = "/images/1.jpg";
-
-        ModeloReciboJRDataSource dataSource = new ModeloReciboJRDataSource();
+//        ModeloReciboJRDataSource dataSource = new ModeloReciboJRDataSource();
+        RboReembolsoCuotaSocial dataSource = new RboReembolsoCuotaSocial();
+        
         List<Comprobante> lista = new ArrayList<Comprobante>();
         lista.add(comprobante);
-        dataSource.setListCertificado(lista);
-        JasperPrint jPrintt;
         
+//        dataSource.setListCertificado(lista);
+        dataSource.setListComprobante(lista);
+        JasperPrint jPrintt;
         try {
-            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboDePago.jasper"), (Map) parametros, dataSource);
-          
+//            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboDePago.jasper"), (Map) parametros, dataSource);
+jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboReembolsoCuotasSociales.jasper"), (Map) parametros, dataSource);            
+            
+            
+            
+            
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
             JasperPrintManager.printReport(jPrintt, true);
@@ -714,8 +718,10 @@ public class GUIComprobante extends javax.swing.JDialog {
         }
 
     }
+ 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
         Imprimir();
+
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void txtCodigoConceptoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoConceptoKeyTyped
@@ -745,10 +751,10 @@ public class GUIComprobante extends javax.swing.JDialog {
                     txtCuit.setText(String.valueOf(cliente.getCuit()));
                     txtNombre.setText(cliente.getRazonSocial());
                 } else if (entidad.getTipoEntidad() == Constantes.ASOCIADO_INT) {
-                    System.out.println(entidad.getTipoEntidad()+" ..tip entidadq");
+                   /*System.out.println(entidad.getTipoEntidad()+" ..tip entidadq");
                     System.out.println(Constantes.ASOCIADO_INT+" ..tipo entidadq");
                     System.out.println("id entidadd"+entidad.getId());
-                    
+                    */
                     Asociado asociado = new AsociadoDaoImp().getAsociado(entidad.getId());
                     txtCuit.setText(String.valueOf(asociado.getCuit()));
                     txtNombre.setText(asociado.getNombre());

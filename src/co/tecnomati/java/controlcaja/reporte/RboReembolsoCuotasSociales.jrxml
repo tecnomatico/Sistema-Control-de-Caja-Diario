@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RboReembolsoCuotasSociales" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="246c9b70-cb7a-46ca-9299-2db62e700448">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="335"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividad" class="java.lang.String"/>
 	<field name="nombreApellido" class="java.lang.String"/>
 	<field name="nroAsociado" class="java.lang.String"/>
 	<field name="fechaIngreso" class="java.lang.String"/>
 	<field name="nroDNI" class="java.lang.String"/>
-	<field name="cuit" class="java.lang.String"/>
 	<field name="cantidadPago" class="java.lang.String"/>
 	<field name="fechaPago" class="java.lang.String"/>
+	<field name="cuitCooperativa" class="java.lang.String"/>
+	<field name="matriculaInaes" class="java.lang.String"/>
+	<field name="ingresosBrutos" class="java.lang.String"/>
+	<field name="domicilioCooperativa" class="java.lang.String"/>
+	<field name="cuitAsociado" class="java.lang.String"/>
+	<field name="lugarPago" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -73,11 +78,6 @@
 				<rectangle>
 					<reportElement uuid="1c734416-07ef-45be-b8ae-7a8488b22b87" x="107" y="21" width="253" height="67"/>
 				</rectangle>
-				<staticText>
-					<reportElement uuid="7bb80d28-af9d-44e3-abe6-c5b96eabeedc" x="96" y="188" width="248" height="20"/>
-					<textElement verticalAlignment="Middle"/>
-					<text><![CDATA[Av. Rio Bamba N°44 - Cnel Arias - S.S. de Jujuy]]></text>
-				</staticText>
 				<rectangle>
 					<reportElement uuid="054fcbbf-b54b-4b3d-a1c3-9ba939cc5824" x="180" y="268" width="90" height="20"/>
 				</rectangle>
@@ -119,18 +119,6 @@
 				<rectangle>
 					<reportElement uuid="dd6e934a-4dfe-47ac-8ba5-4aafea6ee5b1" x="180" y="148" width="90" height="20"/>
 				</rectangle>
-				<staticText>
-					<reportElement uuid="d6e45591-fc54-4948-96e8-01b0978e75c4" x="6" y="385" width="158" height="16"/>
-					<textElement/>
-					<text><![CDATA[Av.Rio BambaN°144 - Jujuy]]></text>
-				</staticText>
-				<staticText>
-					<reportElement uuid="5d9cbac4-0ddd-4ccb-beb2-59cd680e678c" x="96" y="148" width="55" height="20"/>
-					<textElement verticalAlignment="Middle">
-						<font isBold="true"/>
-					</textElement>
-					<text><![CDATA[47.735]]></text>
-				</staticText>
 				<rectangle>
 					<reportElement uuid="9eaca30c-0137-4b9e-b087-f199809c7d62" x="270" y="148" width="90" height="20"/>
 				</rectangle>
@@ -234,11 +222,6 @@
 					<text><![CDATA[Asociado Nro.:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="b838b93c-01a2-4627-9635-55ecb96a31fe" x="276" y="168" width="76" height="20"/>
-					<textElement verticalAlignment="Middle"/>
-					<text><![CDATA[A-1-51004]]></text>
-				</staticText>
-				<staticText>
 					<reportElement uuid="85b387b1-1777-4c05-8513-bf11f45e547a" x="186" y="108" width="68" height="20"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
@@ -250,17 +233,25 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<text><![CDATA[Tesorero]]></text>
 				</staticText>
-				<staticText>
-					<reportElement uuid="d597689a-1201-4201-a2cf-3a84df668e0c" x="276" y="148" width="76" height="20"/>
-					<textElement verticalAlignment="Middle">
-						<font isBold="true"/>
-					</textElement>
-					<text><![CDATA[30-71417115-8]]></text>
-				</staticText>
 				<line>
 					<reportElement uuid="f206580e-a82f-4681-a9cd-edda8837c829" x="238" y="410" width="67" height="1"/>
 				</line>
 			</elementGroup>
+			<textField>
+				<reportElement uuid="d1b07c6f-1643-4111-95ed-e3fd3c480ffc" x="96" y="268" width="78" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroDNI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ae97ef7e-ff12-44c2-91d6-fc1ef7ae14d5" x="6" y="325" width="299" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cantidadPago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="42bd582f-5535-44f1-afdb-c0a2103ffe53" x="85" y="403" width="89" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaPago}]]></textFieldExpression>
+			</textField>
 			<textField>
 				<reportElement uuid="2ad293c0-2e84-4a74-baf8-8c210b1d3100" x="254" y="108" width="100" height="20"/>
 				<textElement verticalAlignment="Middle"/>
@@ -277,6 +268,16 @@
 				<textFieldExpression><![CDATA[$F{nombreApellido}]]></textFieldExpression>
 			</textField>
 			<textField>
+				<reportElement uuid="b6dbc960-5cc1-4b87-8c55-f73fb003b803" x="96" y="148" width="78" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{matriculaInaes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7a889a23-e4c8-4705-abaa-4867ac4166c3" x="276" y="148" width="78" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cuitCooperativa}]]></textFieldExpression>
+			</textField>
+			<textField>
 				<reportElement uuid="e74e52cb-defc-489a-b8ec-c8acda246d9a" x="96" y="248" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nroAsociado}]]></textFieldExpression>
@@ -287,24 +288,24 @@
 				<textFieldExpression><![CDATA[$F{fechaIngreso}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="d1b07c6f-1643-4111-95ed-e3fd3c480ffc" x="96" y="268" width="78" height="20"/>
+				<reportElement uuid="3f97b986-cc82-40b4-91e9-2cf6ce382843" x="276" y="169" width="77" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{nroDNI}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ingresosBrutos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="465fea77-56e9-4317-ae73-0f44e2b7b2f1" x="276" y="268" width="78" height="20"/>
+				<reportElement uuid="a4d5aea4-c83e-4c9a-b935-2eb5111ea99f" x="96" y="189" width="257" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{cuit}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{domicilioCooperativa}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="ae97ef7e-ff12-44c2-91d6-fc1ef7ae14d5" x="6" y="325" width="299" height="20"/>
+			<staticText>
+				<reportElement uuid="6a573c72-623f-440a-a3d9-9fc69bd31f95" x="276" y="269" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{cantidadPago}]]></textFieldExpression>
-			</textField>
+				<text><![CDATA[cuitAsociado]]></text>
+			</staticText>
 			<textField>
-				<reportElement uuid="42bd582f-5535-44f1-afdb-c0a2103ffe53" x="85" y="403" width="89" height="20"/>
+				<reportElement uuid="3af251ac-82fd-44cb-96c0-f79d2f9af36f" x="7" y="384" width="167" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{fechaPago}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{lugarPago}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

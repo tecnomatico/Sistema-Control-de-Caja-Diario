@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RboDistribucionExcedentes" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2d08b54d-d7bb-40d7-9363-7d3fb9feb05d">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="615"/>
+	<property name="ireport.y" value="0"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividad" class="java.lang.String"/>
 	<field name="nombreApellido" class="java.lang.String"/>
@@ -70,10 +70,6 @@
 			<rectangle>
 				<reportElement uuid="6ae92bea-6ed3-4da2-8036-2a68449e8385" x="0" y="167" width="90" height="20"/>
 			</rectangle>
-			<image>
-				<reportElement uuid="cc501f6d-790a-4eed-bc24-f8f49194126d" x="23" y="23" width="80" height="60"/>
-				<imageExpression><![CDATA["C:\\Users\\dario\\Desktop\\theend\\jpgLogo.jpg"]]></imageExpression>
-			</image>
 			<rectangle>
 				<reportElement uuid="24ace38a-bf65-4afe-8b62-40a3c0d73e1e" x="0" y="0" width="360" height="20"/>
 			</rectangle>

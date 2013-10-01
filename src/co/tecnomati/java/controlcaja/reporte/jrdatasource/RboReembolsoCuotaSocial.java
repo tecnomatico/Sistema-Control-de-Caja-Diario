@@ -15,10 +15,10 @@ import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ClienteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteconceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import co.tecnomati.java.controlcaja.util.Entidad;
+import co.tecnomati.java.controlcaja.util.NumberToLetterConverter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,29 +29,29 @@ import net.sf.jasperreports.engine.JRField;
 
 /**
  *
- * @author dario
+ * @author AnahiAramayo
  */
-public class RboDePagoDataSource implements JRDataSource {
+public class RboReembolsoCuotaSocial implements JRDataSource {
 
     int index = -1;
-    List<Comprobante> listaComprobante = new ArrayList();
+    List<Comprobante> listaComprobantes = new ArrayList<Comprobante>();
     Comprobante comprobante;
     Set<Comprobanteconcepto> conjuntoConceptos;
+    private Double monto = 0.00;
 
     @Override
     public boolean next() throws JRException {
-        return ++index < listaComprobante.size();
+        return ++index < listaComprobantes.size();
     }
 
     @Override
     public Object getFieldValue(JRField jrf) throws JRException {
-
         Object valor = null;
 
-        comprobante = listaComprobante.get(index);
+        comprobante = listaComprobantes.get(index);
 
-        Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(listaComprobante.get(index).getId());
-        Set<Comprobanteconcepto> conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(listaComprobante.get(index).getId());//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
+        Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId());
+        Set<Comprobanteconcepto> conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
 
         Cooperativa cooperativa = new CooperativaDaoImp().listarCooperativa().get(0);
         Entidad entidad = new Entidad();
@@ -63,16 +63,14 @@ public class RboDePagoDataSource implements JRDataSource {
                 entidad.setFechaIngreso(a.getIngreso());
                 entidad.setCuit(a.getCuit());
                 break;
-            case Constantes.PROVEEDOR_INT:
-                Proveedor p = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad());
-                entidad.setNombre(p.getRazonSocial());
-                entidad.setCuit(p.getCuit());
-                break;
-            case Constantes.CLIENTE_INT:
-                Cliente c = new ClienteDaoImp().getCliente(comprobante.getIdEntidad());
-                entidad.setNombre(c.getRazonSocial());
-                entidad.setCuit(c.getCuit());
-                break;
+            /*case Constantes.PROVEEDOR_INT :Proveedor p = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad());
+             entidad.setNombre(p.getRazonSocial());
+             entidad.setCuit(p.getCuit());
+             break;
+             case Constantes.CLIENTE_INT : Cliente c = new ClienteDaoImp().getCliente(comprobante.getIdEntidad());
+             entidad.setNombre(c.getRazonSocial());
+             entidad.setCuit(c.getCuit());
+             break;   */
         }
 
         List<Comprobanteconcepto> listaComprobanteConcepto = new ArrayList();
@@ -83,38 +81,33 @@ public class RboDePagoDataSource implements JRDataSource {
         }
 
         if ("nroRecibo".equals(jrf.getName())) {
-            valor = listaComprobante.get(index).getNumeroSerie();
-        } else if ("matriculaInaes".equals(jrf.getName())) {
-            // Dato constante para la configuarcion
-            valor = cooperativa.getMatricula();
+            valor = comprobante.getNumeroSerie();
         } else if ("cuitCooperativa".equals(jrf.getName())) {
             valor = cooperativa.getCuit();
         } else if ("inicioActividades".equals(jrf.getName())) {
             valor = cooperativa.getInicioActividad();
-        } else if ("ingresosBrutos".equals(jrf.getName())) {
-            valor = cooperativa.getIngresoBruto();
-        } else if ("domicilioCooperativa".equals(jrf.getName())) {
-            valor = cooperativa.getDomicilio();
-        } else if ("cantidadPago".equals(jrf.getName())) {
-//            valor = comprobanteconcepto.getMonto();
-//            valor = listaComprobantes.get(index).getComprobanteconceptos();
-        } else if ("conceptoDe".equals(jrf.getName())) {
-//            valor = bautizado.getDni();
-        } else if ("sonPesos".equals(jrf.getName())) {
-            //valor = cooperativa.getDomicilio();
-        } else if ("lugarPago".equals(jrf.getName())) {
-            valor = cooperativa.getDomicilio();
-        } else if ("fechaPago".equals(jrf.getName())) {
-            valor = listaComprobante.get(index).getFecha();
         } else if ("nombreApellido".equals(jrf.getName())) {
-            valor = entidad.getNombre();
+            valor = entidad.getNombre() + " " + entidad.getApellido();
+        } else if ("nroAsociado".equals(jrf.getName())) {
+            valor = entidad.getId();
+        } else if ("fechaIngreso".equals(jrf.getName())) {
+            valor = entidad.getFechaIngreso();
         } else if ("nroDNI".equals(jrf.getName())) {
             valor = entidad.getDni();
+        } else if ("cuitAsociado".equals(jrf.getName())) {
+            valor = entidad.getCuit();
+        } else if ("fechaPago".equals(jrf.getName())) {
+            valor = comprobante.getFecha();
+        } else if ("cantidadPago".equals(jrf.getName())) {
+            Comprobanteconcepto comprobanteconcepto = null;
+            for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
+                comprobanteconcepto = it.next();
+            }
+            monto = comprobanteconcepto.getMonto();
+            valor = NumberToLetterConverter.getConvertirPesosEnString(monto);
         }
 
-
         return valor;
-
     }
 
     public void addComprobante(Comprobante c) {
@@ -122,6 +115,6 @@ public class RboDePagoDataSource implements JRDataSource {
     }
 
     public void setListComprobante(List<Comprobante> c) {
-        this.listaComprobante = c;
+        this.listaComprobantes = c;
     }
 }

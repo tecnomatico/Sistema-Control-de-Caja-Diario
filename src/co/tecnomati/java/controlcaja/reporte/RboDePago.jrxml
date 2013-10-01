@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reciboDePago" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67ddf0f8-02b9-4bf1-94dc-470dc5dbe8c1">
-	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="550"/>
+	<property name="ireport.y" value="37"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividades" class="java.lang.String"/>
 	<field name="cantidadPago" class="java.lang.String"/>
@@ -155,10 +155,6 @@
 				<rectangle>
 					<reportElement uuid="e9c38dda-bd88-415c-ba99-86f0905db2e7" x="0" y="210" width="360" height="39"/>
 				</rectangle>
-				<image>
-					<reportElement uuid="c7a2a2d2-dd06-432d-9231-d2ab7f2310d7" x="23" y="26" width="80" height="60"/>
-					<imageExpression><![CDATA["C:\\Users\\dario\\Desktop\\theend\\jpgLogo.jpg"]]></imageExpression>
-				</image>
 				<staticText>
 					<reportElement uuid="74628859-d250-447d-904a-91af07326216" x="109" y="23" width="253" height="67"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">

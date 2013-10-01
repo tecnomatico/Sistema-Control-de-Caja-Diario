@@ -20,29 +20,14 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteconceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ConceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
-import co.tecnomati.java.controlcaja.reporte.jrdatasource.ModeloReciboJRDataSource;
-import co.tecnomati.java.controlcaja.reporte.jrdatasource.RboIntegCuotaSocialJRDataSource;
-import co.tecnomati.java.controlcaja.reporte.jrdatasource.RboReembolsoCuotaSocial;
 import co.tecnomati.java.controlcaja.util.Entidad;
+import co.tecnomati.java.controlcaja.util.Impresora;
 import co.tecnomati.java.controlcaja.util.MyUtil;
-import co.tecnomati.java.controlcaja.util.mensajero;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.AbstractSet;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperPrintManager;
-import org.jdesktop.swingx.autocomplete.*;
 //import org.jfree.data.time.Month;
 
 /**
@@ -55,11 +40,11 @@ public class GUIComprobante extends javax.swing.JDialog {
     private boolean modificar;
     private Concepto concepto;
     private boolean agregado;
-    
-    Entidad entidad=new Entidad();
+    Entidad entidad = new Entidad();
     private Tipocomprobante tipoComprobante;
     Set<Comprobanteconcepto> conjuntoConceptos;
     Comprobanteconcepto comprobanteconcepto;
+
     /**
      * Creates new form GUIComprobante
      */
@@ -85,50 +70,52 @@ public class GUIComprobante extends javax.swing.JDialog {
         initComponents();
         modificar = true;
         this.comprobante = comprobante;
-        
+
         // cargos los datos para editar
-       dateComprobante.setDate(comprobante.getFecha());
-       cmbTipoProceso.setSelectedIndex(comprobante.getTipoProceso());
-       txtnumSerie1.setText(String.valueOf(comprobante.getNumeroSerie()));
-       
-       // entidad
-       entidad.setId(comprobante.getIdEntidad());
-       entidad.setTipoEntidad(comprobante.getTipoPersona());
-       
-       //tipo de comprobante
-       tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId());
-       txtTipoComprobante.setText(tipoComprobante.getFormulario());
-       txtRefTipoCompr.setText(tipoComprobante.getReferencia());
-       
-       //Conceptoss
-        conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(comprobante.getId());
+        dateComprobante.setDate(comprobante.getFecha());
+        cmbTipoProceso.setSelectedIndex(comprobante.getTipoProceso());
+        txtnumSerie1.setText(String.valueOf(comprobante.getNumeroSerie()));
+
+        // entidad
+        entidad.setId(comprobante.getIdEntidad());
+        entidad.setTipoEntidad(comprobante.getTipoPersona());
+
+        //tipo de comprobante
+        tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId());
+        txtTipoComprobante.setText(tipoComprobante.getFormulario());
+        txtRefTipoCompr.setText(tipoComprobante.getReferencia());
+
+        //Conceptoss
+        conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());
         for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
             comprobanteconcepto = it.next();
             txtCodigoConcepto.setText(String.valueOf(comprobanteconcepto.getConcepto().getCodigoConcepto()));
             txtDescripcionConcepto.setText(comprobanteconcepto.getConcepto().getDescripcion());
             txtMonto.setText(String.valueOf(comprobanteconcepto.getMonto()));
         }
-        
+
         switch (comprobante.getTipoPersona()) {
-           
-             case Constantes.ASOCIADO_INT : Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
-                                            txtCuit.setText(String.valueOf(a.getCuit()));
-                                            txtNombre.setText(a.getNombre());
-                                            break;
-             case Constantes.PROVEEDOR_INT :Proveedor p = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad());
-                                            txtCuit.setText(String.valueOf(p.getCuit()));
-                                            txtNombre.setText(p.getRazonSocial());
-                                            break;
-             case Constantes.CLIENTE_INT : Cliente c = new ClienteDaoImp().getCliente(comprobante.getIdEntidad());
-                                           txtCuit.setText(String.valueOf(c.getCuit()));
-                                           txtNombre.setText(c.getRazonSocial());
-                                           break;
-         }
+
+            case Constantes.ASOCIADO_INT:
+                Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+                txtCuit.setText(String.valueOf(a.getCuit()));
+                txtNombre.setText(a.getNombre());
+                break;
+            case Constantes.PROVEEDOR_INT:
+                Proveedor p = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad());
+                txtCuit.setText(String.valueOf(p.getCuit()));
+                txtNombre.setText(p.getRazonSocial());
+                break;
+            case Constantes.CLIENTE_INT:
+                Cliente c = new ClienteDaoImp().getCliente(comprobante.getIdEntidad());
+                txtCuit.setText(String.valueOf(c.getCuit()));
+                txtNombre.setText(c.getRazonSocial());
+                break;
+        }
         //cargar datos del combobox
         setDatosCmbTipoFormulario();
-//        setEscuchadorDeEventosCmboTipoComprobante();
-
-        //cargar los campos de texto con 
+        setEnabledBotonImprimir(tipoComprobante.getCodigo());
+         
 //        setDatosNombreEntidad();
         this.setTitle(Constantes.NAME_NUEVO_REGISTRO);
         this.setLocationRelativeTo(null);
@@ -455,6 +442,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         dateComprobante.setMaxSelectableDate(new Date());
 
         btnImprimir.setText("Imprimir");
+        btnImprimir.setEnabled(false);
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImprimirActionPerformed(evt);
@@ -472,19 +460,16 @@ public class GUIComprobante extends javax.swing.JDialog {
                     .addComponent(panelComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dateComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(83, 83, 83)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 279, Short.MAX_VALUE))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
@@ -548,7 +533,7 @@ public class GUIComprobante extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         //cargo los datos en el objeto comprobante
-         comprobante.setIdEntidad(entidad.getId());
+        comprobante.setIdEntidad(entidad.getId());
         comprobante.setTipoPersona(entidad.getTipoEntidad());
         comprobante.setFecha(dateComprobante.getDate());
         comprobante.setNumeroSerie(Long.parseLong(txtnumSerie1.getText()));
@@ -557,7 +542,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         //realizo el almacenamiento o actualizacion de los datos segun corresponda
         if (modificar) {
-            
+
             //modificar
             new ComprobanteDaoImp().upDateFormulario(comprobante);
             //update comprobante concepto para 1 solo concepto
@@ -566,46 +551,34 @@ public class GUIComprobante extends javax.swing.JDialog {
             new ComprobanteconceptoDaoImp().upDateComprobanteconcepto(comprobanteconcepto);
         } else {
             //el objeto entidad solo se cargara cuando es nuevo
-           
-            for (int i = 0; i < 1000; i++) {
-                new ComprobanteDaoImp().addFormulario(comprobante);
-                comprobante.setNumeroSerie(i+comprobante.getNumeroSerie());
-               System.out.println(i);
-            }
+
+                 new ComprobanteDaoImp().addFormulario(comprobante);
+               
+            
             Comprobanteconcepto detalle = new Comprobanteconcepto();
             detalle.setConcepto(concepto);
             detalle.setComprobante(comprobante);
             detalle.setMonto(Double.parseDouble(txtMonto.getText()));
             new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalle);
-            
-            
+
+
         }
-        // agregar los conceptos en un conjunto
-        Set<Comprobanteconcepto> conjuntoDetalle = new HashSet<Comprobanteconcepto>();
-
-        //agregar los conceptos al detalle
-
-
-
-
-        //         conjuntoDetalle.add(detalle);
-//         comprobante.setComprobanteconceptos(conjuntoDetalle);
-        // agregar mas conceptos si es neceario
-        //pregunto si esta tildado el combo
-
-        //
-        //falta la validacion de los datos
-
-
-
-
         agregado = true;
 
         JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
-
+        setEnabledBotonImprimir(tipoComprobante.getCodigo());
 //        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+/**
+ * 
+ * @param tipoComprobante entero que determina el tipo de comprobante almacenado
+ *  si el tipo de comprobante pertenece a uno de los 5 tipos de recibo entonces se activa
+ */
+    public void setEnabledBotonImprimir(int tipoComprobante){
+          if(tipoComprobante<=5){  
+              btnImprimir.setEnabled(true);
+          }
+    }
     private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             GUIgestorEntidades gestorEntidades = new GUIgestorEntidades(null, true);
@@ -681,47 +654,12 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     }//GEN-LAST:event_txtRefTipoComprKeyPressed
 
-    public void Imprimir(){
-        Map parametros = new HashMap();
-        String logotipo = "/images/1.jpg";
-//        ModeloReciboJRDataSource dataSource = new ModeloReciboJRDataSource();
-        RboReembolsoCuotaSocial dataSource = new RboReembolsoCuotaSocial();
-        
-        List<Comprobante> lista = new ArrayList<Comprobante>();
-        lista.add(comprobante);
-        
-//        dataSource.setListCertificado(lista);
-        dataSource.setListComprobante(lista);
-        JasperPrint jPrintt;
-        try {
-//            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboDePago.jasper"), (Map) parametros, dataSource);
-jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboReembolsoCuotasSociales.jasper"), (Map) parametros, dataSource);            
-            
-            
-            
-            
-            // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
-            // si es false imprime de una con la configuarcion por defecto.
-            JasperPrintManager.printReport(jPrintt, true);
-            // esto es para la vista previa
-//            JDialog reporte = new JDialog();
-//            reporte.setSize(900, 700);
-//            reporte.setLocationRelativeTo(null);
-//            reporte.setModal(true);
-//            reporte.setTitle("INFORME");
-//            JRViewer jv = new JRViewer(jPrintt);
-//            reporte.getContentPane().add(jv);
-//            reporte.setVisible(true);
+  
 
-        } catch (JRException ex) {
-            mensajero.mensajeError(this, "Error de Impresion");
-        }
-
-    }
- 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        Imprimir();
-
+                 
+            new Impresora(comprobante, tipoComprobante.getCodigo()).Imprimir();
+      
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void txtCodigoConceptoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoConceptoKeyTyped
@@ -751,10 +689,10 @@ jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResou
                     txtCuit.setText(String.valueOf(cliente.getCuit()));
                     txtNombre.setText(cliente.getRazonSocial());
                 } else if (entidad.getTipoEntidad() == Constantes.ASOCIADO_INT) {
-                   /*System.out.println(entidad.getTipoEntidad()+" ..tip entidadq");
-                    System.out.println(Constantes.ASOCIADO_INT+" ..tipo entidadq");
-                    System.out.println("id entidadd"+entidad.getId());
-                    */
+                    /*System.out.println(entidad.getTipoEntidad()+" ..tip entidadq");
+                     System.out.println(Constantes.ASOCIADO_INT+" ..tipo entidadq");
+                     System.out.println("id entidadd"+entidad.getId());
+                     */
                     Asociado asociado = new AsociadoDaoImp().getAsociado(entidad.getId());
                     txtCuit.setText(String.valueOf(asociado.getCuit()));
                     txtNombre.setText(asociado.getNombre());
@@ -764,26 +702,26 @@ jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResou
     }//GEN-LAST:event_txtCuitKeyPressed
 
     private void txtnumSerie1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumSerie1KeyTyped
-        
-        if (txtnumSerie1.getText().length()==4) {
+
+        if (txtnumSerie1.getText().length() == 4) {
             txtNumSerie2.requestFocus();
         }
         MyUtil.consumirLetras(evt, txtnumSerie1, 4);
-        
+
 
     }//GEN-LAST:event_txtnumSerie1KeyTyped
 
     private void txtNumSerie2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSerie2KeyTyped
-         MyUtil.consumirLetras(evt, txtNumSerie2, 8);
-         if (txtNumSerie2.getText().length()==8) {
+        MyUtil.consumirLetras(evt, txtNumSerie2, 8);
+        if (txtNumSerie2.getText().length() == 8) {
             txtCuit.requestFocus();
-         }
+        }
     }//GEN-LAST:event_txtNumSerie2KeyTyped
 
     private void txtRefTipoComprKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRefTipoComprKeyTyped
-         if (txtRefTipoCompr.getText().length()==4 && evt.getKeyCode()!=8) {
+        if (txtRefTipoCompr.getText().length() == 4 && evt.getKeyCode() != 8) {
             txtCuit.requestFocus();
-         }
+        }
     }//GEN-LAST:event_txtRefTipoComprKeyTyped
 
     private void cmbTipoProcesoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbTipoProcesoKeyPressed
@@ -792,7 +730,6 @@ jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResou
         }
     }//GEN-LAST:event_cmbTipoProcesoKeyPressed
 
-   
     /**
      * @param args the command line arguments
      */

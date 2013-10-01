@@ -50,4 +50,27 @@ public class Constantes {
      public static final int PROVEEDOR_INT=2;
      
      
+    public static final String RECIBO_PAGO ="RECIBO DE PAGO";    
+    public static final String REF_RECIBO_PAGO ="RP";    
+    public static final int CODIGO_RECIBO_PAGO=1;
+    
+    public static final String RECIBO_DISTRIBUCION_EXCEDENTE ="RECIBO DE DISTRIBUCION DE EXCEDENTES";    
+    public static final String REF_RECIBO_DISTRIBUCION_EXCEDENTE ="RDE";    
+    public static final int CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE=2;
+    
+    public static final String RECIBO_INTEGRACION_CUOTA ="RECIBO DE INTEGRACION DE CUOTA";    
+    public static final String REF_RECIBO_INTEGRACION_CUOTA ="RIC";    
+    public static final int CODIGO_RECIBO_INTEGRACION_CUOTA=3;
+
+    public static final String RECIBO_ANTICIPO_RETORNO ="RECIBO DE ANTICIPO DE RETORNO";    
+    public static final String REF_RECIBO_ANTICIPO_RETORNO ="RAR";    
+    public static final int CODIGO_RECIBO_ANTICIPO_RETORNO=4;
+
+    public static final String RECIBO_REEMBOLSO_CUOTA_SOCIAL ="RECIBO DE REEMBOLSO DE CUOTA SOCIALES";    
+    public static final String REF_RECIBO_REEMBOLSO_CUOTA_SOCIAL ="RRC";    
+    public static final int CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES=5;
+     
+     
+    
+     
 }

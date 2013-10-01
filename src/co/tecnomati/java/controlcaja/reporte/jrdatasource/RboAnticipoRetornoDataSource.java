@@ -36,8 +36,7 @@ import net.sf.jasperreports.engine.JRField;
 public class RboAnticipoRetornoDataSource implements JRDataSource{
     int index = -1;
     Comprobante comprobante;
-    List<Comprobante> listaComprobante = new ComprobanteDaoImp().listarFormulario();
-    
+        
     List<Comprobante> listaComprobantes = new ArrayList<Comprobante>();    
     Cooperativa cooperativa = new CooperativaDaoImp().listarCooperativa().get(0);
     @Override
@@ -49,10 +48,10 @@ public class RboAnticipoRetornoDataSource implements JRDataSource{
     public Object getFieldValue(JRField jrf) throws JRException {
         Object valor=null;
        
-        comprobante = listaComprobante.get(index);
+        comprobante = listaComprobantes.get(index);
         
-        Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(listaComprobante.get(index).getId());
-        Set<Comprobanteconcepto> conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(listaComprobante.get(index).getId());//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
+        Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId());
+        Set<Comprobanteconcepto> conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(comprobante.getId());//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
         
         Cooperativa cooperativa = new CooperativaDaoImp().listarCooperativa().get(0);
         Entidad entidad= new Entidad();
@@ -81,7 +80,7 @@ public class RboAnticipoRetornoDataSource implements JRDataSource{
         }
                   
         if ("nroRecibo".equals(jrf.getName())) {
-            valor = listaComprobante.get(index).getNumeroSerie();
+            valor = comprobante.getNumeroSerie();
         }else if("matriculaInaes".equals(jrf.getName())){
             // Dato constante para la configuarcion
             valor = cooperativa.getMatricula();
@@ -203,7 +202,7 @@ public class RboAnticipoRetornoDataSource implements JRDataSource{
             valor = cooperativa.getDomicilio();
         }
         else if("fechaPago".equals(jrf.getName())){
-            valor = listaComprobante.get(index).getFecha();
+            valor = comprobante.getFecha();
         }
                 
         return valor;
@@ -215,7 +214,7 @@ public class RboAnticipoRetornoDataSource implements JRDataSource{
     }
     
      public void setListComprobante(List<Comprobante> c){
-         this.listaComprobante = c;
+         this.listaComprobantes = c;
      }
     
 }

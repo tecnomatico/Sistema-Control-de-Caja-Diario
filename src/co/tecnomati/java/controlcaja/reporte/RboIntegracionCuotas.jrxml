@@ -142,10 +142,6 @@
 			<rectangle>
 				<reportElement uuid="bb65c43a-6431-4cd4-9a96-21edce0c89ec" x="181" y="168" width="90" height="20"/>
 			</rectangle>
-			<image>
-				<reportElement uuid="db92cc1c-4b14-4cac-95ce-862cf1f935ff" x="24" y="24" width="80" height="60"/>
-				<imageExpression><![CDATA["C:\\Users\\dario\\Desktop\\theend\\jpgLogo.jpg"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement uuid="36c08fcc-4122-48dc-b504-f59055c0736b" x="7" y="344" width="344" height="16"/>
 				<textElement/>

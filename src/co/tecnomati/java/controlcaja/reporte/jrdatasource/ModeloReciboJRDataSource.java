@@ -94,11 +94,8 @@ public class ModeloReciboJRDataSource implements JRDataSource {
         return valor;
     }
 
-    public void addCertificado(Comprobante c) {
-        this.comprobante = c;
-    }
-
-    public void setListCertificado(List<Comprobante> l) {
+   
+    public void setListComprobante(List<Comprobante> l) {
         this.listaComprobante = l;
     }
 }

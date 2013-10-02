@@ -7,6 +7,7 @@ package co.tecnomati.java.controlcaja.vista;
 import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.modelo.ModeloTipoComprobante;
+import co.tecnomati.java.controlcaja.util.TablaUtil;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
@@ -266,5 +267,6 @@ public class GUIGestorTipoComprobante extends javax.swing.JDialog {
         modeloTipoComp = new ModeloTipoComprobante();
         sorter = new TableRowSorter(modeloTipoComp);
         tblDocumento.setModel(modeloTipoComp);
+        TablaUtil.ocultarIdTabla(tblDocumento);
     }
 }

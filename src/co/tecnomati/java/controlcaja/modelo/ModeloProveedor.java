@@ -46,20 +46,22 @@ public class ModeloProveedor extends AbstractTableModel{
         
         switch (columnIndex) {
             case 0:objeto = persona.getIdProveedor();break; 
-             /* No hay necesidad de mostrar este campo a menos q se 
-             pida para nosotros seria nuestra manera de manejarlo*/ 
-            case 1:objeto = persona.getCuit();break;
-            case 2:objeto = persona.getRazonSocial()+" ";
+            
+            case 1:objeto = persona.getCuit();
+                           break;
+            case 2:objeto = persona.getRazonSocial();
                             break;
-            case 3:objeto = persona.getDomicilio()+" ";
+            case 3:objeto = persona.getDomicilio();
                             break;
-            case 4:objeto = persona.getEstado();break;
+            case 4:objeto = persona.getTelefono();
+                            break;
+            
         }      
         return objeto;
     }
     
     private String[] cabeceras = {
-        "IdProveedor","Cuit", "RazonSocial", "domicilio","Estado",
+        "Id","Cuit", "RazonSocial", "Domicilio","Telefono",
     };
     
     public Proveedor Consulta(int col) {

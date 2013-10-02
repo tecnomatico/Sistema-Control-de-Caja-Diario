@@ -24,6 +24,7 @@ public class AsociadoDaoImp extends HibernateUtil implements AsociadoDAO {
         Session session = HibernateUtil.getSession();
                 
         session.beginTransaction();
+       
         Criteria criteria = session.createCriteria(Asociado.class);
         
         ArrayList<Asociado> parroquia = (ArrayList<Asociado>)criteria.list();

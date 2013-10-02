@@ -30,7 +30,7 @@ public class ModeloComprobante extends AbstractTableModel {
     
     
      private String[] cabeceras = {
-        "Id", "Fecha", "Operacion", "Numero Serie", "Entidad", "Comprobante","Detalle"      
+        "Id", "Fecha", "Operacion", "Ref", "Numero Serie", "Entidad","Detalle"      
     };
     
     
@@ -68,10 +68,10 @@ public class ModeloComprobante extends AbstractTableModel {
             case 0:objeto = comprobante.getId();break;
             case 1:objeto = MyUtil.getFechaString10DDMMAAAA(comprobante.getFecha());break;
             case 2:objeto = getTipoOperacion();break;
-            case 3:objeto = comprobante.getNumeroSerie();break;
-            case 4:objeto = getRazonSocial();break;
-            case 5:objeto = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getFormulario();break; //ver aqui
-           case 6:objeto =  getMontoTotal(comprobante.getId());break; // ver aqui
+            case 3:objeto =new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getReferencia();break;
+            case 4:objeto = comprobante.getNumeroSerie();break;
+            case 5:objeto = getRazonSocial();break;
+            case 6:objeto =  getMontoTotal(comprobante.getId());break; // ver aqui
 
             
         }      

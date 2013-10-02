@@ -8,6 +8,7 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Proveedor;
 import co.tecnomati.java.controlcaja.modelo.ModeloProveedor;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
+import co.tecnomati.java.controlcaja.util.TablaUtil;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -59,7 +60,8 @@ public class GUIGestorProveedores extends javax.swing.JDialog {
     public void inicializarTabla(){
         modeloproveedor = new ModeloProveedor();
         sorter = new TableRowSorter(modeloproveedor);
-        tblProveedor.setModel(modeloproveedor);  
+        tblProveedor.setModel(modeloproveedor);
+        TablaUtil.ocultarIdTabla(tblProveedor);
     }
     
     @SuppressWarnings("unchecked")

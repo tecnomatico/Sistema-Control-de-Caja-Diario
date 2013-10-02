@@ -20,5 +20,6 @@ public interface ComprobanteConceptoDAO {
   public Comprobanteconcepto getComprobanteconcepto(int idComprobanteconcepto);
   public List<Comprobanteconcepto> listComprobanteconceptos(int idConcepto);
 //  public List<Comprobanteconcepto> listComprobanteconceptos(Comprobante c);
+  
    public double getMontoTotal(int idComprobante);
 }

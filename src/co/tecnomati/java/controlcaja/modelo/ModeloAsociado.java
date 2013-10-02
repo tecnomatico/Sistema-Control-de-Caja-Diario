@@ -53,17 +53,18 @@ public class ModeloAsociado extends AbstractTableModel{
         switch (columnIndex) {
             case 0:objeto = persona.getIdAsociado();break;
             
-            case 1:objeto = persona.getCuit();break;
+            case 1:objeto = persona.getLegajo();break;
             
             case 2:objeto = persona.getApellido()+" "+persona.getNombre();break;
-            case 3:objeto = persona.getIngreso();break;
+            case 3:objeto = persona.getCuit();break;
+            case 4:objeto = persona.getTelefono();break;
             
         }      
         return objeto;
     }
     
     private String[] cabeceras = {
-        "id", "Cuit", "Nombre", "FechaIngreso",
+         "Id","Legajo", "RazonSocial", "Cuit","Telefono",
     };
     
     public Asociado Consulta(int col) {

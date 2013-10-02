@@ -8,6 +8,7 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Asociado;
 import co.tecnomati.java.controlcaja.modelo.ModeloAsociado;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
+import co.tecnomati.java.controlcaja.util.TablaUtil;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.RowFilter.*;
@@ -58,7 +59,8 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
     public void inicializarTabla(){
         modeloasociado = new ModeloAsociado();
         sorter = new TableRowSorter(modeloasociado);
-        tblAsociado.setModel(modeloasociado);  
+        tblAsociado.setModel(modeloasociado); 
+        TablaUtil.ocultarIdTabla(tblAsociado);
     }
     
     @SuppressWarnings("unchecked")

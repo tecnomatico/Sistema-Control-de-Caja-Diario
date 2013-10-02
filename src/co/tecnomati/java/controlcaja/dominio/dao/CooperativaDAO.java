@@ -16,4 +16,5 @@ public interface CooperativaDAO {
   public void deleteCooperativa(Cooperativa a);
   public void upDateCooperativa(Cooperativa a);
   public Cooperativa getCooperativa(int idCooperativa);
+ 
 }

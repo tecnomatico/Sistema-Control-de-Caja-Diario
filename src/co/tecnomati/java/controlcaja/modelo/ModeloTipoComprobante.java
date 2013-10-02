@@ -30,9 +30,19 @@ public class ModeloTipoComprobante extends AbstractTableModel {
     
     }
      private String[] cabeceras = {
-        "codigo", "Denominacion", "Abreviatura" ,
+        "codigo",  "Abreviatura" ,"Denominacion",
     };
     
+     
+     public void addElement(Object nuevoElemento){
+        listaTipoComp.add((Tipocomprobante)nuevoElemento);        
+        actualizar();
+    }
+     
+      @Override
+    public String getColumnName(int column) {
+        return cabeceras[column];
+    }
     @Override
     public int getColumnCount() {
         return cabeceras.length;    }
@@ -49,9 +59,9 @@ public class ModeloTipoComprobante extends AbstractTableModel {
         switch (columnIndex) {
             case 0:objeto = tipoComp.getCodigo();break;
             
-            case 1:objeto = tipoComp.getFormulario();break;
+            case 1:objeto = tipoComp.getReferencia();break;
             
-            case 2:objeto = tipoComp.getReferencia();break;
+            case 2:objeto = tipoComp.getFormulario();break;
                       
         }      
         return objeto;    }

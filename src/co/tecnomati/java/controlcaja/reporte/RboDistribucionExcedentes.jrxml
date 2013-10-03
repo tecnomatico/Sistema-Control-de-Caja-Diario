@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RboDistribucionExcedentes" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2d08b54d-d7bb-40d7-9363-7d3fb9feb05d">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="264"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividad" class="java.lang.String"/>
 	<field name="nombreApellido" class="java.lang.String"/>
@@ -304,8 +304,11 @@
 				<textFieldExpression><![CDATA[$F{ingresosBrutos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="4b13873d-c91d-4064-b581-2e3e450bc7bb" x="96" y="167" width="258" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement uuid="4b13873d-c91d-4064-b581-2e3e450bc7bb" x="95" y="168" width="257" height="19"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph tabStopWidth="80"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{domicilioCooperativa}]]></textFieldExpression>
 			</textField>
 			<textField>

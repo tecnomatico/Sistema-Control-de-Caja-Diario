@@ -323,14 +323,14 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="panel2" max="32767" attributes="0"/>
+                          <Component id="panelConceptosAdicionales" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="labelMetric6" alignment="0" min="-2" max="-2" attributes="1"/>
                                   <Component id="labelMetric10" alignment="0" min="-2" max="-2" attributes="1"/>
                                   <Component id="labelMetric7" alignment="0" min="-2" max="-2" attributes="1"/>
                               </Group>
-                              <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtDescripcionConcepto" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
@@ -338,7 +338,7 @@
                                           <Component id="txtMonto" min="-2" pref="79" max="-2" attributes="0"/>
                                           <Component id="txtCodigoConcepto" min="-2" pref="79" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="122" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="219" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -366,7 +366,7 @@
                           <Component id="labelMetric7" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="panelConceptosAdicionales" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="44" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -401,7 +401,10 @@
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Container class="org.edisoncor.gui.panel.Panel" name="panel2">
+            <Container class="org.edisoncor.gui.panel.Panel" name="panelConceptosAdicionales">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -427,6 +430,7 @@
                 <Component class="javax.swing.JCheckBox" name="jCheckBox1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Aporte de Monotributo"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>

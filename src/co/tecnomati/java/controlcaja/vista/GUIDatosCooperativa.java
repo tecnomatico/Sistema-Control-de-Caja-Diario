@@ -32,14 +32,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         if (!lista.isEmpty()) {
             cooperativa = lista.get(0);
 
-              txtNombre.setText(cooperativa.getRazonSocial());
-              txtMatricula.setText(String.valueOf(cooperativa.getMatricula()));
-              txtCuit.setText(String.valueOf(cooperativa.getCuit()));
-              txtIngresoBruto.setText(cooperativa.getIngresoBruto());
-              dateIncioActividad.setDate(cooperativa.getInicioActividad());
-              txtInicioCaja.setText(String.valueOf(cooperativa.getInicioCaja()));
-              txtTelefono.setText(cooperativa.getTelefono());
-              txtDomicilio.setText(cooperativa.getDomicilio());
+              setDatos(cooperativa);
         }
         
         this.setTitle(Constantes.NAME_REGISTRO_DATOS_COOPERATIVA);
@@ -236,24 +229,12 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         if (cooperativa==null) {
              System.out.println("entro nuevo");
              cooperativa= new Cooperativa();
-             cooperativa.setRazonSocial(txtNombre.getText());
-             cooperativa.setMatricula(Integer.parseInt(txtMatricula.getText()));
-             cooperativa.setCuit(Long.parseLong(txtCuit.getText()));
-             cooperativa.setIngresoBruto(txtIngresoBruto.getText());
-             cooperativa.setInicioActividad(dateIncioActividad.getDate());
-             cooperativa.setTelefono(txtInicioCaja.getText());
-             cooperativa.setDomicilio(txtInicioCaja.getText());           
+             getDatos();
        
             new CooperativaDaoImp().addCooperativa(cooperativa);
             } else {
                  System.out.println("entro a modificar");
-                 cooperativa.setRazonSocial(txtNombre.getText());
-                 cooperativa.setMatricula(Integer.parseInt(txtMatricula.getText()));
-                 cooperativa.setCuit(Long.parseLong(txtCuit.getText()));
-                 cooperativa.setIngresoBruto(txtIngresoBruto.getText());
-                 cooperativa.setInicioActividad(dateIncioActividad.getDate());
-                 cooperativa.setTelefono(txtInicioCaja.getText());
-                 cooperativa.setDomicilio(txtInicioCaja.getText());
+                 getDatos();
                 new CooperativaDaoImp().upDateCooperativa(cooperativa);
             }
   
@@ -264,6 +245,26 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    public void setDatos(Cooperativa cooperativa){
+              txtNombre.setText(cooperativa.getRazonSocial());
+              txtMatricula.setText(String.valueOf(cooperativa.getMatricula()));
+              txtCuit.setText(String.valueOf(cooperativa.getCuit()));
+              txtIngresoBruto.setText(cooperativa.getIngresoBruto());
+              dateIncioActividad.setDate(cooperativa.getInicioActividad());
+              txtInicioCaja.setText(String.valueOf(cooperativa.getInicioCaja()));
+              txtTelefono.setText(cooperativa.getTelefono());
+              txtDomicilio.setText(cooperativa.getDomicilio());
+    }
+    public void getDatos(){
+                  cooperativa.setRazonSocial(txtNombre.getText());
+                 cooperativa.setMatricula(Integer.parseInt(txtMatricula.getText()));
+                 cooperativa.setCuit(Long.parseLong(txtCuit.getText()));
+                 cooperativa.setIngresoBruto(txtIngresoBruto.getText());
+                 cooperativa.setInicioActividad(dateIncioActividad.getDate());
+                 cooperativa.setInicioCaja(Double.parseDouble(txtInicioCaja.getText()));
+                 cooperativa.setTelefono(txtTelefono.getText());
+                 cooperativa.setDomicilio(txtDomicilio.getText());
+    }
     /**
      * @param args the command line arguments
      */

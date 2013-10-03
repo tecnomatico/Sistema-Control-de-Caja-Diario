@@ -8,6 +8,7 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.modelo.ModeloAsociado;
 import co.tecnomati.java.controlcaja.modelo.ModeloCliente;
 import co.tecnomati.java.controlcaja.modelo.ModeloProveedor;
+import co.tecnomati.java.controlcaja.util.ComprobanteUtil;
 import co.tecnomati.java.controlcaja.util.Entidad;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -42,6 +43,21 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
+        // si es un tipo de comprobante 
+        inicializarTablaAsociado();
+
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+    public GUIgestorEntidades(java.awt.Frame parent, boolean modal,int codTipoCompr) {
+        super(parent, modal);
+        initComponents();
+        
+        // algunos comprobantes solo son para asociados , en consecuencia en estos casos solo se debe permitir el filtro por asociado solamente
+        if (ComprobanteUtil.isReciboParaAsociado(codTipoCompr)){
+             cmbFiltroEntidad.setSelectedIndex(Constantes.ASOCIADO_INT);
+             cmbFiltroEntidad.setEnabled(false);
+        }
         inicializarTablaAsociado();
 
         this.setLocationRelativeTo(null);

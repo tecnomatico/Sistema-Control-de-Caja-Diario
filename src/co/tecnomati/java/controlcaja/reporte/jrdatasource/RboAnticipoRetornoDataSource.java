@@ -54,23 +54,25 @@ public class RboAnticipoRetornoDataSource implements JRDataSource{
         Set<Comprobanteconcepto> conjuntoConceptos= new ComprobanteDaoImp().listarConcepto(comprobante.getId());//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
         
         Cooperativa cooperativa = new CooperativaDaoImp().listarCooperativa().get(0);
-        Entidad entidad= new Entidad();
-
-        switch (comprobante.getTipoPersona()) {           
-             case Constantes.ASOCIADO_INT : Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());                                            
-                                            entidad.setNombre(a.getApellido() +" "+a.getNombre());
-                                            entidad.setFechaIngreso(a.getIngreso());
-                                            entidad.setCuit(a.getCuit());
-                                            break;
-             case Constantes.PROVEEDOR_INT :Proveedor p = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad());
-                                            entidad.setNombre(p.getRazonSocial());
-                                            entidad.setCuit(p.getCuit());
-                                            break;
-             case Constantes.CLIENTE_INT : Cliente c = new ClienteDaoImp().getCliente(comprobante.getIdEntidad());
-                                           entidad.setNombre(c.getRazonSocial());
-                                           entidad.setCuit(c.getCuit());
-                                           break;                                 
-      }
+        
+        Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+//        Entidad entidad= new Entidad();
+//
+//        switch (comprobante.getTipoPersona()) {           
+//             case Constantes.ASOCIADO_INT : Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());                                            
+//                                            entidad.setNombre(a.getApellido() +" "+a.getNombre());
+//                                            entidad.setFechaIngreso(a.getIngreso());
+//                                            entidad.setCuit(a.getCuit());
+//                                            break;
+//             case Constantes.PROVEEDOR_INT :Proveedor p = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad());
+//                                            entidad.setNombre(p.getRazonSocial());
+//                                            entidad.setCuit(p.getCuit());
+//                                            break;
+//             case Constantes.CLIENTE_INT : Cliente c = new ClienteDaoImp().getCliente(comprobante.getIdEntidad());
+//                                           entidad.setNombre(c.getRazonSocial());
+//                                           entidad.setCuit(c.getCuit());
+//                                           break;                                 
+//      }
       
         List<Comprobanteconcepto> listaComprobanteConcepto= new ArrayList() ;        
         conjuntoConceptos=  new ComprobanteDaoImp().listarConcepto(comprobante.getId());
@@ -97,19 +99,24 @@ public class RboAnticipoRetornoDataSource implements JRDataSource{
             valor = cooperativa.getDomicilio();
         }                       
         else if("nombreApellido".equals(jrf.getName())){
-            valor = entidad.getNombre();
+//            valor = entidad.getNombre();
+           valor= a.getApellido()+" "+a.getNombre();
         }
         else if("nroAsociado".equals(jrf.getName())){
-            valor = entidad.getId();
+//            valor = entidad.getId();
+            valor= a.getLegajo();
         }
         else if("fechaIngreso".equals(jrf.getName())){
-            valor = entidad.getFechaIngreso();
+//            valor = entidad.getFechaIngreso();
+            valor= MyUtil.getFechaString10DDMMAAAA(a.getIngreso());
         }
         else if("nroDNI".equals(jrf.getName())){
-            valor = entidad.getDni();
+//            valor = entidad.getDni();
+            valor= a.getDni();
         }
         else if("cuitAsociado".equals(jrf.getName())){
-            valor = entidad.getCuit();
+//            valor = entidad.getCuit();
+            valor= a.getCuit();
         }
         else if("concepto1".equals(jrf.getName())){
             //valor = entidad.getNombre();
@@ -184,16 +191,16 @@ public class RboAnticipoRetornoDataSource implements JRDataSource{
             //valor = entidad.getDni();
         }
         else if("totalImporte".equals(jrf.getName())){
-            valor = entidad.getDni();
+            valor = "Importe";
         }
         else if("totalDescuento".equals(jrf.getName())){
-            valor = entidad.getDni();
+            valor = "Descuento";
         }
         else if("neto".equals(jrf.getName())){
-            valor = entidad.getDni();
+            valor = "neto";
         }
         else if("sonPesos".equals(jrf.getName())){
-            valor = entidad.getDni();
+            valor = "pesoso";
         }
         else if("ano".equals(jrf.getName())){
             valor = Calendar.YEAR;
@@ -202,7 +209,10 @@ public class RboAnticipoRetornoDataSource implements JRDataSource{
             valor = cooperativa.getDomicilio();
         }
         else if("fechaPago".equals(jrf.getName())){
-            valor = comprobante.getFecha();
+            valor = MyUtil.getFechaString10DDMMAAAA(comprobante.getFecha());
+        }
+        else if("inicioActividad".equals(jrf.getName())){
+            valor = MyUtil.getFechaString10DDMMAAAA(cooperativa.getInicioActividad());
         }
                 
         return valor;

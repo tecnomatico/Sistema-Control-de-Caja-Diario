@@ -18,6 +18,7 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import co.tecnomati.java.controlcaja.util.Entidad;
+import co.tecnomati.java.controlcaja.util.MyUtil;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -53,26 +54,31 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
         Set<Comprobanteconcepto> conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
 
         Cooperativa cooperativa = new CooperativaDaoImp().listarCooperativa().get(0);
-        Entidad entidad = new Entidad();
-
-        switch (comprobante.getTipoPersona()) {
-            case Constantes.ASOCIADO_INT:
-                Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
-                entidad.setNombre(a.getApellido() + " " + a.getNombre());
-                entidad.setFechaIngreso(a.getIngreso());
-                entidad.setCuit(a.getCuit());
-                break;
-            case Constantes.PROVEEDOR_INT:
-                Proveedor p = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad());
-                entidad.setNombre(p.getRazonSocial());
-                entidad.setCuit(p.getCuit());
-                break;
-            case Constantes.CLIENTE_INT:
-                Cliente c = new ClienteDaoImp().getCliente(comprobante.getIdEntidad());
-                entidad.setNombre(c.getRazonSocial());
-                entidad.setCuit(c.getCuit());
-                break;
-        }
+     
+         Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+//        Entidad entidad = new Entidad();
+//
+//        switch (comprobante.getTipoPersona()) {
+//            case Constantes.ASOCIADO_INT:
+//                Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+//                entidad.setNombre(a.getApellido() + " " + a.getNombre());
+//                entidad.setFechaIngreso(a.getIngreso());
+//                entidad.setCuit(a.getCuit());
+//                entidad.setDni(a.getDni());
+//                entidad.setId(a.getLegajo());
+//                
+//                break;
+//            case Constantes.PROVEEDOR_INT:
+//                Proveedor p = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad());
+//                entidad.setNombre(p.getRazonSocial());
+//                entidad.setCuit(p.getCuit());
+//                break;
+//            case Constantes.CLIENTE_INT:
+//                Cliente c = new ClienteDaoImp().getCliente(comprobante.getIdEntidad());
+//                entidad.setNombre(c.getRazonSocial());
+//                entidad.setCuit(c.getCuit());
+//                break;
+//        }
 
         List<Comprobanteconcepto> listaComprobanteConcepto = new ArrayList();
         conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());
@@ -89,21 +95,21 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
         } else if ("cuitCooperativa".equals(jrf.getName())) {
             valor = cooperativa.getCuit();
         } else if ("inicioActividades".equals(jrf.getName())) {
-            valor = cooperativa.getInicioActividad();
+            valor = MyUtil.getFechaString10DDMMAAAA(cooperativa.getInicioActividad());
         } else if ("ingresosBrutos".equals(jrf.getName())) {
             valor = cooperativa.getIngresoBruto();
         } else if ("domicilioCooperativa".equals(jrf.getName())) {
             valor = cooperativa.getDomicilio();
         } else if ("nombreApellido".equals(jrf.getName())) {
-            valor = entidad.getNombre();
+            valor = valor= a.getApellido()+" "+a.getNombre();
         } else if ("nroAsociado".equals(jrf.getName())) {
-            valor = entidad.getId();
+            valor = valor= a.getLegajo();
         } else if ("fechaIngreso".equals(jrf.getName())) {
-            valor = entidad.getFechaIngreso();
+            valor = valor= MyUtil.getFechaString10DDMMAAAA(a.getIngreso());
         } else if ("nroDNI".equals(jrf.getName())) {
-            valor = entidad.getDni();
+            valor =  valor= a.getDni();
         } else if ("cuitAsociado".equals(jrf.getName())) {
-            valor = entidad.getCuit();
+            valor= a.getCuit();
         } else if ("ejercicioEconomico".equals(jrf.getName())) {
             valor = comprobante.getEjercicioEconomico();
         } //        else if("nroDNI".equals(jrf.getName())){
@@ -115,7 +121,10 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
         else if ("lugarPago".equals(jrf.getName())) {
             valor = cooperativa.getDomicilio();
         } else if ("fechaPago".equals(jrf.getName())) {
-            valor = comprobante.getFecha();
+            valor = MyUtil.getFechaString10DDMMAAAA(comprobante.getFecha());
+        }
+         else if ("inicioActividad".equals(jrf.getName())) {
+            valor = MyUtil.getFechaString10DDMMAAAA(cooperativa.getInicioActividad());
         }
 
         return valor;

@@ -56,7 +56,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         modificar = false;
         comprobante = new Comprobante();
         //cargar datos del combobox
-        setDatosCmbTipoFormulario();
+//        setDatosCmbTipoFormulario();
 //        setEscuchadorDeEventosCmboTipoComprobante();
 
         //cargar los campos de texto con 
@@ -67,18 +67,33 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     }
 
-    public GUIComprobante(java.awt.Frame parent, boolean modal, Comprobante comprobante) {
+    public GUIComprobante(java.awt.Frame parent, boolean modal, Comprobante compr) {
         super(parent, modal);
         initComponents();
         modificar = true;
-        this.comprobante = comprobante;
+        this.comprobante = compr;
+       
+        setDatos();
+        //cargar datos del combobox
+//        setDatosCmbTipoFormulario();
+        controlarTipoOperacion();
+        setEnabledBotonImprimir(tipoComprobante.getCodigo());
 
-        // cargos los datos para editar
+//        setDatosNombreEntidad();
+        this.setTitle(Constantes.NAME_NUEVO_REGISTRO);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+
+    }
+
+    public void setDatos(){
+         // cargos los datos para editar
         dateComprobante.setDate(comprobante.getFecha());
         cmbTipoProceso.setSelectedIndex(comprobante.getTipoProceso());
         txtnumSerie1.setText(String.valueOf(comprobante.getNumeroSerie()));
 
         // entidad
+        entidad= new Entidad();
         entidad.setId(comprobante.getIdEntidad());
         entidad.setTipoEntidad(comprobante.getTipoPersona());
 
@@ -114,30 +129,26 @@ public class GUIComprobante extends javax.swing.JDialog {
                 txtNombre.setText(c.getRazonSocial());
                 break;
         }
-        //cargar datos del combobox
-        setDatosCmbTipoFormulario();
-        setEnabledBotonImprimir(tipoComprobante.getCodigo());
-
-//        setDatosNombreEntidad();
-        this.setTitle(Constantes.NAME_NUEVO_REGISTRO);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-
     }
-
-    public void setDatosCmbTipoFormulario() {
-//        cmbTipoComprobante.removeAllItems();
-//
-//        if (new TipoComprobanteDaoImp().listarTipoFormulario().isEmpty()) {
-//            cmbTipoComprobante.setEditable(false);
-//        } else {
-//            cmbTipoComprobante.setEditable(true);
-//            for (Tipocomprobante o : new TipoComprobanteDaoImp().listarTipoFormulario()) {
-//                cmbTipoComprobante.addItem(o.getReferencia());
-//            }
-//            AutoCompleteDecorator.decorate(this.cmbTipoComprobante);
-//        }
+    
+    public void getDatos(){
+        
+        
     }
+    
+//    public void setDatosCmbTipoFormulario() {
+////        cmbTipoComprobante.removeAllItems();
+////
+////        if (new TipoComprobanteDaoImp().listarTipoFormulario().isEmpty()) {
+////            cmbTipoComprobante.setEditable(false);
+////        } else {
+////            cmbTipoComprobante.setEditable(true);
+////            for (Tipocomprobante o : new TipoComprobanteDaoImp().listarTipoFormulario()) {
+////                cmbTipoComprobante.addItem(o.getReferencia());
+////            }
+////            AutoCompleteDecorator.decorate(this.cmbTipoComprobante);
+////        }
+//    }
 
     public boolean isAgregado() {
         return agregado;

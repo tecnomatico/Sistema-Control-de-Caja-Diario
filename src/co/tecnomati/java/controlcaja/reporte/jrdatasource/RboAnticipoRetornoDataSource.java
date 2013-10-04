@@ -32,6 +32,7 @@ import net.sf.jasperreports.engine.JRField;
 /**
  *
  * @author dario
+ * Asociado
  */
 public class RboAnticipoRetornoDataSource implements JRDataSource{
     int index = -1;

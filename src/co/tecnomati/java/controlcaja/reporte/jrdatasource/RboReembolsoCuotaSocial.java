@@ -18,6 +18,7 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import co.tecnomati.java.controlcaja.util.Entidad;
+import co.tecnomati.java.controlcaja.util.MyUtil;
 import co.tecnomati.java.controlcaja.util.NumberToLetterConverter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,6 +31,7 @@ import net.sf.jasperreports.engine.JRField;
 /**
  *
  * @author AnahiAramayo
+ * Asociado
  */
 public class RboReembolsoCuotaSocial implements JRDataSource {
 
@@ -54,15 +56,18 @@ public class RboReembolsoCuotaSocial implements JRDataSource {
         Set<Comprobanteconcepto> conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
 
         Cooperativa cooperativa = new CooperativaDaoImp().listarCooperativa().get(0);
-        Entidad entidad = new Entidad();
+        
+         Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+        
+//        Entidad entidad = new Entidad();
 
-        switch (comprobante.getTipoPersona()) {
-            case Constantes.ASOCIADO_INT:
-                Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
-                entidad.setNombre(a.getApellido() + " " + a.getNombre());
-                entidad.setFechaIngreso(a.getIngreso());
-                entidad.setCuit(a.getCuit());
-                break;
+//        switch (comprobante.getTipoPersona()) {
+//            case Constantes.ASOCIADO_INT:
+//                Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+//                entidad.setNombre(a.getApellido() + " " + a.getNombre());
+//                entidad.setFechaIngreso(a.getIngreso());
+//                entidad.setCuit(a.getCuit());
+//                break;
             /*case Constantes.PROVEEDOR_INT :Proveedor p = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad());
              entidad.setNombre(p.getRazonSocial());
              entidad.setCuit(p.getCuit());
@@ -71,7 +76,7 @@ public class RboReembolsoCuotaSocial implements JRDataSource {
              entidad.setNombre(c.getRazonSocial());
              entidad.setCuit(c.getCuit());
              break;   */
-        }
+//        }
 
         List<Comprobanteconcepto> listaComprobanteConcepto = new ArrayList();
         conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());
@@ -85,17 +90,25 @@ public class RboReembolsoCuotaSocial implements JRDataSource {
         } else if ("cuitCooperativa".equals(jrf.getName())) {
             valor = cooperativa.getCuit();
         } else if ("inicioActividades".equals(jrf.getName())) {
-            valor = cooperativa.getInicioActividad();
+            valor = MyUtil.getFechaString10DDMMAAAA(cooperativa.getInicioActividad());
         } else if ("nombreApellido".equals(jrf.getName())) {
-            valor = entidad.getNombre() + " " + entidad.getApellido();
+            valor = a.getApellido() + " " +a.getNombre();
+        } else if ("ingresosBrutos".equals(jrf.getName())) {
+            cooperativa.getIngresoBruto();
+        } else if ("nombreApellido".equals(jrf.getName())) {
+            valor = a.getApellido() + " " +a.getNombre();
         } else if ("nroAsociado".equals(jrf.getName())) {
-            valor = entidad.getId();
+            
+        } else if ("nombreApellido".equals(jrf.getName())) {
+            valor = a.getApellido() + " " +a.getNombre();
+        } else if ("nroAsociado".equals(jrf.getName())) {
+            valor = a.getLegajo();
         } else if ("fechaIngreso".equals(jrf.getName())) {
-            valor = entidad.getFechaIngreso();
+            valor = MyUtil.getFechaString10DDMMAAAA(a.getIngreso());
         } else if ("nroDNI".equals(jrf.getName())) {
-            valor = entidad.getDni();
+            valor = a.getDni();
         } else if ("cuitAsociado".equals(jrf.getName())) {
-            valor = entidad.getCuit();
+            valor = a.getCuit();
         } else if ("fechaPago".equals(jrf.getName())) {
             valor = comprobante.getFecha();
         } else if ("cantidadPago".equals(jrf.getName())) {

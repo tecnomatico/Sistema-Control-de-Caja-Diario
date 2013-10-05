@@ -7,7 +7,12 @@ package co.tecnomati.java.controlcaja.vista;
 import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Cooperativa;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -17,6 +22,8 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
 
     Cooperativa cooperativa=null;
     boolean operacionOk = false; // este es una variable que se pone en verdadero si se guardo con exito los datos 
+    boolean modificar=false;
+
     /**
      * Creates new form GUIDatosCooperativa
      */
@@ -31,13 +38,19 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         List<Cooperativa> lista = new CooperativaDaoImp().listarCooperativa();
         if (!lista.isEmpty()) {
             cooperativa = lista.get(0);
-
-              setDatos(cooperativa);
-        }
+            setDatos(cooperativa);
+            modificar = true;
+            // cambiar las etiquetas para que mensionen q se hara una actualizacion de datos
+            btnGuardar.setText("Modificar");
+            this.setTitle("Actualizar Datos de la Persona");
+        }else{
+            modificar = false;
+        }            
         
         this.setTitle(Constantes.NAME_REGISTRO_DATOS_COOPERATIVA);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.setResizable(false);
     }
 
     /**
@@ -73,7 +86,19 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
 
         labelMetric1.setText("Nombre");
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
         labelMetric2.setText("Matricula");
+
+        txtMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMatriculaKeyTyped(evt);
+            }
+        });
 
         labelMetric3.setText("CUIT");
 
@@ -84,6 +109,12 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         });
 
         labelMetric4.setText("Domicilio");
+
+        txtDomicilio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDomicilioKeyTyped(evt);
+            }
+        });
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +137,11 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
                 txtIngresoBrutoActionPerformed(evt);
             }
         });
+        txtIngresoBruto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIngresoBrutoKeyTyped(evt);
+            }
+        });
 
         labelMetric6.setText("Inicio de Actividad");
 
@@ -120,42 +156,44 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panel1Layout.createSequentialGroup()
                             .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panel1Layout.createSequentialGroup()
-                            .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panel1Layout.createSequentialGroup()
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(114, 114, 114)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                            .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panel1Layout.createSequentialGroup()
-                            .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtIngresoBruto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panel1Layout.createSequentialGroup()
-                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(dateIncioActividad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtInicioCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(panel1Layout.createSequentialGroup()
+                                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
+                                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                    .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                    .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtCuit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                    .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                    .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtIngresoBruto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addContainerGap()))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtInicioCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateIncioActividad, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)))))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +241,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,45 +264,123 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     }//GEN-LAST:event_txtIngresoBrutoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (cooperativa==null) {
-             System.out.println("entro nuevo");
-             cooperativa= new Cooperativa();
-             getDatos();
-       
-            new CooperativaDaoImp().addCooperativa(cooperativa);
+     
+            if (validacionGUICooperativa()) {
+                JOptionPane.showMessageDialog(null, "Debe completar todos los campos...");
             } else {
-                 System.out.println("entro a modificar");
-                 getDatos();
-                new CooperativaDaoImp().upDateCooperativa(cooperativa);
+                if (cooperativa==null) {
+                    System.out.println("entro nuevo");
+                    cooperativa= new Cooperativa();
+                    getDatos();       
+                    new CooperativaDaoImp().addCooperativa(cooperativa);
+                } else {
+                    System.out.println("entro a modificar");
+                    getDatos();
+                    new CooperativaDaoImp().upDateCooperativa(cooperativa);
+                }                        
             }
+
+//        if (cooperativa==null) {
+//             System.out.println("entro nuevo");
+//             cooperativa= new Cooperativa();
+//             getDatos();
+//       
+//            new CooperativaDaoImp().addCooperativa(cooperativa);
+//            } else {
+//                 System.out.println("entro a modificar");
+//                 getDatos();
+//                new CooperativaDaoImp().upDateCooperativa(cooperativa);
+//            }
   
-    
-  
-    operacionOk= true;
-    this.dispose();
+        operacionOk= true;
+    //this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+       permitirSoloLetras(evt);
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtMatriculaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyTyped
+        permitirSoloNumero(evt);
+    }//GEN-LAST:event_txtMatriculaKeyTyped
+
+    private void txtIngresoBrutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIngresoBrutoKeyTyped
+        permitirSoloNumero(evt);
+    }//GEN-LAST:event_txtIngresoBrutoKeyTyped
+
+    private void txtDomicilioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDomicilioKeyTyped
+        permitirSoloLetras(evt);
+    }//GEN-LAST:event_txtDomicilioKeyTyped
+
     public void setDatos(Cooperativa cooperativa){
-              txtNombre.setText(cooperativa.getRazonSocial());
-              txtMatricula.setText(String.valueOf(cooperativa.getMatricula()));
-              txtCuit.setText(String.valueOf(cooperativa.getCuit()));
-              txtIngresoBruto.setText(cooperativa.getIngresoBruto());
-              dateIncioActividad.setDate(cooperativa.getInicioActividad());
-              txtInicioCaja.setText(String.valueOf(cooperativa.getInicioCaja()));
-              txtTelefono.setText(cooperativa.getTelefono());
-              txtDomicilio.setText(cooperativa.getDomicilio());
+        txtNombre.setText(cooperativa.getRazonSocial());
+        txtMatricula.setText(String.valueOf(cooperativa.getMatricula()));
+        txtCuit.setText(String.valueOf(cooperativa.getCuit()));
+        txtIngresoBruto.setText(cooperativa.getIngresoBruto());
+        dateIncioActividad.setDate(cooperativa.getInicioActividad());
+        txtInicioCaja.setText(String.valueOf(cooperativa.getInicioCaja()));
+        txtTelefono.setText(cooperativa.getTelefono());
+        txtDomicilio.setText(cooperativa.getDomicilio());
     }
     public void getDatos(){
-                  cooperativa.setRazonSocial(txtNombre.getText());
-                 cooperativa.setMatricula(Integer.parseInt(txtMatricula.getText()));
-                 cooperativa.setCuit(Long.parseLong(txtCuit.getText()));
-                 cooperativa.setIngresoBruto(txtIngresoBruto.getText());
-                 cooperativa.setInicioActividad(dateIncioActividad.getDate());
-                 cooperativa.setInicioCaja(Double.parseDouble(txtInicioCaja.getText()));
-                 cooperativa.setTelefono(txtTelefono.getText());
-                 cooperativa.setDomicilio(txtDomicilio.getText());
+        cooperativa.setRazonSocial(txtNombre.getText());
+        cooperativa.setMatricula(Integer.parseInt(txtMatricula.getText()));
+        cooperativa.setCuit(Long.parseLong(txtCuit.getText()));
+        cooperativa.setIngresoBruto(txtIngresoBruto.getText());
+        cooperativa.setInicioActividad(dateIncioActividad.getDate());
+        cooperativa.setInicioCaja(Double.parseDouble(txtInicioCaja.getText()));
+        cooperativa.setTelefono(txtTelefono.getText());
+        cooperativa.setDomicilio(txtDomicilio.getText());
     }
+    
+    /**
+     * Metodo de Validacion de JTextField de Dtos de Cooperativa.
+     */
+    public boolean validacionGUICooperativa(){
+        boolean vacio = true;
+        ArrayList<JTextField> listaTxt = new ArrayList();
+        listaTxt.add(txtNombre);
+        listaTxt.add(txtMatricula); listaTxt.add(txtCuit);
+        listaTxt.add(txtIngresoBruto);listaTxt.add(txtInicioCaja);
+//        listaTxt.add(txtTelFijo);listaTxt.add(txtTelCel);
+        listaTxt.add(txtDomicilio);
+        for (Iterator<JTextField> it = listaTxt.iterator(); it.hasNext();) {
+            JTextField jTextField = it.next();
+            if (jTextField.getText().equals("")) {
+                jTextField.setBackground(Color.red);
+                vacio = true;
+                break;
+            }else{
+                vacio = false;
+            }             
+        }
+        return vacio;
+    }
+    
+    public void permitirSoloLetras(java.awt.event.KeyEvent evt){
+        // conusmir los caracteres del legajo excepto los numeros
+        char caracter = evt.getKeyChar();
+        if(((caracter < '0') ||
+            (caracter > '9')) &&
+            (caracter != '\b' /*corresponde a BACK_SPACE*/))
+        {
+            evt.consume();  // ignorar el evento de teclado
+        }
+    }
+    
+    private void permitirSoloNumero(java.awt.event.KeyEvent evt) {
+        // permitir solo el ingreso de numero
+        char caracter = evt.getKeyChar();
+        if(((caracter < '0') ||
+            (caracter > '9')) &&
+            (caracter != '\b' /*corresponde a BACK_SPACE*/))
+        {
+             evt.consume();  // ignorar el evento de teclado
+        }
+       
+     }    
+    
     /**
      * @param args the command line arguments
      */

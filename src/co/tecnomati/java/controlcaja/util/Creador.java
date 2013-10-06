@@ -15,17 +15,16 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
  * @author joel
  */
 public class Creador {
-    
-    
-    public static void CrearCategoriaComprobanteYRecibos(){
+
+    public static void CrearCategoriaComprobanteYRecibos() {
         Categoriacomprobante categoria = new Categoriacomprobante();
         categoria.setDescripcion(Constantes.CATEGORIA_BOLETA);
         new CategoriaComprobanteDaoImp().addCategoriacomprobante(categoria);
-        
+
         categoria = new Categoriacomprobante();
         categoria.setDescripcion(Constantes.CATEGORIA_CHEQUE);
         new CategoriaComprobanteDaoImp().addCategoriacomprobante(categoria);
-        
+
         categoria = new Categoriacomprobante();
         categoria.setDescripcion(Constantes.CATEGORIA_FACTURA);
         new CategoriaComprobanteDaoImp().addCategoriacomprobante(categoria);
@@ -34,54 +33,65 @@ public class Creador {
         categoria.setDescripcion(Constantes.CATEGORIA_RECIBO);
         new CategoriaComprobanteDaoImp().addCategoriacomprobante(categoria);
         CrearRecibos(categoria);
-        
+
     }
-    
+
     /**
      * Crea los tipos de recibos que se tienen que imprimir de forma automatica
      */
-      public static void CrearRecibos(Categoriacomprobante categoria){
-       Tipocomprobante recibo = new Tipocomprobante();
-       recibo.setCodigo(Constantes.CODIGO_RECIBO_PAGO);
-       recibo.setFormulario(Constantes.RECIBO_PAGO);
-       recibo.setReferencia(Constantes.REF_RECIBO_PAGO);
-       recibo.setCategoriacomprobante(categoria);
-       
-       new TipoComprobanteDaoImp().addTipoFormulario(recibo);
+    public static void CrearRecibos(Categoriacomprobante categoria) {
+        // inicializo el numero de serie parte izquierda y la parte derecha
+        long numI = 0000;
+        long numD = 0000000000;
+        
+        Tipocomprobante recibo = new Tipocomprobante();
+        recibo.setCodigo(Constantes.CODIGO_RECIBO_PAGO);
+        recibo.setFormulario(Constantes.RECIBO_PAGO);
+        recibo.setReferencia(Constantes.REF_RECIBO_PAGO);
+        recibo.setCategoriacomprobante(categoria);
+        recibo.setNumeroSerieIzq(numI);
+        recibo.setNumeroSerieDer(numD);
+        new TipoComprobanteDaoImp().addTipoFormulario(recibo);
 
-       recibo = new Tipocomprobante();
-       recibo.setCodigo(Constantes.CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE);
-       recibo.setFormulario(Constantes.RECIBO_DISTRIBUCION_EXCEDENTE);
-       recibo.setReferencia(Constantes.REF_RECIBO_DISTRIBUCION_EXCEDENTE);
-              recibo.setCategoriacomprobante(categoria);
+        recibo = new Tipocomprobante();
+        recibo.setCodigo(Constantes.CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE);
+        recibo.setFormulario(Constantes.RECIBO_DISTRIBUCION_EXCEDENTE);
+        recibo.setReferencia(Constantes.REF_RECIBO_DISTRIBUCION_EXCEDENTE);
+        recibo.setNumeroSerieIzq(numI);
+        recibo.setNumeroSerieDer(numD);
+        recibo.setCategoriacomprobante(categoria);
 
-       new TipoComprobanteDaoImp().addTipoFormulario(recibo);
-       
-       recibo = new Tipocomprobante();
-       recibo.setCodigo(Constantes.CODIGO_RECIBO_INTEGRACION_CUOTA);
-       recibo.setFormulario(Constantes.RECIBO_INTEGRACION_CUOTA);
-       recibo.setReferencia(Constantes.REF_RECIBO_INTEGRACION_CUOTA);
-              recibo.setCategoriacomprobante(categoria);
+        new TipoComprobanteDaoImp().addTipoFormulario(recibo);
 
-       new TipoComprobanteDaoImp().addTipoFormulario(recibo);
-       
-       recibo = new Tipocomprobante();
-       recibo.setCodigo(Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO);
-       recibo.setFormulario(Constantes.RECIBO_ANTICIPO_RETORNO);
-       recibo.setReferencia(Constantes.REF_RECIBO_ANTICIPO_RETORNO);
-              recibo.setCategoriacomprobante(categoria);
+        recibo = new Tipocomprobante();
+        recibo.setCodigo(Constantes.CODIGO_RECIBO_INTEGRACION_CUOTA);
+        recibo.setFormulario(Constantes.RECIBO_INTEGRACION_CUOTA);
+        recibo.setReferencia(Constantes.REF_RECIBO_INTEGRACION_CUOTA);
+        recibo.setNumeroSerieIzq(numI);
+        recibo.setNumeroSerieDer(numD);
+        recibo.setCategoriacomprobante(categoria);
 
-       new TipoComprobanteDaoImp().addTipoFormulario(recibo);
-       
-       recibo = new Tipocomprobante();
-       recibo.setCodigo(Constantes.CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES);
-       recibo.setFormulario(Constantes.RECIBO_REEMBOLSO_CUOTA_SOCIAL);
-       recibo.setReferencia(Constantes.REF_RECIBO_REEMBOLSO_CUOTA_SOCIAL);
-              recibo.setCategoriacomprobante(categoria);
+        new TipoComprobanteDaoImp().addTipoFormulario(recibo);
 
-       new TipoComprobanteDaoImp().addTipoFormulario(recibo);
-       
+        recibo = new Tipocomprobante();
+        recibo.setCodigo(Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO);
+        recibo.setFormulario(Constantes.RECIBO_ANTICIPO_RETORNO);
+        recibo.setReferencia(Constantes.REF_RECIBO_ANTICIPO_RETORNO);
+        recibo.setNumeroSerieIzq(numI);
+        recibo.setNumeroSerieDer(numD);
+        recibo.setCategoriacomprobante(categoria);
+
+        new TipoComprobanteDaoImp().addTipoFormulario(recibo);
+
+        recibo = new Tipocomprobante();
+        recibo.setCodigo(Constantes.CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES);
+        recibo.setFormulario(Constantes.RECIBO_REEMBOLSO_CUOTA_SOCIAL);
+        recibo.setReferencia(Constantes.REF_RECIBO_REEMBOLSO_CUOTA_SOCIAL);
+        recibo.setNumeroSerieIzq(numI);
+        recibo.setNumeroSerieDer(numD);
+        recibo.setCategoriacomprobante(categoria);
+
+        new TipoComprobanteDaoImp().addTipoFormulario(recibo);
+
     }
-    
-    
 }

@@ -25,4 +25,37 @@ public class ComprobanteUtil {
         }
         return b;
     }
+    
+    public static long incrementarNumSerieIzq(long numI){
+        if (numI==9999) {
+            // error no hay mas lugar 
+            numI=0000;
+        } else {
+            numI =numI+1;
+        }
+        return numI;
+    }
+    /**
+     * Incrementa el numero de seriie  de un recibo automatico 
+     * @param numI  numeracion izquierda del numero de serie
+     * @param numD  numeracion derecha del numero de serie
+     * @return 
+     */
+    public static boolean isLLenoPosicionDer(long numD){
+        boolean b = false;
+        if(numD==999999999){
+                b= true;
+        }
+        return b;
+    }
+    public static long incrementarNumSerieDer(long numD){
+        
+        if(isLLenoPosicionDer(numD)){
+            numD= 00000000;
+            
+        }else{
+            numD = numD + 1;
+        }   
+        return numD;
+    }
 }

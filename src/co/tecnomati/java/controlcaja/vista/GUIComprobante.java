@@ -42,10 +42,12 @@ public class GUIComprobante extends javax.swing.JDialog {
     private boolean modificar;
     private Concepto concepto;
     private boolean agregado;
-    Entidad entidad ;
+    Entidad entidad;
     private Tipocomprobante tipoComprobante;
     Set<Comprobanteconcepto> conjuntoConceptos;
     Comprobanteconcepto comprobanteconcepto;
+    private long numIzq;
+    private long numDer;
 
     /**
      * Creates new form GUIComprobante
@@ -72,8 +74,11 @@ public class GUIComprobante extends javax.swing.JDialog {
         initComponents();
         modificar = true;
         this.comprobante = compr;
-       
+
         setDatos();
+        // esto es porque debe reflejar las variables q se enccargan de mantener el numero de serie en todo momento
+        numIzq= tipoComprobante.getNumeroSerieIzq();
+        numDer= tipoComprobante.getNumeroSerieDer();
         //cargar datos del combobox
 //        setDatosCmbTipoFormulario();
         controlarTipoOperacion();
@@ -86,14 +91,15 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     }
 
-    public void setDatos(){
-         // cargos los datos para editar
+    public void setDatos() {
+        // cargos los datos para editar
         dateComprobante.setDate(comprobante.getFecha());
         cmbTipoProceso.setSelectedIndex(comprobante.getTipoProceso());
-        txtnumSerie1.setText(String.valueOf(comprobante.getNumeroSerie()));
-
+        txtnumSerie1.setText(String.valueOf(comprobante.getNumeroSerieIzq()));
+        txtNumSerie2.setText(String.valueOf(comprobante.getNumeroSerieDer()));
+        
         // entidad
-        entidad= new Entidad();
+        entidad = new Entidad();
         entidad.setId(comprobante.getIdEntidad());
         entidad.setTipoEntidad(comprobante.getTipoPersona());
 
@@ -132,14 +138,13 @@ public class GUIComprobante extends javax.swing.JDialog {
                 break;
         }
     }
+
     /**
-     * 
+     *
      */
-    public void getDatos(){
-        
-        
+    public void getDatos() {
     }
-    
+
 //    public void setDatosCmbTipoFormulario() {
 ////        cmbTipoComprobante.removeAllItems();
 ////
@@ -153,7 +158,6 @@ public class GUIComprobante extends javax.swing.JDialog {
 ////            AutoCompleteDecorator.decorate(this.cmbTipoComprobante);
 ////        }
 //    }
-
     public boolean isAgregado() {
         return agregado;
     }
@@ -556,7 +560,11 @@ public class GUIComprobante extends javax.swing.JDialog {
         comprobante.setIdEntidad(entidad.getId());
         comprobante.setTipoPersona(entidad.getTipoEntidad());
         comprobante.setFecha(dateComprobante.getDate());
-        comprobante.setNumeroSerie(Long.parseLong(txtnumSerie1.getText()));
+        comprobante.setNumeroSerieIzq(numIzq);
+        comprobante.setNumeroSerieDer(numDer);
+        // aqui deberia ir concatendado la ref+iz+der
+        comprobante.setNumeroSerie(tipoComprobante.getReferencia()+numIzq+numDer);
+        System.out.println(tipoComprobante.getReferencia()+numIzq+numDer);
         comprobante.setTipoProceso(cmbTipoProceso.getSelectedIndex());
         comprobante.setTipocomprobante(tipoComprobante);
 
@@ -580,7 +588,9 @@ public class GUIComprobante extends javax.swing.JDialog {
             detalle.setComprobante(comprobante);
             detalle.setMonto(Double.parseDouble(txtMonto.getText()));
             new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalle);
-
+            
+            // si saliio todo ok entonces actualizo el contador de comprobante 
+            actualizarNumeroDeSerie(tipoComprobante);
 
         }
         agregado = true;
@@ -589,6 +599,24 @@ public class GUIComprobante extends javax.swing.JDialog {
         setEnabledBotonImprimir(tipoComprobante.getCodigo());
 //        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
+    
+    public void actualizarNumeroDeSerie(Tipocomprobante tc){
+        if (tc.getFormulario().equals(Constantes.RECIBO_ANTICIPO_RETORNO) ||
+                tc.getFormulario().equals(Constantes.RECIBO_DISTRIBUCION_EXCEDENTE) || 
+                tc.getFormulario().equals(Constantes.RECIBO_INTEGRACION_CUOTA)||
+                tc.getFormulario().equals(Constantes.RECIBO_PAGO)||
+                tc.getFormulario().equals(Constantes.RECIBO_REEMBOLSO_CUOTA_SOCIAL)
+           ) {
+            tc.setNumeroSerieIzq(numIzq);
+            tc.setNumeroSerieDer(numDer);
+            new TipoComprobanteDaoImp().upDateTipoFormulario(tc);
+            
+        }
+    }
+    
+    
+    
+    
     /**
      *
      * @param tipoComprobante entero que determina el tipo de comprobante
@@ -660,60 +688,137 @@ public class GUIComprobante extends javax.swing.JDialog {
     }//GEN-LAST:event_txtTipoComprobanteKeyPressed
 
     /**
-     * ESte metodo controla si el comprobante que se esta por registrar es uno de entrada o salida
+     * ESte metodo controla si el comprobante que se esta por registrar es uno
+     * de entrada o salida
      */
-    public void controlarTipoOperacion(){
+    public void controlarTipoOperacion() {
         // determinar si es una operacion de entrada o salida
-                    if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_PAGO || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES) {
-                        cmbTipoProceso.setSelectedIndex(Constantes.OP_SALIDA);
-                        cmbTipoProceso.setEnabled(false);
-                    } else if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_INTEGRACION_CUOTA) {
-                        cmbTipoProceso.setSelectedIndex(Constantes.OP_ENTRADA);
-                        cmbTipoProceso.setEnabled(false);
-                    } else {
-                        cmbTipoProceso.setEnabled(true);
+        if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_PAGO || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES) {
+            cmbTipoProceso.setSelectedIndex(Constantes.OP_SALIDA);
+            cmbTipoProceso.setEnabled(false);
+        } else if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_INTEGRACION_CUOTA) {
+            cmbTipoProceso.setSelectedIndex(Constantes.OP_ENTRADA);
+            cmbTipoProceso.setEnabled(false);
+        } else {
+            cmbTipoProceso.setEnabled(true);
 
-                    }
+        }
     }
-     
+
     /**
-     * Controla de que si se ingresa un tipo de comprobante luego de que ya se haya cargado una entidad , entonces si el tipo de comprobante no se corresponde con el tipo de entidad que deberia ir entonces se borra los datos de la entidad 
+     * Controla de que si se ingresa un tipo de comprobante luego de que ya se
+     * haya cargado una entidad , entonces si el tipo de comprobante no se
+     * corresponde con el tipo de entidad que deberia ir entonces se borra los
+     * datos de la entidad
      */
-    public void controlarEntidad(){
-         if (entidad!=null) {
-             if (ComprobanteUtil.isReciboParaAsociado(tipoComprobante.getCodigo())) {
-                 if (!(entidad.getTipoEntidad()==Constantes.ASOCIADO_INT)) {
-                     limpiarDatosEntidad();
-                 } 
-             }
-         }
-     }
-     public void limpiarDatosEntidad(){
-         entidad=new Entidad();
-         txtCuit.setText("");
-         txtNombre.setText("");
-     }
+    public void controlarEntidad() {
+        if (entidad != null) {
+            if (ComprobanteUtil.isReciboParaAsociado(tipoComprobante.getCodigo())) {
+                if (!(entidad.getTipoEntidad() == Constantes.ASOCIADO_INT)) {
+                    limpiarDatosEntidad();
+                }
+            }
+        }
+    }
+
+    /**
+     * Determina la numeracion del comprobante
+     */
+    public void controlarNumeroSerie() {
+        switch (tipoComprobante.getCategoriacomprobante().getDescripcion()) {
+            case Constantes.CATEGORIA_BOLETA:
+                System.out.println("boleta");
+
+                break;
+            case Constantes.CATEGORIA_CHEQUE:
+                System.out.println("cheque");
+
+                break;
+            case Constantes.CATEGORIA_FACTURA:
+                System.out.println("factura");
+
+                break;
+
+            case Constantes.CATEGORIA_RECIBO:
+                System.out.println("recibo");
+                // generar automaticamente el numero de serie con la numeracion que le toca
+                txtnumSerie1.setEditable(false);
+                txtNumSerie2.setEditable(false);
+                generarNumerodeSerieRecibo();
+                break;
+        }
+
+    }
+
+    public void generarNumerodeSerieRecibo() {
+        // incrementar el numero de serie
+         numIzq = tipoComprobante.getNumeroSerieIzq();
+         numDer= tipoComprobante.getNumeroSerieDer();
+        if (ComprobanteUtil.isLLenoPosicionDer(numDer)) {
+             numIzq = ComprobanteUtil.incrementarNumSerieIzq(numIzq);
+        }
+        numDer = ComprobanteUtil.incrementarNumSerieDer(tipoComprobante.getNumeroSerieDer());
+        System.out.println(numIzq);
+        System.out.println(numDer);
+        txtnumSerie1.setText(String.valueOf(numIzq));
+        txtNumSerie2.setText(String.valueOf(numDer));
+//         switch (tipoComprobante.getFormulario()) {
+//            case Constantes.RECIBO_ANTICIPO_RETORNO:
+//                System.out.println(Constantes.RECIBO_ANTICIPO_RETORNO);
+//                
+//                break;
+//            case Constantes.RECIBO_DISTRIBUCION_EXCEDENTE:
+//                System.out.println(Constantes.RECIBO_DISTRIBUCION_EXCEDENTE);
+//                
+//                break;
+//            case Constantes.RECIBO_INTEGRACION_CUOTA:
+//                System.out.println(Constantes.RECIBO_INTEGRACION_CUOTA);
+//                
+//                break;
+//
+//            case Constantes.RECIBO_PAGO:
+//                System.out.println(Constantes.RECIBO_PAGO);
+//                // generar automaticamente el numero de serie con la numeracion que le toca
+//               
+//                break;
+//                
+//            case Constantes.RECIBO_REEMBOLSO_CUOTA_SOCIAL:
+//                System.out.println(Constantes.RECIBO_REEMBOLSO_CUOTA_SOCIAL);
+//                // generar automaticamente el numero de serie con la numeracion que le toca
+//               
+//                break;
+//        }
+    }
+
+    public void limpiarDatosEntidad() {
+        entidad = new Entidad();
+        txtCuit.setText("");
+        txtNombre.setText("");
+    }
     private void txtRefTipoComprKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRefTipoComprKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String tipo = txtRefTipoCompr.getText().trim();
-            tipoComprobante = new TipoComprobanteDaoImp().getTipoFormularioRef(tipo);
-            if (!"".equals(tipo)&& tipoComprobante != null) {
-                
-                   txtTipoComprobante.setText(tipoComprobante.getFormulario());
-                   controlarTipoOperacion();
-                   controlarEntidad();
-                   txtnumSerie1.requestFocus();
-                   
-                
-            }else{
+            tipoComprobante = new TipoComprobanteDaoImp().getTipoComprobanteRef(tipo);
+//            tipoComprobante = new TipoComprobanteDaoImp().getTipoFormularioRef(tipo);
+            if (!"".equals(tipo) && tipoComprobante != null) {
+
+                txtTipoComprobante.setText(tipoComprobante.getFormulario());
+                controlarTipoOperacion();
+                controlarEntidad();
+                controlarNumeroSerie();
+                txtnumSerie1.requestFocus();
+
+
+            } else {
                 GUIGestorTipoComprobante guiGestorTipoComp = new GUIGestorTipoComprobante(null, true);
                 if (guiGestorTipoComp.isAgregado()) {
                     tipoComprobante = guiGestorTipoComp.getTipoComp();
                     txtRefTipoCompr.setText(tipoComprobante.getReferencia());
                     txtTipoComprobante.setText(tipoComprobante.getFormulario());
-                   controlarTipoOperacion();
-                   controlarEntidad();
-                   txtnumSerie1.requestFocus();
+                    controlarTipoOperacion();
+                    controlarEntidad();
+                    controlarNumeroSerie();
+                    txtnumSerie1.requestFocus();
                 }
             }
 

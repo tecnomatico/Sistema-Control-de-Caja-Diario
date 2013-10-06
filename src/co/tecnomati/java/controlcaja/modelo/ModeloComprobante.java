@@ -70,7 +70,7 @@ public class ModeloComprobante extends AbstractTableModel {
             case 2:objeto = getTipoOperacion();break;
             case 3:objeto =comprobante.getTipocomprobante().getReferencia();break;
 //            case 3:objeto =new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getReferencia();break;
-            case 4:objeto = comprobante.getNumeroSerie();break;
+            case 4:objeto = comprobante.getNumeroSerieIzq()+"-"+comprobante.getNumeroSerieDer();break;
             case 5:objeto = getRazonSocial();break;
             case 6:objeto =  getMontoTotal(comprobante.getId());break; // ver aqui
 

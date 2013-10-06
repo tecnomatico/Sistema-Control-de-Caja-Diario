@@ -22,7 +22,7 @@ public class ModeloTipoComprobante extends AbstractTableModel {
 
     public ModeloTipoComprobante() {
         try {
-            listaTipoComp = (ArrayList<Tipocomprobante>) tipoCompDAO.listarTipoFormulario();
+            listaTipoComp = (ArrayList<Tipocomprobante>) tipoCompDAO.listarTipoComprobante();
       } catch (ClassCastException ex) {
             listaTipoComp = new ArrayList<Tipocomprobante>();            
       }

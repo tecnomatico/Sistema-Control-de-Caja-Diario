@@ -17,7 +17,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Joel
  */
-public class TipoComprobanteDaoImp extends  HibernateUtil implements TipoComprobanteDAO{
+public class TipoComprobanteDaoImp extends HibernateUtil implements TipoComprobanteDAO {
 
     @Override
     public List<Tipocomprobante> listarTipoFormulario() {
@@ -26,8 +26,8 @@ public class TipoComprobanteDaoImp extends  HibernateUtil implements TipoComprob
 
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Tipocomprobante.class);
-        
-        ArrayList<Tipocomprobante> tipocomprobante = (ArrayList<Tipocomprobante>)criteria.list();
+
+        ArrayList<Tipocomprobante> tipocomprobante = (ArrayList<Tipocomprobante>) criteria.list();
         session.close();
         return tipocomprobante;
     }
@@ -35,55 +35,90 @@ public class TipoComprobanteDaoImp extends  HibernateUtil implements TipoComprob
     @Override
     public void addTipoFormulario(Tipocomprobante a) {
 //        Session session = getSessionFactory().openSession();
-                Session session = HibernateUtil.getSession();
+        Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
         session.save(a);
         session.getTransaction().commit();
-        session.close();   }
+        session.close();
+    }
 
     @Override
     public void deleteTipoFormulario(Tipocomprobante a) {
 //        Session session = HibernateUtil.getSessionFactory().openSession();
-                Session session = HibernateUtil.getSession();
+        Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
         session.delete(a);
         session.getTransaction().commit();
-        session.close();    }
+        session.close();
+    }
 
     @Override
     public void upDateTipoFormulario(Tipocomprobante a) {
 //        Session session = HibernateUtil.getSessionFactory().openSession();
-                Session session = HibernateUtil.getSession();
+        Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
         session.update(a);
         session.getTransaction().commit();
-        session.close();     }
+        session.close();
+    }
 
     @Override
     public Tipocomprobante getTipoFormulario(int idTipoFormulario) {
 //        Session session = HibernateUtil.getSessionFactory().openSession();
-                Session session = HibernateUtil.getSession();
+        Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
-       Tipocomprobante a = (Tipocomprobante) session.get(Tipocomprobante.class,idTipoFormulario);
+        Tipocomprobante a = (Tipocomprobante) session.get(Tipocomprobante.class, idTipoFormulario);
         session.getTransaction().commit();
         session.close();
-        return a;   
+        return a;
     }
-    public Tipocomprobante getTipoFormularioRef(String ref) {
-       Tipocomprobante a = null;
-//        Session session = getSessionFactory().openSession();
-               Session session = HibernateUtil.getSession();
 
-       session.beginTransaction();
-        String sql= "from Tipocomprobante where referencia ='"+ref+"'";     
+    public Tipocomprobante getTipoFormularioRef(String ref) {
+        Tipocomprobante a = null;
+//        Session session = getSessionFactory().openSession();
+        Session session = HibernateUtil.getSession();
+
+        session.beginTransaction();
+        String sql = "from Tipocomprobante where referencia ='" + ref + "'";
         session.getTransaction().commit();
-        a =(Tipocomprobante) session.createQuery(sql).uniqueResult();
+        a = (Tipocomprobante) session.createQuery(sql).uniqueResult();
         session.close();
-        return a; 
+        return a;
     }
-    
+
+    public Tipocomprobante getTipoComprobanteRef(String ref) {
+        Tipocomprobante a = null;
+//        Session session = getSessionFactory().openSession();
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        String sql = "from Tipocomprobante tc \n"
+                + "join fetch tc.categoriacomprobante as cc\n"
+                + "where tc.referencia ='" + ref + "'";
+
+        session.getTransaction().commit();
+        a = (Tipocomprobante) session.createQuery(sql).uniqueResult();
+        session.close();
+        return a;
+    }
+
+    @Override
+    public List<Tipocomprobante> listarTipoComprobante() {
+        List<Tipocomprobante> a = new ArrayList<>();
+//        Session session = getSessionFactory().openSession();
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        String sql = "from Tipocomprobante tc \n"
+                + "join fetch tc.categoriacomprobante as cc"
+                ;
+
+        session.getTransaction().commit();
+        a =   (ArrayList<Tipocomprobante>) session.createQuery(sql).list();
+        session.close();
+        return a;    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 05/10/2013 20:21:42 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 06/10/2013 01:19:46 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="co.tecnomati.java.controlcaja.dominio.Comprobante" table="comprobante" catalog="control_caja">
         <id name="id" type="java.lang.Integer">
@@ -11,8 +11,14 @@
         <many-to-one name="tipocomprobante" class="co.tecnomati.java.controlcaja.dominio.Tipocomprobante" fetch="select">
             <column name="codigoTipoComprob" />
         </many-to-one>
-        <property name="numeroSerie" type="long">
-            <column name="numeroSerie" not-null="true" unique="true" />
+        <property name="numeroSerie" type="string">
+            <column name="numeroSerie" length="18" unique="true" />
+        </property>
+        <property name="numeroSerieIzq" type="java.lang.Long">
+            <column name="numeroSerieIzq" />
+        </property>
+        <property name="numeroSerieDer" type="java.lang.Long">
+            <column name="numeroSerieDer" />
         </property>
         <property name="idEntidad" type="int">
             <column name="idEntidad" not-null="true" />

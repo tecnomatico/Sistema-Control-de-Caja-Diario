@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 05/10/2013 20:21:41 by Hibernate Tools 3.2.1.GA
+// Generated 06/10/2013 01:19:46 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -14,7 +14,9 @@ public class Comprobante  implements java.io.Serializable {
 
      private Integer id;
      private Tipocomprobante tipocomprobante;
-     private long numeroSerie;
+     private String numeroSerie;
+     private Long numeroSerieIzq;
+     private Long numeroSerieDer;
      private int idEntidad;
      private Integer tipoPersona;
      private Date fecha;
@@ -26,13 +28,14 @@ public class Comprobante  implements java.io.Serializable {
     }
 
 	
-    public Comprobante(long numeroSerie, int idEntidad) {
-        this.numeroSerie = numeroSerie;
+    public Comprobante(int idEntidad) {
         this.idEntidad = idEntidad;
     }
-    public Comprobante(Tipocomprobante tipocomprobante, long numeroSerie, int idEntidad, Integer tipoPersona, Date fecha, Integer tipoProceso, Date ejercicioEconomico, Set<Comprobanteconcepto> comprobanteconceptos) {
+    public Comprobante(Tipocomprobante tipocomprobante, String numeroSerie, Long numeroSerieIzq, Long numeroSerieDer, int idEntidad, Integer tipoPersona, Date fecha, Integer tipoProceso, Date ejercicioEconomico, Set<Comprobanteconcepto> comprobanteconceptos) {
        this.tipocomprobante = tipocomprobante;
        this.numeroSerie = numeroSerie;
+       this.numeroSerieIzq = numeroSerieIzq;
+       this.numeroSerieDer = numeroSerieDer;
        this.idEntidad = idEntidad;
        this.tipoPersona = tipoPersona;
        this.fecha = fecha;
@@ -55,12 +58,26 @@ public class Comprobante  implements java.io.Serializable {
     public void setTipocomprobante(Tipocomprobante tipocomprobante) {
         this.tipocomprobante = tipocomprobante;
     }
-    public long getNumeroSerie() {
+    public String getNumeroSerie() {
         return this.numeroSerie;
     }
     
-    public void setNumeroSerie(long numeroSerie) {
+    public void setNumeroSerie(String numeroSerie) {
         this.numeroSerie = numeroSerie;
+    }
+    public Long getNumeroSerieIzq() {
+        return this.numeroSerieIzq;
+    }
+    
+    public void setNumeroSerieIzq(Long numeroSerieIzq) {
+        this.numeroSerieIzq = numeroSerieIzq;
+    }
+    public Long getNumeroSerieDer() {
+        return this.numeroSerieDer;
+    }
+    
+    public void setNumeroSerieDer(Long numeroSerieDer) {
+        this.numeroSerieDer = numeroSerieDer;
     }
     public int getIdEntidad() {
         return this.idEntidad;

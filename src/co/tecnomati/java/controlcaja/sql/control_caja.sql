@@ -70,7 +70,9 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 
 CREATE TABLE IF NOT EXISTS `comprobante` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `numeroSerie` bigint(20) NOT NULL,
+  `numeroSerie` varchar(18) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `numeroSerieIzq` bigint(4)  NULL,
+  `numeroSerieDer` bigint(10)  NULL,
   `idEntidad` int(11) NOT NULL,
   `tipoPersona` int(2) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
@@ -164,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `tipocomprobante` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `codigoCategoria` int(11)  NULL,
   `formulario` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `referencia` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `referencia` varchar(4) COLLATE utf8_spanish_ci DEFAULT NULL,
   `numeroSerieIzq` bigint(4)  NULL,
   `numeroSerieDer` bigint(10)  NULL,
   UNIQUE KEY `formulario` (`formulario`),

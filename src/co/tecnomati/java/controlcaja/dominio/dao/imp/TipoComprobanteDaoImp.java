@@ -22,7 +22,7 @@ public class TipoComprobanteDaoImp extends  HibernateUtil implements TipoComprob
     @Override
     public List<Tipocomprobante> listarTipoFormulario() {
 //        Session session = HibernateUtil.getSessionFactory().openSession();
-                Session session = HibernateUtil.getSession();
+        Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Tipocomprobante.class);

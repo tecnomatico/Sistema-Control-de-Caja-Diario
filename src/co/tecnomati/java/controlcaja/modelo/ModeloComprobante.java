@@ -68,7 +68,8 @@ public class ModeloComprobante extends AbstractTableModel {
             case 0:objeto = comprobante.getId();break;
             case 1:objeto = MyUtil.getFechaString10DDMMAAAA(comprobante.getFecha());break;
             case 2:objeto = getTipoOperacion();break;
-            case 3:objeto =new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getReferencia();break;
+            case 3:objeto =comprobante.getTipocomprobante().getReferencia();break;
+//            case 3:objeto =new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getReferencia();break;
             case 4:objeto = comprobante.getNumeroSerie();break;
             case 5:objeto = getRazonSocial();break;
             case 6:objeto =  getMontoTotal(comprobante.getId());break; // ver aqui
@@ -79,8 +80,8 @@ public class ModeloComprobante extends AbstractTableModel {
     }
     public double getMontoTotal(int idComprobante){
         double total=0;
-        Set<Comprobanteconcepto> conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(idComprobante);
-        for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
+//        Set<Comprobanteconcepto> conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(idComprobante);
+        for (Iterator<Comprobanteconcepto> it = comprobante.getComprobanteconceptos().iterator(); it.hasNext();) {
             Comprobanteconcepto comprobanteconcepto = it.next();
             total= total+comprobanteconcepto.getMonto();
 

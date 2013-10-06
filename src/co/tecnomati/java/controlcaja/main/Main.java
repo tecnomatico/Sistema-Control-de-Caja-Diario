@@ -4,12 +4,18 @@
  */
 package co.tecnomati.java.controlcaja.main;
 
+import co.tecnomati.java.controlcaja.dominio.Comprobante;
+import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.CategoriaComprobanteDaoImp;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.util.Creador;
 import co.tecnomati.java.controlcaja.util.NumberToLetterConverter;
 import co.tecnomati.java.controlcaja.vista.GUIGestorDeCaja;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Iterator;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,8 +29,8 @@ public class Main {
      */
     public static void main(String[] args) {
        try{
-           if( new TipoComprobanteDaoImp().listarTipoFormulario().isEmpty())
-              Creador.CrearRecibos();
+           if( new CategoriaComprobanteDaoImp().listarCategoriaComprobante().isEmpty())
+             Creador.CrearCategoriaComprobanteYRecibos();
        }catch(Exception e){
            JOptionPane.showMessageDialog(null, "LA BD NO ESTA INICIADA, POR FAVOR ACTIVE EL SERVICIO Y VUELVA ARRANCAR EL SISTEMA ", "ERROR", JOptionPane.ERROR_MESSAGE);
        }
@@ -39,6 +45,28 @@ public class Main {
 ////      System.out.println("Número : "+big);
 //        }
      
-    }
+//   // pueba si funca el join fech 
+//       Comprobante c = new ComprobanteDaoImp().getComprobante(31);
+//       System.out.println(c.getTipocomprobante().getReferencia());
+//       System.out.println(c.getNumeroSerie());
+//       System.out.println(c.getFecha());
+//       System.out.println(c.getTipocomprobante().getFormulario());
+//       System.out.println(c.getTipocomprobante().getCodigo());
+//       System.out.println("----comprobantes----");
+//       System.out.println("----comprobantesConcepto----");
+//      
+//        Set<Comprobanteconcepto>conjunto =  c.getComprobanteconceptos();
+//           for (Iterator<Comprobanteconcepto> it = conjunto.iterator(); it.hasNext();) {
+//            Comprobanteconcepto comprobanteconcepto = it.next();
+//                   System.out.println(comprobanteconcepto.getMonto());
+//                   System.out.println(comprobanteconcepto.getConcepto());
+//                   System.out.println(comprobanteconcepto.getConcepto().getDescripcion());
+//                   
+//        }
+ 
+        }
+    
+    
+    
    
 }

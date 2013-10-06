@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-09-2013 a las 15:48:16
+-- Tiempo de generación: 06-10-2013 a las 01:05:59
 -- Versión del servidor: 5.5.32
 -- Versión de PHP: 5.4.16
 
@@ -42,16 +42,8 @@ CREATE TABLE IF NOT EXISTS `asociado` (
   PRIMARY KEY (`idAsociado`),
   UNIQUE KEY `legajo` (`legajo`),
   UNIQUE KEY `cuit` (`cuit`),
-  UNIQUE KEY `dni` (`dni`),
   KEY `idCoop` (`idCoop`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `asociado`
---
-
-INSERT INTO `asociado` (`idAsociado`, `idCoop`, `legajo`, `cuit`, `dni`, `apellido`, `nombre`, `ingreso`, `telefono`, `estado`) VALUES
-(1, NULL, 1, 1, 1, 'PELAEZ', 'JOEL', '2013-09-13', '', NULL);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -65,10 +57,10 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `razonSocial` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `domicilio` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `estado` int(2) DEFAULT NULL,
- `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,  
+  `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`idCliente`),
   UNIQUE KEY `cuit` (`cuit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -79,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 CREATE TABLE IF NOT EXISTS `comprobante` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numeroSerie` bigint(20) NOT NULL,
-  `idEntidad` int(11) NOT NULL ,
+  `idEntidad` int(11) NOT NULL,
   `tipoPersona` int(2) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `codigoTipoComprob` int(11) DEFAULT NULL,
@@ -88,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `comprobante` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `numeroSerie` (`numeroSerie`),
   KEY `codigoTipoComprob` (`codigoTipoComprob`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=49 ;
 
 -- --------------------------------------------------------
 
@@ -104,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `comprobanteconcepto` (
   PRIMARY KEY (`id`),
   KEY `idConcepto` (`idConcepto`),
   KEY `idComprobante` (`idComprobante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=33 ;
 
 -- --------------------------------------------------------
 
@@ -116,16 +108,7 @@ CREATE TABLE IF NOT EXISTS `concepto` (
   `codigoConcepto` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`codigoConcepto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `concepto`
---
-
-INSERT INTO `concepto` (`codigoConcepto`, `descripcion`) VALUES
-(1, 'monotributo'),
-(2, 'desarrollo de software a medida'),
-(3, 'capacitacion');
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -146,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `cooperativa` (
   PRIMARY KEY (`idCoop`),
   UNIQUE KEY `matricula` (`matricula`),
   UNIQUE KEY `cuit` (`cuit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -160,12 +143,18 @@ CREATE TABLE IF NOT EXISTS `proveedor` (
   `razonSocial` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `domicilio` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `estado` int(2) DEFAULT NULL,
-  `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,  
-PRIMARY KEY (`idProveedor`),
+  `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`idProveedor`),
   UNIQUE KEY `cuit` (`cuit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `categoriaComprobante` (
+  `codigoCategoria` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`codigoCategoria`),
+  UNIQUE KEY `descripcion` (`descripcion`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
 --
 -- Estructura de tabla para la tabla `tipocomprobante`
@@ -173,25 +162,25 @@ PRIMARY KEY (`idProveedor`),
 
 CREATE TABLE IF NOT EXISTS `tipocomprobante` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `codigoCategoria` int(11)  NULL,
   `formulario` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `referencia` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `detalleConcepto` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `numeroSerieIzq` bigint(4)  NULL,
+  `numeroSerieDer` bigint(10)  NULL,
+  UNIQUE KEY `formulario` (`formulario`),
   PRIMARY KEY (`codigo`),
-  UNIQUE KEY `formulario` (`formulario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `tipocomprobante`
---
-
-INSERT INTO `tipocomprobante` (`codigo`, `formulario`, `referencia`, `detalleConcepto`) VALUES
-(1, 'RECIBO A', 'RA', NULL),
-(2, 'RECIBO B', 'RB', NULL);
+  INDEX(codigoCategoria),
+  FOREIGN KEY (codigoCategoria)
+  REFERENCES categoriaComprobante(codigoCategoria)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
+ ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
 --
 -- Restricciones para tablas volcadas
 --
 
+--
 --
 -- Filtros para la tabla `asociado`
 --

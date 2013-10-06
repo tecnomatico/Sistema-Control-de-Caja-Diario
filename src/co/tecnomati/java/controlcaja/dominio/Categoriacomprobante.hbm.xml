@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 05/10/2013 20:21:42 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="co.tecnomati.java.controlcaja.dominio.Categoriacomprobante" table="categoriacomprobante" catalog="control_caja">
+        <id name="codigoCategoria" type="java.lang.Integer">
+            <column name="codigoCategoria" />
+            <generator class="identity" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" unique="true" />
+        </property>
+        <set name="tipocomprobantes" inverse="true">
+            <key>
+                <column name="codigoCategoria" />
+            </key>
+            <one-to-many class="co.tecnomati.java.controlcaja.dominio.Tipocomprobante" />
+        </set>
+    </class>
+</hibernate-mapping>

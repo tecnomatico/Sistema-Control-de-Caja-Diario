@@ -4,23 +4,16 @@
  */
 package co.tecnomati.java.controlcaja.reporte.jrdatasource;
 
-import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Asociado;
-import co.tecnomati.java.controlcaja.dominio.Cliente;
 import co.tecnomati.java.controlcaja.dominio.Comprobante;
 import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.Cooperativa;
-import co.tecnomati.java.controlcaja.dominio.Proveedor;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.ClienteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
-import co.tecnomati.java.controlcaja.util.Entidad;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -50,8 +43,10 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
 
         comprobante = listaComprobantes.get(index);
 
-        Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId());
-        Set<Comprobanteconcepto> conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
+        Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
+//        Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId());
+        Set<Comprobanteconcepto> conjuntoConceptos = comprobante.getComprobanteconceptos();//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
+//        Set<Comprobanteconcepto> conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
 
         Cooperativa cooperativa = new CooperativaDaoImp().listarCooperativa().get(0);
      

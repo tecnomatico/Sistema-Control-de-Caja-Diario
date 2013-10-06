@@ -1,21 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 23/09/2013 20:39:13 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 05/10/2013 20:21:42 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="co.tecnomati.java.controlcaja.dominio.Tipocomprobante" table="tipocomprobante" catalog="control_caja">
         <id name="codigo" type="java.lang.Integer">
             <column name="codigo" />
             <generator class="identity" />
         </id>
+        <many-to-one name="categoriacomprobante" class="co.tecnomati.java.controlcaja.dominio.Categoriacomprobante" fetch="select">
+            <column name="codigoCategoria" />
+        </many-to-one>
         <property name="formulario" type="string">
             <column name="formulario" length="100" unique="true" />
         </property>
         <property name="referencia" type="string">
             <column name="referencia" length="20" />
         </property>
-        <property name="detalleConcepto" type="string">
-            <column name="detalleConcepto" length="20" />
+        <property name="numeroSerieIzq" type="java.lang.Long">
+            <column name="numeroSerieIzq" />
+        </property>
+        <property name="numeroSerieDer" type="java.lang.Long">
+            <column name="numeroSerieDer" />
         </property>
         <set name="comprobantes" inverse="true">
             <key>

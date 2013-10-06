@@ -98,12 +98,14 @@ public class GUIComprobante extends javax.swing.JDialog {
         entidad.setTipoEntidad(comprobante.getTipoPersona());
 
         //tipo de comprobante
-        tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId());
+        tipoComprobante = comprobante.getTipocomprobante();
+//        tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId());
         txtTipoComprobante.setText(tipoComprobante.getFormulario());
         txtRefTipoCompr.setText(tipoComprobante.getReferencia());
 
         //Conceptoss
-        conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());
+        conjuntoConceptos = comprobante.getComprobanteconceptos();
+//        conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());
         for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
             comprobanteconcepto = it.next();
             txtCodigoConcepto.setText(String.valueOf(comprobanteconcepto.getConcepto().getCodigoConcepto()));
@@ -130,7 +132,9 @@ public class GUIComprobante extends javax.swing.JDialog {
                 break;
         }
     }
-    
+    /**
+     * 
+     */
     public void getDatos(){
         
         
@@ -719,7 +723,8 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
 
-        new Impresora(comprobante, tipoComprobante.getCodigo()).Imprimir();
+//        new Impresora(comprobante, tipoComprobante.getCodigo()).Imprimir();
+        new Impresora(comprobante).Imprimir();
 
     }//GEN-LAST:event_btnImprimirActionPerformed
 

@@ -19,6 +19,7 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteconceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import co.tecnomati.java.controlcaja.util.Entidad;
+import co.tecnomati.java.controlcaja.util.Numero_a_Letra;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -74,11 +75,12 @@ public class RboDePagoDataSource implements JRDataSource {
                 entidad.setCuit(c.getCuit());
                 break;
         }
-
+        Double monto = 0.0;
         List<Comprobanteconcepto> listaComprobanteConcepto = new ArrayList();
         conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());
         for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
             Comprobanteconcepto comprobante1 = it.next();
+            monto = monto + comprobante1.getMonto();
             listaComprobanteConcepto.add(comprobante1);
         }
 
@@ -101,7 +103,7 @@ public class RboDePagoDataSource implements JRDataSource {
         } else if ("conceptoDe".equals(jrf.getName())) {
 //            valor = bautizado.getDni();
         } else if ("sonPesos".equals(jrf.getName())) {
-            //valor = cooperativa.getDomicilio();
+            valor = new Numero_a_Letra().Convertir(String.valueOf(monto), true);
         } else if ("lugarPago".equals(jrf.getName())) {
             valor = cooperativa.getDomicilio();
         } else if ("fechaPago".equals(jrf.getName())) {

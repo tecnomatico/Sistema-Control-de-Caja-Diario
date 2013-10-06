@@ -21,4 +21,5 @@ public interface ComprobanteDAO {
   public Comprobante getFormulario(int idFormulario);
   public Tipocomprobante getTipocomprobante(int idComprobante);
   public Set<Comprobanteconcepto> listarConcepto(int idComprobante);   
+//  public Comprobante getComprobante(int idComprobante);
   }

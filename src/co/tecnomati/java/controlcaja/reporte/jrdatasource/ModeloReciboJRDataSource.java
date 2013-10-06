@@ -13,6 +13,7 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import co.tecnomati.java.controlcaja.util.NumberToLetterConverter;
+import co.tecnomati.java.controlcaja.util.Numero_a_Letra;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -73,7 +74,8 @@ public class ModeloReciboJRDataSource implements JRDataSource {
                     comprobanteconcepto = it.next();
                 }
                 monto = comprobanteconcepto.getMonto();
-                valor = NumberToLetterConverter.getConvertirPesosEnString(monto);
+                valor = new Numero_a_Letra().Convertir(String.valueOf(monto),true);
+//                valor = NumberToLetterConverter.getConvertirPesosEnString(monto);
             } else if ("conceptoDe".equals(jrf.getName())) {
                 Comprobanteconcepto comprobanteconcepto2 = null;
                 for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {

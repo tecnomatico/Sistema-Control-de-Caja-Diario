@@ -34,9 +34,9 @@ public class Impresora {
      * @param comprobante representa uno de los 5 recibos a imprimir
      * @param tipo es el tipo de comprobante ej: recibo de pago, recibo anticipo retorno.....
      */
-    public Impresora(Comprobante comprobante, int tipo) {
+    public Impresora(Comprobante comprobante) {
         this.comprobante = comprobante;
-        this.tipoComprobante= tipo;
+        this.tipoComprobante= comprobante.getTipocomprobante().getCodigo();
     }
    
       public void imprimirReciboReembolsoCuotaSociales() {

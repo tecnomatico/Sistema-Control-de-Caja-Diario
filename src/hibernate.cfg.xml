@@ -10,6 +10,7 @@
     <mapping resource="co/tecnomati/java/controlcaja/dominio/Cooperativa.hbm.xml"/>
     <mapping resource="co/tecnomati/java/controlcaja/dominio/Concepto.hbm.xml"/>
     <mapping resource="co/tecnomati/java/controlcaja/dominio/Asociado.hbm.xml"/>
+    <mapping resource="co/tecnomati/java/controlcaja/dominio/Categoriacomprobante.hbm.xml"/>
     <mapping resource="co/tecnomati/java/controlcaja/dominio/Proveedor.hbm.xml"/>
     <mapping resource="co/tecnomati/java/controlcaja/dominio/Tipocomprobante.hbm.xml"/>
     <mapping resource="co/tecnomati/java/controlcaja/dominio/Cliente.hbm.xml"/>

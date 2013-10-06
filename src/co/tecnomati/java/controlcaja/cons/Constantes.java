@@ -71,6 +71,10 @@ public class Constantes {
     public static final int CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES=5;
      
      
+    public static final String CATEGORIA_FACTURA = "FACTURA";
+    public static final String CATEGORIA_RECIBO = "RECIBO";
+    public static final String CATEGORIA_CHEQUE = "CHEQUE";
+    public static final String CATEGORIA_BOLETA = "BOLETA";
     
      
 }

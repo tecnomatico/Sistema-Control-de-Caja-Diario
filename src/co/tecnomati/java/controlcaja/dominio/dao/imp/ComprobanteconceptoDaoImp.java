@@ -84,7 +84,7 @@ public class ComprobanteconceptoDaoImp extends HibernateUtil implements Comproba
          criteria.addOrder(Order.asc("id"));
          List<Comprobanteconcepto> lista = criteria.list();
          
-//         session.close();
+        session.close();
           return lista;
     }
     @Override
@@ -99,7 +99,7 @@ public class ComprobanteconceptoDaoImp extends HibernateUtil implements Comproba
          for (Comprobanteconcepto comprobanteconcepto : lista) {
             total =total + comprobanteconcepto.getMonto();
         }
-//         session.close();
+         session.close();
           return total;
     }
 

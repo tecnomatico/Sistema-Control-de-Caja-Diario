@@ -9,6 +9,7 @@ import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CategoriaComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
+import co.tecnomati.java.controlcaja.util.ComprobanteUtil;
 import co.tecnomati.java.controlcaja.util.Creador;
 import co.tecnomati.java.controlcaja.util.NumberToLetterConverter;
 import co.tecnomati.java.controlcaja.vista.GUIGestorDeCaja;
@@ -31,11 +32,21 @@ public class Main {
        try{
            if( new CategoriaComprobanteDaoImp().listarCategoriaComprobante().isEmpty())
              Creador.CrearCategoriaComprobanteYRecibos();
+            Creador.CrearCooperativayAsociado();
        }catch(Exception e){
            JOptionPane.showMessageDialog(null, "LA BD NO ESTA INICIADA, POR FAVOR ACTIVE EL SERVICIO Y VUELVA ARRANCAR EL SISTEMA ", "ERROR", JOptionPane.ERROR_MESSAGE);
        }
         
         GUIGestorDeCaja gestorCaja = new GUIGestorDeCaja();
+       
+//       // probar num serie iq
+//       long n = 1384;
+//       String cadenaI= ComprobanteUtil.formatearNumSerieIzq(n);
+//       String cadenaD= ComprobanteUtil.formatearNumSerieDer(n);
+//       System.out.println(cadenaI);
+//       System.out.println(cadenaD);
+       
+       
 ////        Double pesos = 0.29;
 //      double valor=0.0;
 //        for (double i = 0.1; i < 1000; i++) {

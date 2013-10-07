@@ -5,10 +5,15 @@
 package co.tecnomati.java.controlcaja.util;
 
 import co.tecnomati.java.controlcaja.cons.Constantes;
+import co.tecnomati.java.controlcaja.dominio.Asociado;
 import co.tecnomati.java.controlcaja.dominio.Categoriacomprobante;
+import co.tecnomati.java.controlcaja.dominio.Cooperativa;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CategoriaComprobanteDaoImp;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
+import java.util.Date;
 
 /**
  *
@@ -93,5 +98,62 @@ public class Creador {
 
         new TipoComprobanteDaoImp().addTipoFormulario(recibo);
 
+    }
+    
+    public static void CrearCooperativayAsociado(){
+        Cooperativa coop = new Cooperativa();
+        long cuit = 12345;
+        coop.setCuit(cuit);
+        coop.setDomicilio("Pandora Inc");
+        coop.setIngresoBruto("aaa");
+        coop.setInicioActividad(new Date());
+        coop.setInicioCaja(0.0);
+        coop.setMatricula(345);
+        coop.setRazonSocial("Tecnomatica Lda");
+        coop.setTelefono("154729680");
+        new CooperativaDaoImp().addCooperativa(coop);
+        
+        // agregar asociadoss
+        Asociado a = new Asociado();
+       
+        a.setApellido("Pelaez");
+        a.setCooperativa(coop);
+        a.setCuit(cuit+76);
+        a.setDni(32369235);
+        a.setIngreso(new Date());
+        a.setLegajo(1);
+        a.setNombre("Joel Alfredo Ismael");
+        a.setTelefono("154729680");
+        new AsociadoDaoImp().addAsociado(a);
+
+        a.setApellido("Aramayo");
+        a.setCooperativa(coop);
+        a.setCuit(cuit+87);
+        a.setDni(32369235);
+        a.setIngreso(new Date());
+        a.setLegajo(4);
+        a.setNombre("Anahi");
+        a.setTelefono("154729680");
+        new AsociadoDaoImp().addAsociado(a);
+        
+        a.setApellido("Portal");
+        a.setCooperativa(coop);
+        a.setCuit(cuit+9);
+        a.setDni(32369235);
+        a.setIngreso(new Date());
+        a.setLegajo(2);
+        a.setNombre("Tormenta de Facha");
+        a.setTelefono("154729680");
+        
+        new AsociadoDaoImp().addAsociado(a);
+        a.setApellido("Risco");
+        a.setCooperativa(coop);
+        a.setCuit(cuit+1);
+        a.setDni(32369235);
+        a.setIngreso(new Date());
+        a.setLegajo(3);
+        a.setNombre("Carlo");
+        a.setTelefono("154729680");
+        new AsociadoDaoImp().addAsociado(a);
     }
 }

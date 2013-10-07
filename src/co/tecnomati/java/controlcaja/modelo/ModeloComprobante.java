@@ -12,6 +12,7 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.ClienteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteconceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
+import co.tecnomati.java.controlcaja.util.ComprobanteUtil;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -70,7 +71,7 @@ public class ModeloComprobante extends AbstractTableModel {
             case 2:objeto = getTipoOperacion();break;
             case 3:objeto =comprobante.getTipocomprobante().getReferencia();break;
 //            case 3:objeto =new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getReferencia();break;
-            case 4:objeto = comprobante.getNumeroSerieIzq()+"-"+comprobante.getNumeroSerieDer();break;
+            case 4:objeto = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq())+"-"+ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());break;
             case 5:objeto = getRazonSocial();break;
             case 6:objeto =  getMontoTotal(comprobante.getId());break; // ver aqui
 

@@ -95,8 +95,8 @@ public class GUIComprobante extends javax.swing.JDialog {
         // cargos los datos para editar
         dateComprobante.setDate(comprobante.getFecha());
         cmbTipoProceso.setSelectedIndex(comprobante.getTipoProceso());
-        txtnumSerie1.setText(String.valueOf(comprobante.getNumeroSerieIzq()));
-        txtNumSerie2.setText(String.valueOf(comprobante.getNumeroSerieDer()));
+        txtnumSerie1.setText(ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq()));
+        txtNumSerie2.setText(ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer()));
         
         // entidad
         entidad = new Entidad();
@@ -596,6 +596,10 @@ public class GUIComprobante extends javax.swing.JDialog {
         agregado = true;
 
         JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
+//        if (!modificar) {
+//           new Impresora(comprobante).Imprimir();    
+//        }
+        this.dispose();
         setEnabledBotonImprimir(tipoComprobante.getCodigo());
 //        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -758,10 +762,10 @@ public class GUIComprobante extends javax.swing.JDialog {
              numIzq = ComprobanteUtil.incrementarNumSerieIzq(numIzq);
         }
         numDer = ComprobanteUtil.incrementarNumSerieDer(tipoComprobante.getNumeroSerieDer());
-        System.out.println(numIzq);
-        System.out.println(numDer);
-        txtnumSerie1.setText(String.valueOf(numIzq));
-        txtNumSerie2.setText(String.valueOf(numDer));
+//        System.out.println(numIzq);
+//        System.out.println(numDer);
+        txtnumSerie1.setText(ComprobanteUtil.formatearNumSerieIzq(numIzq));
+        txtNumSerie2.setText(ComprobanteUtil.formatearNumSerieDer(numDer));
 //         switch (tipoComprobante.getFormulario()) {
 //            case Constantes.RECIBO_ANTICIPO_RETORNO:
 //                System.out.println(Constantes.RECIBO_ANTICIPO_RETORNO);

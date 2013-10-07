@@ -47,7 +47,7 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
         session.beginTransaction();
         session.save(a);
         session.getTransaction().commit();
-        session.flush();
+//        session.flush();
         session.close();
     }
 
@@ -101,7 +101,7 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
         Comprobante a = (Comprobante) session.get(Comprobante.class, idComprobante);
         Tipocomprobante tipoCom = a.getTipocomprobante();
         session.getTransaction().commit();
-
+        session.close();
         return tipoCom;
     }
 
@@ -115,6 +115,7 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
         Comprobante a = (Comprobante) session.get(Comprobante.class, idComprobante);
         Set<Comprobanteconcepto> conjuntoConceptos = a.getComprobanteconceptos();
         session.getTransaction().commit();
+        session.close();
 
         return conjuntoConceptos;
 

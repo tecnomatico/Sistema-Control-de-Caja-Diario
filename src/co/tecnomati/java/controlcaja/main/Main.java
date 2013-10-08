@@ -30,9 +30,10 @@ public class Main {
      */
     public static void main(String[] args) {
        try{
-           if( new CategoriaComprobanteDaoImp().listarCategoriaComprobante().isEmpty())
+           if( new CategoriaComprobanteDaoImp().listarCategoriaComprobante().isEmpty()){
              Creador.CrearCategoriaComprobanteYRecibos();
             Creador.CrearCooperativayAsociado();
+           }
        }catch(Exception e){
            JOptionPane.showMessageDialog(null, "LA BD NO ESTA INICIADA, POR FAVOR ACTIVE EL SERVICIO Y VUELVA ARRANCAR EL SISTEMA ", "ERROR", JOptionPane.ERROR_MESSAGE);
        }

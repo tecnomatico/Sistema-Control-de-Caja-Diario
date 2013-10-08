@@ -95,7 +95,7 @@ public class TipoComprobanteDaoImp extends HibernateUtil implements TipoComproba
 //        Session session = getSessionFactory().openSession();
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-
+           
         String sql = "from Tipocomprobante tc \n"
                 + "join fetch tc.categoriacomprobante as cc\n"
                 + "where tc.referencia ='" + ref + "'";

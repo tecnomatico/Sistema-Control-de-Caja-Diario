@@ -15,5 +15,6 @@ public interface CategoriaComprobanteDAO {
   public void addCategoriacomprobante(Categoriacomprobante a);
   public void deleteCategoriacomprobante(Categoriacomprobante a);
   public void upDateCategoriacomprobante(Categoriacomprobante a);
+  public Categoriacomprobante getCategoriaComprobanteXdescripcion(String descripcion);
    
 }

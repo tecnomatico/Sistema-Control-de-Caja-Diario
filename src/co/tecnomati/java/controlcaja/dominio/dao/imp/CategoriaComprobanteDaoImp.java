@@ -24,7 +24,7 @@ public class CategoriaComprobanteDaoImp extends HibernateUtil implements Categor
         Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(Tipocomprobante.class);
+        Criteria criteria = session.createCriteria(Categoriacomprobante.class);
         
         ArrayList<Categoriacomprobante> categoriacomprobante = (ArrayList<Categoriacomprobante>)criteria.list();
         session.close();
@@ -56,5 +56,16 @@ public class CategoriaComprobanteDaoImp extends HibernateUtil implements Categor
         session.update(a);
         session.getTransaction().commit();
         session.close();     }
+
+    public Categoriacomprobante getCategoriaComprobanteXdescripcion(String descripcion) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        String sql= "from Categoriacomprobante where descripcion ='"+descripcion+"'";  
+       
+        Categoriacomprobante catcomp = (Categoriacomprobante)session.createQuery(sql).uniqueResult();
+        session.getTransaction().commit();
+        session.close();
+        return catcomp;
+    }
     
 }

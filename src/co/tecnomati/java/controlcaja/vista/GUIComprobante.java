@@ -77,11 +77,12 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         setDatos();
         // esto es porque debe reflejar las variables q se enccargan de mantener el numero de serie en todo momento
-        numIzq= tipoComprobante.getNumeroSerieIzq();
-        numDer= tipoComprobante.getNumeroSerieDer();
+        numIzq = tipoComprobante.getNumeroSerieIzq();
+        numDer = tipoComprobante.getNumeroSerieDer();
         //cargar datos del combobox
 //        setDatosCmbTipoFormulario();
         controlarTipoOperacion();
+        ControlarEditableNumeroSerie();
         setEnabledBotonImprimir(tipoComprobante.getCodigo());
 
 //        setDatosNombreEntidad();
@@ -97,7 +98,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         cmbTipoProceso.setSelectedIndex(comprobante.getTipoProceso());
         txtnumSerie1.setText(ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq()));
         txtNumSerie2.setText(ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer()));
-        
+
         // entidad
         entidad = new Entidad();
         entidad.setId(comprobante.getIdEntidad());
@@ -198,12 +199,14 @@ public class GUIComprobante extends javax.swing.JDialog {
         txtMonto = new org.edisoncor.gui.textField.TextField();
         labelMetric10 = new org.edisoncor.gui.label.LabelMetric();
         txtDescripcionConcepto = new org.edisoncor.gui.textField.TextField();
-        panelConceptosAdicionales = new org.edisoncor.gui.panel.Panel();
-        jCheckBox1 = new javax.swing.JCheckBox();
         btnGuardar = new org.edisoncor.gui.button.ButtonIpod();
         btnCancelar = new org.edisoncor.gui.button.ButtonIpod();
         dateComprobante = new com.toedter.calendar.JDateChooser();
         btnImprimir = new org.edisoncor.gui.button.ButtonIpod();
+        panelContendedorPanelMonotrib = new org.edisoncor.gui.panel.Panel();
+        panelMonotributo = new org.edisoncor.gui.panel.Panel();
+        chkAporteMonotributo = new javax.swing.JCheckBox();
+        txtMontoMonotributo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -378,33 +381,6 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         txtDescripcionConcepto.setEditable(false);
 
-        panelConceptosAdicionales.setEnabled(false);
-
-        jCheckBox1.setText("Aporte de Monotributo");
-        jCheckBox1.setEnabled(false);
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelConceptosAdicionalesLayout = new javax.swing.GroupLayout(panelConceptosAdicionales);
-        panelConceptosAdicionales.setLayout(panelConceptosAdicionalesLayout);
-        panelConceptosAdicionalesLayout.setHorizontalGroup(
-            panelConceptosAdicionalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelConceptosAdicionalesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBox1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelConceptosAdicionalesLayout.setVerticalGroup(
-            panelConceptosAdicionalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelConceptosAdicionalesLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jCheckBox1)
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout panelConceptoLayout = new javax.swing.GroupLayout(panelConcepto);
         panelConcepto.setLayout(panelConceptoLayout);
         panelConceptoLayout.setHorizontalGroup(
@@ -412,26 +388,23 @@ public class GUIComprobante extends javax.swing.JDialog {
             .addGroup(panelConceptoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelConceptosAdicionales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelMetric10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDescripcionConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelConceptoLayout.createSequentialGroup()
                         .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMetric10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDescripcionConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panelConceptoLayout.createSequentialGroup()
-                                .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCodigoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 219, Short.MAX_VALUE)))))
+                            .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 219, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelConceptoLayout.setVerticalGroup(
             panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConceptoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCodigoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -443,9 +416,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelConceptosAdicionales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(207, 207, 207))
         );
 
         btnGuardar.setText("Guardar");
@@ -473,22 +444,80 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
         });
 
+        panelContendedorPanelMonotrib.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        panelContendedorPanelMonotrib.setMaximumSize(new java.awt.Dimension(426, 84));
+        panelContendedorPanelMonotrib.setMinimumSize(new java.awt.Dimension(426, 84));
+
+        panelMonotributo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 102)));
+        panelMonotributo.setEnabled(false);
+        panelMonotributo.setMaximumSize(new java.awt.Dimension(414, 62));
+        panelMonotributo.setMinimumSize(new java.awt.Dimension(414, 62));
+
+        chkAporteMonotributo.setBackground(new java.awt.Color(51, 51, 51));
+        chkAporteMonotributo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        chkAporteMonotributo.setForeground(new java.awt.Color(255, 255, 255));
+        chkAporteMonotributo.setText("Aporte de Monotributo");
+        chkAporteMonotributo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkAporteMonotributoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelMonotributoLayout = new javax.swing.GroupLayout(panelMonotributo);
+        panelMonotributo.setLayout(panelMonotributoLayout);
+        panelMonotributoLayout.setHorizontalGroup(
+            panelMonotributoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMonotributoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chkAporteMonotributo)
+                .addGap(18, 18, 18)
+                .addComponent(txtMontoMonotributo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelMonotributoLayout.setVerticalGroup(
+            panelMonotributoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMonotributoLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(panelMonotributoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkAporteMonotributo)
+                    .addComponent(txtMontoMonotributo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelContendedorPanelMonotribLayout = new javax.swing.GroupLayout(panelContendedorPanelMonotrib);
+        panelContendedorPanelMonotrib.setLayout(panelContendedorPanelMonotribLayout);
+        panelContendedorPanelMonotribLayout.setHorizontalGroup(
+            panelContendedorPanelMonotribLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelContendedorPanelMonotribLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelMonotributo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelContendedorPanelMonotribLayout.setVerticalGroup(
+            panelContendedorPanelMonotribLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelContendedorPanelMonotribLayout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(panelMonotributo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelEntidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panel1Layout.createSequentialGroup()
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelContendedorPanelMonotrib, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelEntidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelComprobante, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelConcepto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
                         .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dateComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 279, Short.MAX_VALUE))
-                    .addGroup(panel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(122, 122, 122)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -508,8 +537,10 @@ public class GUIComprobante extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
-                .addComponent(panelConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelContendedorPanelMonotrib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -563,8 +594,8 @@ public class GUIComprobante extends javax.swing.JDialog {
         comprobante.setNumeroSerieIzq(numIzq);
         comprobante.setNumeroSerieDer(numDer);
         // aqui deberia ir concatendado la ref+iz+der
-        comprobante.setNumeroSerie(tipoComprobante.getReferencia()+numIzq+numDer);
-        System.out.println(tipoComprobante.getReferencia()+numIzq+numDer);
+        comprobante.setNumeroSerie(tipoComprobante.getReferencia() + numIzq + numDer);
+        System.out.println(tipoComprobante.getReferencia() + numIzq + numDer);
         comprobante.setTipoProceso(cmbTipoProceso.getSelectedIndex());
         comprobante.setTipocomprobante(tipoComprobante);
 
@@ -588,7 +619,7 @@ public class GUIComprobante extends javax.swing.JDialog {
             detalle.setComprobante(comprobante);
             detalle.setMonto(Double.parseDouble(txtMonto.getText()));
             new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalle);
-            
+
             // si saliio todo ok entonces actualizo el contador de comprobante 
             actualizarNumeroDeSerie(tipoComprobante);
 
@@ -603,24 +634,20 @@ public class GUIComprobante extends javax.swing.JDialog {
         setEnabledBotonImprimir(tipoComprobante.getCodigo());
 //        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
-    
-    public void actualizarNumeroDeSerie(Tipocomprobante tc){
-        if (tc.getFormulario().equals(Constantes.RECIBO_ANTICIPO_RETORNO) ||
-                tc.getFormulario().equals(Constantes.RECIBO_DISTRIBUCION_EXCEDENTE) || 
-                tc.getFormulario().equals(Constantes.RECIBO_INTEGRACION_CUOTA)||
-                tc.getFormulario().equals(Constantes.RECIBO_PAGO)||
-                tc.getFormulario().equals(Constantes.RECIBO_REEMBOLSO_CUOTA_SOCIAL)
-           ) {
+
+    public void actualizarNumeroDeSerie(Tipocomprobante tc) {
+        if (tc.getFormulario().equals(Constantes.RECIBO_ANTICIPO_RETORNO)
+                || tc.getFormulario().equals(Constantes.RECIBO_DISTRIBUCION_EXCEDENTE)
+                || tc.getFormulario().equals(Constantes.RECIBO_INTEGRACION_CUOTA)
+                || tc.getFormulario().equals(Constantes.RECIBO_PAGO)
+                || tc.getFormulario().equals(Constantes.RECIBO_REEMBOLSO_CUOTA_SOCIAL)) {
             tc.setNumeroSerieIzq(numIzq);
             tc.setNumeroSerieDer(numDer);
             new TipoComprobanteDaoImp().upDateTipoFormulario(tc);
-            
+
         }
     }
-    
-    
-    
-    
+
     /**
      *
      * @param tipoComprobante entero que determina el tipo de comprobante
@@ -725,41 +752,75 @@ public class GUIComprobante extends javax.swing.JDialog {
         }
     }
 
+    public void limpiarNumeroSerie() {
+        txtnumSerie1.setText("");
+        txtNumSerie2.setText("");
+    }
+
     /**
-     * Determina la numeracion del comprobante
+     * Determina la numeracion del comprobante actual
      */
-    public void controlarNumeroSerie() {
+    public void GenerarNumeroSerie() {
         switch (tipoComprobante.getCategoriacomprobante().getDescripcion()) {
             case Constantes.CATEGORIA_BOLETA:
                 System.out.println("boleta");
+                limpiarNumeroSerie();
 
                 break;
             case Constantes.CATEGORIA_CHEQUE:
                 System.out.println("cheque");
-
+                limpiarNumeroSerie();
                 break;
             case Constantes.CATEGORIA_FACTURA:
                 System.out.println("factura");
-
+                limpiarNumeroSerie();
                 break;
 
             case Constantes.CATEGORIA_RECIBO:
                 System.out.println("recibo");
+                
                 // generar automaticamente el numero de serie con la numeracion que le toca
                 txtnumSerie1.setEditable(false);
                 txtNumSerie2.setEditable(false);
                 generarNumerodeSerieRecibo();
+                txtCuit.requestFocus();
                 break;
         }
 
     }
+    public void controlarPanelMonotributo(){
+        if(tipoComprobante.getCodigo()==Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO){
+//            panelContendedorPanelMonotrib.setVisible(true);
+              chkAporteMonotributo.setEnabled(true);
+              txtMontoMonotributo.setEnabled(true);
+              
+        }else{
+//            panelContendedorPanelMonotrib.setVisible(false);
+              chkAporteMonotributo.setEnabled(false);
+              txtMontoMonotributo.setEnabled(false);
+        }
+    }
+    
+    /**
+     * Controla si se puede poner la propiedad Editable o no el Numero de Serie
+     */
+    public void ControlarEditableNumeroSerie() {
+        if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_PAGO || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_INTEGRACION_CUOTA) {
+            txtnumSerie1.setEditable(false);
+            txtNumSerie2.setEditable(false);
+        } else {
+            txtnumSerie1.setEditable(true);
+            txtNumSerie2.setEditable(true);
+
+        }
+    }
 
     public void generarNumerodeSerieRecibo() {
         // incrementar el numero de serie
-         numIzq = tipoComprobante.getNumeroSerieIzq();
-         numDer= tipoComprobante.getNumeroSerieDer();
+        numIzq = tipoComprobante.getNumeroSerieIzq();
+        numDer = tipoComprobante.getNumeroSerieDer();
         if (ComprobanteUtil.isLLenoPosicionDer(numDer)) {
-             numIzq = ComprobanteUtil.incrementarNumSerieIzq(numIzq);
+            numIzq = ComprobanteUtil.incrementarNumSerieIzq(numIzq);
         }
         numDer = ComprobanteUtil.incrementarNumSerieDer(tipoComprobante.getNumeroSerieDer());
 //        System.out.println(numIzq);
@@ -809,7 +870,9 @@ public class GUIComprobante extends javax.swing.JDialog {
                 txtTipoComprobante.setText(tipoComprobante.getFormulario());
                 controlarTipoOperacion();
                 controlarEntidad();
-                controlarNumeroSerie();
+                GenerarNumeroSerie();
+                controlarPanelMonotributo();
+                ControlarEditableNumeroSerie();
                 txtnumSerie1.requestFocus();
 
 
@@ -821,7 +884,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                     txtTipoComprobante.setText(tipoComprobante.getFormulario());
                     controlarTipoOperacion();
                     controlarEntidad();
-                    controlarNumeroSerie();
+                    GenerarNumeroSerie();
                     txtnumSerie1.requestFocus();
                 }
             }
@@ -842,9 +905,9 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     }//GEN-LAST:event_txtCodigoConceptoKeyTyped
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void chkAporteMonotributoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAporteMonotributoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_chkAporteMonotributoActionPerformed
 
     private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
         MyUtil.consumirLetras(evt, txtCodigoConcepto, 0);
@@ -956,9 +1019,9 @@ public class GUIComprobante extends javax.swing.JDialog {
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnGuardar;
     private org.edisoncor.gui.button.ButtonIpod btnImprimir;
+    private javax.swing.JCheckBox chkAporteMonotributo;
     private org.edisoncor.gui.comboBox.ComboBoxRect cmbTipoProceso;
     private com.toedter.calendar.JDateChooser dateComprobante;
-    private javax.swing.JCheckBox jCheckBox1;
     private org.edisoncor.gui.label.LabelMetric labelMetric10;
     private org.edisoncor.gui.label.LabelMetric labelMetric2;
     private org.edisoncor.gui.label.LabelMetric labelMetric3;
@@ -971,12 +1034,14 @@ public class GUIComprobante extends javax.swing.JDialog {
     private org.edisoncor.gui.panel.Panel panel1;
     private org.edisoncor.gui.panel.Panel panelComprobante;
     private org.edisoncor.gui.panel.Panel panelConcepto;
-    private org.edisoncor.gui.panel.Panel panelConceptosAdicionales;
+    private org.edisoncor.gui.panel.Panel panelContendedorPanelMonotrib;
     private org.edisoncor.gui.panel.Panel panelEntidad;
+    private org.edisoncor.gui.panel.Panel panelMonotributo;
     private org.edisoncor.gui.textField.TextField txtCodigoConcepto;
     private org.edisoncor.gui.textField.TextField txtCuit;
     private org.edisoncor.gui.textField.TextField txtDescripcionConcepto;
     private org.edisoncor.gui.textField.TextField txtMonto;
+    private javax.swing.JTextField txtMontoMonotributo;
     private org.edisoncor.gui.textField.TextField txtNombre;
     private org.edisoncor.gui.textField.TextField txtNumSerie2;
     private org.edisoncor.gui.textField.TextField txtRefTipoCompr;

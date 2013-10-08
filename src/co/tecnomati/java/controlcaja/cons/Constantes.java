@@ -29,6 +29,7 @@ public class Constantes {
      public static final String NAME_INICIO_CAJA = "REGISTRO DE INICIO DE CAJA";
      public static final String NAME_NUEVO_PROVEEDOR = "NUEVO PROVEEDOR";
      public static final String NAME_NUEVO_CLIENTE = "NUEVO CLIENTE";
+    public static final String NAME_NUEVO_CATEGORIA="NUEVA CATEGORIA";
      
      public static final String NAME_EDITAR_ASOCIADO = "EDITAR ASOCIADO";
      public static final String NAME_EDITAR_DOCUMENTO = "EDITAR COMPROBANTE";
@@ -75,6 +76,7 @@ public class Constantes {
     public static final String CATEGORIA_RECIBO = "RECIBO";
     public static final String CATEGORIA_CHEQUE = "CHEQUE";
     public static final String CATEGORIA_BOLETA = "BOLETA";
+   
     
      
 }

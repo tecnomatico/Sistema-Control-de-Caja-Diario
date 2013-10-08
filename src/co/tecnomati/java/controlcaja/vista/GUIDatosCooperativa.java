@@ -8,9 +8,11 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Cooperativa;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
 import java.awt.Color;
+import java.awt.Label;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -23,7 +25,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     Cooperativa cooperativa=null;
     boolean operacionOk = false; // este es una variable que se pone en verdadero si se guardo con exito los datos 
     boolean modificar=false;
-
+    javax.swing.ImageIcon icono= new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/ErrorX.png"));
     /**
      * Creates new form GUIDatosCooperativa
      */
@@ -81,11 +83,23 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         labelMetric7 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric8 = new org.edisoncor.gui.label.LabelMetric();
         txtInicioCaja = new org.edisoncor.gui.textField.TextField();
+        lblImgNombre = new javax.swing.JLabel();
+        lblImgMatricula = new javax.swing.JLabel();
+        lblImgCuit = new javax.swing.JLabel();
+        lblImgIngBruto = new javax.swing.JLabel();
+        lblImgInicioCaja = new javax.swing.JLabel();
+        lblImgTelefono = new javax.swing.JLabel();
+        lblImgDomicilio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         labelMetric1.setText("Nombre");
 
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
+            }
+        });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreKeyTyped(evt);
@@ -105,6 +119,11 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         txtCuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCuitActionPerformed(evt);
+            }
+        });
+        txtCuit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCuitKeyTyped(evt);
             }
         });
 
@@ -145,9 +164,47 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
 
         labelMetric6.setText("Inicio de Actividad");
 
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
+
         labelMetric7.setText("Telefono");
 
         labelMetric8.setText("Inicio de Caja");
+
+        txtInicioCaja.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtInicioCajaKeyTyped(evt);
+            }
+        });
+
+        lblImgNombre.setMaximumSize(new java.awt.Dimension(25, 25));
+        lblImgNombre.setMinimumSize(new java.awt.Dimension(25, 25));
+        lblImgNombre.setPreferredSize(new java.awt.Dimension(25, 25));
+
+        lblImgMatricula.setMaximumSize(new java.awt.Dimension(25, 25));
+        lblImgMatricula.setMinimumSize(new java.awt.Dimension(25, 25));
+        lblImgMatricula.setPreferredSize(new java.awt.Dimension(25, 25));
+
+        lblImgCuit.setMaximumSize(new java.awt.Dimension(25, 25));
+        lblImgCuit.setMinimumSize(new java.awt.Dimension(25, 25));
+        lblImgCuit.setPreferredSize(new java.awt.Dimension(25, 25));
+
+        lblImgIngBruto.setMaximumSize(new java.awt.Dimension(25, 25));
+        lblImgIngBruto.setMinimumSize(new java.awt.Dimension(25, 25));
+        lblImgIngBruto.setPreferredSize(new java.awt.Dimension(25, 25));
+
+        lblImgInicioCaja.setMaximumSize(new java.awt.Dimension(25, 25));
+        lblImgInicioCaja.setMinimumSize(new java.awt.Dimension(25, 25));
+        lblImgInicioCaja.setPreferredSize(new java.awt.Dimension(25, 25));
+
+        lblImgTelefono.setText("jLabel6");
+
+        lblImgDomicilio.setMaximumSize(new java.awt.Dimension(0, 0));
+        lblImgDomicilio.setMinimumSize(new java.awt.Dimension(25, 25));
+        lblImgDomicilio.setPreferredSize(new java.awt.Dimension(25, 25));
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -156,34 +213,41 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panel1Layout.createSequentialGroup()
-                            .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(panel1Layout.createSequentialGroup()
-                                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
-                                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                    .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                    .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtCuit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                    .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                    .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtIngresoBruto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addContainerGap()))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(panel1Layout.createSequentialGroup()
+                                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
+                                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                        .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                        .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtCuit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                        .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                        .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtIngresoBruto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblImgMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblImgCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblImgIngBruto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblImgDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblImgNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,7 +257,12 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtInicioCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dateIncioActividad, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)))))
+                            .addComponent(dateIncioActividad, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblImgInicioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblImgTelefono))))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,36 +270,46 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
                 .addGap(50, 50, 50)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblImgNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblImgMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblImgCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIngresoBruto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblImgIngBruto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateIncioActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtInicioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtInicioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblImgInicioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(9, 9, 9)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblImgTelefono))
                 .addGap(8, 8, 8)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                    .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblImgDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -266,39 +345,69 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
      
             if (validacionGUICooperativa()) {
-                JOptionPane.showMessageDialog(null, "Debe completar todos los campos...");
+                
+                if (txtNombre.getText().equals("")) {
+                    lblImgNombre.setIcon(icono);
+                } 
+                if (txtMatricula.getText().equals("")) {
+                        lblImgMatricula.setIcon(icono);
+                }
+                if (txtCuit.getText().equals("")) {
+                            lblImgCuit.setIcon(icono);
+                }
+                if (txtInicioCaja.getText().equals("")) {
+                                lblImgInicioCaja.setIcon(icono);
+                }
+                if (txtIngresoBruto.getText().equals("")) {
+                    lblImgIngBruto.setIcon(icono);
+                }
+                if (txtDomicilio.getText().equals("")) {
+                    lblImgDomicilio.setIcon(icono);
+                } 
+                
+                
+                JOptionPane.showMessageDialog(null, "Debe completar todos los campos que son Obligatorios.");
+                
+//                for (Iterator<JTextField> it = listaTxt.iterator(); it.hasNext();) {
+//                    JTextField jTextField = it.next();
+////                    for (Iterator<JLabel> it1 = listaLabels.iterator(); it1.hasNext();) {
+//                        //JLabel jLabel = it1.next();
+//                            if (jTextField.getText().equals("")) {
+//                                
+////                                jLabel.setIcon(icono);
+//                            }
+////                    }
+//                }
             } else {
                 if (cooperativa==null) {
                     System.out.println("entro nuevo");
                     cooperativa= new Cooperativa();
                     getDatos();       
                     new CooperativaDaoImp().addCooperativa(cooperativa);
+                    JOptionPane.showMessageDialog(null, "Los datos fueron cargados correctamente.");
+                    this.dispose();
                 } else {
                     System.out.println("entro a modificar");
                     getDatos();
                     new CooperativaDaoImp().upDateCooperativa(cooperativa);
+                    JOptionPane.showMessageDialog(null, "Los datos fueron modificados correctamente.");
+                    this.dispose();
                 }                        
             }
 
-//        if (cooperativa==null) {
-//             System.out.println("entro nuevo");
-//             cooperativa= new Cooperativa();
-//             getDatos();
-//       
-//            new CooperativaDaoImp().addCooperativa(cooperativa);
-//            } else {
-//                 System.out.println("entro a modificar");
-//                 getDatos();
-//                new CooperativaDaoImp().upDateCooperativa(cooperativa);
-//            }
-  
         operacionOk= true;
-    //this.dispose();
-        // TODO add your handling code here:
+        //this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-       permitirSoloLetras(evt);
+       if(txtNombre.getText().length()>=12){
+            evt.consume();
+       }
+        
+       char TipoDeTecla = evt.getKeyChar();
+       if(Character.isDigit(TipoDeTecla)){
+            evt.consume();
+       }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtMatriculaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyTyped
@@ -310,8 +419,30 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     }//GEN-LAST:event_txtIngresoBrutoKeyTyped
 
     private void txtDomicilioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDomicilioKeyTyped
-        permitirSoloLetras(evt);
+        if(txtIngresoBruto.getText().length()>=12){
+            evt.consume();
+        }        
+        char TipoDeTecla = evt.getKeyChar();
+        if(Character.isDigit(TipoDeTecla)){
+            evt.consume();
+        }
     }//GEN-LAST:event_txtDomicilioKeyTyped
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+
+    }//GEN-LAST:event_txtNombreFocusLost
+
+    private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
+        permitirSoloNumero(evt);
+    }//GEN-LAST:event_txtCuitKeyTyped
+
+    private void txtInicioCajaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInicioCajaKeyTyped
+        permitirSoloNumero(evt);
+    }//GEN-LAST:event_txtInicioCajaKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        permitirSoloNumero(evt);
+    }//GEN-LAST:event_txtTelefonoKeyTyped
 
     public void setDatos(Cooperativa cooperativa){
         txtNombre.setText(cooperativa.getRazonSocial());
@@ -339,6 +470,13 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
      */
     public boolean validacionGUICooperativa(){
         boolean vacio = true;
+        //boolean vacio = true;
+//        ArrayList<JLabel> listaLabels = new ArrayList();
+//        listaLabels.add(lblImgNombre);
+//        listaLabels.add(lblImgMatricula); listaLabels.add(lblImgCuit);
+//        listaLabels.add(lblImgIngBruto);listaLabels.add(lblImgInicioCaja);
+//        listaLabels.add(lblImgDomicilio);
+        
         ArrayList<JTextField> listaTxt = new ArrayList();
         listaTxt.add(txtNombre);
         listaTxt.add(txtMatricula); listaTxt.add(txtCuit);
@@ -347,28 +485,74 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         listaTxt.add(txtDomicilio);
         for (Iterator<JTextField> it = listaTxt.iterator(); it.hasNext();) {
             JTextField jTextField = it.next();
-            if (jTextField.getText().equals("")) {
-                jTextField.setBackground(Color.red);
-                vacio = true;
-                break;
-            }else{
-                vacio = false;
-            }             
+//            for (Iterator<JLabel> it1 = listaLabels.iterator(); it1.hasNext();) {
+//                JLabel jLabel = it1.next();
+                if (jTextField.getText().equals("")) {
+//                    jTextField.setBackground(Color.yellow);                
+//                    jLabel.setIcon(icono);                                    
+                    vacio = true;
+                }else{
+                    vacio = false;
+                }             
+                
+//            }
         }
+        
+//        if (txtNombre.getText().equals("")) {
+//            txtNombre.setBackground(Color.red);
+//            vacio = true;
+//        } else {
+//            if (txtMatricula.getText().equals("")) {
+//                txtMatricula.setBackground(Color.red);
+//                vacio = true;
+//            } else {
+//                if (txtCuit.getText().equals("")) {
+//                    txtCuit.setBackground(Color.red);
+//                    vacio = true;
+//                } else {
+//                    if (txtIngresoBruto.getText().equals("")) {
+//                        txtIngresoBruto.setBackground(Color.red);
+//                        vacio = true;
+//                    } else {
+//                        if (txtInicioCaja.getText().equals("")) {
+//                            txtInicioCaja.setBackground(Color.red);
+//                            vacio = true;
+//                        } else {
+//                            if (txtDomicilio.getText().equals("")) {
+//                                txtDomicilio.setBackground(Color.red);
+//                                vacio = true;
+//                            }else{
+//                                vacio = false;
+//                            } 
+//                        }
+//                    }
+//                }
+//            }
+//        }
         return vacio;
     }
+//    public boolean validacionGUICooperativa(){
+//        boolean vacio = true;
+//        ArrayList<JTextField> listaTxt = new ArrayList();
+//        listaTxt.add(txtNombre);
+//        listaTxt.add(txtMatricula); listaTxt.add(txtCuit);
+//        listaTxt.add(txtIngresoBruto);listaTxt.add(txtInicioCaja);
+////        listaTxt.add(txtTelFijo);listaTxt.add(txtTelCel);
+//        listaTxt.add(txtDomicilio);
+//        for (Iterator<JTextField> it = listaTxt.iterator(); it.hasNext();) {
+//            JTextField jTextField = it.next();
+//            if (jTextField.getText().equals("")) {
+//                jTextField.setBackground(Color.red);
+//                vacio = true;
+//                break;
+//            }else{
+//                vacio = false;
+//            }             
+//        }
+//        return vacio;
+//    }
     
-    public void permitirSoloLetras(java.awt.event.KeyEvent evt){
-        // conusmir los caracteres del legajo excepto los numeros
-        char caracter = evt.getKeyChar();
-        if(((caracter < '0') ||
-            (caracter > '9')) &&
-            (caracter != '\b' /*corresponde a BACK_SPACE*/))
-        {
-            evt.consume();  // ignorar el evento de teclado
-        }
-    }
-    
+
     private void permitirSoloNumero(java.awt.event.KeyEvent evt) {
         // permitir solo el ingreso de numero
         char caracter = evt.getKeyChar();
@@ -434,6 +618,13 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     private org.edisoncor.gui.label.LabelMetric labelMetric6;
     private org.edisoncor.gui.label.LabelMetric labelMetric7;
     private org.edisoncor.gui.label.LabelMetric labelMetric8;
+    private javax.swing.JLabel lblImgCuit;
+    private javax.swing.JLabel lblImgDomicilio;
+    private javax.swing.JLabel lblImgIngBruto;
+    private javax.swing.JLabel lblImgInicioCaja;
+    private javax.swing.JLabel lblImgMatricula;
+    private javax.swing.JLabel lblImgNombre;
+    private javax.swing.JLabel lblImgTelefono;
     private org.edisoncor.gui.panel.Panel panel1;
     private org.edisoncor.gui.textField.TextField txtCuit;
     private org.edisoncor.gui.textField.TextField txtDomicilio;

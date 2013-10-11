@@ -8,7 +8,10 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Cliente;
 import co.tecnomati.java.controlcaja.dominio.dao.ClienteDAO;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ClienteDaoImp;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -26,6 +29,12 @@ private boolean modificar=false;
         initComponents();
        
         cliente = new Cliente();    
+    
+        SNumeros(txtCuit);
+        SNumeros(txtTelefono);
+        //SLetras(txtDomicilio);
+        SLetras(txtRazonSocial);
+      
         this.setTitle(Constantes.NAME_NUEVO_CLIENTE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -265,6 +274,32 @@ private boolean modificar=false;
             }
         });
     }
+    
+        public void SLetras(JTextField a){
+    a.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyTyped(KeyEvent v){
+            char c=v.getKeyChar();
+            if (Character.isDigit(c)){
+                getToolkit().beep();
+                v.consume();
+            }
+        }
+    });
+            }
+      public void SNumeros(JTextField a){
+    a.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyTyped(KeyEvent v){
+            char c=v.getKeyChar();
+            if (!Character.isDigit(c)){
+                getToolkit().beep();
+                v.consume();
+            }
+        }
+    });
+            }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnGuardar;

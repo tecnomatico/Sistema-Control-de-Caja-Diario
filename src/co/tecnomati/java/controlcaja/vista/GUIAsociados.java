@@ -9,7 +9,10 @@ import co.tecnomati.java.controlcaja.dominio.Asociado;
 import co.tecnomati.java.controlcaja.dominio.dao.AsociadoDAO;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
 import java.awt.Frame;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -26,6 +29,11 @@ public class GUIAsociados extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setTitle(Constantes.NAME_NUEVO_ASOCIADO);
+        SNumeros(txtDNI);
+        SNumeros(txtCuit);
+        SNumeros(txtTelefono);
+        SLetras(txtApellido);
+        SLetras(txtNombre);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -325,6 +333,37 @@ public class GUIAsociados extends javax.swing.JDialog {
             }
         });
     }
+/*
+ * Permite validar que solo se ingrese a un jtxtfields letras o numeros 
+ * dependiento el tipo.
+ * La parte importante de esta funcion es Character.isDigit
+ */    
+    public void SLetras(JTextField a){
+    a.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyTyped(KeyEvent v){
+            char c=v.getKeyChar();
+            if (Character.isDigit(c)){
+                getToolkit().beep();
+                v.consume();
+            }
+        }
+    });
+            }
+      public void SNumeros(JTextField a){
+    a.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyTyped(KeyEvent v){
+            char c=v.getKeyChar();
+            if (!Character.isDigit(c)){
+                getToolkit().beep();
+                v.consume();
+            }
+        }
+    });
+            }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.label.LabelMetric Apellido1;
     private org.edisoncor.gui.label.LabelMetric Apellido2;

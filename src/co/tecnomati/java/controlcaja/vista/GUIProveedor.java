@@ -8,7 +8,10 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Proveedor;
 import co.tecnomati.java.controlcaja.dominio.dao.ProveedorDAO;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -25,6 +28,10 @@ public class GUIProveedor extends javax.swing.JDialog {
         initComponents();
         proveedor = new Proveedor();
         this.setTitle(Constantes.NAME_NUEVO_PROVEEDOR);
+        SNumeros(txtCuit);
+        SNumeros(txtTelefono);
+        //SLetras(txtDomicilio);
+        SLetras(txtRazonSocial);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -270,6 +277,31 @@ public class GUIProveedor extends javax.swing.JDialog {
             }
         });
     }
+    
+            public void SLetras(JTextField a){
+    a.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyTyped(KeyEvent v){
+            char c=v.getKeyChar();
+            if (Character.isDigit(c)){
+                getToolkit().beep();
+                v.consume();
+            }
+        }
+    });
+            }
+      public void SNumeros(JTextField a){
+    a.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyTyped(KeyEvent v){
+            char c=v.getKeyChar();
+            if (!Character.isDigit(c)){
+                getToolkit().beep();
+                v.consume();
+            }
+        }
+    });
+            }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnGuardar;

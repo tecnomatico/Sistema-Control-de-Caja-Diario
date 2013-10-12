@@ -88,7 +88,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         lblImgCuit = new javax.swing.JLabel();
         lblImgIngBruto = new javax.swing.JLabel();
         lblImgInicioCaja = new javax.swing.JLabel();
-        lblImgTelefono = new javax.swing.JLabel();
+        lblImgInicioActividad = new javax.swing.JLabel();
         lblImgDomicilio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -200,9 +200,10 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         lblImgInicioCaja.setMinimumSize(new java.awt.Dimension(25, 25));
         lblImgInicioCaja.setPreferredSize(new java.awt.Dimension(25, 25));
 
-        lblImgTelefono.setText("jLabel6");
+        lblImgInicioActividad.setMaximumSize(new java.awt.Dimension(25, 25));
+        lblImgInicioActividad.setMinimumSize(new java.awt.Dimension(25, 25));
+        lblImgInicioActividad.setPreferredSize(new java.awt.Dimension(25, 25));
 
-        lblImgDomicilio.setMaximumSize(new java.awt.Dimension(0, 0));
         lblImgDomicilio.setMinimumSize(new java.awt.Dimension(25, 25));
         lblImgDomicilio.setPreferredSize(new java.awt.Dimension(25, 25));
 
@@ -261,7 +262,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblImgInicioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblImgTelefono))))
+                            .addComponent(lblImgInicioActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
@@ -290,20 +291,18 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateIncioActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(dateIncioActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblImgInicioActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtInicioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblImgInicioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(9, 9, 9)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblImgTelefono))
+                    .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtInicioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblImgInicioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(9, 9, 9)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -364,7 +363,9 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
                 if (txtDomicilio.getText().equals("")) {
                     lblImgDomicilio.setIcon(icono);
                 } 
-                
+                if (dateIncioActividad.getDate() == null) {
+                    lblImgInicioActividad.setIcon(icono);
+                } 
                 
                 JOptionPane.showMessageDialog(null, "Debe completar todos los campos que son Obligatorios.");
                 
@@ -621,10 +622,10 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     private javax.swing.JLabel lblImgCuit;
     private javax.swing.JLabel lblImgDomicilio;
     private javax.swing.JLabel lblImgIngBruto;
+    private javax.swing.JLabel lblImgInicioActividad;
     private javax.swing.JLabel lblImgInicioCaja;
     private javax.swing.JLabel lblImgMatricula;
     private javax.swing.JLabel lblImgNombre;
-    private javax.swing.JLabel lblImgTelefono;
     private org.edisoncor.gui.panel.Panel panel1;
     private org.edisoncor.gui.textField.TextField txtCuit;
     private org.edisoncor.gui.textField.TextField txtDomicilio;

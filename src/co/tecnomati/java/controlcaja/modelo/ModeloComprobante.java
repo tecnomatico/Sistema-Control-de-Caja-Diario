@@ -5,6 +5,7 @@
 package co.tecnomati.java.controlcaja.modelo;
 
 import co.tecnomati.java.controlcaja.cons.Constantes;
+import co.tecnomati.java.controlcaja.dominio.Asociado;
 import co.tecnomati.java.controlcaja.dominio.Comprobante;
 import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
@@ -132,7 +133,10 @@ public class ModeloComprobante extends AbstractTableModel {
        
         switch (comprobante.getTipoPersona().intValue()) {
             
-             case Constantes.ASOCIADO_INT :objeto = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad()).getNombre();break;
+             case Constantes.ASOCIADO_INT :
+                                 Asociado a =  new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+                                 objeto = a.getApellido()+" " + a.getNombre();
+                                 break;
              case Constantes.PROVEEDOR_INT :objeto = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad()).getRazonSocial();break;
              case Constantes.CLIENTE_INT :objeto = new ClienteDaoImp().getCliente(comprobante.getIdEntidad()).getRazonSocial();break;
 

@@ -4,19 +4,9 @@
  */
 package co.tecnomati.java.controlcaja.main;
 
-import co.tecnomati.java.controlcaja.dominio.Comprobante;
-import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CategoriaComprobanteDaoImp;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
-import co.tecnomati.java.controlcaja.util.ComprobanteUtil;
 import co.tecnomati.java.controlcaja.util.Creador;
-import co.tecnomati.java.controlcaja.util.NumberToLetterConverter;
 import co.tecnomati.java.controlcaja.vista.GUIGestorDeCaja;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Iterator;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,8 +21,10 @@ public class Main {
     public static void main(String[] args) {
        try{
            if( new CategoriaComprobanteDaoImp().listarCategoriaComprobante().isEmpty()){
-             Creador.CrearCategoriaComprobanteYRecibos();
+            Creador.crearConceptos();
+               Creador.CrearCategoriaComprobanteYRecibos();
             Creador.CrearCooperativayAsociado();
+            
            }
        }catch(Exception e){
            JOptionPane.showMessageDialog(null, "LA BD NO ESTA INICIADA, POR FAVOR ACTIVE EL SERVICIO Y VUELVA ARRANCAR EL SISTEMA ", "ERROR", JOptionPane.ERROR_MESSAGE);

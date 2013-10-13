@@ -7,10 +7,12 @@ package co.tecnomati.java.controlcaja.util;
 import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Asociado;
 import co.tecnomati.java.controlcaja.dominio.Categoriacomprobante;
+import co.tecnomati.java.controlcaja.dominio.Concepto;
 import co.tecnomati.java.controlcaja.dominio.Cooperativa;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CategoriaComprobanteDaoImp;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.ConceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
 import java.util.Date;
@@ -99,7 +101,30 @@ public class Creador {
         new TipoComprobanteDaoImp().addTipoFormulario(recibo);
 
     }
-    
+    /**
+     * Crea conceptos que deben estar obligariamente en la bd
+     */
+    public static void crearConceptos(){
+        Concepto concepto = new Concepto();
+        concepto.setCodigoConcepto(Constantes.CONCEPTO_CODIGO_ANTICIPO_RETORNO);
+        concepto.setDescripcion(Constantes.CONCEPTO_DESCRIPCION_ANTICIPO_RETORNO);
+        new ConceptoDaoImp().addConcepto(concepto);
+        
+        concepto = new Concepto();
+        concepto.setCodigoConcepto(Constantes.CONCEPTO_CODIGO_DISTRIBUCION_EXCEDENTE);
+        concepto.setDescripcion(Constantes.CONCEPTO_DESCRIPCION_DISTRIBUCION_EXCEDENTE);
+        new ConceptoDaoImp().addConcepto(concepto);
+        
+        concepto = new Concepto();
+        concepto.setCodigoConcepto(Constantes.CONCEPTO_CODIGO_INTEGRACION_CUOTA);
+        concepto.setDescripcion(Constantes.CONCEPTO_DESCRIPCION_INTEGRACION_CUOTA);
+        new ConceptoDaoImp().addConcepto(concepto);
+        
+        concepto = new Concepto();
+        concepto.setCodigoConcepto(Constantes.CONCEPTO_CODIGO_REEMBOLSO_CUOTA_SOCIAL);
+        concepto.setDescripcion(Constantes.CONCEPTO_DESCRIPCION_REEMBOLSO_CUOTA_SOCIAL);
+        new ConceptoDaoImp().addConcepto(concepto);
+    }
     public static void CrearCooperativayAsociado(){
         Cooperativa coop = new Cooperativa();
         long cuit = 12345;

@@ -5,7 +5,8 @@
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/control_caja?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.username">tecnomatico</property>
+    <property name="hibernate.connection.password">tecnojava2013</property>
     <mapping resource="co/tecnomati/java/controlcaja/dominio/Comprobanteconcepto.hbm.xml"/>
     <mapping resource="co/tecnomati/java/controlcaja/dominio/Cooperativa.hbm.xml"/>
     <mapping resource="co/tecnomati/java/controlcaja/dominio/Concepto.hbm.xml"/>

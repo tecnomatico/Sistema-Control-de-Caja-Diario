@@ -77,6 +77,22 @@ public class Constantes {
     public static final String CATEGORIA_CHEQUE = "CHEQUE";
     public static final String CATEGORIA_BOLETA = "BOLETA";
    
-    
+  // conceptos 
+        public static final String CONCEPTO_DESCRIPCION_ANTICIPO_RETORNO = "ANTICIPO DE RETORNO";
+        public static final int CONCEPTO_CODIGO_ANTICIPO_RETORNO = 1;
+        
+        public static final String CONCEPTO_DESCRIPCION_DISTRIBUCION_EXCEDENTE = "DISTRIBUCION DE EXCEDENTES";
+        public static final int CONCEPTO_CODIGO_DISTRIBUCION_EXCEDENTE = 2;
+        
+        public static final String CONCEPTO_DESCRIPCION_INTEGRACION_CUOTA = "INTEGRACION DE CUOTA";
+        public static final int CONCEPTO_CODIGO_INTEGRACION_CUOTA = 3;
+        
+        public static final String CONCEPTO_DESCRIPCION_REEMBOLSO_CUOTA_SOCIAL = "REEMBOLSO DE CUOTA SOCIAL";
+        public static final int CONCEPTO_CODIGO_REEMBOLSO_CUOTA_SOCIAL = 4;
+        
+     
+        
+
+
      
 }

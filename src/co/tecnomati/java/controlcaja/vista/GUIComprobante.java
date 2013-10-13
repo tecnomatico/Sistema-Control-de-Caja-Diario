@@ -25,6 +25,8 @@ import co.tecnomati.java.controlcaja.util.Entidad;
 import co.tecnomati.java.controlcaja.util.Impresora;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import co.tecnomati.java.controlcaja.util.mensajero;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.Iterator;
@@ -38,37 +40,45 @@ import javax.swing.JOptionPane;
  */
 public class GUIComprobante extends javax.swing.JDialog {
 
-    private Comprobante comprobante;
-    private boolean modificar;
-    private Concepto concepto;
-    private boolean agregado;
+    // esto es lo basico que debe tener una ventana de carga de datos
+    private Comprobante comprobante; // comprobante que sera guardado o modificado
+    private boolean modificar; // indicador de si uso esta ventana para modificar o crear 
+    private boolean agregado; // indicador para saber si el usuario realizo la operacion de  carga o actualizacion de los datos del comprobante
+    // clase auxiliar en la que almacena temporalmente un Asociado, Cliente o Proveedor
     Entidad entidad;
-    private Tipocomprobante tipoComprobante;
-    Set<Comprobanteconcepto> conjuntoConceptos;
-    Comprobanteconcepto comprobanteconcepto;
+    // Son elemementos que conforman un comprobante
+    private Concepto concepto = null;
+    private Tipocomprobante tipoComprobante = null;
+    Set<Comprobanteconcepto> conjuntoConceptos = null;
+    Comprobanteconcepto comprobanteconcepto = null;
+    // guarda la numeracion del numerod de serie del comprobante
     private long numIzq;
     private long numDer;
 
     /**
-     * Creates new form GUIComprobante
+     * Constructor usado para crear un Comprobante
      */
     public GUIComprobante(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         modificar = false;
         comprobante = new Comprobante();
-        //cargar datos del combobox
-//        setDatosCmbTipoFormulario();
-//        setEscuchadorDeEventosCmboTipoComprobante();
-
-        //cargar los campos de texto con 
-//        setDatosNombreEntidad();
+        
+        
         this.setTitle(Constantes.NAME_NUEVO_REGISTRO);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
     }
 
+    /**
+     * Constructor usado para Editar un comprobante
+     *
+     * @param parent
+     * @param modal
+     * @param compr El comprobante que envio para q se desplegue en el
+     * formulario para su edicion
+     */
     public GUIComprobante(java.awt.Frame parent, boolean modal, Comprobante compr) {
         super(parent, modal);
         initComponents();
@@ -79,11 +89,12 @@ public class GUIComprobante extends javax.swing.JDialog {
         // esto es porque debe reflejar las variables q se enccargan de mantener el numero de serie en todo momento
         numIzq = tipoComprobante.getNumeroSerieIzq();
         numDer = tipoComprobante.getNumeroSerieDer();
-        //cargar datos del combobox
-//        setDatosCmbTipoFormulario();
+
         controlarTipoOperacion();
+        controlarTipodeComprobante();
         ControlarEditableNumeroSerie();
         setEnabledBotonImprimir(tipoComprobante.getCodigo());
+        controlarPanelMonotributo();
 
 //        setDatosNombreEntidad();
         this.setTitle(Constantes.NAME_NUEVO_REGISTRO);
@@ -92,6 +103,18 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     }
 
+    /**
+     * Cuando se utilize para editar el comprobante , No se puede editar el
+     * campo Tipo de Comprobante.
+     *
+     */
+    public void controlarTipodeComprobante() {
+        txtRefTipoCompr.setEditable(false);
+    }
+
+    /**
+     * Carga en la ventana la informacion del Comprobante
+     */
     public void setDatos() {
         // cargos los datos para editar
         dateComprobante.setDate(comprobante.getFecha());
@@ -112,12 +135,24 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         //Conceptoss
         conjuntoConceptos = comprobante.getComprobanteconceptos();
+        
 //        conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());
+        int cont = 0;
         for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
             comprobanteconcepto = it.next();
-            txtCodigoConcepto.setText(String.valueOf(comprobanteconcepto.getConcepto().getCodigoConcepto()));
-            txtDescripcionConcepto.setText(comprobanteconcepto.getConcepto().getDescripcion());
+            cont =cont+1;
+            if (cont==1) {
+            concepto= comprobanteconcepto.getConcepto();
+            txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
+            txtDescripcionConcepto.setText(concepto.getDescripcion());
             txtMonto.setText(String.valueOf(comprobanteconcepto.getMonto()));
+            } else {
+               // existe el aporte de monotribbuto ademas
+               txtAporteMonotributo.setText(String.valueOf(comprobanteconcepto.getMonto()));
+               chkAporteMonotributo.setSelected(true);
+            }
+            
+            
         }
 
         switch (comprobante.getTipoPersona()) {
@@ -141,24 +176,12 @@ public class GUIComprobante extends javax.swing.JDialog {
     }
 
     /**
-     *
+     * Tiene que realizar la captura de datos de la ventana y pasarsela al
+     * Objeto Comprobante para su posterior Carga o Actualizacion en la bd
      */
     public void getDatos() {
     }
 
-//    public void setDatosCmbTipoFormulario() {
-////        cmbTipoComprobante.removeAllItems();
-////
-////        if (new TipoComprobanteDaoImp().listarTipoFormulario().isEmpty()) {
-////            cmbTipoComprobante.setEditable(false);
-////        } else {
-////            cmbTipoComprobante.setEditable(true);
-////            for (Tipocomprobante o : new TipoComprobanteDaoImp().listarTipoFormulario()) {
-////                cmbTipoComprobante.addItem(o.getReferencia());
-////            }
-////            AutoCompleteDecorator.decorate(this.cmbTipoComprobante);
-////        }
-//    }
     public boolean isAgregado() {
         return agregado;
     }
@@ -192,6 +215,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         txtNombre = new org.edisoncor.gui.textField.TextField();
         labelMetric9 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric8 = new org.edisoncor.gui.label.LabelMetric();
+        btnBuscarEntidad = new org.edisoncor.gui.button.ButtonIpod();
         panelConcepto = new org.edisoncor.gui.panel.Panel();
         labelMetric6 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric7 = new org.edisoncor.gui.label.LabelMetric();
@@ -206,30 +230,44 @@ public class GUIComprobante extends javax.swing.JDialog {
         panelContendedorPanelMonotrib = new org.edisoncor.gui.panel.Panel();
         panelMonotributo = new org.edisoncor.gui.panel.Panel();
         chkAporteMonotributo = new javax.swing.JCheckBox();
-        txtMontoMonotributo = new javax.swing.JTextField();
+        txtAporteMonotributo = new org.edisoncor.gui.textField.TextField();
+        btnEliminar = new org.edisoncor.gui.button.ButtonIpod();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        panel1.setColorPrimario(new java.awt.Color(153, 153, 153));
+        panel1.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 102, 102)));
+        panel1.setColorPrimario(new java.awt.Color(0, 0, 0));
 
-        labelMetric2.setText("Fecha");
+        labelMetric2.setText("FECHA");
+        labelMetric2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
-        panelComprobante.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Comprobante", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(255, 255, 255)));
-        panelComprobante.setColorPrimario(new java.awt.Color(153, 153, 153));
+        panelComprobante.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 102)));
+        panelComprobante.setForeground(new java.awt.Color(255, 255, 255));
+        panelComprobante.setColorPrimario(new java.awt.Color(0, 0, 0));
 
-        labelMetric4.setText("Tipo Comprobante: ");
+        labelMetric4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelMetric4.setText("TIPO DE COMPROB");
+        labelMetric4.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
-        labelMetric5.setText("Serie-Numero");
+        labelMetric5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelMetric5.setText("      NUMERO-SERIE");
+        labelMetric5.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
+        txtnumSerie1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtnumSerie1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtnumSerie1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtnumSerie1KeyTyped(evt);
             }
         });
 
-        labelMetric3.setText("Tipo Proceso");
+        labelMetric3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelMetric3.setText("  OPERACION");
+        labelMetric3.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
+        cmbTipoProceso.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 102)));
         cmbTipoProceso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ENTRADA", "SALIDA" }));
+        cmbTipoProceso.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         cmbTipoProceso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbTipoProcesoActionPerformed(evt);
@@ -241,6 +279,8 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
         });
 
+        txtNumSerie2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNumSerie2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtNumSerie2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNumSerie2KeyTyped(evt);
@@ -254,6 +294,8 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
         });
 
+        txtRefTipoCompr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtRefTipoCompr.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtRefTipoCompr.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtRefTipoComprKeyPressed(evt);
@@ -270,48 +312,56 @@ public class GUIComprobante extends javax.swing.JDialog {
             .addGroup(panelComprobanteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelComprobanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
+                    .addGroup(panelComprobanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panelComprobanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelComprobanteLayout.createSequentialGroup()
-                        .addComponent(cmbTipoProceso, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelComprobanteLayout.createSequentialGroup()
-                        .addComponent(txtRefTipoCompr, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTipoComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelComprobanteLayout.createSequentialGroup()
-                        .addComponent(txtnumSerie1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelComprobanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtnumSerie1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                            .addComponent(txtRefTipoCompr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNumSerie2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(panelComprobanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTipoComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panelComprobanteLayout.createSequentialGroup()
+                                .addComponent(txtNumSerie2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 179, Short.MAX_VALUE))))
+                    .addComponent(cmbTipoProceso, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         panelComprobanteLayout.setVerticalGroup(
             panelComprobanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelComprobanteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelComprobanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbTipoProceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(panelComprobanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelComprobanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtTipoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtRefTipoCompr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addComponent(txtRefTipoCompr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelMetric4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtTipoComprobante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelComprobanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtnumSerie1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNumSerie2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelComprobanteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTipoProceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
-        panelEntidad.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entidad", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(255, 255, 255)));
-        panelEntidad.setColorPrimario(new java.awt.Color(153, 153, 153));
+        panelEntidad.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 102)));
+        panelEntidad.setColorPrimario(new java.awt.Color(0, 0, 0));
 
+        txtCuit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCuit.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtCuit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCuitActionPerformed(evt);
+            }
+        });
         txtCuit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCuitKeyPressed(evt);
@@ -322,6 +372,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         });
 
         txtNombre.setEditable(false);
+        txtNombre.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNombreKeyPressed(evt);
@@ -329,45 +380,71 @@ public class GUIComprobante extends javax.swing.JDialog {
         });
 
         labelMetric9.setText("RAZON SOCIAL:    ");
+        labelMetric9.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
+        labelMetric8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelMetric8.setText("CUIT");
+        labelMetric8.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        btnBuscarEntidad.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 102, 102)));
+        btnBuscarEntidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/Profile.png"))); // NOI18N
+        btnBuscarEntidad.setText("Buscar");
+        btnBuscarEntidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarEntidadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelEntidadLayout = new javax.swing.GroupLayout(panelEntidad);
         panelEntidad.setLayout(panelEntidadLayout);
         panelEntidadLayout.setHorizontalGroup(
             panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEntidadLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMetric9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelMetric9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(127, Short.MAX_VALUE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                    .addGroup(panelEntidadLayout.createSequentialGroup()
+                        .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscarEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         panelEntidadLayout.setVerticalGroup(
             panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEntidadLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelEntidadLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEntidadLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnBuscarEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        panelConcepto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle de Concepto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(255, 255, 255)));
-        panelConcepto.setColorPrimario(new java.awt.Color(153, 153, 153));
+        panelConcepto.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 102)));
+        panelConcepto.setColorPrimario(new java.awt.Color(0, 0, 0));
 
-        labelMetric6.setText("codigo Concepto: ");
+        labelMetric6.setText("COD CONCEPTO");
+        labelMetric6.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
-        labelMetric7.setText("Monto ");
+        labelMetric7.setText("MONTO $");
+        labelMetric7.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
+        txtCodigoConcepto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCodigoConcepto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtCodigoConcepto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCodigoConceptoKeyPressed(evt);
@@ -377,28 +454,38 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
         });
 
-        labelMetric10.setText("Concepto");
+        txtMonto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtMonto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtMonto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMontoKeyTyped(evt);
+            }
+        });
+
+        labelMetric10.setText("CONCEPTO");
+        labelMetric10.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         txtDescripcionConcepto.setEditable(false);
+        txtDescripcionConcepto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout panelConceptoLayout = new javax.swing.GroupLayout(panelConcepto);
         panelConcepto.setLayout(panelConceptoLayout);
         panelConceptoLayout.setHorizontalGroup(
             panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConceptoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelMetric10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDescripcionConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelConceptoLayout.createSequentialGroup()
                         .addGroup(panelConceptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodigoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 219, Short.MAX_VALUE)))
+                            .addComponent(txtCodigoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelConceptoLayout.setVerticalGroup(
@@ -419,6 +506,8 @@ public class GUIComprobante extends javax.swing.JDialog {
                 .addGap(207, 207, 207))
         );
 
+        btnGuardar.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 102, 102)));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/GUARDAR.jpg"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -426,6 +515,8 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
         });
 
+        btnCancelar.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 102, 102)));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/Atras.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -436,6 +527,8 @@ public class GUIComprobante extends javax.swing.JDialog {
         dateComprobante.setDate(new Date());
         dateComprobante.setMaxSelectableDate(new Date());
 
+        btnImprimir.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 102, 102)));
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/print_32.png"))); // NOI18N
         btnImprimir.setText("Imprimir");
         btnImprimir.setEnabled(false);
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
@@ -444,22 +537,34 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
         });
 
-        panelContendedorPanelMonotrib.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        panelContendedorPanelMonotrib.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 102)));
+        panelContendedorPanelMonotrib.setColorPrimario(new java.awt.Color(0, 0, 0));
         panelContendedorPanelMonotrib.setMaximumSize(new java.awt.Dimension(426, 84));
         panelContendedorPanelMonotrib.setMinimumSize(new java.awt.Dimension(426, 84));
 
         panelMonotributo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 102)));
+        panelMonotributo.setColorPrimario(new java.awt.Color(0, 0, 0));
         panelMonotributo.setEnabled(false);
         panelMonotributo.setMaximumSize(new java.awt.Dimension(414, 62));
         panelMonotributo.setMinimumSize(new java.awt.Dimension(414, 62));
 
-        chkAporteMonotributo.setBackground(new java.awt.Color(51, 51, 51));
-        chkAporteMonotributo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        chkAporteMonotributo.setBackground(new java.awt.Color(0, 0, 0));
+        chkAporteMonotributo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         chkAporteMonotributo.setForeground(new java.awt.Color(255, 255, 255));
-        chkAporteMonotributo.setText("Aporte de Monotributo");
+        chkAporteMonotributo.setText("Aporte de Monotributo: $");
+        chkAporteMonotributo.setEnabled(false);
         chkAporteMonotributo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkAporteMonotributoActionPerformed(evt);
+            }
+        });
+
+        txtAporteMonotributo.setEditable(false);
+        txtAporteMonotributo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtAporteMonotributo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtAporteMonotributo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAporteMonotributoKeyTyped(evt);
             }
         });
 
@@ -471,16 +576,16 @@ public class GUIComprobante extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(chkAporteMonotributo)
                 .addGap(18, 18, 18)
-                .addComponent(txtMontoMonotributo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtAporteMonotributo, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addGap(200, 200, 200))
         );
         panelMonotributoLayout.setVerticalGroup(
             panelMonotributoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMonotributoLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(18, 18, 18)
                 .addGroup(panelMonotributoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chkAporteMonotributo)
-                    .addComponent(txtMontoMonotributo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAporteMonotributo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -496,32 +601,43 @@ public class GUIComprobante extends javax.swing.JDialog {
         panelContendedorPanelMonotribLayout.setVerticalGroup(
             panelContendedorPanelMonotribLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelContendedorPanelMonotribLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelMonotributo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        btnEliminar.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 102, 102)));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/ELIMINAR3.jpg"))); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+            .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelContendedorPanelMonotrib, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelEntidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelComprobante, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelConcepto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelContendedorPanelMonotrib, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelEntidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 279, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dateComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(122, 122, 122)
+                        .addGap(54, 54, 54)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                         .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -529,23 +645,24 @@ public class GUIComprobante extends javax.swing.JDialog {
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(panelComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addComponent(panelConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelContendedorPanelMonotrib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -573,68 +690,101 @@ public class GUIComprobante extends javax.swing.JDialog {
     public boolean validarCamposVacio() {
         boolean b = false;
 
-        boolean cTC, cNS1, cNS2, cD, cLN = false;
-        cTC = txtTipoComprobante.getText().trim().isEmpty();
-        cNS1 = txtnumSerie1.getText().trim().isEmpty();
-//            cNS2 = txtnumSerie2.getText().trim().isEmpty();
-//            cD = txtDni.getText().trim().isEmpty();
-//            cLN = txtLugarNac.getText().trim().isEmpty();
-
+        boolean bconcepto, bentidad, btipocomprobante, bnumeroSerie,bmonto,bmonotributo;
+        btipocomprobante = tipoComprobante == null;
+        bconcepto = concepto == null;
+        bentidad = entidad == null;
+        bnumeroSerie = txtnumSerie1.getText().trim().isEmpty() && txtNumSerie2.getText().trim().isEmpty();
+        bmonto = txtMonto.getText().trim().isEmpty();
+//         System.out.println("El monto es "+ bmonto);
+        if (!btipocomprobante && !bconcepto && !bentidad && !bentidad && !bnumeroSerie) {
+            b = true;
+        } else {
+            if (btipocomprobante) {
+                mensajero.mensajeError(null, "Tipo comprobante no puede estar vacio");
+            } else if (bnumeroSerie) {
+                mensajero.mensajeError(null, "Numero de Serie no puede estar vacio");
+            } else if (bentidad) {
+                mensajero.mensajeError(null, "Entidad no puede estar vacio");
+            } else if (bconcepto) {
+                mensajero.mensajeError(null, "Concepto no puede estar vacio");
+            }  else if (bmonto) {
+                mensajero.mensajeError(null, "Monto no puede estar vacio");
+            }
+        }
 
 
         return b;
     }
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        if (validarCamposVacio()) {
+            //cargo los datos en el objeto comprobante
+            comprobante.setIdEntidad(entidad.getId());
+            comprobante.setTipoPersona(entidad.getTipoEntidad());
+            comprobante.setFecha(dateComprobante.getDate());
+            comprobante.setNumeroSerieIzq(numIzq);
+            comprobante.setNumeroSerieDer(numDer);
+            // aqui deberia ir concatendado la ref+iz+der
+            comprobante.setNumeroSerie(tipoComprobante.getReferencia() + numIzq + numDer);
+            System.out.println(tipoComprobante.getReferencia() + numIzq + numDer);
+            comprobante.setTipoProceso(cmbTipoProceso.getSelectedIndex());
+            comprobante.setTipocomprobante(tipoComprobante);
 
-        //cargo los datos en el objeto comprobante
-        comprobante.setIdEntidad(entidad.getId());
-        comprobante.setTipoPersona(entidad.getTipoEntidad());
-        comprobante.setFecha(dateComprobante.getDate());
-        comprobante.setNumeroSerieIzq(numIzq);
-        comprobante.setNumeroSerieDer(numDer);
-        // aqui deberia ir concatendado la ref+iz+der
-        comprobante.setNumeroSerie(tipoComprobante.getReferencia() + numIzq + numDer);
-        System.out.println(tipoComprobante.getReferencia() + numIzq + numDer);
-        comprobante.setTipoProceso(cmbTipoProceso.getSelectedIndex());
-        comprobante.setTipocomprobante(tipoComprobante);
+            //realizo el almacenamiento o actualizacion de los datos segun corresponda
+            if (modificar) {
 
-        //realizo el almacenamiento o actualizacion de los datos segun corresponda
-        if (modificar) {
+                //modificar
+                new ComprobanteDaoImp().upDateFormulario(comprobante);
+                //update comprobante concepto para 1 solo concepto
+                comprobanteconcepto.setConcepto(new ConceptoDaoImp().getConcepto(Integer.parseInt(txtCodigoConcepto.getText())));
+                comprobanteconcepto.setMonto(Double.parseDouble(txtMonto.getText()));
+                new ComprobanteconceptoDaoImp().upDateComprobanteconcepto(comprobanteconcepto);
+            } else {
+                //el objeto entidad solo se cargara cuando es nuevo
 
-            //modificar
-            new ComprobanteDaoImp().upDateFormulario(comprobante);
-            //update comprobante concepto para 1 solo concepto
-            comprobanteconcepto.setConcepto(new ConceptoDaoImp().getConcepto(Integer.parseInt(txtCodigoConcepto.getText())));
-            comprobanteconcepto.setMonto(Double.parseDouble(txtMonto.getText()));
-            new ComprobanteconceptoDaoImp().upDateComprobanteconcepto(comprobanteconcepto);
-        } else {
-            //el objeto entidad solo se cargara cuando es nuevo
+                new ComprobanteDaoImp().addFormulario(comprobante);
 
-            new ComprobanteDaoImp().addFormulario(comprobante);
+                // aqui debe cargar 1 o dos conceptos dependiendo si carga monotributo son dos
+                Comprobanteconcepto detalle = new Comprobanteconcepto();
+                detalle.setConcepto(concepto);
+                detalle.setComprobante(comprobante);
+                detalle.setMonto(Double.parseDouble(txtMonto.getText()));
+                new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalle);
+                System.out.print("Hey no esta ejecutnado el guardar");
+                // carga el segundo detalle si es un recibo anticipo de retorno
+                if (tipoComprobante.getCodigo()==Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO) {
+                     System.out.println(Constantes.CONCEPTO_DESCRIPCION_ANTICIPO_RETORNO);
+                    
+                      Comprobanteconcepto detalleMonotributo = new Comprobanteconcepto();
+                      detalleMonotributo.setConcepto(new ConceptoDaoImp().getConceptoCod(Constantes.CONCEPTO_CODIGO_ANTICIPO_RETORNO));
+                      detalleMonotributo.setComprobante(comprobante);
+                      detalleMonotributo.setMonto(Double.parseDouble(txtAporteMonotributo.getText()));
+                      new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalleMonotributo);
+                }
+                // si saliio todo ok entonces actualizo el contador de comprobante 
+                actualizarNumeroDeSerie(tipoComprobante);
 
+            }
+            agregado = true;
 
-            Comprobanteconcepto detalle = new Comprobanteconcepto();
-            detalle.setConcepto(concepto);
-            detalle.setComprobante(comprobante);
-            detalle.setMonto(Double.parseDouble(txtMonto.getText()));
-            new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalle);
-
-            // si saliio todo ok entonces actualizo el contador de comprobante 
-            actualizarNumeroDeSerie(tipoComprobante);
-
-        }
-        agregado = true;
-
-        JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
+            JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
 //        if (!modificar) {
 //           new Impresora(comprobante).Imprimir();    
 //        }
-        this.dispose();
-        setEnabledBotonImprimir(tipoComprobante.getCodigo());
-//        this.dispose();
+            this.dispose();
+            setEnabledBotonImprimir(tipoComprobante.getCodigo());
+//        this.dispose();     
+        }
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    /**
+     *
+     * @param tc Tipo de comprobante que se utilizo Realiza la actualizacion del
+     * numero de serie en la bd para el tipo de comprobante que se utilizo en la
+     * carga del comprobante
+     */
     public void actualizarNumeroDeSerie(Tipocomprobante tc) {
         if (tc.getFormulario().equals(Constantes.RECIBO_ANTICIPO_RETORNO)
                 || tc.getFormulario().equals(Constantes.RECIBO_DISTRIBUCION_EXCEDENTE)
@@ -651,8 +801,8 @@ public class GUIComprobante extends javax.swing.JDialog {
     /**
      *
      * @param tipoComprobante entero que determina el tipo de comprobante
-     * almacenado si el tipo de comprobante pertenece a uno de los 5 tipos de
-     * recibo entonces se activa
+     * almacenado. Si el tipo de comprobante pertenece a uno de los 5 tipos de
+     * recibo entonces se activa para que el usuario determine si desea imprimir
      */
     public void setEnabledBotonImprimir(int tipoComprobante) {
         if (tipoComprobante <= 5) {
@@ -677,8 +827,15 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     }//GEN-LAST:event_txtNombreKeyPressed
 
+    public GUIComprobante() {
+    }
     private void txtCodigoConceptoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoConceptoKeyPressed
+//        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+//            @Override
+//            public boolean dispatchKeyEvent(KeyEvent evt) {
+
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
             int codigoConcepto = Integer.parseInt(txtCodigoConcepto.getText().trim());
             if (!"".equals(codigoConcepto)) {
                 concepto = new ConceptoDaoImp().getConcepto(codigoConcepto);
@@ -701,6 +858,13 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
 
         }
+
+
+//                return false;
+//            }
+//        });
+
+
     }//GEN-LAST:event_txtCodigoConceptoKeyPressed
 
     private void txtTipoComprobanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoComprobanteKeyPressed
@@ -720,7 +884,9 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     /**
      * ESte metodo controla si el comprobante que se esta por registrar es uno
-     * de entrada o salida
+     * de entrada o salida En el caso de que el comprobante sea de entrada o
+     * salida se deja de modo editable para que el usuario lo determine
+     * manualmente
      */
     public void controlarTipoOperacion() {
         // determinar si es una operacion de entrada o salida
@@ -778,7 +944,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
             case Constantes.CATEGORIA_RECIBO:
                 System.out.println("recibo");
-                
+
                 // generar automaticamente el numero de serie con la numeracion que le toca
                 txtnumSerie1.setEditable(false);
                 txtNumSerie2.setEditable(false);
@@ -788,24 +954,35 @@ public class GUIComprobante extends javax.swing.JDialog {
         }
 
     }
-    public void controlarPanelMonotributo(){
-        if(tipoComprobante.getCodigo()==Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO){
+
+    /**
+     * Controla de que no se pueda editar este panel si el Tipo de Cmprobante no
+     * es Uno de Anticipo de REtorno
+     */
+    public void controlarPanelMonotributo() {
+        if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO) {
 //            panelContendedorPanelMonotrib.setVisible(true);
-              chkAporteMonotributo.setEnabled(true);
-              txtMontoMonotributo.setEnabled(true);
-              
-        }else{
+            chkAporteMonotributo.setEnabled(true);
+            txtAporteMonotributo.setEnabled(true);
+           
+
+        } else {
 //            panelContendedorPanelMonotrib.setVisible(false);
-              chkAporteMonotributo.setEnabled(false);
-              txtMontoMonotributo.setEnabled(false);
+            chkAporteMonotributo.setEnabled(false);
+            txtAporteMonotributo.setEnabled(false);
+             chkAporteMonotributo.setSelected(false);
+             txtAporteMonotributo.setText("");
         }
     }
-    
+
     /**
      * Controla si se puede poner la propiedad Editable o no el Numero de Serie
+     * Esto depende de que si se trata de un Tipo de comprobante con numero de
+     * serie de generacion automatica o no.
      */
     public void ControlarEditableNumeroSerie() {
         if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_PAGO || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_INTEGRACION_CUOTA) {
+            // para estos tipos de comprobante se genera automaticamente por lo que se debe controlar de que no se pueda editar el campo de numero de serie
             txtnumSerie1.setEditable(false);
             txtNumSerie2.setEditable(false);
         } else {
@@ -906,17 +1083,28 @@ public class GUIComprobante extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCodigoConceptoKeyTyped
 
     private void chkAporteMonotributoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAporteMonotributoActionPerformed
-        // TODO add your handling code here:
+        if (chkAporteMonotributo.isSelected()) {
+                    txtAporteMonotributo.setText("0");
+                    txtAporteMonotributo.setEditable(true);
+
+        } else {
+                    txtAporteMonotributo.setText("");
+                    txtAporteMonotributo.setEditable(false);
+
+        }
     }//GEN-LAST:event_chkAporteMonotributoActionPerformed
 
     private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
         MyUtil.consumirLetras(evt, txtCodigoConcepto, 0);
     }//GEN-LAST:event_txtCuitKeyTyped
 
-    private void txtCuitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_F1) {
-
-            if (!txtRefTipoCompr.getText().isEmpty()) {
+    /**
+     *  metodo que se encarga de buscar la entidad y lo almacena en un objeto entidad
+     * Reliza una pequeña validadcion : si no se eligio un tipo de copmrobante entnoces no se puede realizar la busqueda
+     */
+    private void buscarEntidad (){
+        if (tipoComprobante != null) {
+//            if (!txtRefTipoCompr.getText().isEmpty()) {
                 GUIgestorEntidades gestorEntidad = new GUIgestorEntidades(null, true, tipoComprobante.getCodigo());
                 if (gestorEntidad.isSelecciono()) {
                     entidad = gestorEntidad.getEntidad();
@@ -929,19 +1117,19 @@ public class GUIComprobante extends javax.swing.JDialog {
                         txtCuit.setText(String.valueOf(cliente.getCuit()));
                         txtNombre.setText(cliente.getRazonSocial());
                     } else if (entidad.getTipoEntidad() == Constantes.ASOCIADO_INT) {
-                        /*System.out.println(entidad.getTipoEntidad()+" ..tip entidadq");
-                         System.out.println(Constantes.ASOCIADO_INT+" ..tipo entidadq");
-                         System.out.println("id entidadd"+entidad.getId());
-                         */
                         Asociado asociado = new AsociadoDaoImp().getAsociado(entidad.getId());
                         txtCuit.setText(String.valueOf(asociado.getCuit()));
-                        txtNombre.setText(asociado.getNombre());
+                        txtNombre.setText(asociado.getApellido() + " " + asociado.getNombre());
                     }
                 }
 
             } else {
                 JOptionPane.showMessageDialog(null, "Debes elegir un Tipo de Comprobante antes de continuar con este paso");
             }
+    }
+    private void txtCuitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            buscarEntidad();
         }
     }//GEN-LAST:event_txtCuitKeyPressed
 
@@ -973,6 +1161,26 @@ public class GUIComprobante extends javax.swing.JDialog {
             txtRefTipoCompr.requestFocus();
         }
     }//GEN-LAST:event_cmbTipoProcesoKeyPressed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEntidadActionPerformed
+        buscarEntidad();
+    }//GEN-LAST:event_btnBuscarEntidadActionPerformed
+
+    private void txtCuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCuitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCuitActionPerformed
+
+    private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoKeyTyped
+           MyUtil.consumirLetras(evt, txtMonto, 20);
+    }//GEN-LAST:event_txtMontoKeyTyped
+
+    private void txtAporteMonotributoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAporteMonotributoKeyTyped
+        MyUtil.consumirLetras(evt, txtMonto, 15);
+    }//GEN-LAST:event_txtAporteMonotributoKeyTyped
 
     /**
      * @param args the command line arguments
@@ -1016,7 +1224,9 @@ public class GUIComprobante extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.edisoncor.gui.button.ButtonIpod btnBuscarEntidad;
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
+    private org.edisoncor.gui.button.ButtonIpod btnEliminar;
     private org.edisoncor.gui.button.ButtonIpod btnGuardar;
     private org.edisoncor.gui.button.ButtonIpod btnImprimir;
     private javax.swing.JCheckBox chkAporteMonotributo;
@@ -1037,11 +1247,11 @@ public class GUIComprobante extends javax.swing.JDialog {
     private org.edisoncor.gui.panel.Panel panelContendedorPanelMonotrib;
     private org.edisoncor.gui.panel.Panel panelEntidad;
     private org.edisoncor.gui.panel.Panel panelMonotributo;
+    private org.edisoncor.gui.textField.TextField txtAporteMonotributo;
     private org.edisoncor.gui.textField.TextField txtCodigoConcepto;
     private org.edisoncor.gui.textField.TextField txtCuit;
     private org.edisoncor.gui.textField.TextField txtDescripcionConcepto;
     private org.edisoncor.gui.textField.TextField txtMonto;
-    private javax.swing.JTextField txtMontoMonotributo;
     private org.edisoncor.gui.textField.TextField txtNombre;
     private org.edisoncor.gui.textField.TextField txtNumSerie2;
     private org.edisoncor.gui.textField.TextField txtRefTipoCompr;

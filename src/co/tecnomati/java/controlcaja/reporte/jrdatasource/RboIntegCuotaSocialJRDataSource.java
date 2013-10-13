@@ -87,7 +87,7 @@ public class RboIntegCuotaSocialJRDataSource implements JRDataSource {
         } else if ("inicioActividades".equals(jrf.getName())) {
             valor = cooperativa.getInicioActividad();
         } else if ("nombreApellido".equals(jrf.getName())) {
-            valor = entidad.getNombre() + " " + entidad.getApellido();
+            valor = entidad.getNombre();
         } else if ("nroAsociado".equals(jrf.getName())) {
             valor = entidad.getId();
         } else if ("fechaIngreso".equals(jrf.getName())) {

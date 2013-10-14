@@ -95,12 +95,20 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
 
         labelMetric1.setText("Nombre");
 
+        txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNombreMouseClicked(evt);
+            }
+        });
         txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNombreFocusLost(evt);
             }
         });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreKeyTyped(evt);
             }
@@ -108,7 +116,15 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
 
         labelMetric2.setText("Matricula");
 
+        txtMatricula.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtMatriculaMouseClicked(evt);
+            }
+        });
         txtMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMatriculaKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtMatriculaKeyTyped(evt);
             }
@@ -116,12 +132,20 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
 
         labelMetric3.setText("CUIT");
 
+        txtCuit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCuitMouseClicked(evt);
+            }
+        });
         txtCuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCuitActionPerformed(evt);
             }
         });
         txtCuit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCuitKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCuitKeyTyped(evt);
             }
@@ -130,6 +154,9 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         labelMetric4.setText("Domicilio");
 
         txtDomicilio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDomicilioKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDomicilioKeyTyped(evt);
             }
@@ -151,12 +178,20 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
 
         labelMetric5.setText("Ingreso Bruto");
 
+        txtIngresoBruto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtIngresoBrutoMouseClicked(evt);
+            }
+        });
         txtIngresoBruto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIngresoBrutoActionPerformed(evt);
             }
         });
         txtIngresoBruto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIngresoBrutoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIngresoBrutoKeyTyped(evt);
             }
@@ -164,7 +199,19 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
 
         labelMetric6.setText("Inicio de Actividad");
 
+        dateIncioActividad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dateIncioActividadKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dateIncioActividadKeyTyped(evt);
+            }
+        });
+
         txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTelefonoKeyTyped(evt);
             }
@@ -175,6 +222,9 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         labelMetric8.setText("Inicio de Caja");
 
         txtInicioCaja.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtInicioCajaKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtInicioCajaKeyTyped(evt);
             }
@@ -445,6 +495,57 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         permitirSoloNumero(evt);
     }//GEN-LAST:event_txtTelefonoKeyTyped
 
+    private void txtNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMouseClicked
+    }//GEN-LAST:event_txtNombreMouseClicked
+
+    private void txtMatriculaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMatriculaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMatriculaMouseClicked
+
+    private void txtCuitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCuitMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCuitMouseClicked
+
+    private void txtIngresoBrutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIngresoBrutoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIngresoBrutoMouseClicked
+
+    private void txtInicioCajaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInicioCajaKeyPressed
+        lblImgInicioCaja.setIcon(null);
+    }//GEN-LAST:event_txtInicioCajaKeyPressed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        lblImgNombre.setIcon(null);
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtMatriculaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyPressed
+        lblImgMatricula.setIcon(null);
+    }//GEN-LAST:event_txtMatriculaKeyPressed
+
+    private void txtCuitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyPressed
+        lblImgCuit.setIcon(null);
+    }//GEN-LAST:event_txtCuitKeyPressed
+
+    private void txtIngresoBrutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIngresoBrutoKeyPressed
+        lblImgIngBruto.setIcon(null);
+    }//GEN-LAST:event_txtIngresoBrutoKeyPressed
+
+    private void dateIncioActividadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dateIncioActividadKeyPressed
+        lblImgInicioActividad.setIcon(null);
+    }//GEN-LAST:event_dateIncioActividadKeyPressed
+
+    private void txtTelefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoKeyPressed
+
+    private void txtDomicilioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDomicilioKeyPressed
+        lblImgDomicilio.setIcon(null);        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDomicilioKeyPressed
+
+    private void dateIncioActividadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dateIncioActividadKeyTyped
+        lblImgInicioActividad.setIcon(null);        // TODO add your handling code here:
+    }//GEN-LAST:event_dateIncioActividadKeyTyped
+
     public void setDatos(Cooperativa cooperativa){
         txtNombre.setText(cooperativa.getRazonSocial());
         txtMatricula.setText(String.valueOf(cooperativa.getMatricula()));
@@ -488,7 +589,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
             JTextField jTextField = it.next();
 //            for (Iterator<JLabel> it1 = listaLabels.iterator(); it1.hasNext();) {
 //                JLabel jLabel = it1.next();
-                if (jTextField.getText().equals("")) {
+                if (jTextField.getText().equals("") || dateIncioActividad.getDate() == null) {
 //                    jTextField.setBackground(Color.yellow);                
 //                    jLabel.setIcon(icono);                                    
                     vacio = true;

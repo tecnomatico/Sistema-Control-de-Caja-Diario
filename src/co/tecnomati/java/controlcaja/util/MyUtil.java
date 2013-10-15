@@ -48,4 +48,24 @@ public class MyUtil {
          SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");     
          return sdf.format(fecha);
     }
+   
+   /**
+    * Permite el ingreso de cualquier caracter y tambien
+    * Consume cualquier caracter luego de haber ingresado n caracteres.
+    * @param evt
+    * @param campo
+    * @param n 
+    */
+     public static void consumirAll(java.awt.event.KeyEvent evt, JTextField campo, int n){
+         if (evt.getKeyChar()!='.' || countChar(".", campo.getText())>1) {
+             consumirLetras(evt);
+         }
+         if (campo.getText().length() == n) {
+            evt.consume();
+        } 
+    }
+     
+     public static int countChar(String c, String s){
+        return s.split(c).length - 1;
+     }
 }

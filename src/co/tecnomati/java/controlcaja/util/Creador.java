@@ -124,6 +124,11 @@ public class Creador {
         concepto.setCodigoConcepto(Constantes.CONCEPTO_CODIGO_REEMBOLSO_CUOTA_SOCIAL);
         concepto.setDescripcion(Constantes.CONCEPTO_DESCRIPCION_REEMBOLSO_CUOTA_SOCIAL);
         new ConceptoDaoImp().addConcepto(concepto);
+        
+        concepto = new Concepto();
+        concepto.setCodigoConcepto(Constantes.CONCEPTO_CODIGO_MONOTRIBUTO);
+        concepto.setDescripcion(Constantes.CONCEPTO_DESCRIPCION_MONOTRIBUTO);
+        new ConceptoDaoImp().addConcepto(concepto);
     }
     public static void CrearCooperativayAsociado(){
         Cooperativa coop = new Cooperativa();

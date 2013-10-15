@@ -90,6 +90,9 @@ public class Constantes {
         public static final String CONCEPTO_DESCRIPCION_REEMBOLSO_CUOTA_SOCIAL = "REEMBOLSO DE CUOTA SOCIAL";
         public static final int CONCEPTO_CODIGO_REEMBOLSO_CUOTA_SOCIAL = 4;
         
+        public static final String CONCEPTO_DESCRIPCION_MONOTRIBUTO = "MONOTRIBUTO";
+        public static final int CONCEPTO_CODIGO_MONOTRIBUTO = 5;
+        
      
         
 

@@ -25,8 +25,6 @@ import co.tecnomati.java.controlcaja.util.Entidad;
 import co.tecnomati.java.controlcaja.util.Impresora;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import co.tecnomati.java.controlcaja.util.mensajero;
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.Iterator;
@@ -63,8 +61,8 @@ public class GUIComprobante extends javax.swing.JDialog {
         initComponents();
         modificar = false;
         comprobante = new Comprobante();
-        
-        
+
+
         this.setTitle(Constantes.NAME_NUEVO_REGISTRO);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -92,6 +90,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         controlarTipoOperacion();
         controlarTipodeComprobante();
+        controlarConcepto();
         ControlarEditableNumeroSerie();
         setEnabledBotonImprimir(tipoComprobante.getCodigo());
         controlarPanelMonotributo();
@@ -102,7 +101,69 @@ public class GUIComprobante extends javax.swing.JDialog {
         this.setVisible(true);
 
     }
+    
+    /**
+     * controla de q si se ingresa un recibo automatico , este debe generar automaticamente su concetpo asociado
+     * Ej . si se elige un recibo anticipo de retorno como tipo de comporobante , entonces en el camppo concepto deberia completarse autmaticamente el concepto anticipo retorno
+     */
+    public void controlarConcepto(){
+       switch (tipoComprobante.getCodigo()) {
+            case Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO:
+                System.out.println("boleta");
+                if (!modificar) {
+                    // nuevo entnoces traigo su concetpo asociado
+                    concepto = new ConceptoDaoImp().getConcepto(Constantes.CONCEPTO_CODIGO_ANTICIPO_RETORNO);
+                    cargarConceptoAutomatico(concepto);
 
+                }
+                
+                break;
+            case Constantes.CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE:
+                System.out.println("");
+                 if (!modificar) {
+                    // nuevo entnoces traigo su concetpo asociado
+                    concepto = new ConceptoDaoImp().getConcepto(Constantes.CONCEPTO_CODIGO_DISTRIBUCION_EXCEDENTE);
+                    cargarConceptoAutomatico(concepto);
+
+                 }
+                break;
+            case Constantes.CODIGO_RECIBO_INTEGRACION_CUOTA:
+                System.out.println("");
+                 if (!modificar) {
+                    // nuevo entnoces traigo su concetpo asociado
+                    concepto = new ConceptoDaoImp().getConcepto(Constantes.CONCEPTO_CODIGO_INTEGRACION_CUOTA);
+                    cargarConceptoAutomatico(concepto);
+
+                 }
+                break;
+            case Constantes.CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES:
+                System.out.println("");
+                  if (!modificar) {
+                    // nuevo entnoces traigo su concetpo asociado
+                    concepto = new ConceptoDaoImp().getConcepto(Constantes.CONCEPTO_CODIGO_REEMBOLSO_CUOTA_SOCIAL);
+                    cargarConceptoAutomatico(concepto);
+                }
+                break;
+            default:
+                txtCodigoConcepto.setText("");
+                txtCodigoConcepto.setEditable(true);
+                txtDescripcionConcepto.setText("");
+                txtDescripcionConcepto.setEditable(false);
+                break;
+       }
+       
+    }
+ /**
+  *  cargar el concepto en el formulario si el tipo de comprobante es un recibo: rar,ric,rrc,rde
+  * @param concepto 
+  */
+    private void cargarConceptoAutomatico(Concepto concepto){
+      // aqi se setea el campo concepto
+       txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
+       txtCodigoConcepto.setEditable(false);
+       txtDescripcionConcepto.setText(concepto.getDescripcion());
+       txtDescripcionConcepto.setEditable(false);
+  }
     /**
      * Cuando se utilize para editar el comprobante , No se puede editar el
      * campo Tipo de Comprobante.
@@ -135,32 +196,36 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         //Conceptoss
         conjuntoConceptos = comprobante.getComprobanteconceptos();
-        
-//        conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());
-        int cont = 0;
+
+        System.out.println("Tamaño del conjunto" + conjuntoConceptos.size());
+
         for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
             comprobanteconcepto = it.next();
-            cont =cont+1;
-            if (cont==1) {
-            concepto= comprobanteconcepto.getConcepto();
-            txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
-            txtDescripcionConcepto.setText(concepto.getDescripcion());
-            txtMonto.setText(String.valueOf(comprobanteconcepto.getMonto()));
-            } else {
-               // existe el aporte de monotribbuto ademas
-               txtAporteMonotributo.setText(String.valueOf(comprobanteconcepto.getMonto()));
-               chkAporteMonotributo.setSelected(true);
+
+            if (comprobanteconcepto.getConcepto().getCodigoConcepto() == Constantes.CONCEPTO_CODIGO_ANTICIPO_RETORNO) {
+                System.out.println("elemento nro 1 del conjunto" + comprobanteconcepto.getConcepto().getCodigoConcepto() + Constantes.CONCEPTO_CODIGO_ANTICIPO_RETORNO);
+                concepto = comprobanteconcepto.getConcepto();
+                txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
+                txtDescripcionConcepto.setText(concepto.getDescripcion());
+                txtMonto.setText(String.valueOf(comprobanteconcepto.getMonto()));
+            } else if (comprobanteconcepto.getConcepto().getCodigoConcepto() == Constantes.CONCEPTO_CODIGO_MONOTRIBUTO) {
+                System.out.println("elemento nro 2 del conjunto");
+
+                // existe el aporte de monotribbuto ademas
+                txtAporteMonotributo.setText(String.valueOf(comprobanteconcepto.getMonto()));
+                chkAporteMonotributo.setSelected(true);
             }
-            
-            
+
         }
+
+
 
         switch (comprobante.getTipoPersona()) {
 
             case Constantes.ASOCIADO_INT:
                 Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
                 txtCuit.setText(String.valueOf(a.getCuit()));
-                txtNombre.setText(a.getNombre());
+                txtNombre.setText(a.getApellido()+ " "+a.getNombre());
                 break;
             case Constantes.PROVEEDOR_INT:
                 Proveedor p = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad());
@@ -690,14 +755,15 @@ public class GUIComprobante extends javax.swing.JDialog {
     public boolean validarCamposVacio() {
         boolean b = false;
 
-        boolean bconcepto, bentidad, btipocomprobante, bnumeroSerie,bmonto,bmonotributo;
+        boolean bconcepto, bentidad, btipocomprobante, bnumeroSerie, bmonto, bmonotributo;
         btipocomprobante = tipoComprobante == null;
         bconcepto = concepto == null;
         bentidad = entidad == null;
         bnumeroSerie = txtnumSerie1.getText().trim().isEmpty() && txtNumSerie2.getText().trim().isEmpty();
         bmonto = txtMonto.getText().trim().isEmpty();
+        bmonotributo = chkAporteMonotributo.isSelected() && txtAporteMonotributo.getText().trim().isEmpty();
 //         System.out.println("El monto es "+ bmonto);
-        if (!btipocomprobante && !bconcepto && !bentidad && !bentidad && !bnumeroSerie) {
+        if (!btipocomprobante && !bconcepto && !bentidad && !bentidad && !bnumeroSerie && !bmonto && !bmonotributo) {
             b = true;
         } else {
             if (btipocomprobante) {
@@ -708,8 +774,10 @@ public class GUIComprobante extends javax.swing.JDialog {
                 mensajero.mensajeError(null, "Entidad no puede estar vacio");
             } else if (bconcepto) {
                 mensajero.mensajeError(null, "Concepto no puede estar vacio");
-            }  else if (bmonto) {
+            } else if (bmonto) {
                 mensajero.mensajeError(null, "Monto no puede estar vacio");
+            } else if (bmonotributo) {
+                mensajero.mensajeError(null, "Monotributo no puede estar vacio");
             }
         }
 
@@ -736,31 +804,56 @@ public class GUIComprobante extends javax.swing.JDialog {
 
                 //modificar
                 new ComprobanteDaoImp().upDateFormulario(comprobante);
-                //update comprobante concepto para 1 solo concepto
-                comprobanteconcepto.setConcepto(new ConceptoDaoImp().getConcepto(Integer.parseInt(txtCodigoConcepto.getText())));
-                comprobanteconcepto.setMonto(Double.parseDouble(txtMonto.getText()));
-                new ComprobanteconceptoDaoImp().upDateComprobanteconcepto(comprobanteconcepto);
+                //update para los conceptos del formulario
+                for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
+                    comprobanteconcepto = it.next();
+
+                    if (comprobanteconcepto.getConcepto().getCodigoConcepto() == Constantes.CONCEPTO_CODIGO_MONOTRIBUTO) {
+                        
+                        if (chkAporteMonotributo.isSelected()) {
+                            // actualiza
+                            comprobanteconcepto.setMonto(Double.parseDouble(txtAporteMonotributo.getText().trim()));
+                            new ComprobanteconceptoDaoImp().upDateComprobanteconcepto(comprobanteconcepto);
+                            System.out.println("Se actualizo el monotributo");
+                        } else {
+                            // quiere decir que no aplicara monotributo , por ende debemos eliminarlo 
+                            new ComprobanteconceptoDaoImp().deleteComprobanteconcepto(comprobanteconcepto);
+                            System.out.println("Se borro el monotributo");
+
+                        }
+
+                    } else {
+                        // es otro concepto
+                        comprobanteconcepto.setConcepto(new ConceptoDaoImp().getConcepto(Integer.parseInt(txtCodigoConcepto.getText())));
+                        comprobanteconcepto.setMonto(Double.parseDouble(txtMonto.getText()));
+                        new ComprobanteconceptoDaoImp().upDateComprobanteconcepto(comprobanteconcepto);
+                        System.out.println("Se actualizo el concepto 1");
+                    }
+                }
+
+
             } else {
                 //el objeto entidad solo se cargara cuando es nuevo
-
                 new ComprobanteDaoImp().addFormulario(comprobante);
-
+                System.out.println("SE guardo el comprobante");
                 // aqui debe cargar 1 o dos conceptos dependiendo si carga monotributo son dos
                 Comprobanteconcepto detalle = new Comprobanteconcepto();
                 detalle.setConcepto(concepto);
                 detalle.setComprobante(comprobante);
                 detalle.setMonto(Double.parseDouble(txtMonto.getText()));
                 new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalle);
-                System.out.print("Hey no esta ejecutnado el guardar");
+                System.out.print("Se guardo el detalle 1");
                 // carga el segundo detalle si es un recibo anticipo de retorno
-                if (tipoComprobante.getCodigo()==Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO) {
-                     System.out.println(Constantes.CONCEPTO_DESCRIPCION_ANTICIPO_RETORNO);
-                    
-                      Comprobanteconcepto detalleMonotributo = new Comprobanteconcepto();
-                      detalleMonotributo.setConcepto(new ConceptoDaoImp().getConceptoCod(Constantes.CONCEPTO_CODIGO_ANTICIPO_RETORNO));
-                      detalleMonotributo.setComprobante(comprobante);
-                      detalleMonotributo.setMonto(Double.parseDouble(txtAporteMonotributo.getText()));
-                      new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalleMonotributo);
+                if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO && chkAporteMonotributo.isSelected()) {
+                    System.out.println(Constantes.CONCEPTO_DESCRIPCION_ANTICIPO_RETORNO);
+
+                    Comprobanteconcepto detalleMonotributo = new Comprobanteconcepto();
+                    detalleMonotributo.setConcepto(new ConceptoDaoImp().getConcepto(Constantes.CONCEPTO_CODIGO_MONOTRIBUTO));
+                    detalleMonotributo.setComprobante(comprobante);
+                    detalleMonotributo.setMonto(Double.parseDouble(txtAporteMonotributo.getText()));
+                    new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalleMonotributo);
+                    System.out.print("Se guardo el detalle 2");
+
                 }
                 // si saliio todo ok entonces actualizo el contador de comprobante 
                 actualizarNumeroDeSerie(tipoComprobante);
@@ -964,14 +1057,14 @@ public class GUIComprobante extends javax.swing.JDialog {
 //            panelContendedorPanelMonotrib.setVisible(true);
             chkAporteMonotributo.setEnabled(true);
             txtAporteMonotributo.setEnabled(true);
-           
+
 
         } else {
 //            panelContendedorPanelMonotrib.setVisible(false);
             chkAporteMonotributo.setEnabled(false);
             txtAporteMonotributo.setEnabled(false);
-             chkAporteMonotributo.setSelected(false);
-             txtAporteMonotributo.setText("");
+            chkAporteMonotributo.setSelected(false);
+            txtAporteMonotributo.setText("");
         }
     }
 
@@ -1047,6 +1140,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 txtTipoComprobante.setText(tipoComprobante.getFormulario());
                 controlarTipoOperacion();
                 controlarEntidad();
+                controlarConcepto();
                 GenerarNumeroSerie();
                 controlarPanelMonotributo();
                 ControlarEditableNumeroSerie();
@@ -1060,9 +1154,12 @@ public class GUIComprobante extends javax.swing.JDialog {
                     txtRefTipoCompr.setText(tipoComprobante.getReferencia());
                     txtTipoComprobante.setText(tipoComprobante.getFormulario());
                     controlarTipoOperacion();
-                    controlarEntidad();
-                    GenerarNumeroSerie();
-                    txtnumSerie1.requestFocus();
+                     controlarEntidad();
+                controlarConcepto();
+                GenerarNumeroSerie();
+                controlarPanelMonotributo();
+                ControlarEditableNumeroSerie();
+                txtnumSerie1.requestFocus();
                 }
             }
 
@@ -1084,12 +1181,12 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     private void chkAporteMonotributoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAporteMonotributoActionPerformed
         if (chkAporteMonotributo.isSelected()) {
-                    txtAporteMonotributo.setText("0");
-                    txtAporteMonotributo.setEditable(true);
+            txtAporteMonotributo.setText("0");
+            txtAporteMonotributo.setEditable(true);
 
         } else {
-                    txtAporteMonotributo.setText("");
-                    txtAporteMonotributo.setEditable(false);
+            txtAporteMonotributo.setText("");
+            txtAporteMonotributo.setEditable(false);
 
         }
     }//GEN-LAST:event_chkAporteMonotributoActionPerformed
@@ -1099,33 +1196,34 @@ public class GUIComprobante extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCuitKeyTyped
 
     /**
-     *  metodo que se encarga de buscar la entidad y lo almacena en un objeto entidad
-     * Reliza una pequeña validadcion : si no se eligio un tipo de copmrobante entnoces no se puede realizar la busqueda
+     * metodo que se encarga de buscar la entidad y lo almacena en un objeto
+     * entidad Reliza una pequeña validadcion : si no se eligio un tipo de
+     * copmrobante entnoces no se puede realizar la busqueda
      */
-    private void buscarEntidad (){
+    private void buscarEntidad() {
         if (tipoComprobante != null) {
 //            if (!txtRefTipoCompr.getText().isEmpty()) {
-                GUIgestorEntidades gestorEntidad = new GUIgestorEntidades(null, true, tipoComprobante.getCodigo());
-                if (gestorEntidad.isSelecciono()) {
-                    entidad = gestorEntidad.getEntidad();
-                    if (entidad.getTipoEntidad() == Constantes.PROVEEDOR_INT) {
-                        Proveedor proveedor = new ProveedorDaoImp().getProveedor(entidad.getId());
-                        txtCuit.setText(String.valueOf(proveedor.getCuit()));
-                        txtNombre.setText(proveedor.getRazonSocial());
-                    } else if (entidad.getTipoEntidad() == Constantes.CLIENTE_INT) {
-                        Cliente cliente = new ClienteDaoImp().getCliente(entidad.getId());
-                        txtCuit.setText(String.valueOf(cliente.getCuit()));
-                        txtNombre.setText(cliente.getRazonSocial());
-                    } else if (entidad.getTipoEntidad() == Constantes.ASOCIADO_INT) {
-                        Asociado asociado = new AsociadoDaoImp().getAsociado(entidad.getId());
-                        txtCuit.setText(String.valueOf(asociado.getCuit()));
-                        txtNombre.setText(asociado.getApellido() + " " + asociado.getNombre());
-                    }
+            GUIgestorEntidades gestorEntidad = new GUIgestorEntidades(null, true, tipoComprobante.getCodigo());
+            if (gestorEntidad.isSelecciono()) {
+                entidad = gestorEntidad.getEntidad();
+                if (entidad.getTipoEntidad() == Constantes.PROVEEDOR_INT) {
+                    Proveedor proveedor = new ProveedorDaoImp().getProveedor(entidad.getId());
+                    txtCuit.setText(String.valueOf(proveedor.getCuit()));
+                    txtNombre.setText(proveedor.getRazonSocial());
+                } else if (entidad.getTipoEntidad() == Constantes.CLIENTE_INT) {
+                    Cliente cliente = new ClienteDaoImp().getCliente(entidad.getId());
+                    txtCuit.setText(String.valueOf(cliente.getCuit()));
+                    txtNombre.setText(cliente.getRazonSocial());
+                } else if (entidad.getTipoEntidad() == Constantes.ASOCIADO_INT) {
+                    Asociado asociado = new AsociadoDaoImp().getAsociado(entidad.getId());
+                    txtCuit.setText(String.valueOf(asociado.getCuit()));
+                    txtNombre.setText(asociado.getApellido() + " " + asociado.getNombre());
                 }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Debes elegir un Tipo de Comprobante antes de continuar con este paso");
             }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes elegir un Tipo de Comprobante antes de continuar con este paso");
+        }
     }
     private void txtCuitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
@@ -1175,11 +1273,12 @@ public class GUIComprobante extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCuitActionPerformed
 
     private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoKeyTyped
-           MyUtil.consumirLetras(evt, txtMonto, 20);
+        MyUtil.consumirAll(evt, txtMonto, 20);
     }//GEN-LAST:event_txtMontoKeyTyped
 
     private void txtAporteMonotributoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAporteMonotributoKeyTyped
-        MyUtil.consumirLetras(evt, txtMonto, 15);
+        MyUtil.consumirAll(evt, txtAporteMonotributo, 15);
+        
     }//GEN-LAST:event_txtAporteMonotributoKeyTyped
 
     /**

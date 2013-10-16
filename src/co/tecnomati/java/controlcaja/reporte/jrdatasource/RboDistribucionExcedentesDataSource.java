@@ -76,7 +76,8 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
 //        }
 
         List<Comprobanteconcepto> listaComprobanteConcepto = new ArrayList();
-        conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());
+//        conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());
+        conjuntoConceptos = comprobante.getComprobanteconceptos();
         for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
             Comprobanteconcepto comprobante1 = it.next();
             listaComprobanteConcepto.add(comprobante1);

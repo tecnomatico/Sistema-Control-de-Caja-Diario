@@ -8,6 +8,7 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Asociado;
 import co.tecnomati.java.controlcaja.dominio.dao.AsociadoDAO;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
+import co.tecnomati.java.controlcaja.util.mensajero;
 import java.awt.Frame;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -16,7 +17,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Joel
+ * @author AnahiAramayo
  */
 public class GUIAsociados extends javax.swing.JDialog {
     private boolean modificar=false;
@@ -29,6 +30,7 @@ public class GUIAsociados extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setTitle(Constantes.NAME_NUEVO_ASOCIADO);
+        //txtLegajo.setText(String.valueOf(asociado.getIdAsociado()));
         SNumeros(txtDNI);
         SNumeros(txtCuit);
         SNumeros(txtTelefono);
@@ -47,13 +49,22 @@ public class GUIAsociados extends javax.swing.JDialog {
         // se indica que se utiliza este formulario para modificar datos
          modificar = true;
         this.setTitle(Constantes.NAME_EDITAR_ASOCIADO);
+        //txtDni.setText(String.valueOf(persona.getDni()));
         txtLegajo.setText(String.valueOf(asociado.getLegajo()));
+        
         txtCuit.setText(String.valueOf(asociado.getCuit()));
         txtDNI.setText(String.valueOf(asociado.getDni()));
         txtApellido.setText(asociado.getApellido());
         txtNombre.setText(asociado.getNombre());
         txtTelefono.setText(asociado.getTelefono());
         dateIngreso.setDate(asociado.getIngreso());
+        
+        SNumeros(txtDNI);
+        SNumeros(txtCuit);
+        SNumeros(txtTelefono);
+        SLetras(txtApellido);
+        SLetras(txtNombre);
+        
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 }
@@ -99,6 +110,10 @@ public class GUIAsociados extends javax.swing.JDialog {
 
         labelMetric3.setText("Legajo");
 
+        txtLegajo.setEditable(false);
+        txtLegajo.setBackground(new java.awt.Color(255, 255, 255));
+        txtLegajo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtLegajo.setEnabled(false);
         txtLegajo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLegajoActionPerformed(evt);
@@ -258,34 +273,62 @@ public class GUIAsociados extends javax.swing.JDialog {
     }//GEN-LAST:event_txtDNIActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        AsociadoDAO asociadoDAO = new AsociadoDaoImp();
-//        Persona persona;
-        if (!modificar) {
+
+         boolean b = false;   
+        if (modificar == false) {
            //si se ingresa un nueva persona
            asociado = new Asociado();    
         }
-        //asociado.
-        asociado.setLegajo(Integer.parseInt(txtLegajo.getText()));
+         AsociadoDAO asociadoDAO = new AsociadoDaoImp();
+     try {
+         boolean cCuit, cA, cN, cT, cDni = false;
+            cCuit = txtCuit.getText().trim().isEmpty();
+            cA = txtApellido.getText().trim().isEmpty();
+            cN = txtNombre.getText().trim().isEmpty();
+            cT = txtTelefono.getText().trim().isEmpty();
+            cDni = txtDNI.getText().trim().isEmpty();
+            
+            
+            //corroboro que no este vacio
+            if (cCuit || cA || cT || cN || cDni) {
+               if (cCuit) {
+                mensajero.mensajeError(null, "Tipo cuit no puede estar vacio");
+            } else if (cA) {
+                mensajero.mensajeError(null, "Apellido no puede estar vacio");
+            } else if (cN) {
+                mensajero.mensajeError(null, "Nombre no puede estar vacio");
+            } else if (cT) {
+                mensajero.mensajeError(null, "telefono no puede estar vacio");
+            } else if (cDni) {
+                mensajero.mensajeError(null, "dni no puede estar vacio");
+            } 
+        } else {
+                   asociado.setLegajo(Integer.parseInt(txtLegajo.getText()));
         asociado.setCuit(Long.parseLong(txtCuit.getText()));
         asociado.setDni(Integer.valueOf(txtDNI.getText()));
         asociado.setApellido(txtApellido.getText());
         asociado.setNombre(txtNombre.getText());
         asociado.setIngreso(dateIngreso.getDate());
         asociado.setTelefono(txtTelefono.getText());
-        //if (validacion()) {
-//      JOptionPane.showMessageDialog(null, "Debe completar todos los campos...");
-//        } else {
-            if (modificar) {
-                asociadoDAO.upDateAsociado(asociado);
-            } else {
-                asociadoDAO.addAsociado(asociado);
-            }
+          /*proveedor.setRazonSocial(txtRazonSocial.getText().toUpperCase());
+          proveedor.setTelefono(txtTelefono.getText().toUpperCase());*/
             setAgregado(true);
+            //se crea un proveedor nuevo
+            if (modificar == false) {
+                asociadoDAO.addAsociado(asociado);
+            } else {
+                //se carga un proveedor para editarlo
+                asociadoDAO.upDateAsociado(asociado);
+                
+            }
+            //setAgregado(true);
             JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
             this.dispose();
-//        }
-
-        
+        } }catch (NullPointerException e) {
+        JOptionPane.showMessageDialog(null, "Debes completar todos los campos");
+        modificar = false;
+        this.dispose();
+}
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -345,6 +388,7 @@ public class GUIAsociados extends javax.swing.JDialog {
             char c=v.getKeyChar();
             if (Character.isDigit(c)){
                 getToolkit().beep();
+                JOptionPane.showMessageDialog(null, "Solo Letras...");
                 v.consume();
             }
         }
@@ -357,6 +401,7 @@ public class GUIAsociados extends javax.swing.JDialog {
             char c=v.getKeyChar();
             if (!Character.isDigit(c)){
                 getToolkit().beep();
+                JOptionPane.showMessageDialog(null, "Solo Nùmeros...");
                 v.consume();
             }
         }

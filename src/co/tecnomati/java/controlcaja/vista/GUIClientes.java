@@ -8,6 +8,7 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Cliente;
 import co.tecnomati.java.controlcaja.dominio.dao.ClienteDAO;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ClienteDaoImp;
+import co.tecnomati.java.controlcaja.util.mensajero;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -15,7 +16,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author joel
+ * @author AnahiAramayo
  */
 public class GUIClientes extends javax.swing.JDialog {
 private boolean modificar=false;
@@ -46,6 +47,12 @@ private boolean modificar=false;
          modificar = true;
         this.setTitle(Constantes.NAME_NUEVO_PROVEEDOR);
         setDatos(cliente);
+        
+        SNumeros(txtCuit);
+        SNumeros(txtTelefono);
+        //SLetras(txtDomicilio);
+        SLetras(txtRazonSocial);
+        
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -186,21 +193,54 @@ private boolean modificar=false;
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-         ClienteDAO clienteDAO = new ClienteDaoImp();
-       
-        getDatos();
-        //if (validacion()) {
-//      JOptionPane.showMessageDialog(null, "Debe completar todos los campos...");
-//        } else {
-            if (modificar) {
-                clienteDAO.upDateCliente(cliente);
-            } else {
-                clienteDAO.addCliente(cliente);
-            }
+        boolean b = false;   
+        if (modificar == false) {
+           //si se ingresa un nueva persona
+           cliente = new Cliente();    
+        }
+       ClienteDAO clienteDAO = new ClienteDaoImp();
+     try {
+         boolean cA, cRS, cD, cT = false;
+            cA = txtCuit.getText().trim().isEmpty();
+            cRS = txtRazonSocial.getText().trim().isEmpty();
+            cD = txtDomicilio.getText().trim().isEmpty();
+            cT = txtTelefono.getText().trim().isEmpty();
+            //corroboro que no este vacio
+            if (cA || cRS || cT || cD) {
+               if (cA) {
+                mensajero.mensajeError(null, "Tipo cuit no puede estar vacio");
+            } else if (cRS) {
+                mensajero.mensajeError(null, "razon no puede estar vacio");
+            } else if (cD) {
+                mensajero.mensajeError(null, "domicilio no puede estar vacio");
+            } else if (cT) {
+                mensajero.mensajeError(null, "telefono no puede estar vacio");
+            } 
+        } else {
+           
+            cliente.setCuit(Integer.parseInt(txtCuit.getText()));
+            cliente.setRazonSocial(txtRazonSocial.getText().toUpperCase());
+            cliente.setDomicilio(txtDomicilio.getText().toUpperCase());
+            cliente.setTelefono(txtTelefono.getText().toUpperCase());
             setAgregado(true);
+            
+            
+            //se crea un proveedor nuevo
+            if (modificar == false) {
+                clienteDAO.addCliente(cliente);
+            } else {
+                //se carga un proveedor para editarlo
+                clienteDAO.upDateCliente(cliente);
+                
+            }
+            //setAgregado(true);
             JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
             this.dispose();
-//        }
+        } }catch (NullPointerException e) {
+        JOptionPane.showMessageDialog(null, "Debes completar todos los campos");
+        modificar = false;
+        this.dispose();
+}
     }//GEN-LAST:event_btnGuardarActionPerformed
 
      /**
@@ -282,6 +322,7 @@ private boolean modificar=false;
             char c=v.getKeyChar();
             if (Character.isDigit(c)){
                 getToolkit().beep();
+                JOptionPane.showMessageDialog(null, "Solo Letras...");
                 v.consume();
             }
         }
@@ -294,6 +335,7 @@ private boolean modificar=false;
             char c=v.getKeyChar();
             if (!Character.isDigit(c)){
                 getToolkit().beep();
+                JOptionPane.showMessageDialog(null, "Solo Nùmeros...");
                 v.consume();
             }
         }

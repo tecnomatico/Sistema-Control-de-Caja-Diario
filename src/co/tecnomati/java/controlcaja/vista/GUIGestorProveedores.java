@@ -21,7 +21,8 @@ import javax.swing.table.TableRowSorter;
  * @author Joel
  */
 public class GUIGestorProveedores extends javax.swing.JDialog {
- int numeroSeleccion;
+ public boolean modificar;
+    int numeroSeleccion;
     Proveedor proveedor;
     ModeloProveedor modeloproveedor;
     boolean agregado = false;
@@ -216,7 +217,9 @@ public class GUIGestorProveedores extends javax.swing.JDialog {
             numeroSeleccion = sorter.convertRowIndexToModel(tblProveedor.getSelectedRow());
             proveedor = modeloproveedor.getProveedor(numeroSeleccion);
             // abrir el formulario alta de persona para editar los datos de persona
+            modificar=true;
             GUIProveedor modificarPersona = new GUIProveedor(null, true, proveedor);
+            
             // actulizar la tabla con los datos modificados
              if (modificarPersona.isAgregado()) {
                  inicializarTabla();
@@ -228,7 +231,9 @@ public class GUIGestorProveedores extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        modificar = false;
         GUIProveedor nuevoProveedor = new GUIProveedor(null, true);
+        
         if (nuevoProveedor.isAgregado()) {
             inicializarTabla();
     }//GEN-LAST:event_btnNuevoActionPerformed

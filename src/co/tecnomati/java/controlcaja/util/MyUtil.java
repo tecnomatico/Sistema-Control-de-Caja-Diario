@@ -25,7 +25,7 @@ public class MyUtil {
         char caracter = evt.getKeyChar();
         if (((caracter < '0')
                 || (caracter > '9'))
-                && (caracter != '\b' /*corresponde a BACK_SPACE*/) && caracter !='.' && caracter !=',') {
+                && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
             evt.consume();  // ignorar el evento de teclado
         }
     }

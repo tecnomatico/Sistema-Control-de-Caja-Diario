@@ -8,6 +8,7 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Proveedor;
 import co.tecnomati.java.controlcaja.dominio.dao.ProveedorDAO;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
+import co.tecnomati.java.controlcaja.util.mensajero;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -19,13 +20,16 @@ import javax.swing.JTextField;
  */
 public class GUIProveedor extends javax.swing.JDialog {
 
-    private boolean modificar = false;
-    Proveedor proveedor;
+    private boolean modificar;
+    Proveedor proveedor = null;
+   // ProveedorDAO proveedorDAO = new ProveedorDaoImp();
+    
     boolean agregado = false;
 
     public GUIProveedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        modificar = false;
         proveedor = new Proveedor();
         this.setTitle(Constantes.NAME_NUEVO_PROVEEDOR);
         SNumeros(txtCuit);
@@ -43,6 +47,10 @@ public class GUIProveedor extends javax.swing.JDialog {
         modificar = true;
         this.setTitle(Constantes.NAME_NUEVO_PROVEEDOR);
         setDatos(proveedor);
+        SNumeros(txtCuit);
+        SNumeros(txtTelefono);
+        //SLetras(txtDomicilio);
+        SLetras(txtRazonSocial);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -188,25 +196,56 @@ public class GUIProveedor extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-        ProveedorDAO proveedorDAO = new ProveedorDaoImp();
-
-        getDatos();
-        //if (validacion()) {
-//      JOptionPane.showMessageDialog(null, "Debe completar todos los campos...");
-//        } else {
-        if (modificar) {
-            proveedorDAO.upDateProveedor(proveedor);
-        } else {
-            proveedorDAO.addProveedor(proveedor);
+        boolean b = false;   
+        if (modificar == false) {
+           //si se ingresa un nueva persona
+           proveedor = new Proveedor();    
         }
-        setAgregado(true);
-        JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
+        ProveedorDAO proveedorDAO = new ProveedorDaoImp();
+     try {
+         boolean cA, cRS, cD, cT = false;
+            cA = txtCuit.getText().trim().isEmpty();
+            cRS = txtRazonSocial.getText().trim().isEmpty();
+            cD = txtDomicilio.getText().trim().isEmpty();
+            cT = txtTelefono.getText().trim().isEmpty();
+            //corroboro que no este vacio
+            if (cA || cRS || cT || cD) {
+               if (cA) {
+                mensajero.mensajeError(null, "Tipo cuit no puede estar vacio");
+            } else if (cRS) {
+                mensajero.mensajeError(null, "razon no puede estar vacio");
+            } else if (cD) {
+                mensajero.mensajeError(null, "domicilio no puede estar vacio");
+            } else if (cT) {
+                mensajero.mensajeError(null, "telefono no puede estar vacio");
+            } 
+        } else {
+           
+            proveedor.setCuit(Integer.parseInt(txtCuit.getText()));
+            proveedor.setRazonSocial(txtRazonSocial.getText().toUpperCase());
+            proveedor.setDomicilio(txtDomicilio.getText().toUpperCase());
+            proveedor.setTelefono(txtTelefono.getText().toUpperCase());
+            setAgregado(true);
+            
+            
+            //se crea un proveedor nuevo
+            if (modificar == false) {
+                proveedorDAO.addProveedor(proveedor);
+            } else {
+                //se carga un proveedor para editarlo
+                proveedorDAO.upDateProveedor(proveedor);
+                
+            }
+            //setAgregado(true);
+            JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
+            this.dispose();
+        } }catch (NullPointerException e) {
+        JOptionPane.showMessageDialog(null, "Debes completar todos los campos");
+        modificar = false;
         this.dispose();
-//        }
-
-
+}
     }//GEN-LAST:event_btnGuardarActionPerformed
     /**
      * Setea el formulario con los datos de proveedor pasado por parametro
@@ -285,6 +324,7 @@ public class GUIProveedor extends javax.swing.JDialog {
             char c=v.getKeyChar();
             if (Character.isDigit(c)){
                 getToolkit().beep();
+                JOptionPane.showMessageDialog(null, "Solo Letras...");
                 v.consume();
             }
         }
@@ -297,6 +337,7 @@ public class GUIProveedor extends javax.swing.JDialog {
             char c=v.getKeyChar();
             if (!Character.isDigit(c)){
                 getToolkit().beep();
+                JOptionPane.showMessageDialog(null, "Solo Nùmeros...");
                 v.consume();
             }
         }

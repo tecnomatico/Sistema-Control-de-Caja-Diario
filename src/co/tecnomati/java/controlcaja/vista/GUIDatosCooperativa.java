@@ -395,7 +395,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
      
             if (validacionGUICooperativa()) {
                 
-                if (txtNombre.getText().equals("")) {
+                if (txtNombre.getText().trim().isEmpty()) {
                     lblImgNombre.setIcon(icono);
                 } 
                 if (txtMatricula.getText().equals("")) {
@@ -488,6 +488,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCuitKeyTyped
 
     private void txtInicioCajaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInicioCajaKeyTyped
+     
         permitirSoloNumero(evt);
     }//GEN-LAST:event_txtInicioCajaKeyTyped
 
@@ -511,6 +512,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     }//GEN-LAST:event_txtIngresoBrutoMouseClicked
 
     private void txtInicioCajaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInicioCajaKeyPressed
+       // esto es para cuando ingrese al campo se vorre el icono
         lblImgInicioCaja.setIcon(null);
     }//GEN-LAST:event_txtInicioCajaKeyPressed
 
@@ -589,7 +591,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
             JTextField jTextField = it.next();
 //            for (Iterator<JLabel> it1 = listaLabels.iterator(); it1.hasNext();) {
 //                JLabel jLabel = it1.next();
-                if (jTextField.getText().equals("") || dateIncioActividad.getDate() == null) {
+                if (jTextField.getText().trim().isEmpty() || dateIncioActividad.getDate() == null) {
 //                    jTextField.setBackground(Color.yellow);                
 //                    jLabel.setIcon(icono);                                    
                     vacio = true;

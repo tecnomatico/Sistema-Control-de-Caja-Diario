@@ -32,13 +32,13 @@ CREATE TABLE IF NOT EXISTS `asociado` (
   `idAsociado` int(11) NOT NULL AUTO_INCREMENT,
   `idCoop` int(11) DEFAULT NULL,
   `legajo` int(11) NOT NULL,
-  `cuit` bigint(20) DEFAULT NULL,
-  `dni` int(11) DEFAULT NULL,
+  `cuit` varchar(14) COLLATE utf8_spanish_ci not NULL,
+  `dni` int(9) DEFAULT NULL,
   `apellido` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ingreso` date DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `estado` int(2) DEFAULT NULL,
+  `estado`  bit DEFAULT NULL,
   PRIMARY KEY (`idAsociado`),
   UNIQUE KEY `legajo` (`legajo`),
   UNIQUE KEY `cuit` (`cuit`),
@@ -53,10 +53,10 @@ CREATE TABLE IF NOT EXISTS `asociado` (
 
 CREATE TABLE IF NOT EXISTS `cliente` (
   `idCliente` int(11) NOT NULL AUTO_INCREMENT,
-  `cuit` bigint(20) NOT NULL,
+ `cuit` varchar(14) COLLATE utf8_spanish_ci not NULL,
   `razonSocial` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `domicilio` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `estado` int(2) DEFAULT NULL,
+ `estado`  bit DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`idCliente`),
   UNIQUE KEY `cuit` (`cuit`)
@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `comprobante` (
   `codigoTipoComprob` int(11) DEFAULT NULL,
   `tipoProceso` int(2) DEFAULT NULL,
   `ejercicioEconomico` date DEFAULT NULL,
+  `estado`  bit DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `numeroSerie` (`numeroSerie`),
   KEY `codigoTipoComprob` (`codigoTipoComprob`)
@@ -95,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `comprobanteconcepto` (
   `idComprobante` int(11) DEFAULT NULL,
   `idConcepto` int(11) DEFAULT NULL,
   `monto` double DEFAULT NULL,
+  `estado`  bit DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idConcepto` (`idConcepto`),
   KEY `idComprobante` (`idComprobante`)
@@ -109,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `comprobanteconcepto` (
 CREATE TABLE IF NOT EXISTS `concepto` (
   `codigoConcepto` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+`estado`  bit DEFAULT NULL,
   PRIMARY KEY (`codigoConcepto`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
@@ -121,13 +124,14 @@ CREATE TABLE IF NOT EXISTS `concepto` (
 CREATE TABLE IF NOT EXISTS `cooperativa` (
   `idCoop` int(11) NOT NULL AUTO_INCREMENT,
   `matricula` int(11) NOT NULL,
-  `cuit` bigint(20) DEFAULT NULL,
+  `cuit` varchar(14) COLLATE utf8_spanish_ci not NULL,
   `razonSocial` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `inicioActividad` date DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `domicilio` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `inicioCaja` double DEFAULT NULL,
   `ingresoBruto` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+`estado`  bit DEFAULT NULL,
   PRIMARY KEY (`idCoop`),
   UNIQUE KEY `matricula` (`matricula`),
   UNIQUE KEY `cuit` (`cuit`)
@@ -141,11 +145,11 @@ CREATE TABLE IF NOT EXISTS `cooperativa` (
 
 CREATE TABLE IF NOT EXISTS `proveedor` (
   `idProveedor` int(11) NOT NULL AUTO_INCREMENT,
-  `cuit` bigint(20) NOT NULL,
+  `cuit` varchar(14) COLLATE utf8_spanish_ci not NULL,
   `razonSocial` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `domicilio` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `estado` int(2) DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+`estado`  bit DEFAULT NULL,
   PRIMARY KEY (`idProveedor`),
   UNIQUE KEY `cuit` (`cuit`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
@@ -154,6 +158,7 @@ CREATE TABLE IF NOT EXISTS `proveedor` (
 CREATE TABLE IF NOT EXISTS `categoriaComprobante` (
   `codigoCategoria` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+`estado`  bit DEFAULT NULL,
   PRIMARY KEY (`codigoCategoria`),
   UNIQUE KEY `descripcion` (`descripcion`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
@@ -169,6 +174,7 @@ CREATE TABLE IF NOT EXISTS `tipocomprobante` (
   `referencia` varchar(4) COLLATE utf8_spanish_ci DEFAULT NULL,
   `numeroSerieIzq` bigint(4)  NULL,
   `numeroSerieDer` bigint(10)  NULL,
+`estado`  bit DEFAULT NULL,
   UNIQUE KEY `formulario` (`formulario`),
   PRIMARY KEY (`codigo`),
   INDEX(codigoCategoria),

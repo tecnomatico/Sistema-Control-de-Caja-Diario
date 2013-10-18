@@ -12,7 +12,6 @@ import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
 import co.tecnomati.java.controlcaja.util.MyUtil;
-import co.tecnomati.java.controlcaja.util.NumberToLetterConverter;
 import co.tecnomati.java.controlcaja.util.Numero_a_Letra;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -36,7 +35,7 @@ public class ModeloReciboJRDataSource implements JRDataSource {
     List<Comprobante> listaComprobante = new ArrayList<>();
     
 //    datos de la cooperativa
-//    Cooperativa coop = new CooperativaDaoImp().listarCooperativa().get(0);
+    Cooperativa coop = new CooperativaDaoImp().listarCooperativa().get(0);
     
     Concepto concepto;
     private Double monto = 0.0;
@@ -89,7 +88,7 @@ public class ModeloReciboJRDataSource implements JRDataSource {
 
                 valor = MyUtil.getFechaString10DDMMAAAA(comprobante.getFecha());
             } else if ("matricula".equals(jrf.getName())) {
-//            valor = coop.getMatricula();
+                    valor = coop.getMatricula();
             }
 
         

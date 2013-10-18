@@ -90,7 +90,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         controlarTipoOperacion();
         controlarTipodeComprobante();
-        controlarConcepto();
+
         ControlarEditableNumeroSerie();
         setEnabledBotonImprimir(tipoComprobante.getCodigo());
         controlarPanelMonotributo();
@@ -102,7 +102,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     }
     
-    /**
+    /** Solo usar para crear un nuevo comprobante
      * controla de q si se ingresa un recibo automatico , este debe generar automaticamente su concetpo asociado
      * Ej . si se elige un recibo anticipo de retorno como tipo de comporobante , entonces en el camppo concepto deberia completarse autmaticamente el concepto anticipo retorno
      */
@@ -202,13 +202,14 @@ public class GUIComprobante extends javax.swing.JDialog {
         for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
             comprobanteconcepto = it.next();
 
-            if (comprobanteconcepto.getConcepto().getCodigoConcepto() == Constantes.CONCEPTO_CODIGO_ANTICIPO_RETORNO) {
+            if (comprobanteconcepto.getConcepto().getCodigoConcepto() != Constantes.CONCEPTO_CODIGO_MONOTRIBUTO) {
                 System.out.println("elemento nro 1 del conjunto" + comprobanteconcepto.getConcepto().getCodigoConcepto() + Constantes.CONCEPTO_CODIGO_ANTICIPO_RETORNO);
                 concepto = comprobanteconcepto.getConcepto();
+                System.out.println("conceptos guardado ahoara esta para editar"+concepto.getDescripcion());
                 txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
                 txtDescripcionConcepto.setText(concepto.getDescripcion());
                 txtMonto.setText(String.valueOf(comprobanteconcepto.getMonto()));
-            } else if (comprobanteconcepto.getConcepto().getCodigoConcepto() == Constantes.CONCEPTO_CODIGO_MONOTRIBUTO) {
+            } else {
                 System.out.println("elemento nro 2 del conjunto");
 
                 // existe el aporte de monotribbuto ademas

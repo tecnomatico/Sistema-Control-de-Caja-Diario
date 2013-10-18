@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 06/10/2013 01:19:46 by Hibernate Tools 3.2.1.GA
+// Generated 18/10/2013 11:16:44 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -13,14 +13,16 @@ public class Comprobanteconcepto  implements java.io.Serializable {
      private Concepto concepto;
      private Comprobante comprobante;
      private Double monto;
+     private Boolean estado;
 
     public Comprobanteconcepto() {
     }
 
-    public Comprobanteconcepto(Concepto concepto, Comprobante comprobante, Double monto) {
+    public Comprobanteconcepto(Concepto concepto, Comprobante comprobante, Double monto, Boolean estado) {
        this.concepto = concepto;
        this.comprobante = comprobante;
        this.monto = monto;
+       this.estado = estado;
     }
    
     public Integer getId() {
@@ -50,6 +52,13 @@ public class Comprobanteconcepto  implements java.io.Serializable {
     
     public void setMonto(Double monto) {
         this.monto = monto;
+    }
+    public Boolean getEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
 

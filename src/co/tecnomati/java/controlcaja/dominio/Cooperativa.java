@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 06/10/2013 01:19:46 by Hibernate Tools 3.2.1.GA
+// Generated 18/10/2013 11:16:44 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -14,23 +14,25 @@ public class Cooperativa  implements java.io.Serializable {
 
      private Integer idCoop;
      private int matricula;
-     private Long cuit;
+     private String cuit;
      private String razonSocial;
      private Date inicioActividad;
      private String telefono;
      private String domicilio;
      private Double inicioCaja;
      private String ingresoBruto;
+     private Boolean estado;
      private Set<Asociado> asociados = new HashSet<Asociado>(0);
 
     public Cooperativa() {
     }
 
 	
-    public Cooperativa(int matricula) {
+    public Cooperativa(int matricula, String cuit) {
         this.matricula = matricula;
+        this.cuit = cuit;
     }
-    public Cooperativa(int matricula, Long cuit, String razonSocial, Date inicioActividad, String telefono, String domicilio, Double inicioCaja, String ingresoBruto, Set<Asociado> asociados) {
+    public Cooperativa(int matricula, String cuit, String razonSocial, Date inicioActividad, String telefono, String domicilio, Double inicioCaja, String ingresoBruto, Boolean estado, Set<Asociado> asociados) {
        this.matricula = matricula;
        this.cuit = cuit;
        this.razonSocial = razonSocial;
@@ -39,6 +41,7 @@ public class Cooperativa  implements java.io.Serializable {
        this.domicilio = domicilio;
        this.inicioCaja = inicioCaja;
        this.ingresoBruto = ingresoBruto;
+       this.estado = estado;
        this.asociados = asociados;
     }
    
@@ -56,11 +59,11 @@ public class Cooperativa  implements java.io.Serializable {
     public void setMatricula(int matricula) {
         this.matricula = matricula;
     }
-    public Long getCuit() {
+    public String getCuit() {
         return this.cuit;
     }
     
-    public void setCuit(Long cuit) {
+    public void setCuit(String cuit) {
         this.cuit = cuit;
     }
     public String getRazonSocial() {
@@ -104,6 +107,13 @@ public class Cooperativa  implements java.io.Serializable {
     
     public void setIngresoBruto(String ingresoBruto) {
         this.ingresoBruto = ingresoBruto;
+    }
+    public Boolean getEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
     public Set<Asociado> getAsociados() {
         return this.asociados;

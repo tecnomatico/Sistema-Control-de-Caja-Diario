@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 06/10/2013 01:19:46 by Hibernate Tools 3.2.1.GA
+// Generated 18/10/2013 11:16:44 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -13,22 +13,23 @@ public class Asociado  implements java.io.Serializable {
      private Integer idAsociado;
      private Cooperativa cooperativa;
      private int legajo;
-     private Long cuit;
+     private String cuit;
      private Integer dni;
      private String apellido;
      private String nombre;
      private Date ingreso;
      private String telefono;
-     private Integer estado;
+     private Boolean estado;
 
     public Asociado() {
     }
 
 	
-    public Asociado(int legajo) {
+    public Asociado(int legajo, String cuit) {
         this.legajo = legajo;
+        this.cuit = cuit;
     }
-    public Asociado(Cooperativa cooperativa, int legajo, Long cuit, Integer dni, String apellido, String nombre, Date ingreso, String telefono, Integer estado) {
+    public Asociado(Cooperativa cooperativa, int legajo, String cuit, Integer dni, String apellido, String nombre, Date ingreso, String telefono, Boolean estado) {
        this.cooperativa = cooperativa;
        this.legajo = legajo;
        this.cuit = cuit;
@@ -61,11 +62,11 @@ public class Asociado  implements java.io.Serializable {
     public void setLegajo(int legajo) {
         this.legajo = legajo;
     }
-    public Long getCuit() {
+    public String getCuit() {
         return this.cuit;
     }
     
-    public void setCuit(Long cuit) {
+    public void setCuit(String cuit) {
         this.cuit = cuit;
     }
     public Integer getDni() {
@@ -103,11 +104,11 @@ public class Asociado  implements java.io.Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    public Integer getEstado() {
+    public Boolean getEstado() {
         return this.estado;
     }
     
-    public void setEstado(Integer estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 

@@ -561,7 +561,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     public void getDatos(){
         cooperativa.setRazonSocial(txtNombre.getText());
         cooperativa.setMatricula(Integer.parseInt(txtMatricula.getText()));
-        cooperativa.setCuit(Long.parseLong(txtCuit.getText()));
+        cooperativa.setCuit(txtCuit.getText());
         cooperativa.setIngresoBruto(txtIngresoBruto.getText());
         cooperativa.setInicioActividad(dateIncioActividad.getDate());
         cooperativa.setInicioCaja(Double.parseDouble(txtInicioCaja.getText()));

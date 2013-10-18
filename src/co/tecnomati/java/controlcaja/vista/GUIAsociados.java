@@ -304,7 +304,7 @@ public class GUIAsociados extends javax.swing.JDialog {
             } 
         } else {
                    asociado.setLegajo(Integer.parseInt(txtLegajo.getText()));
-        asociado.setCuit(Long.parseLong(txtCuit.getText()));
+        asociado.setCuit(txtCuit.getText());
         asociado.setDni(Integer.valueOf(txtDNI.getText()));
         asociado.setApellido(txtApellido.getText());
         asociado.setNombre(txtNombre.getText());

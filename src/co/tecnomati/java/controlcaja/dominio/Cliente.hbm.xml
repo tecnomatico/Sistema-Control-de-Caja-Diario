@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 06/10/2013 01:19:46 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 18/10/2013 11:16:45 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="co.tecnomati.java.controlcaja.dominio.Cliente" table="cliente" catalog="control_caja">
         <id name="idCliente" type="java.lang.Integer">
             <column name="idCliente" />
             <generator class="identity" />
         </id>
-        <property name="cuit" type="long">
-            <column name="cuit" not-null="true" unique="true" />
+        <property name="cuit" type="string">
+            <column name="cuit" length="14" not-null="true" unique="true" />
         </property>
         <property name="razonSocial" type="string">
             <column name="razonSocial" length="100" />
@@ -17,7 +17,7 @@
         <property name="domicilio" type="string">
             <column name="domicilio" length="200" />
         </property>
-        <property name="estado" type="java.lang.Integer">
+        <property name="estado" type="java.lang.Boolean">
             <column name="estado" />
         </property>
         <property name="telefono" type="string">

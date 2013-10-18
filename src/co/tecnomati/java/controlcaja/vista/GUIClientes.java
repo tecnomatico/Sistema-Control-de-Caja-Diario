@@ -218,7 +218,7 @@ private boolean modificar=false;
             } 
         } else {
            
-            cliente.setCuit(Integer.parseInt(txtCuit.getText()));
+            cliente.setCuit(txtCuit.getText());
             cliente.setRazonSocial(txtRazonSocial.getText().toUpperCase());
             cliente.setDomicilio(txtDomicilio.getText().toUpperCase());
             cliente.setTelefono(txtTelefono.getText().toUpperCase());
@@ -264,7 +264,7 @@ private boolean modificar=false;
      */
     public void getDatos() {
        
-        cliente.setCuit(Long.parseLong(txtCuit.getText()));
+        cliente.setCuit(txtCuit.getText());
         cliente.setRazonSocial(txtRazonSocial.getText());
         cliente.setTelefono(txtTelefono.getText().trim());
         cliente.setDomicilio(txtDomicilio.getText().trim());

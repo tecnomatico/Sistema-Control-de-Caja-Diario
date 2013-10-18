@@ -132,7 +132,7 @@ public class Creador {
     }
     public static void CrearCooperativayAsociado(){
         Cooperativa coop = new Cooperativa();
-        long cuit = 12345;
+        String cuit = "12345";
         coop.setCuit(cuit);
         coop.setDomicilio("Pandora Inc");
         coop.setIngresoBruto("aaa");

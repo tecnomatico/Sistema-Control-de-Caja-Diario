@@ -17,7 +17,7 @@ public class Entidad {
     
 
     private Date fechaIngreso;
-    private Long cuit;
+    private String cuit;
     private Integer dni;
     
 
@@ -69,14 +69,14 @@ public class Entidad {
     /**
      * @return the cuit
      */
-    public Long getCuit() {
+    public String getCuit() {
         return cuit;
     }
 
     /**
      * @param cuit the cuit to set
      */
-    public void setCuit(Long cuit) {
+    public void setCuit(String cuit) {
         this.cuit = cuit;
     }
 

@@ -223,7 +223,7 @@ public class GUIProveedor extends javax.swing.JDialog {
             } 
         } else {
            
-            proveedor.setCuit(Integer.parseInt(txtCuit.getText()));
+            proveedor.setCuit(txtCuit.getText());
             proveedor.setRazonSocial(txtRazonSocial.getText().toUpperCase());
             proveedor.setDomicilio(txtDomicilio.getText().toUpperCase());
             proveedor.setTelefono(txtTelefono.getText().toUpperCase());
@@ -268,7 +268,7 @@ public class GUIProveedor extends javax.swing.JDialog {
      */
     public void getDatos() {
         
-        proveedor.setCuit(Long.parseLong(txtCuit.getText()));
+        proveedor.setCuit(txtCuit.getText());
         proveedor.setRazonSocial(txtRazonSocial.getText());
         proveedor.setTelefono(txtTelefono.getText().trim());
         proveedor.setDomicilio(txtDomicilio.getText().trim());

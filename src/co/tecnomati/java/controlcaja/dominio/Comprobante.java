@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 06/10/2013 01:19:46 by Hibernate Tools 3.2.1.GA
+// Generated 18/10/2013 11:16:44 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -22,6 +22,7 @@ public class Comprobante  implements java.io.Serializable {
      private Date fecha;
      private Integer tipoProceso;
      private Date ejercicioEconomico;
+     private Boolean estado;
      private Set<Comprobanteconcepto> comprobanteconceptos = new HashSet<Comprobanteconcepto>(0);
 
     public Comprobante() {
@@ -31,7 +32,7 @@ public class Comprobante  implements java.io.Serializable {
     public Comprobante(int idEntidad) {
         this.idEntidad = idEntidad;
     }
-    public Comprobante(Tipocomprobante tipocomprobante, String numeroSerie, Long numeroSerieIzq, Long numeroSerieDer, int idEntidad, Integer tipoPersona, Date fecha, Integer tipoProceso, Date ejercicioEconomico, Set<Comprobanteconcepto> comprobanteconceptos) {
+    public Comprobante(Tipocomprobante tipocomprobante, String numeroSerie, Long numeroSerieIzq, Long numeroSerieDer, int idEntidad, Integer tipoPersona, Date fecha, Integer tipoProceso, Date ejercicioEconomico, Boolean estado, Set<Comprobanteconcepto> comprobanteconceptos) {
        this.tipocomprobante = tipocomprobante;
        this.numeroSerie = numeroSerie;
        this.numeroSerieIzq = numeroSerieIzq;
@@ -41,6 +42,7 @@ public class Comprobante  implements java.io.Serializable {
        this.fecha = fecha;
        this.tipoProceso = tipoProceso;
        this.ejercicioEconomico = ejercicioEconomico;
+       this.estado = estado;
        this.comprobanteconceptos = comprobanteconceptos;
     }
    
@@ -113,6 +115,13 @@ public class Comprobante  implements java.io.Serializable {
     
     public void setEjercicioEconomico(Date ejercicioEconomico) {
         this.ejercicioEconomico = ejercicioEconomico;
+    }
+    public Boolean getEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
     public Set<Comprobanteconcepto> getComprobanteconceptos() {
         return this.comprobanteconceptos;

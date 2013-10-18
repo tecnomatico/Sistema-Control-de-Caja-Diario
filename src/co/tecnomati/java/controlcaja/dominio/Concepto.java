@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 06/10/2013 01:19:46 by Hibernate Tools 3.2.1.GA
+// Generated 18/10/2013 11:16:44 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -13,13 +13,15 @@ public class Concepto  implements java.io.Serializable {
 
      private Integer codigoConcepto;
      private String descripcion;
+     private Boolean estado;
      private Set<Comprobanteconcepto> comprobanteconceptos = new HashSet<Comprobanteconcepto>(0);
 
     public Concepto() {
     }
 
-    public Concepto(String descripcion, Set<Comprobanteconcepto> comprobanteconceptos) {
+    public Concepto(String descripcion, Boolean estado, Set<Comprobanteconcepto> comprobanteconceptos) {
        this.descripcion = descripcion;
+       this.estado = estado;
        this.comprobanteconceptos = comprobanteconceptos;
     }
    
@@ -36,6 +38,13 @@ public class Concepto  implements java.io.Serializable {
     
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+    public Boolean getEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
     public Set<Comprobanteconcepto> getComprobanteconceptos() {
         return this.comprobanteconceptos;

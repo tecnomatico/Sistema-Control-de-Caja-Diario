@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RboReembolsoCuotasSociales" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="246c9b70-cb7a-46ca-9299-2db62e700448">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="206"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividad" class="java.lang.String"/>
 	<field name="nombreApellido" class="java.lang.String"/>
@@ -239,8 +239,10 @@
 				<textFieldExpression><![CDATA[$F{nroDNI}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="ae97ef7e-ff12-44c2-91d6-fc1ef7ae14d5" x="6" y="325" width="299" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement uuid="ae97ef7e-ff12-44c2-91d6-fc1ef7ae14d5" x="6" y="325" width="344" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{cantidadPago}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -293,15 +295,15 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{domicilioCooperativa}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement uuid="6a573c72-623f-440a-a3d9-9fc69bd31f95" x="276" y="269" width="78" height="20"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[cuitAsociado]]></text>
-			</staticText>
 			<textField>
 				<reportElement uuid="3af251ac-82fd-44cb-96c0-f79d2f9af36f" x="7" y="384" width="167" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lugarPago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36522989-3b2f-4cfd-8b8d-527b1479b99a" x="276" y="268" width="78" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cuitAsociado}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

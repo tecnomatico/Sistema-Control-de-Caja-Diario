@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RboAnticipoRetorno" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a27639b2-697f-461d-abe8-2781993ade38">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="367"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividad" class="java.lang.String"/>
 	<field name="periodoFecha" class="java.lang.String"/>
@@ -446,57 +446,57 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{concepto1}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="c36e6ac8-d77a-4f7b-b512-dabf0da1e4e0" x="7" y="329" width="120" height="20"/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="c36e6ac8-d77a-4f7b-b512-dabf0da1e4e0" x="5" y="329" width="120" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{concepto2}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="f1343ba8-a518-4991-bd26-19e52a54700c" x="7" y="348" width="120" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{concepto3}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="500e7568-f383-4a25-bfe3-8808c9fd25af" x="7" y="368" width="120" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{concepto4}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="80f88070-d761-4619-a7db-366cc633cd84" x="7" y="388" width="120" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{concepto5}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="e9620f48-8bd3-4c8d-baa5-f85750d52e3c" x="6" y="408" width="121" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{concepto6}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="d6e45bc8-4525-454e-a13c-461fa8f1db2d" x="142" y="308" width="34" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{porcentaje1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="2c755322-05eb-4791-a2e1-2fd00f7e37f2" x="142" y="328" width="34" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{porcentaje2}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="f8a1b797-45fc-414b-876d-c44313c76b2f" x="142" y="348" width="33" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{porcentaje3}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="beba76fb-654e-4209-ae17-85c012eccf19" x="142" y="368" width="33" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{porcentaje4}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="4449a994-09db-4ad9-8a41-da53549febac" x="142" y="388" width="33" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{porcentaje5}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="0abeed6b-e1ec-453a-b2c5-ddee1fe09810" x="142" y="408" width="33" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{porcentaje6}]]></textFieldExpression>
@@ -506,27 +506,27 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{importe1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="3c19d727-1530-4a4e-94f8-d68537d40bca" x="187" y="329" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{importe2}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="10cf3f4d-5551-4f95-be08-2c4cf2b1e165" x="187" y="348" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{importe3}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="54f9ba55-71e6-4dfd-aba9-e29b51a9a23d" x="187" y="368" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{importe4}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="85ac17e3-39b3-4ddd-8cf1-0de910e3d42a" x="187" y="388" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{importe5}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="ff352adb-3eb2-4222-aca4-79097699a029" x="187" y="408" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{importe6}]]></textFieldExpression>
@@ -536,37 +536,37 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{totalImporte}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="d48aff04-27f7-424e-9529-b374fbef9f45" x="277" y="308" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{descuento1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="2aa8b205-89aa-4130-ade7-125035990156" x="277" y="328" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{descuento2}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="379c9c4a-052b-4271-9c1e-0fee93687fc7" x="277" y="348" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{descuento3}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="5abc98c1-77c4-4377-88f2-dd9f90b478de" x="277" y="368" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{descuento4}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="51146b67-0a8d-470b-9847-1a3de7a4a49a" x="277" y="388" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{descuento5}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="fbae30ad-3f2e-4206-a4fc-e253eeee835b" x="277" y="408" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{descuento6}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="4b6f75b2-bf77-47c7-aee7-3f3cb811b8dc" x="277" y="428" width="78" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{totalDescuento}]]></textFieldExpression>
@@ -577,12 +577,14 @@
 				<textFieldExpression><![CDATA[$F{neto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="91e69bed-ee5b-46e0-91b7-742101cbeebe" x="165" y="471" width="100" height="20"/>
-				<textElement verticalAlignment="Top"/>
+				<reportElement uuid="91e69bed-ee5b-46e0-91b7-742101cbeebe" x="165" y="471" width="190" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{sonPesos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="cbe24a3f-2edf-4cc2-bf2b-2f17abbb2c64" x="295" y="483" width="61" height="20"/>
+				<reportElement uuid="cbe24a3f-2edf-4cc2-bf2b-2f17abbb2c64" x="295" y="487" width="61" height="16"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{ano}]]></textFieldExpression>
 			</textField>

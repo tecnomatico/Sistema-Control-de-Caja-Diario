@@ -13,6 +13,7 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
 import co.tecnomati.java.controlcaja.util.MyUtil;
+import co.tecnomati.java.controlcaja.util.Numero_a_Letra;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,7 +32,16 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
     List<Comprobante> listaComprobantes = new ArrayList<Comprobante>();
     Comprobante comprobante;
     Set<Comprobanteconcepto> conjuntoConceptos;
+    private Comprobanteconcepto comprobanteconcepto1;
+    private Double monto;
 
+    
+     private void setComprobanteConcepto1(Set<Comprobanteconcepto> conjuntoConceptos) {
+        for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
+            Comprobanteconcepto comprobanteconcepto = it.next();
+            comprobanteconcepto1 = comprobanteconcepto;
+        }
+     }
     @Override
     public boolean next() throws JRException {
         return ++index < listaComprobantes.size();
@@ -44,44 +54,12 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
         comprobante = listaComprobantes.get(index);
 
         Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
-//        Tipocomprobante tipoComprobante = new ComprobanteDaoImp().getTipocomprobante(comprobante.getId());
         Set<Comprobanteconcepto> conjuntoConceptos = comprobante.getComprobanteconceptos();//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
-//        Set<Comprobanteconcepto> conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
-
+        setComprobanteConcepto1(conjuntoConceptos);
+        monto= comprobanteconcepto1.getMonto();
         Cooperativa cooperativa = new CooperativaDaoImp().listarCooperativa().get(0);
-     
-         Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
-//        Entidad entidad = new Entidad();
-//
-//        switch (comprobante.getTipoPersona()) {
-//            case Constantes.ASOCIADO_INT:
-//                Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
-//                entidad.setNombre(a.getApellido() + " " + a.getNombre());
-//                entidad.setFechaIngreso(a.getIngreso());
-//                entidad.setCuit(a.getCuit());
-//                entidad.setDni(a.getDni());
-//                entidad.setId(a.getLegajo());
-//                
-//                break;
-//            case Constantes.PROVEEDOR_INT:
-//                Proveedor p = new ProveedorDaoImp().getProveedor(comprobante.getIdEntidad());
-//                entidad.setNombre(p.getRazonSocial());
-//                entidad.setCuit(p.getCuit());
-//                break;
-//            case Constantes.CLIENTE_INT:
-//                Cliente c = new ClienteDaoImp().getCliente(comprobante.getIdEntidad());
-//                entidad.setNombre(c.getRazonSocial());
-//                entidad.setCuit(c.getCuit());
-//                break;
-//        }
-
-        List<Comprobanteconcepto> listaComprobanteConcepto = new ArrayList();
-        conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(comprobante.getId());
-        for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
-            Comprobanteconcepto comprobante1 = it.next();
-            listaComprobanteConcepto.add(comprobante1);
-        }
-
+        Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+                      
         if ("nroRecibo".equals(jrf.getName())) {
             valor = comprobante.getNumeroSerie();
         } else if ("matriculaInaes".equals(jrf.getName())) {
@@ -89,13 +67,15 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
             valor = cooperativa.getMatricula();
         } else if ("cuitCooperativa".equals(jrf.getName())) {
             valor = cooperativa.getCuit();
-        } else if ("inicioActividades".equals(jrf.getName())) {
+        } else if ("inicioActividad".equals(jrf.getName())) {
             valor = MyUtil.getFechaString10DDMMAAAA(cooperativa.getInicioActividad());
         } else if ("ingresosBrutos".equals(jrf.getName())) {
             valor = cooperativa.getIngresoBruto();
         } else if ("domicilioCooperativa".equals(jrf.getName())) {
             valor = cooperativa.getDomicilio();
-        } else if ("nombreApellido".equals(jrf.getName())) {
+        } 
+           // DATOS DEL ASOCIADO
+           else if ("nombreApellido".equals(jrf.getName())) {
             valor = valor= a.getApellido()+" "+a.getNombre();
         } else if ("nroAsociado".equals(jrf.getName())) {
             valor = valor= a.getLegajo();
@@ -107,12 +87,10 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
             valor= a.getCuit();
         } else if ("ejercicioEconomico".equals(jrf.getName())) {
             valor = comprobante.getEjercicioEconomico();
-        } //        else if("nroDNI".equals(jrf.getName())){
-        //            valor = entidad.getDni();
-        //        }
-        //        else if("nroDNI".equals(jrf.getName())){
-        //            valor = entidad.getDni();
-        //        }
+        } 
+         else if ("sonPesos".equals(jrf.getName())) {
+            valor = valor = "(" + new Numero_a_Letra().Convertir(String.valueOf(monto), true) + ")";
+        } 
         else if ("lugarPago".equals(jrf.getName())) {
             valor = cooperativa.getDomicilio();
         } else if ("fechaPago".equals(jrf.getName())) {

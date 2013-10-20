@@ -28,7 +28,7 @@ import javax.swing.table.AbstractTableModel;
 public class ModeloComprobante extends AbstractTableModel {
     Comprobante comprobante = new Comprobante();
     ComprobanteDaoImp comprobanteDAO = new ComprobanteDaoImp();
-    ArrayList<Comprobante> listaComprobante = new ArrayList<Comprobante>();
+    ArrayList<Comprobante> listaComprobante ;
     
     
      private String[] cabeceras = {
@@ -63,7 +63,7 @@ public class ModeloComprobante extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
        Object objeto = new Object();       
         comprobante = (Comprobante) listaComprobante.get(rowIndex);
-        List<Comprobanteconcepto> listConceptos = new ComprobanteconceptoDaoImp().listComprobanteconceptos(comprobante.getId());
+//        Set<Comprobanteconcepto> conjuntoConceptos = comprobante.getComprobanteconceptos();
        
         switch (columnIndex) {
           
@@ -74,13 +74,13 @@ public class ModeloComprobante extends AbstractTableModel {
 //            case 3:objeto =new ComprobanteDaoImp().getTipocomprobante(comprobante.getId()).getReferencia();break;
             case 4:objeto = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq())+"-"+ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());break;
             case 5:objeto = getRazonSocial();break;
-            case 6:objeto =  getMontoTotal(comprobante.getId());break; // ver aqui
+            case 6:objeto =  getMontoTotal();break; // ver aqui
 
             
         }      
         return objeto;
     }
-    public double getMontoTotal(int idComprobante){
+    public double getMontoTotal(){
         double total=0;
 //        Set<Comprobanteconcepto> conjuntoConceptos = new ComprobanteDaoImp().listarConcepto(idComprobante);
         for (Iterator<Comprobanteconcepto> it = comprobante.getComprobanteconceptos().iterator(); it.hasNext();) {

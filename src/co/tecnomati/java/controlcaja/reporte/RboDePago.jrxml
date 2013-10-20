@@ -3,6 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="36"/>
+	<parameter name="logo" class="java.lang.String"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividades" class="java.lang.String"/>
 	<field name="cantidadPago" class="java.lang.String"/>
@@ -150,7 +151,7 @@
 					<reportElement uuid="5bf71e48-cdfa-4756-99c6-69cc594aeeaa" x="0" y="190" width="360" height="20"/>
 				</rectangle>
 				<rectangle>
-					<reportElement uuid="8bb27121-9756-40fa-bf45-8781512b687c" x="0" y="23" width="107" height="67"/>
+					<reportElement uuid="8bb27121-9756-40fa-bf45-8781512b687c" x="0" y="24" width="107" height="67"/>
 				</rectangle>
 				<rectangle>
 					<reportElement uuid="e9c38dda-bd88-415c-ba99-86f0905db2e7" x="0" y="210" width="360" height="39"/>
@@ -267,6 +268,10 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lugarPago}]]></textFieldExpression>
 			</textField>
+			<image scaleImage="Clip" isUsingCache="false">
+				<reportElement uuid="908d5b06-52d1-418e-83ce-c62ee8b87a56" mode="Transparent" x="16" y="25" width="73" height="66"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
 		</band>
 	</detail>
 	<summary>

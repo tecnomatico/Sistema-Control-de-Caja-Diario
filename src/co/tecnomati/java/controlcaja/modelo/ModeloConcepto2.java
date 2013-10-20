@@ -13,17 +13,17 @@ import co.tecnomati.java.controlcaja.dominio.dao.imp.ConceptoDaoImp;
  *
  * @author AnahiAramayo
  */
-public class ModeloConcepto extends AbstractTableModel{
+public class ModeloConcepto2 extends AbstractTableModel{
     Concepto concepto = new Concepto();
     ConceptoDaoImp conceptoDAO = new ConceptoDaoImp();
     ArrayList<Concepto> listaConcepto = new ArrayList<Concepto>();
    
     // tipo= 0  todo los conceptos
     //tipo=1   todos los conceptos menos los 5 conceptos de los formularios 
-    public ModeloConcepto() {            
+    public ModeloConcepto2() {            
         try {
             
-            listaConcepto = (ArrayList<Concepto>) conceptoDAO.listarConcepto();
+            listaConcepto = (ArrayList<Concepto>) conceptoDAO.listarConceptoSinConceptosAutomaticos();
         } catch (ClassCastException ex) {
             listaConcepto = new ArrayList<Concepto>();            
         }finally{

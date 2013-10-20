@@ -8,6 +8,7 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
 
 import co.tecnomati.java.controlcaja.dominio.Concepto;
 import co.tecnomati.java.controlcaja.modelo.ModeloConcepto;
+import co.tecnomati.java.controlcaja.modelo.ModeloConcepto2;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter.*;
 import javax.swing.table.TableRowSorter;
@@ -21,11 +22,13 @@ public class GUIGestordeConcepto extends javax.swing.JDialog {
 int numeroSeleccion;
     Concepto asociado;
     ModeloConcepto modeloasociado = new ModeloConcepto();
+    ModeloConcepto2 modeloasociado2 = new ModeloConcepto2();
     
     private  TableRowSorter sorter;
     GUIGestorAsociado parent;
     boolean agregado= false;
     
+    int i ; // tipo de modelo de concepto
     /**
      * Creates new form GUIGestordeConcepto
      */
@@ -38,10 +41,24 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         this.setVisible(true);
     }
 
+    GUIGestordeConcepto(java.awt.Frame parent,boolean modal, int i) {
+        super(parent, modal);
+        initComponents();
+        this.i = i;
+        inicializarGestorModeloTabla();
+        this.setTitle(Constantes.NAME_GESTOR_CONCEPTOS);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);    }
+
     public void inicializarTabla(){
         modeloasociado= new ModeloConcepto();
         sorter = new TableRowSorter(modeloasociado);
         tblConcepto.setModel(modeloasociado);
+    }
+    public void inicializarTabla2(){
+        modeloasociado2= new ModeloConcepto2();
+        sorter = new TableRowSorter(modeloasociado2);
+        tblConcepto.setModel(modeloasociado2);
     }
     public Concepto getAsociado() {
         return asociado;
@@ -182,11 +199,19 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+private void inicializarGestorModeloTabla(){
+    if (i==0) {
+                  inicializarTabla();
+              } else {
+                  inicializarTabla2();
+              }
+}
     private void btnNuevoConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoConceptoActionPerformed
           GUIConceptos guiConcepto =  new GUIConceptos(null, true);
           if (guiConcepto.isAgregado()) {
-            inicializarTabla();
+              
+           inicializarGestorModeloTabla();
+              
         }
  
            
@@ -201,7 +226,12 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
             GUIConceptos guiConceptos = new GUIConceptos(null, true, asociado);
             // actulizar la tabla con los datos modificados
             if (guiConceptos.isAgregado()) {
-                 inicializarTabla();
+                
+                if (i==0) {
+                  inicializarTabla();
+              } else {
+                  inicializarTabla2();
+              }
             }
             
         } else {

@@ -204,10 +204,11 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNuevoEntidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNuevoEntidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(21, 21, 21))
         );
 
@@ -321,7 +322,29 @@ filtro(txtRazonSocial);
     }//GEN-LAST:event_btnCancelar1ActionPerformed
 
     private void btnNuevoEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoEntidadActionPerformed
-        // TODO add your handling code here:
+          switch (cmbFiltroEntidad.getSelectedIndex()) {
+
+            case Constantes.ASOCIADO_INT:
+                GUIAsociados guiAsociado = new GUIAsociados(null, true);
+                if (guiAsociado.isAgregado()) {
+                    inicializarTablaAsociado();
+                }
+                
+                 break;
+            case Constantes.PROVEEDOR_INT:
+               GUIProveedor guiProveedor = new GUIProveedor(null, true);
+                if (guiProveedor.isAgregado()) {
+                    inicializarTablaProveedor();
+                }
+               
+                break;
+            case Constantes.CLIENTE_INT:
+               GUIClientes guiCliente = new GUIClientes(null, true);
+                if (guiCliente.isAgregado()) {
+                    inicializarTablaCliente();
+                }
+                break;
+        }
     }//GEN-LAST:event_btnNuevoEntidadActionPerformed
 
     /**

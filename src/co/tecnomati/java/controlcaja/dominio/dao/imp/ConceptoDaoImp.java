@@ -16,62 +16,75 @@ import org.hibernate.Session;
  *
  * @author Joel
  */
-public class ConceptoDaoImp extends HibernateUtil implements ConceptoDAO{
+public class ConceptoDaoImp extends HibernateUtil implements ConceptoDAO {
 
     @Override
     public List<Concepto> listarConcepto() {
 //       Session session = HibernateUtil.getSessionFactory().openSession();
-                Session session = HibernateUtil.getSession();
+        Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Concepto.class);
-        
-        ArrayList<Concepto> parroquia = (ArrayList<Concepto>)criteria.list();
+
+        ArrayList<Concepto> parroquia = (ArrayList<Concepto>) criteria.list();
         session.close();
         return parroquia;
+    }
+
+    public List<Concepto> listarConceptoSinConceptosAutomaticos() {
+//       Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSession();
+
+        session.beginTransaction();
+        ArrayList<Concepto> lista= (ArrayList<Concepto>)session.createQuery("from Concepto where codigoConcepto !=1 and  codigoConcepto !=2  and codigoConcepto !=3 and  codigoConcepto !=4  and  codigoConcepto !=5").list();
+        session.close();
+        return lista;
     }
 
     @Override
     public void addConcepto(Concepto a) {
 //        Session session = HibernateUtil.getSessionFactory().openSession();
-                Session session = HibernateUtil.getSession();
+        Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
         session.save(a);
         session.getTransaction().commit();
-        session.close();    }
+        session.close();
+    }
 
     @Override
     public void deleteConcepto(Concepto a) {
 //        Session session = HibernateUtil.getSessionFactory().openSession();
-                Session session = HibernateUtil.getSession();
+        Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
         session.delete(a);
         session.getTransaction().commit();
-        session.close();    }
+        session.close();
+    }
 
     @Override
     public void upDateConcepto(Concepto a) {
 //        Session session = HibernateUtil.getSessionFactory().openSession();
-                Session session = HibernateUtil.getSession();
+        Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
         session.update(a);
         session.getTransaction().commit();
-        session.close();     }
+        session.close();
+    }
 
     @Override
     public Concepto getConcepto(int idConcepto) {
 //        Session session = HibernateUtil.getSessionFactory().openSession();
-                Session session = HibernateUtil.getSession();
+        Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
-        Concepto a = (Concepto) session.get(Concepto.class,idConcepto);
+        Concepto a = (Concepto) session.get(Concepto.class, idConcepto);
         session.getTransaction().commit();
         session.close();
-        return a;      }
-    
+        return a;
+    }
 //    public Concepto getConceptoCod(int ref) {
 //        Concepto a = null;
 ////        Session session = getSessionFactory().openSession();
@@ -84,6 +97,4 @@ public class ConceptoDaoImp extends HibernateUtil implements ConceptoDAO{
 //        session.close();
 //        return a; 
 //    }
-    
-    
 }

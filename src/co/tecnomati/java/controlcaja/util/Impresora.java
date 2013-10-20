@@ -11,10 +11,20 @@ import co.tecnomati.java.controlcaja.reporte.jrdatasource.RboAnticipoRetornoData
 import co.tecnomati.java.controlcaja.reporte.jrdatasource.RboDistribucionExcedentesDataSource;
 import co.tecnomati.java.controlcaja.reporte.jrdatasource.RboIntegCuotaSocialJRDataSource;
 import co.tecnomati.java.controlcaja.reporte.jrdatasource.RboReembolsoCuotaSocial;
+import java.awt.Image;
+import java.awt.image.RenderedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -27,6 +37,7 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 public class Impresora {
     private Comprobante comprobante;
     private  int tipoComprobante ;
+    private RenderedImage image;
   
     
     /**
@@ -40,8 +51,14 @@ public class Impresora {
     }
    
       public void imprimirReciboReembolsoCuotaSociales() {
-        Map parametros = new HashMap();
-        String logotipo = "/images/1.jpg";
+        
+        String logotipo = "co/tecnomati/java/controlcaja/imagen/1.jpg";
+          Image img = new ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/iconTecnomatica.png")).getImage();
+          
+           // creo el objeto  asitencia     
+     
+        Map<String,java.awt.Image> parametros = new HashMap<String,java.awt.Image>();
+//        parametros.put("logo", img);
         RboReembolsoCuotaSocial dataSource = new RboReembolsoCuotaSocial();
         List<Comprobante> lista = new ArrayList<Comprobante>();
         lista.add(comprobante);
@@ -126,8 +143,11 @@ public class Impresora {
     }
 
     public void imprimirReciboDePago() {
-        Map parametros = new HashMap();
-        String logotipo = "/images/1.jpg";
+       String logotipo = "co/tecnomati/java/controlcaja/imagen/1.jpg";
+          Image img = new ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/iconTecnomatica.png")).getImage();
+           Map<String,java.awt.Image> parametros = new HashMap<String,java.awt.Image>();
+//        parametros.put("logo", img);
+        
         ModeloReciboJRDataSource dataSource = new ModeloReciboJRDataSource();
 
         List<Comprobante> lista = new ArrayList<Comprobante>();

@@ -62,7 +62,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         modificar = false;
         comprobante = new Comprobante();
 
-
+        txtRefTipoCompr.requestFocus();
         this.setTitle(Constantes.NAME_NUEVO_REGISTRO);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -84,22 +84,33 @@ public class GUIComprobante extends javax.swing.JDialog {
         this.comprobante = compr;
 
         setDatos();
-        // esto es porque debe reflejar las variables q se enccargan de mantener el numero de serie en todo momento
-        numIzq = tipoComprobante.getNumeroSerieIzq();
-        numDer = tipoComprobante.getNumeroSerieDer();
-
+         numIzq = comprobante.getNumeroSerieIzq();
+         numDer = comprobante.getNumeroSerieDer();
+            
         controlarTipoOperacion();
         controlarTipodeComprobante();
 
         ControlarEditableNumeroSerie();
         setEnabledBotonImprimir(tipoComprobante.getCodigo());
         controlarPanelMonotributo();
-
+ 
+        setEditableComprobante(false);
+        txtnumSerie1.setEnabled(true);
+        txtNumSerie2.setEnabled(true);
+        configuarBotonEditarDesdeGestor();
+        
+        
 //        setDatosNombreEntidad();
         this.setTitle(Constantes.NAME_NUEVO_REGISTRO);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
+    }
+    private void configuarBotonEditarDesdeGestor(){
+        btnEditar.setEnabled(true);
+        btnEliminar.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        btnNuevo.setEnabled(false);
     }
     
     /**
@@ -332,7 +343,13 @@ public class GUIComprobante extends javax.swing.JDialog {
         labelMetric5.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         txtnumSerie1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtnumSerie1.setEnabled(false);
         txtnumSerie1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtnumSerie1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtnumSerie1FocusLost(evt);
+            }
+        });
         txtnumSerie1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtnumSerie1KeyTyped(evt);
@@ -358,7 +375,13 @@ public class GUIComprobante extends javax.swing.JDialog {
         });
 
         txtNumSerie2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNumSerie2.setEnabled(false);
         txtNumSerie2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtNumSerie2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNumSerie2FocusLost(evt);
+            }
+        });
         txtNumSerie2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNumSerie2KeyTyped(evt);
@@ -603,6 +626,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         });
 
         dateComprobante.setDate(new Date());
+        dateComprobante.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         dateComprobante.setMaxSelectableDate(new Date());
 
         btnImprimir.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 102, 102)));
@@ -828,8 +852,19 @@ public class GUIComprobante extends javax.swing.JDialog {
             comprobante.setIdEntidad(entidad.getId());
             comprobante.setTipoPersona(entidad.getTipoEntidad());
             comprobante.setFecha(dateComprobante.getDate());
-            comprobante.setNumeroSerieIzq(numIzq);
-            comprobante.setNumeroSerieDer(numDer);
+            // aqui debo preguntar si es un numero de serie autogenerado o ingresasdo por el usuario
+            if (!isComprobanteParaBuscarConcepto(tipoComprobante)|| isReciboPago(tipoComprobante)) {
+                comprobante.setNumeroSerieIzq(numIzq);
+                comprobante.setNumeroSerieDer(numDer);
+            } else {
+                if (txtnumSerie1.getText().trim().length()==4 && txtNumSerie2.getText().trim().length()==8) {
+                
+                numIzq = Long.valueOf(txtnumSerie1.getText());
+                numDer = Long.valueOf(txtNumSerie2.getText());
+                comprobante.setNumeroSerieIzq(numIzq);
+                comprobante.setNumeroSerieDer(numDer);                }
+            }
+            
             // aqui deberia ir concatendado la ref+iz+der
             String nserie=ComprobanteUtil.formatearNumSerieIzq(numIzq)+"-"+ComprobanteUtil.formatearNumSerieDer(numDer);
             comprobante.setNumeroSerie(tipoComprobante.getReferencia()+nserie);
@@ -900,10 +935,14 @@ public class GUIComprobante extends javax.swing.JDialog {
             agregado = true;
 
             JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
-//        if (!modificar) {
-//           new Impresora(comprobante).Imprimir();    
-//        }
-            this.dispose();
+            setEditableComprobante(false);
+            // botones que deben figurar cuando se guarda
+            btnEditar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+            btnGuardar.setEnabled(false);
+            btnNuevo.setEnabled(true);
+            btnEditar.setEnabled(true);
+            
             setEnabledBotonImprimir(tipoComprobante.getCodigo());
 //        this.dispose();     
         }
@@ -929,6 +968,39 @@ public class GUIComprobante extends javax.swing.JDialog {
         }
     }
 
+    
+    public boolean isReciboPago(Tipocomprobante tc){
+         boolean b=false;
+         if (tc.getFormulario().equals(Constantes.RECIBO_PAGO)){
+             b=true;
+         }
+         
+         return b;
+        
+    }
+    
+    
+    /**
+     * 
+     * @param tc tipo de comprobant
+     * @return  si es un tipo de comprobante = anticipo retorno , distri, integraci, cuota social devolber 
+     */
+    public boolean isComprobanteParaBuscarConcepto(Tipocomprobante tc){
+        boolean b=true;
+        if (tc.getFormulario().equals(Constantes.RECIBO_ANTICIPO_RETORNO)
+                || tc.getFormulario().equals(Constantes.RECIBO_DISTRIBUCION_EXCEDENTE)
+                || tc.getFormulario().equals(Constantes.RECIBO_INTEGRACION_CUOTA)
+                || tc.getFormulario().equals(Constantes.RECIBO_REEMBOLSO_CUOTA_SOCIAL)) {
+          b=  false;
+          System.out.print("false");
+        }
+        
+                  System.out.print("true");
+
+        return b;
+    }
+    
+    
     /**
      *
      * @param tipoComprobante entero que determina el tipo de comprobante
@@ -960,14 +1032,66 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     public GUIComprobante() {
     }
+    
+    /**
+     * i
+     * @param cod de concepto
+     * @return true si el concepto no pertenece a un conceto= monotributo,distribuion excedente, anticipo retrono, rec integrac de cuota
+     * false de otro modo
+     */
+    public boolean isConceptoAutomatico(int cod){
+        boolean b= false;
+        
+        if (cod == Constantes.CONCEPTO_CODIGO_ANTICIPO_RETORNO
+                ||cod == Constantes.CONCEPTO_CODIGO_DISTRIBUCION_EXCEDENTE
+                ||cod == Constantes.CONCEPTO_CODIGO_INTEGRACION_CUOTA
+                ||cod == Constantes.CONCEPTO_CODIGO_MONOTRIBUTO
+                ||cod == Constantes.CONCEPTO_CODIGO_REEMBOLSO_CUOTA_SOCIAL
+                ){
+
+          b=  true;
+        }
+        
+        return b;
+    }
     private void txtCodigoConceptoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoConceptoKeyPressed
 //        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 //            @Override
 //            public boolean dispatchKeyEvent(KeyEvent evt) {
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+             int codigoConcepto = Integer.parseInt(txtCodigoConcepto.getText().trim());
+             
+             System.out.println("codigo de concetpor "+ codigoConcepto);
+             System.out.println("tipode comprobante "+ tipoComprobante.getFormulario());
+            if (isComprobanteParaBuscarConcepto(tipoComprobante)) {
+                System.out.println("es un tipo de comprobante a filtrar "+ isComprobanteParaBuscarConcepto(tipoComprobante));
+                // no se debe buscar un concepto que corresponde alos comprobantes automaticos
+                   
+            if (!"".equals(codigoConcepto) ) {
+                System.out.println("no es distinto de cero codigo concetp");
+                concepto = new ConceptoDaoImp().getConcepto(codigoConcepto);
+//                 System.out.println("concetor"+ concepto.getCodigoConcepto());
+                if (concepto != null && !isConceptoAutomatico(codigoConcepto)) {
+                    txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
+                    txtDescripcionConcepto.setText(concepto.getDescripcion());
+                    txtMonto.requestFocus();
+                } else {
+                    System.out.println("salto bien el pescao");
+                    // llama a la ayuda
+                    GUIGestordeConcepto gestorConcepto = new GUIGestordeConcepto(null, true,1);
+                    // si eligio un concepto debe ser reflejado 
+                    if (gestorConcepto.isAgregado()) {
+                        concepto = gestorConcepto.getAsociado();
+                        txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
+                        txtDescripcionConcepto.setText(concepto.getDescripcion());
+                        txtMonto.requestFocus();
 
-            int codigoConcepto = Integer.parseInt(txtCodigoConcepto.getText().trim());
+                    }
+                }
+            }
+            } else {
+               
             if (!"".equals(codigoConcepto)) {
                 concepto = new ConceptoDaoImp().getConcepto(codigoConcepto);
                 if (concepto != null) {
@@ -987,6 +1111,8 @@ public class GUIComprobante extends javax.swing.JDialog {
                     }
                 }
             }
+            }
+            
 
         }
 
@@ -1050,6 +1176,8 @@ public class GUIComprobante extends javax.swing.JDialog {
     }
 
     public void limpiarNumeroSerie() {
+        txtnumSerie1.setEnabled(true);
+        txtNumSerie2.setEnabled(true);
         txtnumSerie1.setText("");
         txtNumSerie2.setText("");
     }
@@ -1077,6 +1205,8 @@ public class GUIComprobante extends javax.swing.JDialog {
                 System.out.println("recibo");
 
                 // generar automaticamente el numero de serie con la numeracion que le toca
+                txtnumSerie1.setEnabled(true);
+                txtNumSerie2.setEnabled(true);
                 txtnumSerie1.setEditable(false);
                 txtNumSerie2.setEditable(false);
                 generarNumerodeSerieRecibo();
@@ -1116,9 +1246,11 @@ public class GUIComprobante extends javax.swing.JDialog {
             // para estos tipos de comprobante se genera automaticamente por lo que se debe controlar de que no se pueda editar el campo de numero de serie
             txtnumSerie1.setEditable(false);
             txtNumSerie2.setEditable(false);
+            txtCuit.requestFocus();
         } else {
             txtnumSerie1.setEditable(true);
             txtNumSerie2.setEditable(true);
+            txtnumSerie1.requestFocus();
 
         }
     }
@@ -1182,7 +1314,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 GenerarNumeroSerie();
                 controlarPanelMonotributo();
                 ControlarEditableNumeroSerie();
-                txtnumSerie1.requestFocus();
+              
 
 
             } else {
@@ -1197,7 +1329,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 GenerarNumeroSerie();
                 controlarPanelMonotributo();
                 ControlarEditableNumeroSerie();
-                txtnumSerie1.requestFocus();
+                
                 }
             }
 
@@ -1257,6 +1389,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                     txtCuit.setText(String.valueOf(asociado.getCuit()));
                     txtNombre.setText(asociado.getApellido() + " " + asociado.getNombre());
                 }
+                txtCodigoConcepto.requestFocus();
             }
 
         } else {
@@ -1294,12 +1427,25 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     private void cmbTipoProcesoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbTipoProcesoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txtRefTipoCompr.requestFocus();
+            txtCuit.requestFocus();
         }
     }//GEN-LAST:event_cmbTipoProcesoKeyPressed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        int opc = JOptionPane.showConfirmDialog(null,"Esta seguro de Eliminar el Comprobante: "+comprobante.getNumeroSerie(), "ELIMINAR COMPROBANTE", JOptionPane.YES_NO_OPTION);
+        if (opc==JOptionPane.YES_OPTION) {
+           new ComprobanteDaoImp().deleteFormulario(comprobante);
+           mensajero.mensajeInformacionAtualizacionOK(null);
+           
+           // configuarar botones luego de eliminar
+           btnEditar.setEnabled(false);
+           btnEliminar.setEnabled(false);
+           btnGuardar.setEnabled(false);
+           btnImprimir.setEnabled(false);
+           btnNuevo.setEnabled(true);
+           limpiarDatosComprobante();
+           setEditableComprobante(false);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEntidadActionPerformed
@@ -1318,14 +1464,64 @@ public class GUIComprobante extends javax.swing.JDialog {
         MyUtil.consumirAll(evt, txtAporteMonotributo, 15);
         
     }//GEN-LAST:event_txtAporteMonotributoKeyTyped
-
+   
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        // TODO add your handling code here:
+      // inicializar toodo
+        comprobante= new Comprobante();
+        conjuntoConceptos= null;
+        tipoComprobante=null;
+        comprobanteconcepto= null;
+        entidad= null;
+        concepto= null;
+        numDer=0;
+        numIzq= 0;
+         limpiarDatosComprobante(); 
+         
+        //botones
+        btnNuevo.setEnabled(false);
+        btnImprimir.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnGuardar.setEnabled(true);
+         
+        modificar = false;
+        
+        
     }//GEN-LAST:event_btnNuevoActionPerformed
-
+   
+    
+    void configurarParaEditar(){
+         setEditableComprobante(true);
+         txtRefTipoCompr.setEditable(false);
+         txtTipoComprobante.setEditable(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(true);
+        btnGuardar.setEnabled(true);
+        btnNuevo.setEnabled(false);
+   }
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+      configurarParaEditar();
+      controlarEditableMonotributo();
+      
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void txtnumSerie1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtnumSerie1FocusLost
+        if (isComprobanteParaBuscarConcepto(tipoComprobante)) {
+            if (txtnumSerie1.getText().trim().length()!=4) {
+                
+                txtnumSerie1.setText(ComprobanteUtil.formatearNumSerieIzq(Long.parseLong(txtnumSerie1.getText().trim())));
+            }
+        } 
+    }//GEN-LAST:event_txtnumSerie1FocusLost
+
+    private void txtNumSerie2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumSerie2FocusLost
+       if (isComprobanteParaBuscarConcepto(tipoComprobante)) {
+            if (txtNumSerie2.getText().trim().length()!=8) {
+                
+                txtNumSerie2.setText(ComprobanteUtil.formatearNumSerieDer(Long.parseLong(txtNumSerie2.getText().trim())));
+            }
+        } 
+    }//GEN-LAST:event_txtNumSerie2FocusLost
 
     /**
      * @param args the command line arguments
@@ -1405,4 +1601,58 @@ public class GUIComprobante extends javax.swing.JDialog {
     private org.edisoncor.gui.textField.TextField txtTipoComprobante;
     private org.edisoncor.gui.textField.TextField txtnumSerie1;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiarDatosComprobante() {
+       
+        setEditableComprobante(true);
+        dateComprobante.setDate(new Date());
+        
+        cmbTipoProceso.setSelectedIndex(0);
+        
+        txtRefTipoCompr.setText("");
+        txtTipoComprobante.setText("");
+        limpiarDatosEntidad();
+        limpiarNumeroSerie();
+        limpiarConceptos();
+    }
+
+    private void limpiarConceptos() {
+        txtCodigoConcepto.setText("");
+        txtDescripcionConcepto.setText("");
+        txtMonto.setText("");
+        
+        chkAporteMonotributo.setEnabled(false);
+        chkAporteMonotributo.setSelected(false);
+        txtAporteMonotributo.setText("");
+        
+    }
+    /**
+     * si es un comprobante con monotributo entonces permite que se pueda ediar el panel monotributo 
+     */
+    private void controlarEditableMonotributo(){
+        if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO) {
+             chkAporteMonotributo.setEnabled(true);
+             txtAporteMonotributo.setEditable(true);
+        }else{
+             chkAporteMonotributo.setEnabled(false);
+             txtAporteMonotributo.setEditable(false);
+        }
+    }
+    private void setEditableComprobante(boolean b){
+        dateComprobante.setEnabled(b);
+        txtRefTipoCompr.setEditable(b);
+        txtTipoComprobante.setEditable(b);
+        txtnumSerie1.setEditable(b);
+        txtNumSerie2.setEditable(b);
+        cmbTipoProceso.setEnabled(b);
+        txtCuit.setEditable(b);
+        txtNombre.setEditable(b);
+        btnBuscarEntidad.setEnabled(b);
+        txtCodigoConcepto.setEditable(b);
+//        txtDescripcionConcepto.setEditable(b);
+        txtMonto.setEditable(b);
+//       
+        controlarEditableMonotributo();
+        
+    }
 }

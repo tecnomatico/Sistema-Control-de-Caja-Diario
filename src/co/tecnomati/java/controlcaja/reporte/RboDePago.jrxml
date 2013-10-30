@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="36"/>
-	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="logo" class="java.io.InputStream"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividades" class="java.lang.String"/>
 	<field name="cantidadPago" class="java.lang.String"/>
@@ -197,6 +197,10 @@
 					</textElement>
 					<text><![CDATA[Recibo Nro.:]]></text>
 				</staticText>
+				<image>
+					<reportElement uuid="e346ae3a-42a9-4c4b-ab2f-b0424b29d155" mode="Transparent" x="0" y="24" width="103" height="67"/>
+					<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+				</image>
 			</elementGroup>
 			<staticText>
 				<reportElement uuid="3dcdf568-4c4b-46a9-8a4a-671819e75003" x="289" y="4" width="65" height="20"/>
@@ -268,10 +272,6 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lugarPago}]]></textFieldExpression>
 			</textField>
-			<image scaleImage="Clip" isUsingCache="false">
-				<reportElement uuid="908d5b06-52d1-418e-83ce-c62ee8b87a56" mode="Transparent" x="16" y="25" width="73" height="66"/>
-				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
-			</image>
 		</band>
 	</detail>
 	<summary>

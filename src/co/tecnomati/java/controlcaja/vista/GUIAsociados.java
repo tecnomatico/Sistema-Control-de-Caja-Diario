@@ -287,8 +287,6 @@ public class GUIAsociados extends javax.swing.JDialog {
             cN = txtNombre.getText().trim().isEmpty();
             cT = txtTelefono.getText().trim().isEmpty();
             cDni = txtDNI.getText().trim().isEmpty();
-            
-            
             //corroboro que no este vacio
             if (cCuit || cA || cT || cN || cDni) {
                if (cCuit) {

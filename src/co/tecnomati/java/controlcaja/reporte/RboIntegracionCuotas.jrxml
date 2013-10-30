@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RboIntegracionCuotas" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="caf02fa3-b20f-4a74-9c05-4bbe715dc0d6">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="72"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logo" class="java.io.InputStream"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividades" class="java.lang.String"/>
 	<field name="cantidadPago" class="java.lang.String"/>
@@ -315,6 +316,10 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lugarPago}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement uuid="32c43aa5-2dc9-4392-bf9f-fc745133110a" mode="Transparent" x="5" y="21" width="103" height="67"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
 		</band>
 	</detail>
 </jasperReport>

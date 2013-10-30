@@ -25,10 +25,12 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
@@ -38,6 +40,8 @@ public class Impresora {
     private Comprobante comprobante;
     private  int tipoComprobante ;
     private RenderedImage image;
+    //public final String logo="co/tecnomati/java/controlcaja/imagen/logo.jpg";
+    public final String logo="co/tecnomati/java/controlcaja/reporte/logo.jpg";
   
     
     /**
@@ -52,24 +56,40 @@ public class Impresora {
    
       public void imprimirReciboReembolsoCuotaSociales() {
         
-        String logotipo = "co/tecnomati/java/controlcaja/imagen/1.jpg";
-          Image img = new ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/iconTecnomatica.png")).getImage();
+       //String logotipo = "co/tecnomati/java/controlcaja/imagen/1.jpg";
+       //Image img = new ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/iconTecnomatica.png")).getImage();
           
-           // creo el objeto  asitencia     
+       // creo el objeto  asitencia     
      
-        Map<String,java.awt.Image> parametros = new HashMap<String,java.awt.Image>();
+       //Map<String,java.awt.Image> parametros = new HashMap<String,java.awt.Image>();
 //        parametros.put("logo", img);
+          Map parametros = new HashMap();
+
         RboReembolsoCuotaSocial dataSource = new RboReembolsoCuotaSocial();
         List<Comprobante> lista = new ArrayList<Comprobante>();
         lista.add(comprobante);
         dataSource.setListComprobante(lista);
         JasperPrint jPrintt;
         try {
-            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboReembolsoCuotasSociales.jasper"), (Map) parametros, dataSource);
+            parametros.put("logo", this.getClass().getResourceAsStream(logo));
+            jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream
+                    ("co/tecnomati/java/controlcaja/reporte/RboReembolsoCuotasSociales.jasper"), (Map) parametros, dataSource);
 
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
-            JasperPrintManager.printReport(jPrintt, true);
+            // esto es para la vista previa
+            JDialog reporte = new JDialog();
+            reporte.setSize(1250, 700);
+            reporte.setLocationRelativeTo(null);
+            reporte.setModal(true);
+            reporte.setTitle("VISTA PREVIA");
+            JRViewer jv = new JRViewer(jPrintt);
+            reporte.getContentPane().add(jv);
+            reporte.setVisible(true);
+            //JasperPrintManager.printReport(jPrintt, true);
+            
+            
+            //JasperPrintManager.printReport(jPrintt, true);
 
         } catch (JRException ex) {
             mensajero.mensajeError(null, "Error de Impresion");
@@ -79,7 +99,7 @@ public class Impresora {
 
     public void imprimirReciboIntegracionDeCuota() {
         Map parametros = new HashMap();
-        String logotipo = "/images/1.jpg";
+        //String logotipo = "/images/1.jpg";
         RboIntegCuotaSocialJRDataSource dataSource = new RboIntegCuotaSocialJRDataSource();
 
         List<Comprobante> lista = new ArrayList<Comprobante>();
@@ -88,10 +108,19 @@ public class Impresora {
         dataSource.setListComprobante(lista);
         JasperPrint jPrintt;
         try {
+           parametros.put("logo", this.getClass().getResourceAsStream(logo));
             jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboIntegracionCuotas.jasper"), (Map) parametros, dataSource);
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
-            JasperPrintManager.printReport(jPrintt, true);
+            JDialog reporte = new JDialog();
+            reporte.setSize(1250, 700);
+            reporte.setLocationRelativeTo(null);
+            reporte.setModal(true);
+            reporte.setTitle("VISTA PREVIA");
+            JRViewer jv = new JRViewer(jPrintt);
+            reporte.getContentPane().add(jv);
+            reporte.setVisible(true);
+            //JasperPrintManager.printReport(jPrintt, true);
 
         } catch (JRException ex) {
             mensajero.mensajeError(null, "Error de Impresion");
@@ -100,7 +129,7 @@ public class Impresora {
 
     public void imprimirReciboAnticipoDeRetorno() {
         Map parametros = new HashMap();
-        String logotipo = "/images/1.jpg";
+        //String logotipo = "/images/1.jpg";
         RboAnticipoRetornoDataSource dataSource = new RboAnticipoRetornoDataSource();
 
         List<Comprobante> lista = new ArrayList<Comprobante>();
@@ -109,10 +138,19 @@ public class Impresora {
         dataSource.setListComprobante(lista);
         JasperPrint jPrintt;
         try {
+           parametros.put("logo", this.getClass().getResourceAsStream(logo));
             jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboAnticipoRetorno.jasper"), (Map) parametros, dataSource);
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
-            JasperPrintManager.printReport(jPrintt, true);
+            JDialog reporte = new JDialog();
+            reporte.setSize(1250, 700);
+            reporte.setLocationRelativeTo(null);
+            reporte.setModal(true);
+            reporte.setTitle("VISTA PREVIA");
+            JRViewer jv = new JRViewer(jPrintt);
+            reporte.getContentPane().add(jv);
+            reporte.setVisible(true);
+            //JasperPrintManager.printReport(jPrintt, true);
 
         } catch (JRException ex) {
             mensajero.mensajeError(null, "Error de Impresion");
@@ -122,7 +160,7 @@ public class Impresora {
     public void imprimirReciboDistribucionDeExcedentes() {
         
         Map parametros = new HashMap();
-        String logotipo = "/images/1.jpg";
+        //String logotipo = "/images/1.jpg";
         RboDistribucionExcedentesDataSource dataSource = new RboDistribucionExcedentesDataSource();
 
         List<Comprobante> lista = new ArrayList<Comprobante>();
@@ -131,10 +169,19 @@ public class Impresora {
         dataSource.setListComprobante(lista);
         JasperPrint jPrintt;
         try {
+           parametros.put("logo", this.getClass().getResourceAsStream(logo));
             jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboDistribucionExcedentes.jasper"), (Map) parametros, dataSource);
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
-            JasperPrintManager.printReport(jPrintt, true);
+            JDialog reporte = new JDialog();
+            reporte.setSize(1250, 700);
+            reporte.setLocationRelativeTo(null);
+            reporte.setModal(true);
+            reporte.setTitle("VISTA PREVIA");
+            JRViewer jv = new JRViewer(jPrintt);
+            reporte.getContentPane().add(jv);
+            reporte.setVisible(true);
+            //JasperPrintManager.printReport(jPrintt, true);
 
         } catch (JRException ex) {
             mensajero.mensajeError(null, "Error de Impresion");
@@ -143,9 +190,11 @@ public class Impresora {
     }
 
     public void imprimirReciboDePago() {
-       String logotipo = "co/tecnomati/java/controlcaja/imagen/1.jpg";
-          Image img = new ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/iconTecnomatica.png")).getImage();
-           Map<String,java.awt.Image> parametros = new HashMap<String,java.awt.Image>();
+        
+        Map parametros = new HashMap();
+      // String logotipo = "co/tecnomati/java/controlcaja/imagen/1.jpg";
+        //  Image img = new ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/iconTecnomatica.png")).getImage();
+          // Map<String,java.awt.Image> parametros = new HashMap<String,java.awt.Image>();
 //        parametros.put("logo", img);
         
         ModeloReciboJRDataSource dataSource = new ModeloReciboJRDataSource();
@@ -156,10 +205,19 @@ public class Impresora {
         dataSource.setListComprobante(lista);
         JasperPrint jPrintt;
         try {
+             parametros.put("logo", this.getClass().getResourceAsStream(logo));
             jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboDePago.jasper"), (Map) parametros, dataSource);
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
-            JasperPrintManager.printReport(jPrintt, true);
+            JDialog reporte = new JDialog();
+            reporte.setSize(1250, 700);
+            reporte.setLocationRelativeTo(null);
+            reporte.setModal(true);
+            reporte.setTitle("VISTA PREVIA");
+            JRViewer jv = new JRViewer(jPrintt);
+            reporte.getContentPane().add(jv);
+            reporte.setVisible(true);
+            //JasperPrintManager.printReport(jPrintt, true);
 
         } catch (JRException ex) {
             mensajero.mensajeError(null, "Error de Impresion");

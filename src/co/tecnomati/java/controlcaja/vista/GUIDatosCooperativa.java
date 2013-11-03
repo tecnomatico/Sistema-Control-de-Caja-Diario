@@ -24,7 +24,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
 
     Cooperativa cooperativa=null;
     boolean operacionOk = false; // este es una variable que se pone en verdadero si se guardo con exito los datos 
-    boolean modificar=false;
+    private boolean modificar=false;
     javax.swing.ImageIcon icono= new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/ErrorX.png"));
     /**
      * Creates new form GUIDatosCooperativa
@@ -43,7 +43,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
             setDatos(cooperativa);
             modificar = true;
             // cambiar las etiquetas para que mensionen q se hara una actualizacion de datos
-            btnGuardar.setText("Modificar");
+            btnGuardar.setText("Modificar");            
             this.setTitle("Actualizar Datos de la Persona");
         }else{
             modificar = false;
@@ -313,7 +313,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblImgInicioCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblImgInicioActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,7 +369,9 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,43 +394,10 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     }//GEN-LAST:event_txtIngresoBrutoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-     
-            if (validacionGUICooperativa()) {
-                
-                if (txtNombre.getText().trim().isEmpty()) {
-                    lblImgNombre.setIcon(icono);
-                } 
-                if (txtMatricula.getText().equals("")) {
-                        lblImgMatricula.setIcon(icono);
-                }
-                if (txtCuit.getText().equals("")) {
-                            lblImgCuit.setIcon(icono);
-                }
-                if (txtInicioCaja.getText().equals("")) {
-                                lblImgInicioCaja.setIcon(icono);
-                }
-                if (txtIngresoBruto.getText().equals("")) {
-                    lblImgIngBruto.setIcon(icono);
-                }
-                if (txtDomicilio.getText().equals("")) {
-                    lblImgDomicilio.setIcon(icono);
-                } 
-                if (dateIncioActividad.getDate() == null) {
-                    lblImgInicioActividad.setIcon(icono);
-                } 
-                
+            if (validacionGUICooperativa()) {                
+                labelGUICooperativa();
                 JOptionPane.showMessageDialog(null, "Debe completar todos los campos que son Obligatorios.");
-                
-//                for (Iterator<JTextField> it = listaTxt.iterator(); it.hasNext();) {
-//                    JTextField jTextField = it.next();
-////                    for (Iterator<JLabel> it1 = listaLabels.iterator(); it1.hasNext();) {
-//                        //JLabel jLabel = it1.next();
-//                            if (jTextField.getText().equals("")) {
-//                                
-////                                jLabel.setIcon(icono);
-//                            }
-////                    }
-//                }
+
             } else {
                 if (cooperativa==null) {
                     System.out.println("entro nuevo");
@@ -437,28 +406,29 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
                     new CooperativaDaoImp().addCooperativa(cooperativa);
                     JOptionPane.showMessageDialog(null, "Los datos fueron cargados correctamente.");
                     this.dispose();
-                } else {
+                } else {                       
                     System.out.println("entro a modificar");
-                    getDatos();
-                    new CooperativaDaoImp().upDateCooperativa(cooperativa);
-                    JOptionPane.showMessageDialog(null, "Los datos fueron modificados correctamente.");
-                    this.dispose();
+                getDatos();
+                new CooperativaDaoImp().upDateCooperativa(cooperativa);
+                JOptionPane.showMessageDialog(null, "Los datos fueron modificados correctamente.");
+                this.dispose();
+
                 }                        
             }
-
+                         
         operacionOk= true;
         //this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-       if(txtNombre.getText().length()>=12){
-            evt.consume();
-       }
-        
-       char TipoDeTecla = evt.getKeyChar();
-       if(Character.isDigit(TipoDeTecla)){
-            evt.consume();
-       }
+//       if(txtNombre.getText().length()>=12){
+//            evt.consume();
+//       }
+//        
+//       char TipoDeTecla = evt.getKeyChar();
+//       if(Character.isDigit(TipoDeTecla)){
+//            evt.consume();
+//       }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtMatriculaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyTyped
@@ -470,13 +440,13 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     }//GEN-LAST:event_txtIngresoBrutoKeyTyped
 
     private void txtDomicilioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDomicilioKeyTyped
-        if(txtIngresoBruto.getText().length()>=12){
-            evt.consume();
-        }        
-        char TipoDeTecla = evt.getKeyChar();
-        if(Character.isDigit(TipoDeTecla)){
-            evt.consume();
-        }
+//        if(txtIngresoBruto.getText().length()>=12){
+//            evt.consume();
+//        }        
+//        char TipoDeTecla = evt.getKeyChar();
+//        if(Character.isDigit(TipoDeTecla)){
+//            evt.consume();
+//        }
     }//GEN-LAST:event_txtDomicilioKeyTyped
 
     private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
@@ -551,7 +521,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     public void setDatos(Cooperativa cooperativa){
         txtNombre.setText(cooperativa.getRazonSocial());
         txtMatricula.setText(String.valueOf(cooperativa.getMatricula()));
-        txtCuit.setText(String.valueOf(cooperativa.getCuit()));
+        txtCuit.setText(cooperativa.getCuit());
         txtIngresoBruto.setText(cooperativa.getIngresoBruto());
         dateIncioActividad.setDate(cooperativa.getInicioActividad());
         txtInicioCaja.setText(String.valueOf(cooperativa.getInicioCaja()));
@@ -573,88 +543,68 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
      * Metodo de Validacion de JTextField de Dtos de Cooperativa.
      */
     public boolean validacionGUICooperativa(){
-        boolean vacio = true;
-        //boolean vacio = true;
-//        ArrayList<JLabel> listaLabels = new ArrayList();
-//        listaLabels.add(lblImgNombre);
-//        listaLabels.add(lblImgMatricula); listaLabels.add(lblImgCuit);
-//        listaLabels.add(lblImgIngBruto);listaLabels.add(lblImgInicioCaja);
-//        listaLabels.add(lblImgDomicilio);
-        
+        boolean vacio = true;        
         ArrayList<JTextField> listaTxt = new ArrayList();
         listaTxt.add(txtNombre);
         listaTxt.add(txtMatricula); listaTxt.add(txtCuit);
         listaTxt.add(txtIngresoBruto);listaTxt.add(txtInicioCaja);
-//        listaTxt.add(txtTelFijo);listaTxt.add(txtTelCel);
         listaTxt.add(txtDomicilio);
         for (Iterator<JTextField> it = listaTxt.iterator(); it.hasNext();) {
             JTextField jTextField = it.next();
-//            for (Iterator<JLabel> it1 = listaLabels.iterator(); it1.hasNext();) {
-//                JLabel jLabel = it1.next();
-                if (jTextField.getText().trim().isEmpty() || dateIncioActividad.getDate() == null) {
-//                    jTextField.setBackground(Color.yellow);                
-//                    jLabel.setIcon(icono);                                    
+                if (jTextField.getText().equals("") || dateIncioActividad.getDate() == null) {                    
+                    vacio = true;
+                    break;
+                }else{
+                    vacio = false;
+                }                             
+        }        
+        return vacio;
+    }
+    
+    public boolean validacionModificacionGUICooperativa(){
+        boolean vacio = true;        
+        ArrayList<JTextField> listaTxte = new ArrayList();
+        listaTxte.add(txtNombre);
+        listaTxte.add(txtMatricula); listaTxte.add(txtCuit);
+        listaTxte.add(txtIngresoBruto);listaTxte.add(txtInicioCaja);
+        listaTxte.add(txtDomicilio);
+        for (Iterator<JTextField> it = listaTxte.iterator(); it.hasNext();) {
+            JTextField jTextField = it.next();
+                if (jTextField.getText().equals("") || dateIncioActividad.getDate() == null) {                    
                     vacio = true;
                 }else{
                     vacio = false;
-                }             
-                
-//            }
-        }
-        
-//        if (txtNombre.getText().equals("")) {
-//            txtNombre.setBackground(Color.red);
-//            vacio = true;
-//        } else {
-//            if (txtMatricula.getText().equals("")) {
-//                txtMatricula.setBackground(Color.red);
-//                vacio = true;
-//            } else {
-//                if (txtCuit.getText().equals("")) {
-//                    txtCuit.setBackground(Color.red);
-//                    vacio = true;
-//                } else {
-//                    if (txtIngresoBruto.getText().equals("")) {
-//                        txtIngresoBruto.setBackground(Color.red);
-//                        vacio = true;
-//                    } else {
-//                        if (txtInicioCaja.getText().equals("")) {
-//                            txtInicioCaja.setBackground(Color.red);
-//                            vacio = true;
-//                        } else {
-//                            if (txtDomicilio.getText().equals("")) {
-//                                txtDomicilio.setBackground(Color.red);
-//                                vacio = true;
-//                            }else{
-//                                vacio = false;
-//                            } 
-//                        }
-//                    }
-//                }
-//            }
-//        }
+                }                             
+        }        
         return vacio;
     }
-//    public boolean validacionGUICooperativa(){
-//        boolean vacio = true;
-//        ArrayList<JTextField> listaTxt = new ArrayList();
-//        listaTxt.add(txtNombre);
-//        listaTxt.add(txtMatricula); listaTxt.add(txtCuit);
-//        listaTxt.add(txtIngresoBruto);listaTxt.add(txtInicioCaja);
-////        listaTxt.add(txtTelFijo);listaTxt.add(txtTelCel);
-//        listaTxt.add(txtDomicilio);
-//        for (Iterator<JTextField> it = listaTxt.iterator(); it.hasNext();) {
-//            JTextField jTextField = it.next();
-//            if (jTextField.getText().equals("")) {
-//                jTextField.setBackground(Color.red);
-//                vacio = true;
-//                break;
-//            }else{
-//                vacio = false;
-//            }             
-//        }
-//        return vacio;
-//    }
+
+    /**
+     * Metodo de Validacion de JTextField de Dtos de Cooperativa.
+     */
+    public void labelGUICooperativa(){
+        if (txtNombre.getText().equals("")) {
+            lblImgNombre.setIcon(icono);
+        } 
+        if (txtMatricula.getText().equals("")) {
+            lblImgMatricula.setIcon(icono);
+        }
+        if (txtCuit.getText().equals("")) {
+            lblImgCuit.setIcon(icono);
+        }
+        if (txtInicioCaja.getText().equals("")) {
+            lblImgInicioCaja.setIcon(icono);
+        }
+        if (txtIngresoBruto.getText().equals("")) {
+            lblImgIngBruto.setIcon(icono);
+        }
+        if (txtDomicilio.getText().equals("")) {
+            lblImgDomicilio.setIcon(icono);
+        } 
+        if (dateIncioActividad.getDate() == null) {
+            lblImgInicioActividad.setIcon(icono);
+        }                 
+    }
     
 
     private void permitirSoloNumero(java.awt.event.KeyEvent evt) {

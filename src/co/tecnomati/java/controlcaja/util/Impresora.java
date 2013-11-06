@@ -40,9 +40,9 @@ public class Impresora {
     private Comprobante comprobante;
     private  int tipoComprobante ;
     private RenderedImage image;
-    //public final String logo="co/tecnomati/java/controlcaja/imagen/logo.jpg";
-    public final String logo="co/tecnomati/java/controlcaja/reporte/logo.jpg";
-  
+    
+    public final String logo="/co/tecnomati/java/controlcaja/imagen/logo.jpg";
+  public final String logo2="/co/tecnomati/java/controlcaja/imagen/logo2.jpg";
     
     /**
      * 
@@ -72,6 +72,7 @@ public class Impresora {
         JasperPrint jPrintt;
         try {
             parametros.put("logo", this.getClass().getResourceAsStream(logo));
+             parametros.put("logo2", this.getClass().getResourceAsStream(logo2));
             jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream
                     ("co/tecnomati/java/controlcaja/reporte/RboReembolsoCuotasSociales.jasper"), (Map) parametros, dataSource);
 
@@ -109,6 +110,7 @@ public class Impresora {
         JasperPrint jPrintt;
         try {
            parametros.put("logo", this.getClass().getResourceAsStream(logo));
+             parametros.put("logo2", this.getClass().getResourceAsStream(logo2));
             jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboIntegracionCuotas.jasper"), (Map) parametros, dataSource);
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
@@ -139,6 +141,7 @@ public class Impresora {
         JasperPrint jPrintt;
         try {
            parametros.put("logo", this.getClass().getResourceAsStream(logo));
+             parametros.put("logo2", this.getClass().getResourceAsStream(logo2));
             jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboAnticipoRetorno.jasper"), (Map) parametros, dataSource);
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
@@ -170,6 +173,7 @@ public class Impresora {
         JasperPrint jPrintt;
         try {
            parametros.put("logo", this.getClass().getResourceAsStream(logo));
+             parametros.put("logo2", this.getClass().getResourceAsStream(logo2));
             jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboDistribucionExcedentes.jasper"), (Map) parametros, dataSource);
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.
@@ -206,6 +210,7 @@ public class Impresora {
         JasperPrint jPrintt;
         try {
              parametros.put("logo", this.getClass().getResourceAsStream(logo));
+             parametros.put("logo2", this.getClass().getResourceAsStream(logo2));
             jPrintt = JasperFillManager.fillReport(this.getClass().getClassLoader().getResourceAsStream("co/tecnomati/java/controlcaja/reporte/RboDePago.jasper"), (Map) parametros, dataSource);
             // este metodo imprime el reporte , recibe el jprint(el informe, ) y el otro parametro es para decirle que muestre la pantalla de configuracion de la impresora
             // si es false imprime de una con la configuarcion por defecto.

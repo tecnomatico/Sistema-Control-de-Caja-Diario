@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RboReembolsoCuotasSociales" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="246c9b70-cb7a-46ca-9299-2db62e700448">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="0.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="70"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="logo2" class="java.io.InputStream"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividad" class="java.lang.String"/>
 	<field name="nombreApellido" class="java.lang.String"/>
@@ -232,6 +234,10 @@
 				<line>
 					<reportElement uuid="f206580e-a82f-4681-a9cd-edda8837c829" x="238" y="410" width="67" height="1"/>
 				</line>
+				<image>
+					<reportElement uuid="e268963f-1fec-4ae6-8d77-186d42d13536" x="15" y="22" width="90" height="65"/>
+					<imageExpression><![CDATA[$P{logo2}]]></imageExpression>
+				</image>
 			</elementGroup>
 			<textField>
 				<reportElement uuid="d1b07c6f-1643-4111-95ed-e3fd3c480ffc" x="96" y="268" width="78" height="20"/>
@@ -577,6 +583,10 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fechaPago}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement uuid="d422cf7f-231f-4d0f-a0a0-9cb8a0f99e09" x="457" y="23" width="90" height="65"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
 		</band>
 	</detail>
 </jasperReport>

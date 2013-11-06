@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reciboDePago" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67ddf0f8-02b9-4bf1-94dc-470dc5dbe8c1">
-	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="746"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="logo2" class="java.io.InputStream"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividades" class="java.lang.String"/>
 	<field name="cantidadPago" class="java.lang.String"/>
@@ -508,6 +510,14 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nroDNI}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement uuid="aecae237-7a2d-4acb-9ed5-c0ed90b6bb60" x="458" y="24" width="90" height="65"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement uuid="97c4312a-493a-4f5c-81fe-8366c849d1e6" x="18" y="25" width="90" height="65"/>
+				<imageExpression><![CDATA[$P{logo2}]]></imageExpression>
+			</image>
 		</band>
 	</detail>
 	<summary>

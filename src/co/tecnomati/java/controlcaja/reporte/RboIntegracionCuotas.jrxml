@@ -3,6 +3,8 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="logo2" class="java.io.InputStream"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividades" class="java.lang.String"/>
 	<field name="cantidadPago" class="java.lang.String"/>
@@ -587,6 +589,14 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lugarPago}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement uuid="988a7691-259d-4635-9a53-c2c1c82beaf4" x="458" y="23" width="90" height="65"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement uuid="ceb4aada-e4eb-491c-a164-11d6a79095a0" x="15" y="22" width="90" height="65"/>
+				<imageExpression><![CDATA[$P{logo2}]]></imageExpression>
+			</image>
 		</band>
 	</detail>
 </jasperReport>

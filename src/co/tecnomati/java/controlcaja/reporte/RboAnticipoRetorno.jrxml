@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RboAnticipoRetorno" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a27639b2-697f-461d-abe8-2781993ade38">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="513"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="logo2" class="java.io.InputStream"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="inicioActividad" class="java.lang.String"/>
 	<field name="periodoFecha" class="java.lang.String"/>
@@ -1180,6 +1182,14 @@
 			<line>
 				<reportElement uuid="0afb33d6-f134-4a52-a979-c97241adcbf1" x="680" y="532" width="67" height="1"/>
 			</line>
+			<image>
+				<reportElement uuid="00fb6c03-7730-442d-914d-2035d2a9c63f" x="453" y="23" width="90" height="65"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement uuid="5a01b2fc-4559-4a16-a200-2d184baeeac8" x="10" y="22" width="90" height="65"/>
+				<imageExpression><![CDATA[$P{logo2}]]></imageExpression>
+			</image>
 		</band>
 	</detail>
 </jasperReport>

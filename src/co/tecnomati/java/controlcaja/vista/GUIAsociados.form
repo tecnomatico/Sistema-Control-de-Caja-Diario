@@ -158,6 +158,9 @@
         </Component>
         <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnCancelar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/co/tecnomati/java/controlcaja/imagen/Atras.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>
@@ -166,6 +169,9 @@
         </Component>
         <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnGuardar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/co/tecnomati/java/controlcaja/imagen/GUARDAR.jpg"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
           <Events>

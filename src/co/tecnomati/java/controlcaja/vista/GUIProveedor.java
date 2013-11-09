@@ -324,7 +324,7 @@ public class GUIProveedor extends javax.swing.JDialog {
         @Override
         public void keyTyped(KeyEvent v){
             char c=v.getKeyChar();
-            if (Character.isDigit(c)){
+            if (Character.isDigit(c)&& c!='\b'){
                 getToolkit().beep();
                 JOptionPane.showMessageDialog(null, "Solo Letras...");
                 v.consume();
@@ -337,7 +337,7 @@ public class GUIProveedor extends javax.swing.JDialog {
         @Override
         public void keyTyped(KeyEvent v){
             char c=v.getKeyChar();
-            if (!Character.isDigit(c)){
+            if (!Character.isDigit(c)&& c!='\b'){
                 getToolkit().beep();
                 JOptionPane.showMessageDialog(null, "Solo Nùmeros...");
                 v.consume();

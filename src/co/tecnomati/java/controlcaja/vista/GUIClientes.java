@@ -322,7 +322,7 @@ private boolean modificar=false;
         @Override
         public void keyTyped(KeyEvent v){
             char c=v.getKeyChar();
-            if (Character.isDigit(c)){
+            if (Character.isDigit(c)&& c!='\b'){
                 getToolkit().beep();
                 JOptionPane.showMessageDialog(null, "Solo Letras...");
                 v.consume();
@@ -335,7 +335,7 @@ private boolean modificar=false;
         @Override
         public void keyTyped(KeyEvent v){
             char c=v.getKeyChar();
-            if (!Character.isDigit(c)){
+            if (!Character.isDigit(c)&& c!='\b'){
                 getToolkit().beep();
                 JOptionPane.showMessageDialog(null, "Solo Nùmeros...");
                 v.consume();

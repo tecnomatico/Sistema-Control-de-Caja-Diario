@@ -4,12 +4,21 @@
  */
 package co.tecnomati.java.controlcaja.vista;
 
+import co.tecnomati.java.controlcaja.dominio.Categoriacomprobante;
 import co.tecnomati.java.controlcaja.dominio.Comprobante;
+import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.CategoriaComprobanteDaoImp;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.TipoComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.modelo.ModeloAsociado;
 import co.tecnomati.java.controlcaja.modelo.ModeloComprobante;
+import co.tecnomati.java.controlcaja.util.MyUtil;
 import co.tecnomati.java.controlcaja.util.TablaUtil;
+import com.toedter.calendar.JDateChooser;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -43,12 +52,46 @@ int numeroSeleccion;
     public GUIGestorComprobante(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+         setDatosCategoriaComprobante();
+         setDatosCmbTipocomprobante();
         inicializarTabla();
         this.setTitle("Busqueda");
+   
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
+    public void setDatosCategoriaComprobante() {
+        cmbCategoria.removeAllItems();
+
+        if (new CategoriaComprobanteDaoImp().listarCategoriaComprobante().isEmpty()) {
+            cmbCategoria.setEditable(false);
+        } else {
+            cmbCategoria.setEditable(true);
+            cmbCategoria.addItem("Seleccione");
+            for (Categoriacomprobante o : new CategoriaComprobanteDaoImp().listarCategoriaComprobante()) {
+                 
+                cmbCategoria.addItem(o.getDescripcion());
+            }
+            AutoCompleteDecorator.decorate(this.cmbCategoria);
+        }
+    }
+    public void setDatosCmbTipocomprobante() {
+        cmbTipoComprobante.removeAllItems();
+
+        if (new TipoComprobanteDaoImp().listarTipoComprobante().isEmpty()) {
+            cmbTipoComprobante.setEditable(false);
+        } else {
+            cmbTipoComprobante.setEditable(true);
+            cmbTipoComprobante.addItem("Seleccione");
+            for (Tipocomprobante o : new  TipoComprobanteDaoImp().listarTipoComprobante()) {
+                 
+                cmbTipoComprobante.addItem(o.getFormulario());
+            }
+            AutoCompleteDecorator.decorate(this.cmbTipoComprobante);
+        }
+    }
+    
        /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,17 +101,34 @@ int numeroSeleccion;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         panel1 = new org.edisoncor.gui.panel.Panel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblComprobante = new javax.swing.JTable();
         btnCancelar = new org.edisoncor.gui.button.ButtonIpod();
         btnNuevo = new org.edisoncor.gui.button.ButtonIpod();
         btnEditar = new org.edisoncor.gui.button.ButtonIpod();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        cmbCategoria = new javax.swing.JComboBox();
-        labelMetric1 = new org.edisoncor.gui.label.LabelMetric();
+        labelMetric3 = new org.edisoncor.gui.label.LabelMetric();
+        jPanel1 = new javax.swing.JPanel();
+        cmbOperacion = new javax.swing.JComboBox();
+        labelMetric5 = new org.edisoncor.gui.label.LabelMetric();
+        cmbTipoComprobante = new javax.swing.JComboBox();
+        labelMetric6 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric2 = new org.edisoncor.gui.label.LabelMetric();
+        dateDesde = new com.toedter.calendar.JDateChooser();
+        labelMetric1 = new org.edisoncor.gui.label.LabelMetric();
+        labelMetric4 = new org.edisoncor.gui.label.LabelMetric();
+        dateHasta = new com.toedter.calendar.JDateChooser();
+        cmbCategoria = new javax.swing.JComboBox();
+        labelMetric7 = new org.edisoncor.gui.label.LabelMetric();
+        jButton1 = new javax.swing.JButton();
+        labelMetric8 = new org.edisoncor.gui.label.LabelMetric();
+        labelMetric9 = new org.edisoncor.gui.label.LabelMetric();
+        cmbOperacion1 = new javax.swing.JComboBox();
+        txtFormatNumSerie = new javax.swing.JFormattedTextField();
+        rdbMes = new javax.swing.JRadioButton();
+        rdbHoy = new javax.swing.JRadioButton();
+        rdbFecha = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setFont(new java.awt.Font("Agency FB", 0, 12)); // NOI18N
@@ -129,13 +189,208 @@ int numeroSeleccion;
             }
         });
 
-        jButton1.setText("Buscar");
+        labelMetric3.setText("FILTRAR POR");
+        labelMetric3.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 102)));
 
-        labelMetric1.setText("Filtro");
+        cmbOperacion.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        cmbOperacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "ENTRADA", "SALIDA", "ENTRADA-SALIDA" }));
+        cmbOperacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbOperacionActionPerformed(evt);
+            }
+        });
 
-        labelMetric2.setText("Filtro");
+        labelMetric5.setText("Por Fecha");
+        labelMetric5.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        cmbTipoComprobante.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        cmbTipoComprobante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTipoComprobante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoComprobanteActionPerformed(evt);
+            }
+        });
+
+        labelMetric6.setText("Hasta");
+        labelMetric6.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        labelMetric2.setText("Por Operacion");
+        labelMetric2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        labelMetric1.setText("Por Categoria");
+        labelMetric1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        labelMetric4.setText("Por Tipo de Comprobante");
+        labelMetric4.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        cmbCategoria.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione" }));
+        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCategoriaActionPerformed(evt);
+            }
+        });
+
+        labelMetric7.setText("Desde");
+        labelMetric7.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        jButton1.setText("Buscar por Fecha");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        labelMetric8.setText("Por Estado");
+        labelMetric8.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        labelMetric9.setText("Por Numero de Serie");
+        labelMetric9.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        cmbOperacion1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        cmbOperacion1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "ACTIVO", "ANULADO" }));
+        cmbOperacion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbOperacion1ActionPerformed(evt);
+            }
+        });
+
+        txtFormatNumSerie.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        rdbMes.setBackground(new java.awt.Color(51, 51, 51));
+        buttonGroup1.add(rdbMes);
+        rdbMes.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        rdbMes.setForeground(new java.awt.Color(255, 255, 255));
+        rdbMes.setText("Mes Actual");
+        rdbMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbMesActionPerformed(evt);
+            }
+        });
+
+        rdbHoy.setBackground(new java.awt.Color(51, 51, 51));
+        buttonGroup1.add(rdbHoy);
+        rdbHoy.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        rdbHoy.setForeground(new java.awt.Color(255, 255, 255));
+        rdbHoy.setSelected(true);
+        rdbHoy.setText("Hoy");
+        rdbHoy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbHoyActionPerformed(evt);
+            }
+        });
+
+        rdbFecha.setBackground(new java.awt.Color(51, 51, 51));
+        buttonGroup1.add(rdbFecha);
+        rdbFecha.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        rdbFecha.setForeground(new java.awt.Color(255, 255, 255));
+        rdbFecha.setText("Entre las Fechas");
+        rdbFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbFechaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(99, 99, 99)
+                                .addComponent(cmbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(230, 230, 230))
+                            .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelMetric9, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(txtFormatNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(cmbOperacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(207, 207, 207)
+                                    .addComponent(cmbOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(124, 124, 124)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(63, 63, 63)
+                                                .addComponent(rdbMes))
+                                            .addComponent(rdbHoy))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rdbFecha))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(2, 2, 2)
+                                        .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton1)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbTipoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(690, 690, 690))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelMetric4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTipoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbOperacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rdbHoy)
+                        .addComponent(rdbMes)
+                        .addComponent(rdbFecha)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFormatNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelMetric9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 11, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -144,38 +399,27 @@ int numeroSeleccion;
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1078, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(410, 410, 410)
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101)
-                .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -232,6 +476,57 @@ int numeroSeleccion;
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
+        inicializarTablaxCategoria((String)cmbCategoria.getSelectedItem());
+    }//GEN-LAST:event_cmbCategoriaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.out.println(MyUtil.getFechaString10DDMMAAAA(dateDesde.getDate()));
+        inicializarTablaxFecha((dateDesde.getDate()),dateHasta.getDate());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cmbOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOperacionActionPerformed
+      inicializarTablaxOperacion((String)cmbOperacion.getSelectedItem());
+    }//GEN-LAST:event_cmbOperacionActionPerformed
+
+    private void cmbOperacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOperacion1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbOperacion1ActionPerformed
+
+    private void rdbMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbMesActionPerformed
+        if (rdbMes.isSelected())
+        {
+          dateDesde.setDate(new Date(new Date().getYear(),new Date().getMonth(),1,0,0,0));
+//           dateDesde.setDate(new Date(Calendar.YEAR,Calendar.MONTH,1,0,0,0)));
+           
+           dateHasta.setDate(new Date());
+            setEnabledFechas(false);
+
+        }
+    }//GEN-LAST:event_rdbMesActionPerformed
+
+    private void rdbHoyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbHoyActionPerformed
+        if (rdbHoy.isSelected())
+        {
+            dateDesde.setDate(new Date());
+            dateHasta.setDate(new Date());
+            setEnabled(false);
+
+        }
+    }//GEN-LAST:event_rdbHoyActionPerformed
+
+    private void rdbFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbFechaActionPerformed
+        if (rdbFecha.isSelected())
+        {
+            setEnabledFechas(true);
+
+        }
+    }//GEN-LAST:event_rdbFechaActionPerformed
+
+    private void cmbTipoComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoComprobanteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTipoComprobanteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -277,13 +572,55 @@ int numeroSeleccion;
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnEditar;
     private org.edisoncor.gui.button.ButtonIpod btnNuevo;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cmbCategoria;
+    private javax.swing.JComboBox cmbOperacion;
+    private javax.swing.JComboBox cmbOperacion1;
+    private javax.swing.JComboBox cmbTipoComprobante;
+    private com.toedter.calendar.JDateChooser dateDesde;
+    private com.toedter.calendar.JDateChooser dateHasta;
     private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private org.edisoncor.gui.label.LabelMetric labelMetric1;
     private org.edisoncor.gui.label.LabelMetric labelMetric2;
+    private org.edisoncor.gui.label.LabelMetric labelMetric3;
+    private org.edisoncor.gui.label.LabelMetric labelMetric4;
+    private org.edisoncor.gui.label.LabelMetric labelMetric5;
+    private org.edisoncor.gui.label.LabelMetric labelMetric6;
+    private org.edisoncor.gui.label.LabelMetric labelMetric7;
+    private org.edisoncor.gui.label.LabelMetric labelMetric8;
+    private org.edisoncor.gui.label.LabelMetric labelMetric9;
     private org.edisoncor.gui.panel.Panel panel1;
+    private javax.swing.JRadioButton rdbFecha;
+    private javax.swing.JRadioButton rdbHoy;
+    private javax.swing.JRadioButton rdbMes;
     private javax.swing.JTable tblComprobante;
+    private javax.swing.JFormattedTextField txtFormatNumSerie;
     // End of variables declaration//GEN-END:variables
+
+      private void inicializarTablaxCategoria(String string) {
+           modeloComprobante= new ModeloComprobante(string);
+           sorter = new TableRowSorter(modeloComprobante);
+           tblComprobante.setModel(modeloComprobante);
+    }
+
+    private void inicializarTablaxFecha(Date dateDesde,Date dateHasta) {
+           modeloComprobante= new ModeloComprobante(dateDesde,dateHasta);
+           sorter = new TableRowSorter(modeloComprobante);
+           tblComprobante.setModel(modeloComprobante);
+    }
+
+    private void inicializarTablaxOperacion(String string) {
+           modeloComprobante= new ModeloComprobante(string);
+           sorter = new TableRowSorter(modeloComprobante);
+           tblComprobante.setModel(modeloComprobante);    }
+
+
+private void setEnabledFechas(boolean b)
+{
+    dateDesde.setEnabled(b);
+    dateHasta.setEnabled(b);
+    
+}
 }

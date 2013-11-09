@@ -7,6 +7,7 @@ package co.tecnomati.java.controlcaja.dominio.dao;
 import co.tecnomati.java.controlcaja.dominio.Comprobante;
 import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -15,6 +16,15 @@ import java.util.Set;
  */
 public interface ComprobanteDAO {
   java.util.List<Comprobante> listarFormulario();
+  java.util.List<Comprobante> listarFormularioxCategoria(String categoria);
+  /**
+   * 
+   * @param desde fecha de inicio
+   * @param hasta fecha fin
+   * @return una lista con los comprobantes que se registraron entre esas fechas 
+   * Esta hecho con consultas criteria
+   */
+  java.util.List<Comprobante> listarFormularioxFecha(Date desde, Date hasta);
   public void addFormulario(Comprobante a);
   public void deleteFormulario(Comprobante a);
   public void upDateFormulario(Comprobante a);

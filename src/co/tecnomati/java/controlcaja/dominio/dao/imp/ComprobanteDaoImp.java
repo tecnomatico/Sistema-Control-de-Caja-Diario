@@ -10,10 +10,14 @@ import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.dominio.dao.ComprobanteDAO;
 import co.tecnomati.java.controlcaja.hibernateUtil.HibernateUtil;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -33,8 +37,7 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
         ArrayList<Comprobante> comprobante = (ArrayList<Comprobante>) session.createQuery("FROM Comprobante c\n"
                 + "join fetch c.tipocomprobante  as tipo\n"
                 + "join fetch c.comprobanteconceptos as cc\n"
-                + "join fetch cc.concepto as concep\n"
-                ).list();
+                + "join fetch cc.concepto as concep\n").list();
         session.close();
         return comprobante;
     }
@@ -121,6 +124,54 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
 
     }
 
+    @Override
+    public List<Comprobante> listarFormularioxCategoria(String categoria) {
+
+        Session session = HibernateUtil.getSession();
+
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Comprobante.class);
+
+        ArrayList<Comprobante> comprobante = (ArrayList<Comprobante>) session.createQuery("FROM Comprobante c\n"
+                + "join fetch c.tipocomprobante  as tipo\n"
+                + "join fetch c.comprobanteconceptos as cc\n"
+                + "join fetch cc.concepto as conce\n"
+                + "join fetch tipo.categoriacomprobante as categ\n"
+                + "where categ.descripcion='" + categoria + "'").list();
+        session.close();
+        return comprobante;
+    }
+
+    @Override
+    public List<Comprobante> listarFormularioxFecha(Date desde, Date hasta) {
+//        Session session = HibernateUtil.getSession();
+//
+//        session.beginTransaction();
+//        Criteria criteria = session.createCriteria(Comprobante.class);
+//
+//        ArrayList<Comprobante> comprobante = (ArrayList<Comprobante>) session.createQuery("FROM Comprobante c\n"
+//                + "join fetch c.tipocomprobante  as tipo\n"
+//                + "join fetch c.comprobanteconceptos as cc\n"
+//                + "join fetch cc.concepto as conce\n"
+//                + "join fetch tipo.categoriacomprobante as categ\n"
+//                + "where c.fecha<'" + hasta + "' and c.fecha>'" + desde + "'").list();
+//        session.close();
+//        return comprobante;
+         Session session = getSession();
+         Criteria criteria = session.createCriteria(Comprobante.class);
+//        criteria.addOrder(Order.asc("fecha"));
+        
+         criteria.addOrder(Order.asc("id"));
+         criteria.add( Restrictions.ge("fecha", desde) );
+         criteria.add( Restrictions.le("fecha", hasta) ); 
+        criteria.setFetchMode("tipocomprobante", FetchMode.JOIN);
+        criteria.setFetchMode("comprobanteconceptos", FetchMode.JOIN);
+        criteria.setFetchMode("comprobanteconceptos.concepto", FetchMode.JOIN);
+         List<Comprobante> lista = criteria.list();
+         
+         session.close();
+          return lista;
+    }
     /**
      *
      * @param idComprobante identificador unico del comprobante

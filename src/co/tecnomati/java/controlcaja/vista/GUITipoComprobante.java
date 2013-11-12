@@ -39,11 +39,14 @@ public class GUITipoComprobante extends javax.swing.JDialog {
         initComponents();
         this.doc = doc;
         modificar = true;  
+        setDatosCmbTipoFormulario();
         txtDescripcion.setText(doc.getFormulario());
         txtAtajo.setText(doc.getReferencia());
+        cmbOperacion.setSelectedIndex(doc.getOperacion());
+        cmbCategoria.setSelectedItem(doc.getCategoriacomprobante().getDescripcion());
         
         this.setTitle(Constantes.NAME_NUEVO_DOCUMENTO);
-        setDatosCmbTipoFormulario();
+       
         this.setLocationRelativeTo(null);
          this.setVisible(true);
     }
@@ -95,10 +98,12 @@ public class GUITipoComprobante extends javax.swing.JDialog {
         cmbCategoria = new javax.swing.JComboBox();
         labelMetric6 = new org.edisoncor.gui.label.LabelMetric();
         btnNuevaCategoria = new javax.swing.JButton();
+        labelMetric3 = new org.edisoncor.gui.label.LabelMetric();
+        cmbOperacion = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        panel1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        panel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         labelMetric4.setText("Comprobante");
 
@@ -131,6 +136,12 @@ public class GUITipoComprobante extends javax.swing.JDialog {
             }
         });
 
+        labelMetric3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelMetric3.setText("Operacion");
+        labelMetric3.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        cmbOperacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "ENTRADA", "SALIDA", "ENTRADA/SALIDA" }));
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -149,12 +160,16 @@ public class GUITipoComprobante extends javax.swing.JDialog {
                                 .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtAtajo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtAtajo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(panel1Layout.createSequentialGroup()
-                            .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cmbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cmbCategoria, 0, 167, Short.MAX_VALUE)
+                                .addComponent(cmbOperacion, 0, 167, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNuevaCategoria)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -162,15 +177,15 @@ public class GUITipoComprobante extends javax.swing.JDialog {
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNuevaCategoria))))
+                .addGap(10, 10, 10)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNuevaCategoria)
+                    .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,6 +235,7 @@ public class GUITipoComprobante extends javax.swing.JDialog {
         doc.setFormulario(txtDescripcion.getText().toUpperCase());
         doc.setReferencia(txtAtajo.getText().toUpperCase());
         doc.setCategoriacomprobante(new CategoriaComprobanteDaoImp().getCategoriaComprobanteXdescripcion((String)cmbCategoria.getSelectedItem()));
+        doc.setOperacion(cmbOperacion.getSelectedIndex());
         if (modificar) {
              new TipoComprobanteDaoImp().upDateTipoFormulario(doc);
         } else {
@@ -286,6 +302,8 @@ public class GUITipoComprobante extends javax.swing.JDialog {
     private org.edisoncor.gui.button.ButtonIpod btnGuardar;
     private javax.swing.JButton btnNuevaCategoria;
     private javax.swing.JComboBox cmbCategoria;
+    private javax.swing.JComboBox cmbOperacion;
+    private org.edisoncor.gui.label.LabelMetric labelMetric3;
     private org.edisoncor.gui.label.LabelMetric labelMetric4;
     private org.edisoncor.gui.label.LabelMetric labelMetric5;
     private org.edisoncor.gui.label.LabelMetric labelMetric6;

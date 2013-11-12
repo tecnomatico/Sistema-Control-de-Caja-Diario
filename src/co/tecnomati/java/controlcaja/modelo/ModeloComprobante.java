@@ -6,22 +6,17 @@ package co.tecnomati.java.controlcaja.modelo;
 
 import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Asociado;
-import co.tecnomati.java.controlcaja.dominio.Categoriacomprobante;
 import co.tecnomati.java.controlcaja.dominio.Comprobante;
 import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.CategoriaComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ClienteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteconceptoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
 import co.tecnomati.java.controlcaja.util.ComprobanteUtil;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 import javax.swing.table.AbstractTableModel;
 
 /**

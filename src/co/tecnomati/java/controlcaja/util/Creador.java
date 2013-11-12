@@ -55,6 +55,7 @@ public class Creador {
         recibo.setCodigo(Constantes.CODIGO_RECIBO_PAGO);
         recibo.setFormulario(Constantes.RECIBO_PAGO);
         recibo.setReferencia(Constantes.REF_RECIBO_PAGO);
+        recibo.setOperacion(Constantes.OP_SALIDA);
         recibo.setCategoriacomprobante(categoria);
         recibo.setNumeroSerieIzq(numI);
         recibo.setNumeroSerieDer(numD);
@@ -64,6 +65,7 @@ public class Creador {
         recibo.setCodigo(Constantes.CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE);
         recibo.setFormulario(Constantes.RECIBO_DISTRIBUCION_EXCEDENTE);
         recibo.setReferencia(Constantes.REF_RECIBO_DISTRIBUCION_EXCEDENTE);
+        recibo.setOperacion(Constantes.OP_SALIDA);
         recibo.setNumeroSerieIzq(numI);
         recibo.setNumeroSerieDer(numD);
         recibo.setCategoriacomprobante(categoria);
@@ -74,6 +76,7 @@ public class Creador {
         recibo.setCodigo(Constantes.CODIGO_RECIBO_INTEGRACION_CUOTA);
         recibo.setFormulario(Constantes.RECIBO_INTEGRACION_CUOTA);
         recibo.setReferencia(Constantes.REF_RECIBO_INTEGRACION_CUOTA);
+        recibo.setOperacion(Constantes.OP_ENTRADA);
         recibo.setNumeroSerieIzq(numI);
         recibo.setNumeroSerieDer(numD);
         recibo.setCategoriacomprobante(categoria);
@@ -84,6 +87,7 @@ public class Creador {
         recibo.setCodigo(Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO);
         recibo.setFormulario(Constantes.RECIBO_ANTICIPO_RETORNO);
         recibo.setReferencia(Constantes.REF_RECIBO_ANTICIPO_RETORNO);
+        recibo.setOperacion(Constantes.OP_SALIDA);
         recibo.setNumeroSerieIzq(numI);
         recibo.setNumeroSerieDer(numD);
         recibo.setCategoriacomprobante(categoria);
@@ -94,6 +98,7 @@ public class Creador {
         recibo.setCodigo(Constantes.CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES);
         recibo.setFormulario(Constantes.RECIBO_REEMBOLSO_CUOTA_SOCIAL);
         recibo.setReferencia(Constantes.REF_RECIBO_REEMBOLSO_CUOTA_SOCIAL);
+        recibo.setOperacion(Constantes.OP_SALIDA);
         recibo.setNumeroSerieIzq(numI);
         recibo.setNumeroSerieDer(numD);
         recibo.setCategoriacomprobante(categoria);

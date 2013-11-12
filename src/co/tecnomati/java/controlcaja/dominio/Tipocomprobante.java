@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 18/10/2013 11:16:44 by Hibernate Tools 3.2.1.GA
+// Generated 11/11/2013 20:28:15 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -18,18 +18,24 @@ public class Tipocomprobante  implements java.io.Serializable {
      private Long numeroSerieIzq;
      private Long numeroSerieDer;
      private Boolean estado;
+     private int operacion;
      private Set<Comprobante> comprobantes = new HashSet<Comprobante>(0);
 
     public Tipocomprobante() {
     }
 
-    public Tipocomprobante(Categoriacomprobante categoriacomprobante, String formulario, String referencia, Long numeroSerieIzq, Long numeroSerieDer, Boolean estado, Set<Comprobante> comprobantes) {
+	
+    public Tipocomprobante(int operacion) {
+        this.operacion = operacion;
+    }
+    public Tipocomprobante(Categoriacomprobante categoriacomprobante, String formulario, String referencia, Long numeroSerieIzq, Long numeroSerieDer, Boolean estado, int operacion, Set<Comprobante> comprobantes) {
        this.categoriacomprobante = categoriacomprobante;
        this.formulario = formulario;
        this.referencia = referencia;
        this.numeroSerieIzq = numeroSerieIzq;
        this.numeroSerieDer = numeroSerieDer;
        this.estado = estado;
+       this.operacion = operacion;
        this.comprobantes = comprobantes;
     }
    
@@ -81,6 +87,13 @@ public class Tipocomprobante  implements java.io.Serializable {
     
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+    public int getOperacion() {
+        return this.operacion;
+    }
+    
+    public void setOperacion(int operacion) {
+        this.operacion = operacion;
     }
     public Set<Comprobante> getComprobantes() {
         return this.comprobantes;

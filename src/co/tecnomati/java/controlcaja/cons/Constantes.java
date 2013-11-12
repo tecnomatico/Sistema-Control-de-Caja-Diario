@@ -43,8 +43,9 @@ public class Constantes {
     public static final String ASOCIADO = "ASOCIADO";
     
     
-    public static final int OP_ENTRADA = 0;
-    public static final int OP_SALIDA = 1;
+    public static final int OP_ENTRADA = 1;
+    public static final int OP_SALIDA = 2;
+    public static final int OP_ENTRADA_SALIDA = 3;
 
      public static final int ASOCIADO_INT=0;
      public static final int CLIENTE_INT=1;

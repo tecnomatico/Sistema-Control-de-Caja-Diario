@@ -61,7 +61,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         initComponents();
         modificar = false;
         comprobante = new Comprobante();
-
+        activarBotonesParaNuevo();
         txtRefTipoCompr.requestFocus();
         this.setTitle(Constantes.NAME_NUEVO_REGISTRO);
         this.setLocationRelativeTo(null);
@@ -88,6 +88,7 @@ public class GUIComprobante extends javax.swing.JDialog {
          numDer = comprobante.getNumeroSerieDer();
             
         controlarTipoOperacion();
+        
         controlarTipodeComprobante();
 
         ControlarEditableNumeroSerie();
@@ -117,7 +118,11 @@ public class GUIComprobante extends javax.swing.JDialog {
      * Este controla que los botones 
      */
     public void activarBotonesParaNuevo(){
-        
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnGuardar.setEnabled(true);
+        btnImprimir.setEnabled(false);
+        btnNuevo.setEnabled(false);
     }
     
     
@@ -361,7 +366,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         labelMetric3.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         cmbTipoProceso.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 102)));
-        cmbTipoProceso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ENTRADA", "SALIDA" }));
+        cmbTipoProceso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "ENTRADA", "SALIDA" }));
         cmbTipoProceso.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         cmbTipoProceso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -816,22 +821,27 @@ public class GUIComprobante extends javax.swing.JDialog {
     public boolean validarCamposVacio() {
         boolean b = false;
 
-        boolean bconcepto, bentidad, btipocomprobante, bnumeroSerie, bmonto, bmonotributo;
+        boolean bconcepto, bentidad, btipocomprobante, bnumeroSerie, bmonto, bmonotributo,btipoOperacion;
         btipocomprobante = tipoComprobante == null;
         bconcepto = concepto == null;
         bentidad = entidad == null;
         bnumeroSerie = txtnumSerie1.getText().trim().isEmpty() && txtNumSerie2.getText().trim().isEmpty();
         bmonto = txtMonto.getText().trim().isEmpty();
         bmonotributo = chkAporteMonotributo.isSelected() && txtAporteMonotributo.getText().trim().isEmpty();
-//         System.out.println("El monto es "+ bmonto);
-        if (!btipocomprobante && !bconcepto && !bentidad && !bentidad && !bnumeroSerie && !bmonto && !bmonotributo) {
+        btipoOperacion = cmbTipoProceso.getSelectedIndex()==0;
+        //         System.out.println("El monto es "+ bmonto);
+        if (!btipocomprobante && !bconcepto && !bentidad && !bentidad && !bnumeroSerie && !bmonto && !bmonotributo && !btipoOperacion) {
             b = true;
         } else {
             if (btipocomprobante) {
                 mensajero.mensajeError(null, "Tipo comprobante no puede estar vacio");
             } else if (bnumeroSerie) {
                 mensajero.mensajeError(null, "Numero de Serie no puede estar vacio");
-            } else if (bentidad) {
+            }
+             else if (btipoOperacion) {
+                mensajero.mensajeError(null, "Tipo Operacion no puede estar vacio");
+            }
+            else if (bentidad) {
                 mensajero.mensajeError(null, "Entidad no puede estar vacio");
             } else if (bconcepto) {
                 mensajero.mensajeError(null, "Concepto no puede estar vacio");
@@ -840,6 +850,7 @@ public class GUIComprobante extends javax.swing.JDialog {
             } else if (bmonotributo) {
                 mensajero.mensajeError(null, "Monotributo no puede estar vacio");
             }
+            
         }
 
 
@@ -869,6 +880,7 @@ public class GUIComprobante extends javax.swing.JDialog {
             String nserie=ComprobanteUtil.formatearNumSerieIzq(numIzq)+"-"+ComprobanteUtil.formatearNumSerieDer(numDer);
             comprobante.setNumeroSerie(tipoComprobante.getReferencia()+nserie);
             System.out.println(tipoComprobante.getReferencia() + numIzq + numDer);
+            // este atributo pasa a tipo comprobante
             comprobante.setTipoProceso(cmbTipoProceso.getSelectedIndex());
             comprobante.setTipocomprobante(tipoComprobante);
 
@@ -1145,20 +1157,41 @@ public class GUIComprobante extends javax.swing.JDialog {
      * salida se deja de modo editable para que el usuario lo determine
      * manualmente
      */
-    public void controlarTipoOperacion() {
-        // determinar si es una operacion de entrada o salida
-        if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_PAGO || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES) {
-            cmbTipoProceso.setSelectedIndex(Constantes.OP_SALIDA);
-            cmbTipoProceso.setEnabled(false);
-        } else if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_INTEGRACION_CUOTA) {
-            cmbTipoProceso.setSelectedIndex(Constantes.OP_ENTRADA);
-            cmbTipoProceso.setEnabled(false);
-        } else {
-            cmbTipoProceso.setEnabled(true);
-
-        }
-    }
-
+//    public void controlarTipoOperacion() {
+//        // determinar si es una operacion de entrada o salida
+//        if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_PAGO || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE || tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES) {
+//            cmbTipoProceso.setSelectedIndex(Constantes.OP_SALIDA);
+//            cmbTipoProceso.setEnabled(false);
+//        } else if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_INTEGRACION_CUOTA) {
+//            cmbTipoProceso.setSelectedIndex(Constantes.OP_ENTRADA);
+//            cmbTipoProceso.setEnabled(false);
+//        } else {
+//            cmbTipoProceso.setEnabled(true);
+//
+//        }
+//    }
+ /**
+  *  controla el cmbtipooperacion 
+  *  controla cuando se crea un nuevo comprobante y cuando se modifica 
+  */   
+ public void controlarTipoOperacion(){
+     if (modificar) {
+         // control para editar
+           cmbTipoProceso.setSelectedIndex(comprobante.getTipoProceso());
+           cmbTipoProceso.setEnabled(false);
+     } else {
+         // control para nuevo
+         if (tipoComprobante.getOperacion()== Constantes.OP_ENTRADA_SALIDA) {
+         cmbTipoProceso.setSelectedIndex(0);
+         cmbTipoProceso.setEnabled(true);
+     } else {
+         cmbTipoProceso.setEnabled(false);
+         cmbTipoProceso.setSelectedIndex(tipoComprobante.getOperacion());
+     }
+     }
+ 
+     
+ }
     /**
      * Controla de que si se ingresa un tipo de comprobante luego de que ya se
      * haya cargado una entidad , entonces si el tipo de comprobante no se
@@ -1494,6 +1527,7 @@ public class GUIComprobante extends javax.swing.JDialog {
          setEditableComprobante(true);
          txtRefTipoCompr.setEditable(false);
          txtTipoComprobante.setEditable(false);
+         
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(true);
         btnGuardar.setEnabled(true);
@@ -1502,7 +1536,7 @@ public class GUIComprobante extends javax.swing.JDialog {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
       configurarParaEditar();
       controlarEditableMonotributo();
-      
+      modificar= true;
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void txtnumSerie1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtnumSerie1FocusLost
@@ -1642,9 +1676,13 @@ public class GUIComprobante extends javax.swing.JDialog {
         dateComprobante.setEnabled(b);
         txtRefTipoCompr.setEditable(b);
         txtTipoComprobante.setEditable(b);
-        txtnumSerie1.setEditable(b);
-        txtNumSerie2.setEditable(b);
-        cmbTipoProceso.setEnabled(b);
+       // solo se pueden editar los comprobantes que no sean automaticos
+        if (comprobante.getTipocomprobante().getOperacion()==Constantes.OP_ENTRADA_SALIDA) {
+            cmbTipoProceso.setEnabled(b);
+            txtnumSerie1.setEditable(b);
+            txtNumSerie2.setEditable(b);
+        }
+        
         txtCuit.setEditable(b);
         txtNombre.setEditable(b);
         btnBuscarEntidad.setEnabled(b);

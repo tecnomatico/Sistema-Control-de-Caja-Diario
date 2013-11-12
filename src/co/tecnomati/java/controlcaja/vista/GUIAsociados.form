@@ -26,7 +26,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="panel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,45 +45,41 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="Apellido1" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                              <Component id="Apellido2" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                              <Component id="Apellido3" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                              <Component id="Apellido4" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                      <Component id="Apellido1" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="Apellido2" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="Apellido3" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="Apellido4" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelMetric3" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelMetric4" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelMetric5" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtNombre" alignment="0" pref="141" max="32767" attributes="0"/>
-                              <Component id="txtApellido" alignment="0" pref="141" max="32767" attributes="0"/>
                               <Component id="txtTelefono" alignment="0" pref="141" max="32767" attributes="0"/>
                               <Component id="dateIngreso" alignment="0" max="32767" attributes="0"/>
                           </Group>
+                          <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="labelMetric4" min="-2" pref="115" max="-2" attributes="0"/>
-                              <Component id="labelMetric5" min="-2" pref="115" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="labelMetric3" min="-2" pref="59" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="txtLegajo" min="-2" pref="53" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="txtCuit" min="-2" pref="141" max="-2" attributes="0"/>
-                              <Component id="txtDNI" min="-2" pref="141" max="-2" attributes="0"/>
+                              <Component id="txtCuit" alignment="0" pref="141" max="32767" attributes="0"/>
+                              <Component id="txtApellido" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtNombre" alignment="0" pref="141" max="32767" attributes="0"/>
+                              <Component id="txtDNI" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtLegajo" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
+              </Group>
+              <Group type="102" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -95,22 +91,22 @@
                       <Component id="txtLegajo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelMetric3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtCuit" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelMetric4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtDNI" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelMetric5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Apellido1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Apellido2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtApellido" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -120,7 +116,7 @@
                       <Component id="Apellido3" min="-2" max="-2" attributes="0"/>
                       <Component id="dateIngreso" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="Apellido4" min="-2" max="-2" attributes="0"/>
                       <Component id="txtTelefono" min="-2" max="-2" attributes="0"/>
@@ -130,7 +126,7 @@
                       <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="13" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -189,6 +185,9 @@
           </Events>
         </Component>
         <Component class="org.edisoncor.gui.textField.TextField" name="txtApellido">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtApellidoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="org.edisoncor.gui.label.LabelMetric" name="Apellido2">
           <Properties>

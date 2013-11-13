@@ -42,132 +42,104 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                                  <Component id="labelMetric1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtNombre" min="-2" pref="269" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                                      <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                                      <Component id="labelMetric2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtMatricula" pref="269" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-                                      <Component id="labelMetric3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtCuit" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                                      <Component id="labelMetric4" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtDomicilio" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                                      <Component id="labelMetric5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtIngresoBruto" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblImgMatricula" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="lblImgCuit" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="lblImgIngBruto" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="lblImgDomicilio" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="lblImgNombre" min="-2" pref="25" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                          <Component id="labelMetric5" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelMetric3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelMetric6" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelMetric8" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelMetric7" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="labelMetric8" min="-2" max="-2" attributes="0"/>
-                              <Component id="labelMetric6" min="-2" max="-2" attributes="0"/>
-                              <Component id="labelMetric7" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtTelefono" max="32767" attributes="0"/>
-                              <Component id="txtInicioCaja" alignment="0" max="32767" attributes="0"/>
-                              <Component id="dateIncioActividad" alignment="0" pref="269" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblImgInicioCaja" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="lblImgInicioActividad" min="-2" pref="25" max="-2" attributes="0"/>
-                          </Group>
+                      <Component id="labelMetric1" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelMetric2" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelMetric4" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtCuit" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtNombre" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtMatricula" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtTelefono" max="32767" attributes="0"/>
+                          <Component id="dateIncioActividad" max="32767" attributes="0"/>
+                          <Component id="txtInicioCaja" max="32767" attributes="0"/>
+                          <Component id="txtDomicilio" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="txtIngresoBruto" min="-2" pref="269" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblImgMatricula" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="lblImgCuit" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="lblImgIngBruto" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="lblImgDomicilio" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="lblImgNombre" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="lblImgInicioCaja" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="lblImgInicioActividad" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                  <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labelMetric1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNombre" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="lblImgNombre" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labelMetric2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtMatricula" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblImgMatricula" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="txtMatricula" alignment="0" pref="28" max="32767" attributes="0"/>
+                      <Component id="labelMetric2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtCuit" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCuit" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="labelMetric3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblImgCuit" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtIngresoBruto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtIngresoBruto" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="labelMetric5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblImgIngBruto" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblImgInicioActividad" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                           <Component id="labelMetric6" min="-2" max="-2" attributes="0"/>
-                          <Component id="dateIncioActividad" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="dateIncioActividad" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtInicioCaja" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtInicioCaja" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="lblImgInicioCaja" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="labelMetric8" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTelefono" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="labelMetric7" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labelMetric4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDomicilio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDomicilio" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="lblImgDomicilio" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -175,7 +147,7 @@
                       <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -183,7 +155,10 @@
       <SubComponents>
         <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nombre"/>
+            <Property name="text" type="java.lang.String" value="NOMBRE"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="16" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="org.edisoncor.gui.textField.TextField" name="txtNombre">
@@ -196,7 +171,10 @@
         </Component>
         <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Matricula"/>
+            <Property name="text" type="java.lang.String" value="MATRICULA"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="16" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="org.edisoncor.gui.textField.TextField" name="txtMatricula">
@@ -209,6 +187,9 @@
         <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric3">
           <Properties>
             <Property name="text" type="java.lang.String" value="CUIT"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="16" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="org.edisoncor.gui.textField.TextField" name="txtCuit">
@@ -221,11 +202,15 @@
         </Component>
         <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Domicilio"/>
+            <Property name="text" type="java.lang.String" value="DOMICILIO"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="16" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="org.edisoncor.gui.textField.TextField" name="txtDomicilio">
           <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDomicilioActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDomicilioKeyPressed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDomicilioKeyTyped"/>
           </Events>
@@ -254,7 +239,10 @@
         </Component>
         <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ingreso Bruto"/>
+            <Property name="text" type="java.lang.String" value="INGRESO BRUTOS"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="16" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="org.edisoncor.gui.textField.TextField" name="txtIngresoBruto">
@@ -267,7 +255,10 @@
         </Component>
         <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Inicio de Actividad"/>
+            <Property name="text" type="java.lang.String" value="INICIO DE ACTIVIDAD"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="16" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="dateIncioActividad">
@@ -284,12 +275,18 @@
         </Component>
         <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric7">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Telefono"/>
+            <Property name="text" type="java.lang.String" value="TELEFONO"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="16" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Inicio de Caja"/>
+            <Property name="text" type="java.lang.String" value="INICIO DE CAJA"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="16" style="1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="org.edisoncor.gui.textField.TextField" name="txtInicioCaja">

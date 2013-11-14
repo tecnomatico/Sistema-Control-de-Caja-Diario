@@ -97,12 +97,12 @@ public class GUIAsociados extends javax.swing.JDialog {
         txtApellido = new org.edisoncor.gui.textField.TextField();
         Apellido2 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric4 = new org.edisoncor.gui.label.LabelMetric();
-        txtCuit = new org.edisoncor.gui.textField.TextField();
         labelMetric5 = new org.edisoncor.gui.label.LabelMetric();
         txtDNI = new org.edisoncor.gui.textField.TextField();
         Apellido3 = new org.edisoncor.gui.label.LabelMetric();
         txtTelefono = new org.edisoncor.gui.textField.TextField();
         Apellido4 = new org.edisoncor.gui.label.LabelMetric();
+        txtCuit = new javax.swing.JFormattedTextField();
         dateIngreso = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -158,12 +158,6 @@ public class GUIAsociados extends javax.swing.JDialog {
         labelMetric4.setText("CUIT");
         labelMetric4.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
-        txtCuit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCuitActionPerformed(evt);
-            }
-        });
-
         labelMetric5.setText("D.N.I.");
         labelMetric5.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
@@ -178,6 +172,24 @@ public class GUIAsociados extends javax.swing.JDialog {
 
         Apellido4.setText("TELEFONO");
         Apellido4.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        txtCuit.setBackground(new java.awt.Color(204, 204, 204));
+        try {
+            txtCuit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-########-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCuit.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtCuit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCuitKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCuitKeyTyped(evt);
+            }
+        });
+
+        dateIngreso.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -197,13 +209,13 @@ public class GUIAsociados extends javax.swing.JDialog {
                         .addComponent(Apellido4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(dateIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                     .addComponent(txtLegajo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCuit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtDNI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCuit)
+                    .addComponent(dateIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
                 .addContainerGap(65, Short.MAX_VALUE))
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -219,8 +231,8 @@ public class GUIAsociados extends javax.swing.JDialog {
                     .addComponent(txtLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,10 +245,10 @@ public class GUIAsociados extends javax.swing.JDialog {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(20, 20, 20)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Apellido3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Apellido4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,10 +284,6 @@ public class GUIAsociados extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void txtCuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCuitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCuitActionPerformed
-
     private void txtDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDNIActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDNIActionPerformed
@@ -290,7 +298,7 @@ public class GUIAsociados extends javax.swing.JDialog {
          AsociadoDAO asociadoDAO = new AsociadoDaoImp();
      try {
          boolean cCuit, cA, cN, cT, cDni = false;
-            cCuit = txtCuit.getText().trim().isEmpty();
+            cCuit = txtCuit.getText().replaceAll("[.-]", "").trim().isEmpty();
             cA = txtApellido.getText().trim().isEmpty();
             cN = txtNombre.getText().trim().isEmpty();
             cT = txtTelefono.getText().trim().isEmpty();
@@ -344,6 +352,13 @@ public class GUIAsociados extends javax.swing.JDialog {
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoActionPerformed
+
+    private void txtCuitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyPressed
+     
+    }//GEN-LAST:event_txtCuitKeyPressed
+
+    private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
+    }//GEN-LAST:event_txtCuitKeyTyped
 
     /**
      * @param args the command line arguments
@@ -433,7 +448,7 @@ public class GUIAsociados extends javax.swing.JDialog {
     private org.edisoncor.gui.label.LabelMetric labelMetric5;
     private org.edisoncor.gui.panel.Panel panel1;
     private org.edisoncor.gui.textField.TextField txtApellido;
-    private org.edisoncor.gui.textField.TextField txtCuit;
+    private javax.swing.JFormattedTextField txtCuit;
     private org.edisoncor.gui.textField.TextField txtDNI;
     private org.edisoncor.gui.textField.TextField txtLegajo;
     private org.edisoncor.gui.textField.TextField txtNombre;

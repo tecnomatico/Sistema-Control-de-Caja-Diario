@@ -75,7 +75,6 @@ private boolean modificar=false;
 
         panel1 = new org.edisoncor.gui.panel.Panel();
         labelCuit = new org.edisoncor.gui.label.LabelMetric();
-        txtCuit = new org.edisoncor.gui.textField.TextField();
         txtRazonSocial = new org.edisoncor.gui.textField.TextField();
         labelRazonSocial = new org.edisoncor.gui.label.LabelMetric();
         btnCancelar = new org.edisoncor.gui.button.ButtonIpod();
@@ -84,16 +83,11 @@ private boolean modificar=false;
         txtDomicilio = new org.edisoncor.gui.textField.TextField();
         txtTelefono = new org.edisoncor.gui.textField.TextField();
         labelRazonSocial2 = new org.edisoncor.gui.label.LabelMetric();
+        txtCuit = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         labelCuit.setText("CUIT");
-
-        txtCuit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCuitActionPerformed(evt);
-            }
-        });
 
         labelRazonSocial.setText("Razon Social");
 
@@ -117,6 +111,22 @@ private boolean modificar=false;
 
         labelRazonSocial2.setText("Telefono");
 
+        txtCuit.setBackground(new java.awt.Color(204, 204, 204));
+        try {
+            txtCuit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-########-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCuit.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtCuit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCuitKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCuitKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -124,6 +134,10 @@ private boolean modificar=false;
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addComponent(labelCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCuit))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,25 +148,20 @@ private boolean modificar=false;
                             .addComponent(labelRazonSocial2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29))
                             .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addComponent(labelCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 44, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(37, 37, 37)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,7 +185,7 @@ private boolean modificar=false;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,10 +194,6 @@ private boolean modificar=false;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtCuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCuitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCuitActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
@@ -203,7 +208,7 @@ private boolean modificar=false;
        ClienteDAO clienteDAO = new ClienteDaoImp();
      try {
          boolean cA, cRS, cD, cT = false;
-            cA = txtCuit.getText().trim().isEmpty();
+            cA = txtCuit.getText().replaceAll("[.-]", "").trim().isEmpty();
             cRS = txtRazonSocial.getText().trim().isEmpty();
             cD = txtDomicilio.getText().trim().isEmpty();
             cT = txtTelefono.getText().trim().isEmpty();
@@ -244,6 +249,14 @@ private boolean modificar=false;
         this.dispose();
 }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtCuitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyPressed
+
+    }//GEN-LAST:event_txtCuitKeyPressed
+
+    private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
+
+    }//GEN-LAST:event_txtCuitKeyTyped
 
      /**
      * Setea el formulario con los datos de proveedor pasado por parametro
@@ -352,7 +365,7 @@ private boolean modificar=false;
     private org.edisoncor.gui.label.LabelMetric labelRazonSocial1;
     private org.edisoncor.gui.label.LabelMetric labelRazonSocial2;
     private org.edisoncor.gui.panel.Panel panel1;
-    private org.edisoncor.gui.textField.TextField txtCuit;
+    private javax.swing.JFormattedTextField txtCuit;
     private org.edisoncor.gui.textField.TextField txtDomicilio;
     private org.edisoncor.gui.textField.TextField txtRazonSocial;
     private org.edisoncor.gui.textField.TextField txtTelefono;

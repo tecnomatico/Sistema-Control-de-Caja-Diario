@@ -303,11 +303,11 @@ public class GUIComprobante extends javax.swing.JDialog {
         txtTipoComprobante = new org.edisoncor.gui.textField.TextField();
         txtRefTipoCompr = new org.edisoncor.gui.textField.TextField();
         panelEntidad = new org.edisoncor.gui.panel.Panel();
-        txtCuit = new org.edisoncor.gui.textField.TextField();
         txtNombre = new org.edisoncor.gui.textField.TextField();
         labelMetric9 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric8 = new org.edisoncor.gui.label.LabelMetric();
         btnBuscarEntidad = new org.edisoncor.gui.button.ButtonIpod();
+        txtCuit = new javax.swing.JFormattedTextField();
         panelConcepto = new org.edisoncor.gui.panel.Panel();
         labelMetric6 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric7 = new org.edisoncor.gui.label.LabelMetric();
@@ -461,22 +461,6 @@ public class GUIComprobante extends javax.swing.JDialog {
         panelEntidad.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 102)));
         panelEntidad.setColorPrimario(new java.awt.Color(0, 0, 0));
 
-        txtCuit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCuit.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        txtCuit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCuitActionPerformed(evt);
-            }
-        });
-        txtCuit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCuitKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCuitKeyTyped(evt);
-            }
-        });
-
         txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -501,6 +485,22 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
         });
 
+        txtCuit.setEditable(false);
+        try {
+            txtCuit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-########-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCuit.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtCuit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCuitKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCuitKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelEntidadLayout = new javax.swing.GroupLayout(panelEntidad);
         panelEntidad.setLayout(panelEntidadLayout);
         panelEntidadLayout.setHorizontalGroup(
@@ -512,12 +512,12 @@ public class GUIComprobante extends javax.swing.JDialog {
                     .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelEntidadLayout.createSequentialGroup()
-                        .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscarEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelEntidadLayout.setVerticalGroup(
@@ -527,9 +527,9 @@ public class GUIComprobante extends javax.swing.JDialog {
                     .addGroup(panelEntidadLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17))
+                            .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEntidadLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnBuscarEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -793,7 +793,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1394,10 +1394,6 @@ public class GUIComprobante extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_chkAporteMonotributoActionPerformed
 
-    private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
-        MyUtil.consumirLetras(evt, txtCodigoConcepto, 0);
-    }//GEN-LAST:event_txtCuitKeyTyped
-
     /**
      * metodo que se encarga de buscar la entidad y lo almacena en un objeto
      * entidad Reliza una pequeña validadcion : si no se eligio un tipo de
@@ -1429,12 +1425,6 @@ public class GUIComprobante extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Debes elegir un Tipo de Comprobante antes de continuar con este paso");
         }
     }
-    private void txtCuitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_F1) {
-            buscarEntidad();
-        }
-    }//GEN-LAST:event_txtCuitKeyPressed
-
     private void txtnumSerie1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumSerie1KeyTyped
 
         if (txtnumSerie1.getText().length() == 4) {
@@ -1484,10 +1474,6 @@ public class GUIComprobante extends javax.swing.JDialog {
     private void btnBuscarEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEntidadActionPerformed
         buscarEntidad();
     }//GEN-LAST:event_btnBuscarEntidadActionPerformed
-
-    private void txtCuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCuitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCuitActionPerformed
 
     private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoKeyTyped
         MyUtil.consumirAll(evt, txtMonto, 20);
@@ -1556,6 +1542,16 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
         } 
     }//GEN-LAST:event_txtNumSerie2FocusLost
+
+    private void txtCuitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            buscarEntidad();
+        }
+    }//GEN-LAST:event_txtCuitKeyPressed
+
+    private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
+       MyUtil.consumirLetras(evt, txtCodigoConcepto, 0);
+    }//GEN-LAST:event_txtCuitKeyTyped
 
     /**
      * @param args the command line arguments
@@ -1626,7 +1622,7 @@ public class GUIComprobante extends javax.swing.JDialog {
     private org.edisoncor.gui.panel.Panel panelMonotributo;
     private org.edisoncor.gui.textField.TextField txtAporteMonotributo;
     private org.edisoncor.gui.textField.TextField txtCodigoConcepto;
-    private org.edisoncor.gui.textField.TextField txtCuit;
+    private javax.swing.JFormattedTextField txtCuit;
     private org.edisoncor.gui.textField.TextField txtDescripcionConcepto;
     private org.edisoncor.gui.textField.TextField txtMonto;
     private org.edisoncor.gui.textField.TextField txtNombre;

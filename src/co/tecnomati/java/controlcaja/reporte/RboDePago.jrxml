@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reciboDePago" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67ddf0f8-02b9-4bf1-94dc-470dc5dbe8c1">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="45"/>
+	<property name="ireport.y" value="150"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="logo2" class="java.io.InputStream"/>
 	<field name="nroRecibo" class="java.lang.String"/>
@@ -214,22 +214,22 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{inicioActividades}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="6ef8fda3-3324-4c98-9a61-2db5aba9534e" x="7" y="229" width="345" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{cantidadPago}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="ba219ca0-2109-46c4-bfbc-1463c0fc629b" x="97" y="250" width="255" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{conceptoDe}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="aec8e2ee-9456-4a78-9841-7041935520d9" x="42" y="270" width="310" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{sonPesos}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="45a71016-7003-4c3d-a287-573f17824a4b" x="7" y="383" width="100" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fechaPago}]]></textFieldExpression>
@@ -264,7 +264,7 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{domicilioCooperativa}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="0c77714a-c616-4633-9a6d-68a4a91c8c79" x="7" y="333" width="166" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lugarPago}]]></textFieldExpression>
@@ -413,7 +413,7 @@
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Recibi conforme de la Cooperativa Tecnomatica Limitada la suma de pesos:]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="9ad96b58-c560-4f39-bf3e-d780910f3272" x="448" y="229" width="345" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{cantidadPago}]]></textFieldExpression>
@@ -437,12 +437,12 @@
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Son $:]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="33ee64b1-d925-4b39-8d68-d50be01534b0" x="538" y="250" width="255" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{conceptoDe}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="9cd79d4d-af41-4ff8-9aee-3ca41ecbc18b" x="483" y="270" width="310" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{sonPesos}]]></textFieldExpression>
@@ -474,12 +474,12 @@
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Fecha de Pago:]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="2c524f40-dc5f-4d3c-8008-ee8623d83264" x="448" y="383" width="100" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fechaPago}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="5d55a219-e8fd-49f2-a0cc-fb5770e6b7b8" x="448" y="333" width="166" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lugarPago}]]></textFieldExpression>

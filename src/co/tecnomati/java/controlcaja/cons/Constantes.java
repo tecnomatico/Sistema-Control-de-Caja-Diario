@@ -93,6 +93,11 @@ public class Constantes {
         
         public static final String CONCEPTO_DESCRIPCION_MONOTRIBUTO = "MONOTRIBUTO";
         public static final int CONCEPTO_CODIGO_MONOTRIBUTO = 5;
+       
+        
+        // tipo de forma que se accede a la tabla del gestor de concepto
+        public static final int MODELO_TODOS_LOS_CONCEPTOS = 0;
+        public static final int MODELO_FILTRO_CONCEPTOS = 1;
         
      
         

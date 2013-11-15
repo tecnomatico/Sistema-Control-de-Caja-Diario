@@ -22,9 +22,11 @@ import javax.swing.table.TableRowSorter;
 public class GUIGestordeConcepto extends javax.swing.JDialog {
 int numeroSeleccion;
     Concepto asociado;
-    ModeloConcepto modeloasociado = new ModeloConcepto();
-    ModeloConcepto2 modeloasociado2 = new ModeloConcepto2();
+    ModeloConcepto modeloasociado = new ModeloConcepto();  // para mostrar todos los conceptos
+    ModeloConcepto2 modeloasociado2 = new ModeloConcepto2();// para filtrar los conceptos automaticos
     
+
+   
     private  TableRowSorter sorter;
     GUIGestorAsociado parent;
     boolean agregado= false;
@@ -37,6 +39,7 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         inicializarTabla();
+        btnSeleccionar.setVisible(false);
         this.setTitle(Constantes.NAME_GESTOR_CONCEPTOS);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -46,11 +49,15 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.i = i;
+        if (i==Constantes.MODELO_TODOS_LOS_CONCEPTOS) {
+            btnSeleccionar.setVisible(false);
+        }    
         inicializarGestorModeloTabla();
         this.setTitle(Constantes.NAME_GESTOR_CONCEPTOS);
         this.setLocationRelativeTo(null);
         this.setVisible(true);    }
 
+     
     public void inicializarTabla(){
         modeloasociado= new ModeloConcepto();
         sorter = new TableRowSorter(modeloasociado);
@@ -96,6 +103,7 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         txtCodigo = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
         labelDescripcion = new org.edisoncor.gui.label.LabelMetric();
+        btnSeleccionar = new org.edisoncor.gui.button.ButtonIpod();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -148,7 +156,7 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
             }
         });
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar por ...", 0, 0, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar por ...", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
         jPanel3.setOpaque(false);
 
@@ -207,6 +215,14 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        btnSeleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/tick_48.png"))); // NOI18N
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -217,13 +233,13 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(62, 62, 62)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnNuevoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(52, 52, 52)
+                        .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
@@ -237,8 +253,9 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,7 +266,7 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -259,8 +276,9 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 private void inicializarGestorModeloTabla(){
-    if (i==0) {
+    if (i==Constantes.MODELO_TODOS_LOS_CONCEPTOS) {
                   inicializarTabla();
+                  
               } else {
                   inicializarTabla2();
               }
@@ -280,12 +298,17 @@ private void inicializarGestorModeloTabla(){
        
            if (tblConcepto.getSelectedRow() != -1) {
             numeroSeleccion = sorter.convertRowIndexToModel(tblConcepto.getSelectedRow());
-            asociado = modeloasociado.getConcepto(numeroSeleccion);
+               if (i==Constantes.MODELO_TODOS_LOS_CONCEPTOS){
+                   asociado = modeloasociado.getConcepto(numeroSeleccion);
+               } else {
+                   asociado = modeloasociado2.getConcepto(numeroSeleccion);
+               }
+            
             // abrir el formulario alta de persona para editar los datos de persona
             GUIConceptos guiConceptos = new GUIConceptos(null, true, asociado);
             // actulizar la tabla con los datos modificados
-            if (guiConceptos.isAgregado()) {
-                
+            if (guiConceptos.isAgregado()|| guiConceptos.isEliminado()) {
+                guiConceptos.dispose();
                 if (i==0) {
                   inicializarTabla();
               } else {
@@ -322,6 +345,21 @@ private void inicializarGestorModeloTabla(){
     private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
         filtro(txtDescripcion);
     }//GEN-LAST:event_txtDescripcionKeyPressed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        int fila = tblConcepto.getSelectedRow();
+        if (tblConcepto.getSelectedRow() != -1) {
+              numeroSeleccion = sorter.convertRowIndexToModel(tblConcepto.getSelectedRow());
+             asociado = modeloasociado2.getConcepto(fila);
+             System.out.println("concepto "+asociado.getDescripcion() );
+            setAgregado(true);
+        }else{
+           JOptionPane.showMessageDialog(this, "Seleccione una fila");
+           setAgregado(false); 
+        }
+        
+        this.dispose();
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -368,23 +406,14 @@ private void inicializarGestorModeloTabla(){
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnEditar;
     private org.edisoncor.gui.button.ButtonIpod btnNuevoConcepto;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private org.edisoncor.gui.button.ButtonIpod btnSeleccionar;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private org.edisoncor.gui.label.LabelMetric labelCodigo;
     private org.edisoncor.gui.label.LabelMetric labelDescripcion;
-    private org.edisoncor.gui.label.LabelMetric labelMetric1;
-    private org.edisoncor.gui.label.LabelMetric labelMetric2;
-    private org.edisoncor.gui.label.LabelMetric labelMetric3;
-    private org.edisoncor.gui.label.LabelMetric labelMetric4;
     private org.edisoncor.gui.panel.Panel panel1;
     private javax.swing.JTable tblConcepto;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtId1;
-    private javax.swing.JTextField txtRazonSocial;
-    private javax.swing.JTextField txtRazonSocial1;
     // End of variables declaration//GEN-END:variables
 }

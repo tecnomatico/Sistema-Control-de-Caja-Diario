@@ -307,13 +307,13 @@ filtro(txtRazonSocial);
                 entidad.setTipoEntidad(Constantes.ASOCIADO_INT);
             }
             int id = (int) tblEntidad.getModel().getValueAt(fila, 0);
-           
+            setSelecciono(true);
             entidad.setId(id);
         }else {
                 JOptionPane.showMessageDialog(this, "Seleccione una fila");
                 setSelecciono(false);
             }
-            setSelecciono(true);
+           
             this.dispose();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 

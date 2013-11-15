@@ -42,6 +42,7 @@ public class GUIComprobante extends javax.swing.JDialog {
     private Comprobante comprobante; // comprobante que sera guardado o modificado
     private boolean modificar; // indicador de si uso esta ventana para modificar o crear 
     private boolean agregado; // indicador para saber si el usuario realizo la operacion de  carga o actualizacion de los datos del comprobante
+    private boolean elimiado;
     // clase auxiliar en la que almacena temporalmente un Asociado, Cliente o Proveedor
     Entidad entidad;
     // Son elemementos que conforman un comprobante
@@ -53,6 +54,15 @@ public class GUIComprobante extends javax.swing.JDialog {
     private long numIzq;
     private long numDer;
 
+    public boolean isElimiado() {
+        return elimiado;
+    }
+
+    public void setElimiado(boolean elimiado) {
+        this.elimiado = elimiado;
+    }
+
+    
     /**
      * Constructor usado para crear un Comprobante
      */
@@ -1074,14 +1084,14 @@ public class GUIComprobante extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
              int codigoConcepto = Integer.parseInt(txtCodigoConcepto.getText().trim());
              
-             System.out.println("codigo de concetpor "+ codigoConcepto);
-             System.out.println("tipode comprobante "+ tipoComprobante.getFormulario());
+//             System.out.println("codigo de concetpor "+ codigoConcepto);
+//             System.out.println("tipode comprobante "+ tipoComprobante.getFormulario());
             if (isComprobanteParaBuscarConcepto(tipoComprobante)) {
-                System.out.println("es un tipo de comprobante a filtrar "+ isComprobanteParaBuscarConcepto(tipoComprobante));
+//                System.out.println("es un tipo de comprobante a filtrar "+ isComprobanteParaBuscarConcepto(tipoComprobante));
                 // no se debe buscar un concepto que corresponde alos comprobantes automaticos
                    
             if (!"".equals(codigoConcepto) ) {
-                System.out.println("no es distinto de cero codigo concetp");
+//                System.out.println("no es distinto de cero codigo concetp");
                 concepto = new ConceptoDaoImp().getConcepto(codigoConcepto);
 //                 System.out.println("concetor"+ concepto.getCodigoConcepto());
                 if (concepto != null && !isConceptoAutomatico(codigoConcepto)) {
@@ -1091,10 +1101,11 @@ public class GUIComprobante extends javax.swing.JDialog {
                 } else {
                     System.out.println("salto bien el pescao");
                     // llama a la ayuda
-                    GUIGestordeConcepto gestorConcepto = new GUIGestordeConcepto(null, true,1);
+                    GUIGestordeConcepto gestorConcepto = new GUIGestordeConcepto(null, true,Constantes.MODELO_FILTRO_CONCEPTOS);
                     // si eligio un concepto debe ser reflejado 
                     if (gestorConcepto.isAgregado()) {
                         concepto = gestorConcepto.getAsociado();
+//                        concepto.toString();
                         txtCodigoConcepto.setText(String.valueOf(concepto.getCodigoConcepto()));
                         txtDescripcionConcepto.setText(concepto.getDescripcion());
                         txtMonto.requestFocus();
@@ -1459,7 +1470,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         if (opc==JOptionPane.YES_OPTION) {
            new ComprobanteDaoImp().deleteFormulario(comprobante);
            mensajero.mensajeInformacionAtualizacionOK(null);
-           
+           setElimiado(true);
            // configuarar botones luego de eliminar
            btnEditar.setEnabled(false);
            btnEliminar.setEnabled(false);

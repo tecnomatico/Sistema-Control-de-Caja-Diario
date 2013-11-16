@@ -13,6 +13,7 @@ import co.tecnomati.java.controlcaja.dominio.Cooperativa;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.AsociadoDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
+import co.tecnomati.java.controlcaja.util.ComprobanteUtil;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import co.tecnomati.java.controlcaja.util.Numero_a_Letra;
 import java.util.ArrayList;
@@ -92,7 +93,7 @@ public class RboAnticipoRetornoDataSource implements JRDataSource {
         setearComprobantesConceptos(conjuntoConceptos);
         double neto = getNeto();
         if ("nroRecibo".equals(jrf.getName())) {
-            valor = comprobante.getNumeroSerie();
+             valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq())+"-"+ ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
         } else if ("matriculaInaes".equals(jrf.getName())) {
             valor = coop.getMatricula();
         } else if ("inicioActividad".equals(jrf.getName())) {

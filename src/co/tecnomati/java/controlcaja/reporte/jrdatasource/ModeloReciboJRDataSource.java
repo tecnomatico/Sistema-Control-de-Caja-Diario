@@ -11,7 +11,9 @@ import co.tecnomati.java.controlcaja.dominio.Cooperativa;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
+import co.tecnomati.java.controlcaja.util.ComprobanteUtil;
 import co.tecnomati.java.controlcaja.util.MyUtil;
+import co.tecnomati.java.controlcaja.util.NumberToLetterConverter;
 import co.tecnomati.java.controlcaja.util.Numero_a_Letra;
 import com.mysql.jdbc.Util;
 import java.util.ArrayList;
@@ -71,7 +73,7 @@ public class ModeloReciboJRDataSource implements JRDataSource {
         setComprobanteConcepto1(conjuntoConceptos);
         monto = comprobanteconcepto1.getMonto();
         if ("nroRecibo".equals(jrf.getName())) {
-            valor = comprobante.getNumeroSerie();
+             valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq())+"-"+ ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
         } else if ("matriculaInaes".equals(jrf.getName())) {
             valor = coop.getMatricula();
         } else if ("inicioActividades".equals(jrf.getName())) {
@@ -83,14 +85,14 @@ public class ModeloReciboJRDataSource implements JRDataSource {
         } else if ("domicilioCooperativa".equals(jrf.getName())) {
             valor = coop.getDomicilio();
         } else if ("cantidadPago".equals(jrf.getName())) {
-//            valor = new Numero_a_Letra().Convertir(String.valueOf(monto), true);
+             valor = "(" + new Numero_a_Letra().Convertir(String.valueOf(monto), true) + ")";
 //                valor = NumberToLetterConverter.getConvertirPesosEnString(monto);
         } else if ("conceptoDe".equals(jrf.getName())) {
 
             valor = comprobanteconcepto1.getConcepto().getDescripcion();
         } else if ("sonPesos".equals(jrf.getName())) {
             // Dato constante para la configuarcion
-            valor = "(" + new Numero_a_Letra().Convertir(String.valueOf(monto), true) + ")";
+            valor = monto;
         } else if ("fechaPago".equals(jrf.getName())) {
 
             valor = MyUtil.getFechaString10DDMMAAAA(comprobante.getFecha());

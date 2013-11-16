@@ -307,8 +307,8 @@
                       <Component id="labelMetric5" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnDatosCoop" alignment="3" min="-2" pref="84" max="-2" attributes="0"/>
-                          <Component id="btnGestorAsociado" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnDatosCoop" alignment="3" min="-2" pref="95" max="-2" attributes="0"/>
+                          <Component id="btnGestorAsociado" alignment="3" min="-2" pref="95" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="553" max="-2" attributes="0"/>
                   </Group>

@@ -31,6 +31,8 @@ public class GUIAsociados extends javax.swing.JDialog {
         initComponents();
         this.setTitle(Constantes.NAME_NUEVO_ASOCIADO);
         //txtLegajo.setText(String.valueOf(asociado.getIdAsociado()));
+        txtLegajo.setVisible(false);
+        labelLegajo.setVisible(false);
         SNumeros(txtDNI);
         SNumeros(txtCuit);
         SNumeros(txtTelefono);
@@ -88,7 +90,7 @@ public class GUIAsociados extends javax.swing.JDialog {
     private void initComponents() {
 
         panel1 = new org.edisoncor.gui.panel.Panel();
-        labelMetric3 = new org.edisoncor.gui.label.LabelMetric();
+        labelLegajo = new org.edisoncor.gui.label.LabelMetric();
         txtLegajo = new org.edisoncor.gui.textField.TextField();
         btnCancelar = new org.edisoncor.gui.button.ButtonIpod();
         btnGuardar = new org.edisoncor.gui.button.ButtonIpod();
@@ -108,8 +110,8 @@ public class GUIAsociados extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Asociado");
 
-        labelMetric3.setText("LEGAJO");
-        labelMetric3.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        labelLegajo.setText("LEGAJO");
+        labelLegajo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         txtLegajo.setEditable(false);
         txtLegajo.setBackground(new java.awt.Color(255, 255, 255));
@@ -201,7 +203,7 @@ public class GUIAsociados extends javax.swing.JDialog {
                     .addComponent(Apellido1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Apellido2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Apellido3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelLegajo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelMetric4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelMetric5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +229,7 @@ public class GUIAsociados extends javax.swing.JDialog {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -443,7 +445,7 @@ public class GUIAsociados extends javax.swing.JDialog {
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnGuardar;
     private com.toedter.calendar.JDateChooser dateIngreso;
-    private org.edisoncor.gui.label.LabelMetric labelMetric3;
+    private org.edisoncor.gui.label.LabelMetric labelLegajo;
     private org.edisoncor.gui.label.LabelMetric labelMetric4;
     private org.edisoncor.gui.label.LabelMetric labelMetric5;
     private org.edisoncor.gui.panel.Panel panel1;

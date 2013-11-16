@@ -436,7 +436,7 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     }//GEN-LAST:event_txtMatriculaKeyTyped
 
     private void txtIngresoBrutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIngresoBrutoKeyTyped
-        permitirSoloNumero(evt);
+        //permitirSoloNumero(evt);
     }//GEN-LAST:event_txtIngresoBrutoKeyTyped
 
     private void txtDomicilioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDomicilioKeyTyped

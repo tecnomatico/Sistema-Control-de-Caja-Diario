@@ -9,6 +9,7 @@ import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import co.tecnomati.java.controlcaja.dominio.dao.ComprobanteDAO;
 import co.tecnomati.java.controlcaja.hibernateUtil.HibernateUtil;
+import co.tecnomati.java.controlcaja.util.MyUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -133,15 +134,33 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
         Criteria criteria = session.createCriteria(Comprobante.class);
 
         ArrayList<Comprobante> comprobante = (ArrayList<Comprobante>) session.createQuery("FROM Comprobante c\n"
+                + "join fetch c.tipocomprobante  as tipocomprobante\n"
+                + "join fetch c.comprobanteconceptos as comprobanteconcepto\n"
+                + "join fetch comprobanteconcepto.concepto as concepto\n"
+                + "join fetch tipocomprobante.categoriacomprobante as categoria\n"
+                + "where categoria.descripcion='" + categoria + "'").list();
+        session.close();
+        return comprobante;
+    }
+     @Override
+      public List<Comprobante> listarFormularioxFechaHQl(Date desde, Date hasta) {
+        Session session = HibernateUtil.getSession();
+        
+        String desdeS= MyUtil.getFechaString10AAAAMMDD(desde);
+        String hastaS= MyUtil.getFechaString10AAAAMMDD(hasta);
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Comprobante.class);
+
+        ArrayList<Comprobante> comprobante = (ArrayList<Comprobante>) session.createQuery("FROM Comprobante c\n"
                 + "join fetch c.tipocomprobante  as tipo\n"
                 + "join fetch c.comprobanteconceptos as cc\n"
                 + "join fetch cc.concepto as conce\n"
                 + "join fetch tipo.categoriacomprobante as categ\n"
-                + "where categ.descripcion='" + categoria + "'").list();
+                + "where c.fecha<='" + hastaS + "' and c.fecha>='" + desdeS + "'").list();
         session.close();
         return comprobante;
-    }
-
+      }
+    
     @Override
     public List<Comprobante> listarFormularioxFecha(Date desde, Date hasta) {
 //        Session session = HibernateUtil.getSession();
@@ -171,6 +190,23 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
          
          session.close();
           return lista;
+    }
+
+    @Override
+    public List<Comprobante> listarFormularioxFiltro(String where) {  
+         Session session = HibernateUtil.getSession();
+
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Comprobante.class);
+
+        ArrayList<Comprobante> comprobante = (ArrayList<Comprobante>) session.createQuery("FROM Comprobante c\n"
+                + "join fetch c.tipocomprobante  as tipocomprobante\n"
+                + "join fetch c.comprobanteconceptos as comprobanteconcepto\n"
+                + "join fetch comprobanteconcepto.concepto as concepto\n"
+                + "join fetch tipocomprobante.categoriacomprobante as categoria\n"
+                + where).list();
+        session.close();
+        return comprobante;
     }
     /**
      *

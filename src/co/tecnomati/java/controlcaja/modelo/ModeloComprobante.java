@@ -46,10 +46,11 @@ public class ModeloComprobante extends AbstractTableModel {
        *  Filtra la tabla por categoria
        * @param categoria  
        */
-      public ModeloComprobante(String categoria) {            
+     
+      public ModeloComprobante(String where) {            
         try {
                         
-            listaComprobante = (ArrayList<Comprobante>)comprobanteDAO.listarFormularioxCategoria(categoria);
+            listaComprobante = (ArrayList<Comprobante>)comprobanteDAO.listarFormularioxFiltro(where);
         } catch (ClassCastException ex) {
 //            listaComprobante= new ArrayList<Comprobante>();  
             listaComprobante=(ArrayList<Comprobante>)comprobanteDAO.listarFormulario();
@@ -59,7 +60,7 @@ public class ModeloComprobante extends AbstractTableModel {
       public ModeloComprobante(Date desde , Date hasta) {            
         try {
                         
-            listaComprobante = (ArrayList<Comprobante>)comprobanteDAO.listarFormularioxFecha(desde, hasta);
+            listaComprobante = (ArrayList<Comprobante>)comprobanteDAO.listarFormularioxFechaHQl(desde, hasta);
         } catch (ClassCastException ex) {
 //            listaComprobante= new ArrayList<Comprobante>();  
             listaComprobante=(ArrayList<Comprobante>)comprobanteDAO.listarFormulario();

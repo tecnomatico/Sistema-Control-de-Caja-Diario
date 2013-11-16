@@ -99,9 +99,20 @@ public class Constantes {
         public static final int MODELO_TODOS_LOS_CONCEPTOS = 0;
         public static final int MODELO_FILTRO_CONCEPTOS = 1;
         
-     
+        // busqueda de Comprobante. filtros segun eliga los campos
+        public static final int COMPROBANTE_FILTRO_CATEGORIA = 1;
+        public static final int COMPROBANTE_FILTRO_TIPO_COMPROBANTE = 2;
+        public static final int COMPROBANTE_FILTRO_OPERACION = 3;
+        public static final int COMPROBANTE_FILTRO_ESTADO = 4;
+        public static final int COMPROBANTE_FILTRO_FECHA = 5;
+        public static final int COMPROBANTE_FILTRO_NUMERO_SERIE = 6;
         
+        // Seleeccione
+     
+                public static final String SELECCIONE = "Seleccione";
 
+        public static final String COMPROBANTE_ESTADO_ACTIVO = "ACTIVO";
+        public static final String COMPROBANTE_ESTADO_ANULADO = "ANULADO";
 
      
 }

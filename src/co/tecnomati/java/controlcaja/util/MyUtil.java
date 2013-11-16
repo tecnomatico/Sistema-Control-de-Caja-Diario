@@ -48,6 +48,12 @@ public class MyUtil {
          SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");     
          return sdf.format(fecha);
     }
+     public static String getFechaString10AAAAMMDD (Date fecha){
+        
+         Date date = new Date();
+         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");     
+         return sdf.format(fecha);
+    }
    
    /**
     * Permite el ingreso de cualquier caracter y tambien

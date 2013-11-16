@@ -8,6 +8,7 @@ import co.tecnomati.java.controlcaja.dominio.Comprobante;
 import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,6 +18,7 @@ import java.util.Set;
 public interface ComprobanteDAO {
   java.util.List<Comprobante> listarFormulario();
   java.util.List<Comprobante> listarFormularioxCategoria(String categoria);
+  java.util.List<Comprobante> listarFormularioxFiltro(String where);
   /**
    * 
    * @param desde fecha de inicio
@@ -25,6 +27,7 @@ public interface ComprobanteDAO {
    * Esta hecho con consultas criteria
    */
   java.util.List<Comprobante> listarFormularioxFecha(Date desde, Date hasta);
+   public List<Comprobante> listarFormularioxFechaHQl(Date desde, Date hasta) ;
   public void addFormulario(Comprobante a);
   public void deleteFormulario(Comprobante a);
   public void upDateFormulario(Comprobante a);

@@ -232,6 +232,11 @@ public class GUIGestorComprobante extends javax.swing.JDialog {
 
         cmbCategoria.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione" }));
+        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCategoriaActionPerformed(evt);
+            }
+        });
 
         labelMetric7.setText("Desde");
         labelMetric7.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -482,6 +487,10 @@ public class GUIGestorComprobante extends javax.swing.JDialog {
 //        System.out.println(cadena2);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCategoriaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -588,7 +597,7 @@ public class GUIGestorComprobante extends javax.swing.JDialog {
     private String generarWhere() {
         String where = "";
         boolean controlPrimerWhere = true;
-        if (!cmbCategoria.getSelectedItem().equals(Constantes.SELECCIONE) || !cmbTipoComprobante.getSelectedItem().equals(Constantes.SELECCIONE) || !cmbOperacion.getSelectedItem().equals(Constantes.SELECCIONE) || !cmbEstado.getSelectedItem().equals(Constantes.SELECCIONE)||(dateDesde.getDate()!=null && dateHasta.getDate()!=null)|| !isVaciojFormSerie(txtFNumSerie)) {
+        if (!cmbCategoria.getSelectedItem().equals(Constantes.SELECCIONE) || !cmbTipoComprobante.getSelectedItem().equals(Constantes.SELECCIONE) || !cmbOperacion.getSelectedItem().equals(Constantes.SELECCIONE) || !cmbEstado.getSelectedItem().equals(Constantes.SELECCIONE)||(dateDesde.getDate()!=null && dateHasta.getDate()!=null)|| isCorrectojFormSerie(txtFNumSerie)) {
             where = " where ";
 
             if (!cmbCategoria.getSelectedItem().equals(Constantes.SELECCIONE)) {
@@ -636,13 +645,15 @@ public class GUIGestorComprobante extends javax.swing.JDialog {
                     where = where + "and " + getWhereFecha();
 
                 }
-            
-            if (controlPrimerWhere) {
+            if (isCorrectojFormSerie(txtFNumSerie)) {
+                 if (controlPrimerWhere) {
                 where= where + getWhereNumSerie();
                 controlPrimerWhere=false;
             }else{
                  where = where + "and " + getWhereNumSerie();
             }
+            }
+           
 //            try{
                 
 //            }catch(Exception e){
@@ -714,9 +725,9 @@ public class GUIGestorComprobante extends javax.swing.JDialog {
     private boolean isVaciojFormSerie(JFormattedTextField jf){
         boolean b= false;
         String cadena = jf.getText().replaceAll("[.-]", "");
-        cadena = cadena.replaceAll("[. ]", "");
+       
         
-        if (cadena.isEmpty()) {
+        if (cadena.length()==0) {
             b=true;
         } 
         return b;

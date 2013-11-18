@@ -130,6 +130,11 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
                 return canEdit [columnIndex];
             }
         });
+        tblConcepto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblConceptoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblConcepto);
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/Atras.png"))); // NOI18N
@@ -360,6 +365,23 @@ private void inicializarGestorModeloTabla(){
         
         this.dispose();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void tblConceptoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConceptoMouseClicked
+
+        // TODO add your handling code here:
+         int fila = tblConcepto.getSelectedRow();
+        if (tblConcepto.getSelectedRow() != -1) {
+              numeroSeleccion = sorter.convertRowIndexToModel(tblConcepto.getSelectedRow());
+             asociado = modeloasociado2.getConcepto(fila);
+             System.out.println("concepto "+asociado.getDescripcion() );
+            setAgregado(true);
+        }else{
+           JOptionPane.showMessageDialog(this, "Seleccione una fila");
+           setAgregado(false); 
+        }
+        
+        this.dispose();
+    }//GEN-LAST:event_tblConceptoMouseClicked
 
     /**
      * @param args the command line arguments

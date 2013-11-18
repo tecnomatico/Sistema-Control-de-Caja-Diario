@@ -98,6 +98,11 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
                 "id", "cuit", "razon Social"
             }
         ));
+        tblEntidad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEntidadMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEntidad);
 
         labelMetric1.setText("Filtro");
@@ -180,10 +185,11 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
                 .addGap(0, 10, Short.MAX_VALUE)
                 .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEntidadLayout.createSequentialGroup()
+                        .addGap(192, 192, 192)
                         .addComponent(btnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(243, 243, 243)
+                        .addGap(51, 51, 51)
                         .addComponent(btnNuevoEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(283, 283, 283)
+                        .addGap(52, 52, 52)
                         .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -204,11 +210,10 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnNuevoEntidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevoEntidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
 
@@ -346,6 +351,33 @@ filtro(txtRazonSocial);
                 break;
         }
     }//GEN-LAST:event_btnNuevoEntidadActionPerformed
+
+    private void tblEntidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntidadMouseClicked
+        // TODO add your handling code here:
+        
+           int fila = tblEntidad.getSelectedRow();
+        if (tblEntidad.getSelectedRow() != -1) {
+            numeroSeleccion = sorter.convertRowIndexToModel(tblEntidad.getSelectedRow());
+             entidad= new Entidad();
+            System.out.print(cmbFiltroEntidad.getSelectedIndex()+"index cmb");
+            if (cmbFiltroEntidad.getSelectedIndex()==Constantes.PROVEEDOR_INT) {
+                entidad.setTipoEntidad(Constantes.PROVEEDOR_INT);
+            } else if (cmbFiltroEntidad.getSelectedIndex()==Constantes.CLIENTE_INT) {
+                entidad.setTipoEntidad(Constantes.CLIENTE_INT);
+
+            } else if (cmbFiltroEntidad.getSelectedIndex()==Constantes.ASOCIADO_INT) {
+                entidad.setTipoEntidad(Constantes.ASOCIADO_INT);
+            }
+            int id = (int) tblEntidad.getModel().getValueAt(fila, 0);
+            setSelecciono(true);
+            entidad.setId(id);
+        }else {
+                JOptionPane.showMessageDialog(this, "Seleccione una fila");
+                setSelecciono(false);
+            }
+           
+            this.dispose();
+    }//GEN-LAST:event_tblEntidadMouseClicked
 
     /**
      * @param args the command line arguments

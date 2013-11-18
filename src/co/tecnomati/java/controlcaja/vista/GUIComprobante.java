@@ -25,11 +25,13 @@ import co.tecnomati.java.controlcaja.util.Entidad;
 import co.tecnomati.java.controlcaja.util.Impresora;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import co.tecnomati.java.controlcaja.util.mensajero;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 //import org.jfree.data.time.Month;
 
 /**
@@ -72,6 +74,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         modificar = false;
         comprobante = new Comprobante();
         activarBotonesParaNuevo();
+        //SNumeros(txtCodigoConcepto);
         txtRefTipoCompr.requestFocus();
         this.setTitle(Constantes.NAME_NUEVO_REGISTRO);
         this.setLocationRelativeTo(null);
@@ -561,6 +564,11 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         txtCodigoConcepto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCodigoConcepto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtCodigoConcepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoConceptoActionPerformed(evt);
+            }
+        });
         txtCodigoConcepto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCodigoConceptoKeyPressed(evt);
@@ -1563,6 +1571,24 @@ public class GUIComprobante extends javax.swing.JDialog {
     private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
        MyUtil.consumirLetras(evt, txtCodigoConcepto, 0);
     }//GEN-LAST:event_txtCuitKeyTyped
+
+    public void SNumeros(JTextField a){
+    a.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyTyped(KeyEvent v){
+            char c=v.getKeyChar();
+            if (!Character.isDigit(c)&& c!='\b'){
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(null, "Solo Nùmeros...");
+                v.consume();
+            }
+        }
+    });
+            }
+    
+    private void txtCodigoConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoConceptoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoConceptoActionPerformed
 
     /**
      * @param args the command line arguments

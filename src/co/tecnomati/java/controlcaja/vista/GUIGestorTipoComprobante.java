@@ -97,6 +97,11 @@ public class GUIGestorTipoComprobante extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblDocumento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDocumentoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblDocumento);
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/Atras.png"))); // NOI18N
@@ -310,6 +315,25 @@ public class GUIGestorTipoComprobante extends javax.swing.JDialog {
     private void txtIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdKeyPressed
         filtro(txtId);
     }//GEN-LAST:event_txtIdKeyPressed
+
+    private void tblDocumentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDocumentoMouseClicked
+        // TODO add your handling code here:
+        if (tblDocumento.getSelectedRow() != -1) {
+            numeroSeleccion = sorter.convertRowIndexToModel(tblDocumento.getSelectedRow());
+            tipoComp = modeloTipoComp.getTipoComp(numeroSeleccion);
+            
+            //indico qe si se selecciono
+            setAgregado(true);
+                       
+            // cierro la ventna
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una fila");
+       }
+        
+        
+        
+    }//GEN-LAST:event_tblDocumentoMouseClicked
 
     /**
      * @param args the command line arguments

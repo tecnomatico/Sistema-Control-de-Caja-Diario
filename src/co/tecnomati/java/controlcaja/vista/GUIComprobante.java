@@ -1088,9 +1088,10 @@ public class GUIComprobante extends javax.swing.JDialog {
 //        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 //            @Override
 //            public boolean dispatchKeyEvent(KeyEvent evt) {
-
+        
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-             int codigoConcepto = Integer.parseInt(txtCodigoConcepto.getText().trim());
+        SNumeros(txtCodigoConcepto);
+            int codigoConcepto = Integer.parseInt(txtCodigoConcepto.getText().trim());
              
 //             System.out.println("codigo de concetpor "+ codigoConcepto);
 //             System.out.println("tipode comprobante "+ tipoComprobante.getFormulario());
@@ -1579,7 +1580,7 @@ public class GUIComprobante extends javax.swing.JDialog {
             char c=v.getKeyChar();
             if (!Character.isDigit(c)&& c!='\b'){
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(null, "Solo Nùmeros...");
+              //  JOptionPane.showMessageDialog(null, "Solo Nùmeros...");
                 v.consume();
             }
         }

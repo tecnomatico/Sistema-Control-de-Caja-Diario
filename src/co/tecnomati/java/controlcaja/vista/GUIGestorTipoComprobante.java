@@ -36,6 +36,7 @@ public class GUIGestorTipoComprobante extends javax.swing.JDialog {
         inicializarTabla();
         this.setTitle(Constantes.NAME_GESTOR_TIPO_DOCUMENTO);
          this.setLocationRelativeTo(null);
+         //btnSeleccionar.setVisible(false);
         this.setVisible(true);
     }
 

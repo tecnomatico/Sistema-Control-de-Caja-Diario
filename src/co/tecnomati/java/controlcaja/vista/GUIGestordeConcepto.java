@@ -39,7 +39,7 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         inicializarTabla();
-        btnSeleccionar.setVisible(false);
+        
         this.setTitle(Constantes.NAME_GESTOR_CONCEPTOS);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -50,7 +50,7 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         initComponents();
         this.i = i;
         if (i==Constantes.MODELO_TODOS_LOS_CONCEPTOS) {
-            btnSeleccionar.setVisible(false);
+//            btnSeleccionar.setVisible(false);
         }    
         inicializarGestorModeloTabla();
         this.setTitle(Constantes.NAME_GESTOR_CONCEPTOS);
@@ -103,7 +103,6 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         txtCodigo = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
         labelDescripcion = new org.edisoncor.gui.label.LabelMetric();
-        btnSeleccionar = new org.edisoncor.gui.button.ButtonIpod();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -135,6 +134,11 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
                 tblConceptoMouseClicked(evt);
             }
         });
+        tblConcepto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblConceptoKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblConcepto);
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/Atras.png"))); // NOI18N
@@ -161,7 +165,7 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
             }
         });
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar por ...", 0, 0, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar por ...", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
         jPanel3.setOpaque(false);
 
@@ -220,14 +224,6 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        btnSeleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/tick_48.png"))); // NOI18N
-        btnSeleccionar.setText("Seleccionar");
-        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSeleccionarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -239,12 +235,10 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnNuevoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130)
+                        .addComponent(btnNuevoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
@@ -254,13 +248,17 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNuevoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addComponent(btnNuevoConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -351,24 +349,7 @@ private void inicializarGestorModeloTabla(){
         filtro(txtDescripcion);
     }//GEN-LAST:event_txtDescripcionKeyPressed
 
-    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-        int fila = tblConcepto.getSelectedRow();
-        if (tblConcepto.getSelectedRow() != -1) {
-              numeroSeleccion = sorter.convertRowIndexToModel(tblConcepto.getSelectedRow());
-             asociado = modeloasociado2.getConcepto(fila);
-             System.out.println("concepto "+asociado.getDescripcion() );
-            setAgregado(true);
-        }else{
-           JOptionPane.showMessageDialog(this, "Seleccione una fila");
-           setAgregado(false); 
-        }
-        
-        this.dispose();
-    }//GEN-LAST:event_btnSeleccionarActionPerformed
-
-    private void tblConceptoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConceptoMouseClicked
-
-        // TODO add your handling code here:
+    private void getConceptodeJTable(){
          int fila = tblConcepto.getSelectedRow();
         if (tblConcepto.getSelectedRow() != -1) {
               numeroSeleccion = sorter.convertRowIndexToModel(tblConcepto.getSelectedRow());
@@ -381,7 +362,22 @@ private void inicializarGestorModeloTabla(){
         }
         
         this.dispose();
+    }
+    
+    private void tblConceptoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConceptoMouseClicked
+
+        // si hace doble click entnoces se seleecciona el la fila de  la tabla
+       if (evt.getClickCount()==2) {
+            // hizo doble clik con el mouse 
+            getConceptodeJTable();
+        }
     }//GEN-LAST:event_tblConceptoMouseClicked
+
+    private void tblConceptoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblConceptoKeyPressed
+        if (evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER ) {
+            getConceptodeJTable();
+        }
+    }//GEN-LAST:event_tblConceptoKeyPressed
 
     /**
      * @param args the command line arguments
@@ -428,7 +424,6 @@ private void inicializarGestorModeloTabla(){
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnEditar;
     private org.edisoncor.gui.button.ButtonIpod btnNuevoConcepto;
-    private org.edisoncor.gui.button.ButtonIpod btnSeleccionar;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private org.edisoncor.gui.label.LabelMetric labelCodigo;

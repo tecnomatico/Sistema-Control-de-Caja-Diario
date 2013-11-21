@@ -28,17 +28,18 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
 
     @Override
     public List<Comprobante> listarFormulario() {
-//        Session session = HibernateUtil.getSessionFactory().openSession();
+
         Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Comprobante.class);
 
-//        ArrayList<Comprobante> comprobante = (ArrayList<Comprobante>)criteria.list();
         ArrayList<Comprobante> comprobante = (ArrayList<Comprobante>) session.createQuery("FROM Comprobante c\n"
                 + "join fetch c.tipocomprobante  as tipo\n"
                 + "join fetch c.comprobanteconceptos as cc\n"
-                + "join fetch cc.concepto as concep\n").list();
+                + "join fetch cc.concepto as concep\n"
+                + "order by c.id asc and c.fecha asc\n"
+                + "group by c.numeroSerie").list();
         session.close();
         return comprobante;
     }
@@ -86,14 +87,19 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
      */
     @Override
     public Comprobante getFormulario(int idComprobante) {
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-        Session session = HibernateUtil.getSession();
+ Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
-        Comprobante a = (Comprobante) session.get(Comprobante.class, idComprobante);
-        session.getTransaction().commit();
+        Criteria criteria = session.createCriteria(Comprobante.class);
+
+        Comprobante comprobante = (Comprobante) session.createQuery("FROM Comprobante c\n"
+                + "join fetch c.tipocomprobante  as tipo\n"
+                + "join fetch c.comprobanteconceptos as cc\n"
+                + "join fetch cc.concepto as concep\n"
+                + "where c.id = '"+idComprobante+"' \n"
+                + "group by c.numeroSerie").uniqueResult();
         session.close();
-        return a;
+        return comprobante;
     }
 
     @Override
@@ -142,12 +148,13 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
         session.close();
         return comprobante;
     }
-     @Override
-      public List<Comprobante> listarFormularioxFechaHQl(Date desde, Date hasta) {
+
+    @Override
+    public List<Comprobante> listarFormularioxFechaHQl(Date desde, Date hasta) {
         Session session = HibernateUtil.getSession();
-        
-        String desdeS= MyUtil.getFechaString10AAAAMMDD(desde);
-        String hastaS= MyUtil.getFechaString10AAAAMMDD(hasta);
+
+        String desdeS = MyUtil.getFechaString10AAAAMMDD(desde);
+        String hastaS = MyUtil.getFechaString10AAAAMMDD(hasta);
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Comprobante.class);
 
@@ -159,8 +166,8 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
                 + "where c.fecha<='" + hastaS + "' and c.fecha>='" + desdeS + "'").list();
         session.close();
         return comprobante;
-      }
-    
+    }
+
     @Override
     public List<Comprobante> listarFormularioxFecha(Date desde, Date hasta) {
 //        Session session = HibernateUtil.getSession();
@@ -176,25 +183,25 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
 //                + "where c.fecha<'" + hasta + "' and c.fecha>'" + desde + "'").list();
 //        session.close();
 //        return comprobante;
-         Session session = getSession();
-         Criteria criteria = session.createCriteria(Comprobante.class);
+        Session session = getSession();
+        Criteria criteria = session.createCriteria(Comprobante.class);
 //        criteria.addOrder(Order.asc("fecha"));
-        
-         criteria.addOrder(Order.asc("id"));
-         criteria.add( Restrictions.ge("fecha", desde) );
-         criteria.add( Restrictions.le("fecha", hasta) ); 
+
+        criteria.addOrder(Order.asc("id"));
+        criteria.add(Restrictions.ge("fecha", desde));
+        criteria.add(Restrictions.le("fecha", hasta));
         criteria.setFetchMode("tipocomprobante", FetchMode.JOIN);
         criteria.setFetchMode("comprobanteconceptos", FetchMode.JOIN);
         criteria.setFetchMode("comprobanteconceptos.concepto", FetchMode.JOIN);
-         List<Comprobante> lista = criteria.list();
-         
-         session.close();
-          return lista;
+        List<Comprobante> lista = criteria.list();
+
+        session.close();
+        return lista;
     }
 
     @Override
-    public List<Comprobante> listarFormularioxFiltro(String where) {  
-         Session session = HibernateUtil.getSession();
+    public List<Comprobante> listarFormularioxFiltro(String where) {
+        Session session = HibernateUtil.getSession();
 
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Comprobante.class);

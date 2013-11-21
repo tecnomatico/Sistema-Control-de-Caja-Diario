@@ -62,14 +62,11 @@
               </Group>
               <Group type="102" attributes="0">
                   <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <Component id="btnCancelar1" min="-2" pref="86" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnNuevoEntidad" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                          <Component id="btnSeleccionar" min="-2" pref="86" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane1" min="-2" pref="771" max="-2" attributes="0"/>
                   </Group>
@@ -97,7 +94,6 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnNuevoEntidad" alignment="3" max="32767" attributes="0"/>
-                      <Component id="btnSeleccionar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnCancelar1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -125,6 +121,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblEntidadMouseClicked"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tblEntidadKeyPressed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -179,17 +176,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoEntidadActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnSeleccionar">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/co/tecnomati/java/controlcaja/imagen/tick_48.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Seleccionar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeleccionarActionPerformed"/>
           </Events>
         </Component>
         <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnCancelar1">

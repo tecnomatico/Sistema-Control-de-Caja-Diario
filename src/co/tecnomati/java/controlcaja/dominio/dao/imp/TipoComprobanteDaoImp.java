@@ -121,4 +121,20 @@ public class TipoComprobanteDaoImp extends HibernateUtil implements TipoComproba
         a =   (ArrayList<Tipocomprobante>) session.createQuery(sql).list();
         session.close();
         return a;    }
+    
+    
+    @Override
+    public List<Tipocomprobante> listarTipoComprobantexCategoria(String categoria) {
+        List<Tipocomprobante> a = new ArrayList<>();
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        String sql = "from Tipocomprobante tc \n"
+                + "join fetch tc.categoriacomprobante as cc "
+                + " where cc.descripcion = '"+categoria+"'"
+                ;
+
+        session.getTransaction().commit();
+        a =   (ArrayList<Tipocomprobante>) session.createQuery(sql).list();
+        session.close();
+        return a;    }
 }

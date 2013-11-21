@@ -937,6 +937,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
             } else {
                 //el objeto entidad solo se cargara cuando es nuevo
+               comprobante.setEstado(true);
                 new ComprobanteDaoImp().addFormulario(comprobante);
                 System.out.println("SE guardo el comprobante");
                 // aqui debe cargar 1 o dos conceptos dependiendo si carga monotributo son dos
@@ -1391,8 +1392,8 @@ public class GUIComprobante extends javax.swing.JDialog {
     }//GEN-LAST:event_txtRefTipoComprKeyPressed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-
-//        new Impresora(comprobante, tipoComprobante.getCodigo()).Imprimir();
+        // lo vuelvo a traer de la bd para q comprobante este con el conjunto concepto.
+        comprobante = new ComprobanteDaoImp().getFormulario(comprobante.getId());
         new Impresora(comprobante).Imprimir();
 
     }//GEN-LAST:event_btnImprimirActionPerformed
@@ -1477,7 +1478,11 @@ public class GUIComprobante extends javax.swing.JDialog {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int opc = JOptionPane.showConfirmDialog(null,"Esta seguro de Eliminar el Comprobante: "+comprobante.getNumeroSerie(), "ELIMINAR COMPROBANTE", JOptionPane.YES_NO_OPTION);
         if (opc==JOptionPane.YES_OPTION) {
-           new ComprobanteDaoImp().deleteFormulario(comprobante);
+//           new ComprobanteDaoImp().deleteFormulario(comprobante);
+           // no se elimina el comprobante sino solo que cambia su estado a anulado (o sea estado false)
+            comprobante.setEstado(false);
+           new ComprobanteDaoImp().upDateFormulario(comprobante);
+           
            mensajero.mensajeInformacionAtualizacionOK(null);
            setElimiado(true);
            // configuarar botones luego de eliminar

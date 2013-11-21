@@ -36,7 +36,7 @@ public class GUIGestorComprobante extends javax.swing.JDialog {
     ModeloComprobante modeloComprobante;
     boolean agregado = false;
     private TableRowSorter sorter;
-
+boolean bandera; 
     public boolean isAgregado() {
         return agregado;
     }
@@ -58,9 +58,11 @@ public class GUIGestorComprobante extends javax.swing.JDialog {
     public GUIGestorComprobante(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        bandera = false; 
         setDatosCategoriaComprobante();
         setDatosCmbTipocomprobante();
         inicializarTabla();
+        bandera= true;
         dateDesde.setDate(new Date());
         dateHasta.setDate(new Date());
         this.setTitle("Busqueda");
@@ -94,6 +96,24 @@ public class GUIGestorComprobante extends javax.swing.JDialog {
         } else {
             cmbTipoComprobante.addItem("Seleccione");
             for (Tipocomprobante o : new TipoComprobanteDaoImp().listarTipoComprobante()) {
+
+                cmbTipoComprobante.addItem(o.getFormulario());
+            }
+            AutoCompleteDecorator.decorate(this.cmbTipoComprobante);
+            cmbTipoComprobante.setEditable(true);
+
+        }
+    }
+    public void setDatosCmbTipocomprobantexCategoria() {
+        cmbTipoComprobante.removeAllItems();
+
+        if (new TipoComprobanteDaoImp().listarTipoComprobantexCategoria(cmbCategoria.getSelectedItem().toString()).isEmpty()) {
+            cmbTipoComprobante.addItem("Seleccione");
+            cmbTipoComprobante.setEditable(false);
+//            cmbTipoComprobante.setEnabled(false);
+        } else {
+            cmbTipoComprobante.addItem("Seleccione");
+            for (Tipocomprobante o : new TipoComprobanteDaoImp().listarTipoComprobantexCategoria(cmbCategoria.getSelectedItem().toString())) {
 
                 cmbTipoComprobante.addItem(o.getFormulario());
             }
@@ -450,7 +470,13 @@ public class GUIGestorComprobante extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
-        // TODO add your handling code here:
+        // aqui modificar el cmbTipo comprobante para que solo refleje a elementos de su categoria
+        if (bandera) {
+            if (!cmbCategoria.getSelectedItem().toString().equals(Constantes.SELECCIONE)) {
+                setDatosCmbTipocomprobantexCategoria();
+            }
+            
+        }
     }//GEN-LAST:event_cmbCategoriaActionPerformed
 
     /**

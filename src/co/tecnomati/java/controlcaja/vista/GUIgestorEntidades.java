@@ -83,7 +83,6 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
         labelMetric2 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric3 = new org.edisoncor.gui.label.LabelMetric();
         btnNuevoEntidad = new org.edisoncor.gui.button.ButtonIpod();
-        btnSeleccionar = new org.edisoncor.gui.button.ButtonIpod();
         btnCancelar1 = new org.edisoncor.gui.button.ButtonIpod();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -101,6 +100,11 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
         tblEntidad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblEntidadMouseClicked(evt);
+            }
+        });
+        tblEntidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblEntidadKeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(tblEntidad);
@@ -144,14 +148,6 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
             }
         });
 
-        btnSeleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/tick_48.png"))); // NOI18N
-        btnSeleccionar.setText("Seleccionar");
-        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSeleccionarActionPerformed(evt);
-            }
-        });
-
         btnCancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/Atras.png"))); // NOI18N
         btnCancelar1.setText("Cancelar");
         btnCancelar1.addActionListener(new java.awt.event.ActionListener() {
@@ -183,14 +179,11 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(panelEntidadLayout.createSequentialGroup()
                 .addGap(0, 10, Short.MAX_VALUE)
-                .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelEntidadLayout.createSequentialGroup()
-                        .addGap(192, 192, 192)
+                .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEntidadLayout.createSequentialGroup()
                         .addComponent(btnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(btnNuevoEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnNuevoEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -212,7 +205,6 @@ public class GUIgestorEntidades extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(panelEntidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevoEntidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
@@ -297,31 +289,6 @@ filtro(txtRazonSocial);
         filtro(txtId);
     }//GEN-LAST:event_txtIdKeyPressed
 
-    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-          int fila = tblEntidad.getSelectedRow();
-        if (tblEntidad.getSelectedRow() != -1) {
-            numeroSeleccion = sorter.convertRowIndexToModel(tblEntidad.getSelectedRow());
-             entidad= new Entidad();
-            System.out.print(cmbFiltroEntidad.getSelectedIndex()+"index cmb");
-            if (cmbFiltroEntidad.getSelectedIndex()==Constantes.PROVEEDOR_INT) {
-                entidad.setTipoEntidad(Constantes.PROVEEDOR_INT);
-            } else if (cmbFiltroEntidad.getSelectedIndex()==Constantes.CLIENTE_INT) {
-                entidad.setTipoEntidad(Constantes.CLIENTE_INT);
-
-            } else if (cmbFiltroEntidad.getSelectedIndex()==Constantes.ASOCIADO_INT) {
-                entidad.setTipoEntidad(Constantes.ASOCIADO_INT);
-            }
-            int id = (int) tblEntidad.getModel().getValueAt(fila, 0);
-            setSelecciono(true);
-            entidad.setId(id);
-        }else {
-                JOptionPane.showMessageDialog(this, "Seleccione una fila");
-                setSelecciono(false);
-            }
-           
-            this.dispose();
-    }//GEN-LAST:event_btnSeleccionarActionPerformed
-
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
                 this.dispose();
     }//GEN-LAST:event_btnCancelar1ActionPerformed
@@ -352,10 +319,8 @@ filtro(txtRazonSocial);
         }
     }//GEN-LAST:event_btnNuevoEntidadActionPerformed
 
-    private void tblEntidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntidadMouseClicked
-        // TODO add your handling code here:
-        
-           int fila = tblEntidad.getSelectedRow();
+    private void getEntidadDeJTable(){
+          int fila = tblEntidad.getSelectedRow();
         if (tblEntidad.getSelectedRow() != -1) {
             numeroSeleccion = sorter.convertRowIndexToModel(tblEntidad.getSelectedRow());
              entidad= new Entidad();
@@ -377,7 +342,21 @@ filtro(txtRazonSocial);
             }
            
             this.dispose();
+    }
+    private void tblEntidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntidadMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount()==2) {
+            // hizo doble clik con el mouse 
+            getEntidadDeJTable();
+        }
+       
     }//GEN-LAST:event_tblEntidadMouseClicked
+
+    private void tblEntidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblEntidadKeyPressed
+        if (evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER ) {
+            getEntidadDeJTable();
+        }
+    }//GEN-LAST:event_tblEntidadKeyPressed
 
     /**
      * @param args the command line arguments
@@ -423,7 +402,6 @@ filtro(txtRazonSocial);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonIpod btnCancelar1;
     private org.edisoncor.gui.button.ButtonIpod btnNuevoEntidad;
-    private org.edisoncor.gui.button.ButtonIpod btnSeleccionar;
     private javax.swing.JComboBox cmbFiltroEntidad;
     private javax.swing.JScrollPane jScrollPane1;
     private org.edisoncor.gui.label.LabelMetric labelMetric1;

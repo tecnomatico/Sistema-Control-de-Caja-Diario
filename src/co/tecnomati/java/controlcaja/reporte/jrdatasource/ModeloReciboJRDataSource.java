@@ -67,12 +67,15 @@ public class ModeloReciboJRDataSource implements JRDataSource {
     @Override
     public Object getFieldValue(JRField jrf) throws JRException {
         Object valor = null;
+       
         comprobante = listaComprobante.get(index);
+        
         Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
         Set<Comprobanteconcepto> conjuntoConceptos = comprobante.getComprobanteconceptos();
         setComprobanteConcepto1(conjuntoConceptos);
         monto = comprobanteconcepto1.getMonto();
-        if ("nroRecibo".equals(jrf.getName())) {
+       
+         if ("nroRecibo".equals(jrf.getName())) {
              valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq())+"-"+ ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
         } else if ("matriculaInaes".equals(jrf.getName())) {
             valor = coop.getMatricula();

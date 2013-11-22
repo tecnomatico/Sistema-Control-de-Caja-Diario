@@ -25,6 +25,7 @@ import co.tecnomati.java.controlcaja.util.Entidad;
 import co.tecnomati.java.controlcaja.util.Impresora;
 import co.tecnomati.java.controlcaja.util.MyUtil;
 import co.tecnomati.java.controlcaja.util.mensajero;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Date;
@@ -1085,13 +1086,9 @@ public class GUIComprobante extends javax.swing.JDialog {
         
         return b;
     }
-    private void txtCodigoConceptoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoConceptoKeyPressed
-//        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-//            @Override
-//            public boolean dispatchKeyEvent(KeyEvent evt) {
-        
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-        SNumeros(txtCodigoConcepto);
+    
+    private void getProcessConcepto(){
+           SNumeros(txtCodigoConcepto);
             int codigoConcepto = Integer.parseInt(txtCodigoConcepto.getText().trim());
              
 //             System.out.println("codigo de concetpor "+ codigoConcepto);
@@ -1146,7 +1143,16 @@ public class GUIComprobante extends javax.swing.JDialog {
             }
             }
             
+    }
+    private void txtCodigoConceptoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoConceptoKeyPressed
+         txtCodigoConcepto.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,java.util.Collections.EMPTY_SET);
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            // lo podemos usar para hacer un nuevo concepto 
+//              getProcessConcepto();
 
+        }else if (evt.getKeyCode() == KeyEvent.VK_TAB) {
+           // realiza el proceso para obtener el concepto
+            getProcessConcepto();
         }
 
 
@@ -1354,8 +1360,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         txtCuit.setText("");
         txtNombre.setText("");
     }
-    private void txtRefTipoComprKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRefTipoComprKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+    private void getProcessComprobante(){
             String tipo = txtRefTipoCompr.getText().trim();
             tipoComprobante = new TipoComprobanteDaoImp().getTipoComprobanteRef(tipo);
 //            tipoComprobante = new TipoComprobanteDaoImp().getTipoFormularioRef(tipo);
@@ -1387,8 +1392,20 @@ public class GUIComprobante extends javax.swing.JDialog {
                 }
             }
 
+    }
+    
+    private void txtRefTipoComprKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRefTipoComprKeyPressed
+        // esta linea es para que podamos utilizar el evento cuando tecleamos la tecla TAB, sino ponemos esto no funciona
+        txtRefTipoCompr.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,java.util.Collections.EMPTY_SET);
+      
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            // lo podemos usar para crear un nuevo comprobante
+//             getProcessComprobante();
+        }else
+          if (evt.getKeyCode() == KeyEvent.VK_TAB) {
+            getProcessComprobante();
         }
-
+        
     }//GEN-LAST:event_txtRefTipoComprKeyPressed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed

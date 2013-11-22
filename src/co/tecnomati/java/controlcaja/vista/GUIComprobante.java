@@ -1694,22 +1694,30 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     private void limpiarDatosComprobante() {
        
-        setEditableComprobante(true);
+
+        txtRefTipoCompr.setText("");
+        txtTipoComprobante.setText("");
+        txtRefTipoCompr.setEditable(true);
+        txtTipoComprobante.setEditable(true);
+//        txtnumSerie1.setText("");
+//        txtNumSerie2.setText("");
+//        
         dateComprobante.setDate(new Date());
         
         cmbTipoProceso.setSelectedIndex(0);
-        
-        txtRefTipoCompr.setText("");
-        txtTipoComprobante.setText("");
+                
         limpiarDatosEntidad();
+        btnBuscarEntidad.setEnabled(true);
         limpiarNumeroSerie();
         limpiarConceptos();
+        txtRefTipoCompr.requestFocus();
     }
 
     private void limpiarConceptos() {
         txtCodigoConcepto.setText("");
         txtDescripcionConcepto.setText("");
         txtMonto.setText("");
+        txtMonto.setEditable(true);
         
         chkAporteMonotributo.setEnabled(false);
         chkAporteMonotributo.setSelected(false);

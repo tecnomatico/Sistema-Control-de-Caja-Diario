@@ -5,6 +5,7 @@
 package co.tecnomati.java.controlcaja.vista;
 
 import co.tecnomati.java.controlcaja.cons.Constantes;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
 /**
@@ -64,12 +65,22 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
                 btnControlDiarioActionPerformed(evt);
             }
         });
+        btnControlDiario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnControlDiarioKeyPressed(evt);
+            }
+        });
 
         btnConsultarControlDiario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/search_64.png"))); // NOI18N
         btnConsultarControlDiario.setText("Busqueda ");
         btnConsultarControlDiario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultarControlDiarioActionPerformed(evt);
+            }
+        });
+        btnConsultarControlDiario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnConsultarControlDiarioKeyPressed(evt);
             }
         });
 
@@ -112,12 +123,22 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
                 btnDocumentoActionPerformed(evt);
             }
         });
+        btnDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnDocumentoKeyPressed(evt);
+            }
+        });
 
         btnGestorConcepto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/agenda.png"))); // NOI18N
         btnGestorConcepto.setText("Conceptos");
         btnGestorConcepto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestorConceptoActionPerformed(evt);
+            }
+        });
+        btnGestorConcepto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnGestorConceptoKeyPressed(evt);
             }
         });
 
@@ -161,12 +182,22 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
                 btnClientesActionPerformed(evt);
             }
         });
+        btnClientes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnClientesKeyPressed(evt);
+            }
+        });
 
         btnProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/proveedores.png"))); // NOI18N
         btnProveedores.setText(" Proveedores");
         btnProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProveedoresActionPerformed(evt);
+            }
+        });
+        btnProveedores.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnProveedoresKeyPressed(evt);
             }
         });
 
@@ -208,12 +239,22 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
                 btnGestorAsociadoActionPerformed(evt);
             }
         });
+        btnGestorAsociado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnGestorAsociadoKeyPressed(evt);
+            }
+        });
 
         btnDatosCoop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/libros.png"))); // NOI18N
         btnDatosCoop.setText("Datos Generales");
         btnDatosCoop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDatosCoopActionPerformed(evt);
+            }
+        });
+        btnDatosCoop.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnDatosCoopKeyPressed(evt);
             }
         });
 
@@ -307,6 +348,55 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
         GUIGestorComprobante gestorComprobante = new GUIGestorComprobante(this, true);
         
     }//GEN-LAST:event_btnConsultarControlDiarioActionPerformed
+
+    private void btnControlDiarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnControlDiarioKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            GUIComprobante registrarControlDiario = new GUIComprobante(this, true);
+        }
+    }//GEN-LAST:event_btnControlDiarioKeyPressed
+
+    private void btnConsultarControlDiarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnConsultarControlDiarioKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+              GUIGestorComprobante gestorComprobante = new GUIGestorComprobante(this, true);
+        }
+    }//GEN-LAST:event_btnConsultarControlDiarioKeyPressed
+
+    private void btnDocumentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDocumentoKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+              GUIGestorTipoComprobante gestorDocumento = new GUIGestorTipoComprobante(this, true);
+        }
+    }//GEN-LAST:event_btnDocumentoKeyPressed
+
+    private void btnGestorConceptoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnGestorConceptoKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+             GUIGestordeConcepto gestorConcepto = new GUIGestordeConcepto(this, true,Constantes.MODELO_TODOS_LOS_CONCEPTOS);
+        }
+    }//GEN-LAST:event_btnGestorConceptoKeyPressed
+
+    private void btnProveedoresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnProveedoresKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+              GUIGestorProveedores gestorProveedor = new GUIGestorProveedores(this, true);
+        }
+    }//GEN-LAST:event_btnProveedoresKeyPressed
+
+    private void btnClientesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnClientesKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+               GUIGestorCliente gestorCliente = new GUIGestorCliente(this, true);
+        }
+    }//GEN-LAST:event_btnClientesKeyPressed
+
+    private void btnDatosCoopKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDatosCoopKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                GUIDatosCooperativa datosCoop = new GUIDatosCooperativa(this, true);
+        }
+    }//GEN-LAST:event_btnDatosCoopKeyPressed
+
+    private void btnGestorAsociadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnGestorAsociadoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                GUIGestorAsociado gestorAsociado = new GUIGestorAsociado(this, true);
+        }
+        
+    }//GEN-LAST:event_btnGestorAsociadoKeyPressed
 
     /**
      * @param args the command line arguments

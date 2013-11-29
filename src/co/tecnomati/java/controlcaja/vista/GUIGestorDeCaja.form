@@ -104,6 +104,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnControlDiarioActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnControlDiarioKeyPressed"/>
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnConsultarControlDiario">
@@ -115,6 +116,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsultarControlDiarioActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnConsultarControlDiarioKeyPressed"/>
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric2">
@@ -179,6 +181,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDocumentoActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnDocumentoKeyPressed"/>
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnGestorConcepto">
@@ -190,6 +193,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGestorConceptoActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnGestorConceptoKeyPressed"/>
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric3">
@@ -250,6 +254,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClientesActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnClientesKeyPressed"/>
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnProveedores">
@@ -261,6 +266,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProveedoresActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnProveedoresKeyPressed"/>
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric4">
@@ -328,6 +334,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGestorAsociadoActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnGestorAsociadoKeyPressed"/>
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnDatosCoop">
@@ -339,6 +346,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDatosCoopActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnDatosCoopKeyPressed"/>
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric5">

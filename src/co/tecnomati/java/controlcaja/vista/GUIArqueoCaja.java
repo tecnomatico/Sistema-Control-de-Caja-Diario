@@ -4,6 +4,10 @@
  */
 package co.tecnomati.java.controlcaja.vista;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JTextField;
+
 /**
  *
  * @author dario
@@ -13,9 +17,36 @@ public class GUIArqueoCaja extends javax.swing.JDialog {
     /**
      * Creates new form GUIArqueoCaja
      */
+    public void inicialTxtFiel(){
+        txtImporte100.setText("0.00");
+        txtImporte50.setText("0.00");
+        txtImporte20.setText("0.00");
+        txtImporte10.setText("0.00");
+        txtImporte5.setText("0.00");
+        txtImporte2.setText("0.00");
+        txtImporte11.setText("0.00");
+        txtImporte05.setText("0.00");
+        txtImporte025.setText("0.00");
+        txtImporte010.setText("0.00");
+        
+        txtCantidad100.setText("0");
+        txtCantidad50.setText("0");
+        txtCantidad20.setText("0");
+        txtCantidad10.setText("0");
+        txtCantidad5.setText("0");
+        txtCantidad2.setText("0");
+        txtCantidad11.setText("0");
+        txtCantidad05.setText("0");
+        txtCantidad025.setText("0");
+        txtCantidad010.setText("0");
+    }
     public GUIArqueoCaja(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
+        
+        this.setResizable(false);
+        inicialTxtFiel();
     }
 
     /**
@@ -29,7 +60,7 @@ public class GUIArqueoCaja extends javax.swing.JDialog {
 
         panel1 = new org.edisoncor.gui.panel.Panel();
         dateFechaArqueo = new com.toedter.calendar.JDateChooser();
-        textField1 = new org.edisoncor.gui.textField.TextField();
+        txtTotalDinero = new org.edisoncor.gui.textField.TextField();
         jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtImporte100 = new org.edisoncor.gui.textField.TextField();
@@ -66,6 +97,11 @@ public class GUIArqueoCaja extends javax.swing.JDialog {
         txtCantidad010 = new org.edisoncor.gui.textField.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Arqueo de Caja");
+
+        panel1.setPreferredSize(new java.awt.Dimension(476, 507));
+
+        txtTotalDinero.setEditable(false);
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -221,16 +257,73 @@ public class GUIArqueoCaja extends javax.swing.JDialog {
                 txtCantidad100ActionPerformed(evt);
             }
         });
+        txtCantidad100.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCantidad100FocusLost(evt);
+            }
+        });
+
+        txtCantidad50.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCantidad50FocusLost(evt);
+            }
+        });
+
+        txtCantidad20.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCantidad20FocusLost(evt);
+            }
+        });
+
+        txtCantidad10.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCantidad10FocusLost(evt);
+            }
+        });
 
         txtCantidad5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCantidad5ActionPerformed(evt);
             }
         });
+        txtCantidad5.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCantidad5FocusLost(evt);
+            }
+        });
+
+        txtCantidad2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCantidad2FocusLost(evt);
+            }
+        });
+
+        txtCantidad11.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCantidad11FocusLost(evt);
+            }
+        });
+
+        txtCantidad05.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCantidad05FocusLost(evt);
+            }
+        });
+
+        txtCantidad025.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCantidad025FocusLost(evt);
+            }
+        });
 
         txtCantidad010.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCantidad010ActionPerformed(evt);
+            }
+        });
+        txtCantidad010.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCantidad010FocusLost(evt);
             }
         });
 
@@ -285,31 +378,29 @@ public class GUIArqueoCaja extends javax.swing.JDialog {
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addGap(35, 35, 35)
-                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(48, 48, 48)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dateFechaArqueo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(40, Short.MAX_VALUE))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(dateFechaArqueo, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTotalDinero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(dateFechaArqueo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(dateFechaArqueo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -317,26 +408,22 @@ public class GUIArqueoCaja extends javax.swing.JDialog {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTotalDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addGap(281, 281, 281))
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -354,6 +441,97 @@ public class GUIArqueoCaja extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidad5ActionPerformed
 
+    private void txtCantidad100FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidad100FocusLost
+        Double n = Double.parseDouble(txtCantidad100.getText());
+        txtImporte100.setText(String.valueOf(n*100.00));        // TODO add your handling code here: 
+        txtTotalDinero.setText(String.valueOf(refrescarDinero()));
+    }//GEN-LAST:event_txtCantidad100FocusLost
+
+    private void txtCantidad50FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidad50FocusLost
+        Double n = Double.parseDouble(txtCantidad50.getText());
+        txtImporte50.setText(String.valueOf(n*50.00));        // TODO add your handling code here:        
+        txtTotalDinero.setText(String.valueOf(refrescarDinero()));
+    }//GEN-LAST:event_txtCantidad50FocusLost
+
+    private void txtCantidad20FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidad20FocusLost
+        Double n = Double.parseDouble(txtCantidad20.getText());
+        txtImporte20.setText(String.valueOf(n*20.00));        // TODO add your handling code here:        
+        txtTotalDinero.setText(String.valueOf(refrescarDinero()));
+    }//GEN-LAST:event_txtCantidad20FocusLost
+
+    private void txtCantidad10FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidad10FocusLost
+        Double n = Double.parseDouble(txtCantidad10.getText());
+        txtImporte10.setText(String.valueOf(n*10.00));        // TODO add your handling code here:        
+        txtTotalDinero.setText(String.valueOf(refrescarDinero()));
+    }//GEN-LAST:event_txtCantidad10FocusLost
+
+    private void txtCantidad5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidad5FocusLost
+        Double n = Double.parseDouble(txtCantidad5.getText());
+        txtImporte5.setText(String.valueOf(n*5.00));        // TODO add your handling code here:        
+        txtTotalDinero.setText(String.valueOf(refrescarDinero()));
+    }//GEN-LAST:event_txtCantidad5FocusLost
+
+    private void txtCantidad2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidad2FocusLost
+        Double n = Double.parseDouble(txtCantidad2.getText());
+        txtImporte2.setText(String.valueOf(n*2.00));        // TODO add your handling code here:        
+        txtTotalDinero.setText(String.valueOf(refrescarDinero()));
+    }//GEN-LAST:event_txtCantidad2FocusLost
+
+    private void txtCantidad11FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidad11FocusLost
+        Double n = Double.parseDouble(txtCantidad11.getText());
+        txtImporte11.setText(String.valueOf(n*1.00));        // TODO add your handling code here:        
+        txtTotalDinero.setText(String.valueOf(refrescarDinero()));
+    }//GEN-LAST:event_txtCantidad11FocusLost
+
+    private void txtCantidad05FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidad05FocusLost
+        Double n = Double.parseDouble(txtCantidad05.getText());
+        txtImporte05.setText(String.valueOf(n*0.50));        // TODO add your handling code here:        
+        txtTotalDinero.setText(String.valueOf(refrescarDinero()));
+    }//GEN-LAST:event_txtCantidad05FocusLost
+
+    private void txtCantidad025FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidad025FocusLost
+        Double n = Double.parseDouble(txtCantidad025.getText());
+        txtImporte025.setText(String.valueOf(n*0.25));        
+        txtTotalDinero.setText(String.valueOf(refrescarDinero()));// TODO add your handling code here:        
+    }//GEN-LAST:event_txtCantidad025FocusLost
+
+    private void txtCantidad010FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidad010FocusLost
+        Double n = Double.parseDouble(txtCantidad010.getText());
+        txtImporte010.setText(String.valueOf(n*0.10));        // TODO add your handling code here:        
+        txtTotalDinero.setText(String.valueOf(refrescarDinero()));
+    }//GEN-LAST:event_txtCantidad010FocusLost
+    
+    public Double refrescarDinero(){
+       
+        Double n=0.0;                    
+        try {
+             
+            n = Double.parseDouble(txtImporte100.getText())+Double.parseDouble(txtImporte50.getText())+
+            +Double.parseDouble(txtImporte20.getText())+Double.parseDouble(txtImporte10.getText())
+            +Double.parseDouble(txtImporte5.getText())+Double.parseDouble(txtImporte2.getText())
+            +Double.parseDouble(txtImporte11.getText())+Double.parseDouble(txtImporte05.getText())
+            +Double.parseDouble(txtImporte025.getText())+Double.parseDouble(txtImporte010.getText());            
+        } catch (NumberFormatException e) {
+            
+        }
+//        ArrayList<JTextField> listaTxt = new ArrayList();
+//        listaTxt.add(txtImporte100);listaTxt.add(txtImporte50); listaTxt.add(txtImporte20);
+//        listaTxt.add(txtImporte10);listaTxt.add(txtImporte5);listaTxt.add(txtImporte2);
+//        listaTxt.add(txtImporte11);listaTxt.add(txtImporte05);listaTxt.add(txtImporte025);
+//        listaTxt.add(txtImporte010);
+//        for (Iterator<JTextField> it = listaTxt.iterator(); it.hasNext();) {
+//            JTextField jTextField = it.next();
+//                if (jTextField.getText().equals("")) {                    
+//                    
+//                }else{
+//                    n = Double.parseDouble(jTextField.getText())+n;
+//                }                             
+//        }
+
+        return n;
+//            Double n = Double.parseDouble(txtImporte100.getText());
+            //+Double.parseDouble(txtImporte50.getText());       
+    }
     /**
      * @param args the command line arguments
      */
@@ -412,7 +590,6 @@ public class GUIArqueoCaja extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private org.edisoncor.gui.panel.Panel panel1;
-    private org.edisoncor.gui.textField.TextField textField1;
     private org.edisoncor.gui.textField.TextField txtCantidad010;
     private org.edisoncor.gui.textField.TextField txtCantidad025;
     private org.edisoncor.gui.textField.TextField txtCantidad05;
@@ -433,5 +610,6 @@ public class GUIArqueoCaja extends javax.swing.JDialog {
     private org.edisoncor.gui.textField.TextField txtImporte20;
     private org.edisoncor.gui.textField.TextField txtImporte5;
     private org.edisoncor.gui.textField.TextField txtImporte50;
+    private org.edisoncor.gui.textField.TextField txtTotalDinero;
     // End of variables declaration//GEN-END:variables
 }

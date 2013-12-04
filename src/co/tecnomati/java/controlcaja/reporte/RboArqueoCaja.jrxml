@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a3ae244-bf95-4e66-bad1-cea69a718c84">
-	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="551"/>
+	<property name="ireport.y" value="0"/>
 	<field name="nroRecibo" class="java.lang.String"/>
 	<field name="cantidad1" class="java.lang.String"/>
 	<field name="cantidad2" class="java.lang.String"/>
@@ -67,7 +67,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[RECIBO DE ARQUEO DE CAJA]]></text>
+				<text><![CDATA[RECUENTO DE EFECTIVO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="665e9816-73c0-4fe9-b497-35e33d5547c7" x="110" y="21" width="253" height="67"/>

@@ -97,8 +97,12 @@ public class GIUControlComprobante extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         List< Comprobante > lista= new ComprobanteDaoImp().listarFormulario();
-        
-        new Impresora(lista).imprimirControlComprobante();
+        try {
+            
+            new Impresora(lista).imprimirControlComprobante();
+        } catch (NullPointerException ex) {
+            System.out.println("probando");
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ControlComprobante" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3daf35a7-d364-48ce-ab49-0824aecb84e3">
-	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="528"/>
+	<property name="ireport.y" value="25"/>
 	<field name="fecha" class="java.lang.String"/>
 	<field name="tipo" class="java.lang.String"/>
 	<field name="numero" class="java.lang.String"/>
@@ -20,25 +20,25 @@
 	<title>
 		<band height="206" splitType="Stretch">
 			<rectangle>
-				<reportElement uuid="4f498b35-17e8-4d7d-86dd-584eb6ec3d39" x="10" y="10" width="360" height="20"/>
+				<reportElement uuid="4f498b35-17e8-4d7d-86dd-584eb6ec3d39" x="10" y="10" width="500" height="20"/>
 			</rectangle>
 			<rectangle>
 				<reportElement uuid="b4e58cf1-3cc9-4141-8a14-350316401fb3" x="10" y="30" width="107" height="67"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="f79be08d-3942-4935-ba77-7fec0994dd1a" x="10" y="117" width="180" height="20"/>
+				<reportElement uuid="f79be08d-3942-4935-ba77-7fec0994dd1a" x="10" y="117" width="200" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="22f9128e-7cc5-4689-aa7d-71bf40314126" x="117" y="30" width="253" height="67"/>
+				<reportElement uuid="22f9128e-7cc5-4689-aa7d-71bf40314126" x="117" y="30" width="393" height="67"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="28f2169d-347d-493a-ba8b-43cb89e02b44" x="10" y="97" width="360" height="20"/>
+				<reportElement uuid="28f2169d-347d-493a-ba8b-43cb89e02b44" x="10" y="97" width="500" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="ac39cd6b-2035-4312-9778-62af1b3b0e75" x="190" y="117" width="180" height="20"/>
+				<reportElement uuid="ac39cd6b-2035-4312-9778-62af1b3b0e75" x="210" y="117" width="300" height="20"/>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="05355b27-93fc-4f83-8de7-1f24e6251930" x="196" y="117" width="64" height="20"/>
+				<reportElement uuid="05355b27-93fc-4f83-8de7-1f24e6251930" x="217" y="117" width="64" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
@@ -52,26 +52,26 @@
 				<text><![CDATA[RECUENTO DE EFECTIVO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="9122a820-8ecf-4181-b29e-65ad0c8b7a86" x="119" y="30" width="253" height="67"/>
+				<reportElement uuid="9122a820-8ecf-4181-b29e-65ad0c8b7a86" x="133" y="30" width="253" height="67"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Coop. de Trabajo Tecnomatica Ltda.]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement uuid="e2d13ced-8c3d-4fcb-bc14-ecdd3c027d8f" x="10" y="136" width="360" height="10"/>
+				<reportElement uuid="e2d13ced-8c3d-4fcb-bc14-ecdd3c027d8f" x="10" y="136" width="500" height="10"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="ae793825-2b9a-45fd-ac4a-cd6e21b55ae0" x="280" y="146" width="90" height="20"/>
+				<reportElement uuid="ae793825-2b9a-45fd-ac4a-cd6e21b55ae0" x="310" y="146" width="200" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="6e9731b7-a742-477b-89df-0156c68ada51" x="10" y="166" width="90" height="20"/>
+				<reportElement uuid="6e9731b7-a742-477b-89df-0156c68ada51" x="10" y="166" width="107" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="f4b206da-4d61-480a-95ac-0ba69eaeff80" x="100" y="166" width="90" height="20"/>
+				<reportElement uuid="f4b206da-4d61-480a-95ac-0ba69eaeff80" x="110" y="166" width="100" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="e48fe5e0-5f53-4b62-bce4-0f7065f2a186" x="280" y="166" width="90" height="20"/>
+				<reportElement uuid="e48fe5e0-5f53-4b62-bce4-0f7065f2a186" x="310" y="166" width="200" height="20"/>
 			</rectangle>
 			<staticText>
 				<reportElement uuid="a75c8f61-c426-4499-8bbb-6d0aa40f21c1" x="14" y="166" width="83" height="20"/>
@@ -79,19 +79,19 @@
 				<text><![CDATA[Inicio de Act.:]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement uuid="0fd602e8-bd6b-4e81-9460-56a8b149b46b" x="10" y="186" width="90" height="20"/>
+				<reportElement uuid="0fd602e8-bd6b-4e81-9460-56a8b149b46b" x="10" y="186" width="100" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="ad75f1b2-38d2-4efd-b7b9-be9c7035f35a" x="100" y="186" width="270" height="20"/>
+				<reportElement uuid="ad75f1b2-38d2-4efd-b7b9-be9c7035f35a" x="110" y="186" width="400" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="cbcec20c-97f5-44e7-8175-a0116803716e" x="190" y="146" width="90" height="20"/>
+				<reportElement uuid="cbcec20c-97f5-44e7-8175-a0116803716e" x="210" y="146" width="100" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="9df67fbf-e28e-4f41-9579-d468ec60a3c2" x="190" y="166" width="90" height="20"/>
+				<reportElement uuid="9df67fbf-e28e-4f41-9579-d468ec60a3c2" x="210" y="166" width="100" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="3958fcb6-66ee-4fe1-9500-db7dc11de6ab" x="10" y="146" width="90" height="20"/>
+				<reportElement uuid="3958fcb6-66ee-4fe1-9500-db7dc11de6ab" x="10" y="146" width="100" height="20"/>
 			</rectangle>
 			<staticText>
 				<reportElement uuid="f2ac0e7d-2308-48b4-9073-4072ff05d5a3" x="15" y="146" width="85" height="20"/>
@@ -106,19 +106,19 @@
 				<text><![CDATA[Domicilio:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="84fcec75-bfd4-4ea3-93c8-f8cea1830058" x="196" y="167" width="74" height="20"/>
+				<reportElement uuid="84fcec75-bfd4-4ea3-93c8-f8cea1830058" x="216" y="166" width="74" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Ing. Brutos:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d5eb026b-da80-4a91-8dce-1512ef38da81" x="196" y="146" width="54" height="20"/>
+				<reportElement uuid="d5eb026b-da80-4a91-8dce-1512ef38da81" x="216" y="146" width="54" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[C.U.I.T]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="e8c5874b-9f1e-4d94-b550-515986cba100" x="264" y="10" width="100" height="20"/>
+				<reportElement uuid="e8c5874b-9f1e-4d94-b550-515986cba100" x="398" y="10" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<text><![CDATA[ORIGINAL]]></text>
 			</staticText>

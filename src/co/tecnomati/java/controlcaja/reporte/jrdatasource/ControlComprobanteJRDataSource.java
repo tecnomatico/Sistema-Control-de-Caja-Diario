@@ -115,7 +115,7 @@ public class ControlComprobanteJRDataSource implements JRDataSource{
      private void setearComprobantesConceptos (Set<Comprobanteconcepto> conjuntoConceptos){
         for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
             Comprobanteconcepto comprobanteconcepto = it.next();
-            monto = comprobanteconcepto.getMonto()+monto;
+            monto = comprobanteconcepto.getMonto()+ monto;
             if (comprobanteconcepto.getConcepto().getCodigoConcepto() == Constantes.CONCEPTO_CODIGO_MONOTRIBUTO) {
                 // detalle o concepto 2  monotributo
                 comprobanteconcepto2 = comprobanteconcepto;

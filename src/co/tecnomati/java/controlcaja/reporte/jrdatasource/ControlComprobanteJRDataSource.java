@@ -26,8 +26,9 @@ import net.sf.jasperreports.engine.JRField;
  *
  * @author dario
  */
-public class ControlComprobanteJRDataSource implements JRDataSource{
+public class ControlComprobanteJRDataSource implements JRDataSource {
 //indice para recorrer la lista de comprobante
+
     int index = -1;
     //comprobante que tendra la lista
     Comprobante comprobante;
@@ -64,16 +65,16 @@ public class ControlComprobanteJRDataSource implements JRDataSource{
     @Override
     public Object getFieldValue(JRField jrf) throws JRException {
         Object valor = null;
-       
+
         comprobante = listaComprobante.get(index);
-        
+
         Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
         Set<Comprobanteconcepto> conjuntoConceptos = comprobante.getComprobanteconceptos();
         setComprobanteConcepto1(conjuntoConceptos);
         monto = comprobanteconcepto1.getMonto();
-       ////Aca comienza el Encabezado
-         if ("nroRecibo".equals(jrf.getName())) {
-             valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq())+"-"+ ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
+        ////Aca comienza el Encabezado
+        if ("nroRecibo".equals(jrf.getName())) {
+            valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq()) + "-" + ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
         } else if ("matriculaInaes".equals(jrf.getName())) {
             valor = coop.getMatricula();
         } else if ("cuit".equals(jrf.getName())) {
@@ -86,8 +87,8 @@ public class ControlComprobanteJRDataSource implements JRDataSource{
             valor = coop.getIngresoBruto();
         } else if ("domicilioCooperativa".equals(jrf.getName())) {
             valor = coop.getDomicilio();
-  
-            
+
+
             ////Aca comienza el Detalle
         } else if ("fecha".equals(jrf.getName())) {
             valor = MyUtil.getFechaString10DDMMAAAA(coop.getInicioActividad());
@@ -95,13 +96,13 @@ public class ControlComprobanteJRDataSource implements JRDataSource{
         } else if ("tipo".equals(jrf.getName())) {
             valor = tipoComprobante.getReferencia();
         } else if ("numero".equals(jrf.getName())) {
-            valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq())+"-"+ ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
+            valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq()) + "-" + ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
         } else if ("importe".equals(jrf.getName())) {
-            valor =getNeto();
+            valor = getNeto();
         } else if ("observaciones".equals(jrf.getName())) {
-                if (comprobante.getEstado().equals(false)) {
-                     valor = "Anulado";
-                }
+            if (comprobante.getEstado().equals(false)) {
+                valor = "Anulado";
+            }
         }
 
         return valor;
@@ -109,13 +110,12 @@ public class ControlComprobanteJRDataSource implements JRDataSource{
 
     public void setListComprobante(List<Comprobante> l) {
         this.listaComprobante = l;
-    } 
-    
-    
-     private void setearComprobantesConceptos (Set<Comprobanteconcepto> conjuntoConceptos){
+    }
+
+    private void setearComprobantesConceptos(Set<Comprobanteconcepto> conjuntoConceptos) {
         for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
             Comprobanteconcepto comprobanteconcepto = it.next();
-            monto = comprobanteconcepto.getMonto()+ monto;
+            monto = comprobanteconcepto.getMonto() + monto;
             if (comprobanteconcepto.getConcepto().getCodigoConcepto() == Constantes.CONCEPTO_CODIGO_MONOTRIBUTO) {
                 // detalle o concepto 2  monotributo
                 comprobanteconcepto2 = comprobanteconcepto;
@@ -125,15 +125,16 @@ public class ControlComprobanteJRDataSource implements JRDataSource{
             }
         }
     }
-    private double getNeto(){
-        double neto=0;
-        
-        if (comprobanteconcepto2!=null) {
-            neto= comprobanteconcepto1.getMonto()-comprobanteconcepto2.getMonto();
+
+    private double getNeto() {
+        double neto = 0;
+
+        if (comprobanteconcepto2 != null) {
+            neto = comprobanteconcepto1.getMonto() - comprobanteconcepto2.getMonto();
         } else {
-            neto= comprobanteconcepto1.getMonto();
+            neto = comprobanteconcepto1.getMonto();
         }
-        
+
         return neto;
     }
 }

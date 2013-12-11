@@ -56,7 +56,7 @@ public class Impresora {
     }
     public Impresora(List<Comprobante> lista) {
         this.lista = lista;
-        this.tipoComprobante= comprobante.getTipocomprobante().getCodigo();
+//        this.tipoComprobante= comprobante.getTipocomprobante().getCodigo();//Aca modifico Dario. Para Control Comprobante.
     }
    
       public void imprimirReciboReembolsoCuotaSociales() {

@@ -76,6 +76,8 @@ public class ControlComprobanteJRDataSource implements JRDataSource{
              valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq())+"-"+ ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
         } else if ("matriculaInaes".equals(jrf.getName())) {
             valor = coop.getMatricula();
+        } else if ("cuit".equals(jrf.getName())) {
+            valor = coop.getCuit();
         } else if ("inicioActividades".equals(jrf.getName())) {
             valor = MyUtil.getFechaString10DDMMAAAA(coop.getInicioActividad());
         } else if ("cuitCooperativa".equals(jrf.getName())) {

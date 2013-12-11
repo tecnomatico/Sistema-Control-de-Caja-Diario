@@ -8,6 +8,12 @@
 	<field name="numero" class="java.lang.String"/>
 	<field name="importe" class="java.lang.String"/>
 	<field name="observaciones" class="java.lang.String"/>
+	<field name="nroRecibo" class="java.lang.String"/>
+	<field name="matriculaInaes" class="java.lang.String"/>
+	<field name="cuit" class="java.lang.String"/>
+	<field name="inicioActividades" class="java.lang.String"/>
+	<field name="ingresosBrutos" class="java.lang.String"/>
+	<field name="domicilioCooperativa" class="java.lang.String"/>
 	<variable name="tipo_1" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{tipo}]]></variableExpression>
 	</variable>
@@ -122,6 +128,36 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<text><![CDATA[ORIGINAL]]></text>
 			</staticText>
+			<textField>
+				<reportElement uuid="52384b4f-e3cd-462c-8145-c0474804d962" x="281" y="117" width="217" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroRecibo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="89856ca5-df1a-4208-9976-dd297fb75209" x="116" y="146" width="84" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{matriculaInaes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="63eb65ba-bed7-4c9e-bde8-f0e772897b8c" x="316" y="146" width="182" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cuit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ae13c8df-f94f-4734-849d-93d8dcd35339" x="116" y="166" width="84" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{inicioActividades}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9ba41082-6f23-4135-a63e-1d14b37c5805" x="316" y="166" width="182" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ingresosBrutos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0c583abb-834f-46d3-97ab-71aac318b51a" x="117" y="186" width="381" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{domicilioCooperativa}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>

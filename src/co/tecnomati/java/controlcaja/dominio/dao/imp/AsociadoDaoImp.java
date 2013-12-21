@@ -24,10 +24,9 @@ public class AsociadoDaoImp extends HibernateUtil implements AsociadoDAO {
         Session session = HibernateUtil.getSession();
                 
         session.beginTransaction();
-       
-        Criteria criteria = session.createCriteria(Asociado.class);
         
-        ArrayList<Asociado> parroquia = (ArrayList<Asociado>)criteria.list();
+        ArrayList<Asociado> parroquia = (ArrayList<Asociado>)session.createQuery(" from Asociado order by legajo asc").list();
+        
         session.close();
         return parroquia;
     }
@@ -72,5 +71,17 @@ public class AsociadoDaoImp extends HibernateUtil implements AsociadoDAO {
         session.getTransaction().commit();
         session.close();
         return a;      }
+    
+    @Override
+    public int getLastID(){
+        
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        int  id = (int) session.createQuery("select MAX(legajo) from Asociado").uniqueResult();
+        session.getTransaction().commit();
+        session.close();
+        return id;
+    }
+    
     
 }

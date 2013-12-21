@@ -68,8 +68,6 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
     private void initComponents() {
 
         panel1 = new org.edisoncor.gui.panel.Panel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblAsociado = new javax.swing.JTable();
         btnCancelar = new org.edisoncor.gui.button.ButtonIpod();
         btnNuevo = new org.edisoncor.gui.button.ButtonIpod();
         btnEditar = new org.edisoncor.gui.button.ButtonIpod();
@@ -78,43 +76,10 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
         txtId = new javax.swing.JTextField();
         labelMetric3 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric1 = new org.edisoncor.gui.label.LabelMetric();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblAsociado = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        tblAsociado.setBackground(new java.awt.Color(204, 204, 204));
-        tblAsociado.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        tblAsociado.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "LEGAJO", "CUIT", "NOMBRE", "FECHA INGRESO"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblAsociado.setPreferredSize(new java.awt.Dimension(100, 64));
-        tblAsociado.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblAsociadoMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tblAsociado);
-        tblAsociado.getColumnModel().getColumn(1).setMinWidth(20);
-        tblAsociado.getColumnModel().getColumn(1).setPreferredWidth(20);
-        tblAsociado.getColumnModel().getColumn(1).setMaxWidth(20);
-        tblAsociado.getColumnModel().getColumn(3).setMinWidth(20);
-        tblAsociado.getColumnModel().getColumn(3).setPreferredWidth(20);
-        tblAsociado.getColumnModel().getColumn(3).setMaxWidth(20);
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/Atras.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -141,7 +106,7 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar por ...", 0, 0, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar por ...", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jPanel1.setOpaque(false);
@@ -205,6 +170,31 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tblAsociado.setBackground(new java.awt.Color(204, 204, 204));
+        tblAsociado.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
+        tblAsociado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "CODIGO", "DESCRIPCION"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblAsociado);
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -219,24 +209,30 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
                         .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(244, 244, 244)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel1Layout.createSequentialGroup()
+                    .addGap(137, 137, 137)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(120, Short.MAX_VALUE)))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("BUSCAR POR...");
@@ -287,10 +283,6 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Seleccione una fila");
        }
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void tblAsociadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAsociadoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblAsociadoMouseClicked
     public void filtro(JTextField caja){
           if (tblAsociado.getModel().getRowCount() != 0) {
             sorter.setRowFilter(RowFilter.regexFilter("(?i).*" + caja.getText() + ".*"));

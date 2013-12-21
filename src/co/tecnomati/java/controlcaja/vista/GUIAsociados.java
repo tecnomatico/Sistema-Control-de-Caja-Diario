@@ -20,10 +20,12 @@ import javax.swing.JTextField;
  * @author AnahiAramayo
  */
 public class GUIAsociados extends javax.swing.JDialog {
-    private boolean modificar=false;
+
+    private boolean modificar = false;
     Asociado asociado;
-    boolean agregado=false;
-         /**
+    boolean agregado = false;
+
+    /**
      * Creates new form GUIAsociados
      */
     public GUIAsociados(java.awt.Frame parent, boolean modal) {
@@ -31,8 +33,11 @@ public class GUIAsociados extends javax.swing.JDialog {
         initComponents();
         this.setTitle(Constantes.NAME_NUEVO_ASOCIADO);
         //txtLegajo.setText(String.valueOf(asociado.getIdAsociado()));
-        txtLegajo.setVisible(false);
-        labelLegajo.setVisible(false);
+        // nuevo asociado 
+        asociado = new Asociado();
+        txtLegajo.setText(new AsociadoDaoImp().getLastID()+1+"");
+//        txtLegajo.setVisible(false);
+//        labelLegajo.setVisible(false);
         SNumeros(txtDNI);
         SNumeros(txtCuit);
         SNumeros(txtTelefono);
@@ -43,34 +48,36 @@ public class GUIAsociados extends javax.swing.JDialog {
     }
 
     
-    public GUIAsociados(java.awt.Frame parent, boolean modal,Asociado asociado) {
-        
+    public GUIAsociados(java.awt.Frame parent, boolean modal, Asociado asociado) {
+
         super(parent, modal);
         initComponents();
         this.asociado = asociado;
         // se indica que se utiliza este formulario para modificar datos
-         modificar = true;
+        modificar = true;
         this.setTitle(Constantes.NAME_EDITAR_ASOCIADO);
-        //txtDni.setText(String.valueOf(persona.getDni()));
-        txtLegajo.setText(String.valueOf(asociado.getLegajo()));
         
-        txtCuit.setText(String.valueOf(asociado.getCuit()));
-        txtDNI.setText(String.valueOf(asociado.getDni()));
-        txtApellido.setText(asociado.getApellido());
-        txtNombre.setText(asociado.getNombre());
-        txtTelefono.setText(asociado.getTelefono());
-        dateIngreso.setDate(asociado.getIngreso());
+        setDatosaFormulario();
         
         SNumeros(txtDNI);
         SNumeros(txtCuit);
         SNumeros(txtTelefono);
         SLetras(txtApellido);
         SLetras(txtNombre);
-        
+
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-}
+    }
+     private void setDatosaFormulario(){
+        txtLegajo.setText(String.valueOf(asociado.getLegajo()));
+        txtCuit.setText(String.valueOf(asociado.getCuit()));
+        txtDNI.setText(String.valueOf(asociado.getDni()));
+        txtApellido.setText(asociado.getApellido());
+        txtNombre.setText(asociado.getNombre());
+        txtTelefono.setText(asociado.getTelefono());
+        dateIngreso.setDate(asociado.getIngreso());
 
+}
     public boolean isAgregado() {
         return agregado;
     }
@@ -79,7 +86,6 @@ public class GUIAsociados extends javax.swing.JDialog {
         this.agregado = agregado;
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,7 +118,7 @@ public class GUIAsociados extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Asociado");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", 0, 0, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.setOpaque(false);
 
         txtCuit.setBackground(new java.awt.Color(204, 204, 204));
@@ -149,10 +155,8 @@ public class GUIAsociados extends javax.swing.JDialog {
         labelLegajo.setText("LEGAJO");
         labelLegajo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
-        txtLegajo.setEditable(false);
         txtLegajo.setBackground(new java.awt.Color(255, 255, 255));
         txtLegajo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtLegajo.setEnabled(false);
         txtLegajo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLegajoActionPerformed(evt);
@@ -333,24 +337,18 @@ public class GUIAsociados extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDNIActionPerformed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
-         boolean b = false;   
-        if (modificar == false) {
-           //si se ingresa un nueva persona
-           asociado = new Asociado();    
-        }
-         AsociadoDAO asociadoDAO = new AsociadoDaoImp();
-     try {
-         boolean cCuit, cA, cN, cT, cDni = false;
-            cCuit = txtCuit.getText().replaceAll("[.-]", "").trim().isEmpty();
-            cA = txtApellido.getText().trim().isEmpty();
-            cN = txtNombre.getText().trim().isEmpty();
-            cT = txtTelefono.getText().trim().isEmpty();
-            cDni = txtDNI.getText().trim().isEmpty();
-            //corroboro que no este vacio
-            if (cCuit || cA || cT || cN || cDni) {
-               if (cCuit) {
+    public boolean isCamposVacios() {
+        boolean vacio = true;
+        boolean cCuit, cA, cN, cT, cDni = false;
+        cCuit = txtCuit.getText().replaceAll("[.-]", "").trim().isEmpty();
+        cA = txtApellido.getText().trim().isEmpty();
+        cN = txtNombre.getText().trim().isEmpty();
+        cT = txtTelefono.getText().trim().isEmpty();
+        cDni = txtDNI.getText().trim().isEmpty();
+        vacio = (cCuit || cA || cT || cN || cDni);
+        //corroboro que no este vacio
+        if (vacio) {
+            if (cCuit) {
                 mensajero.mensajeError(null, "Tipo cuit no puede estar vacio");
             } else if (cA) {
                 mensajero.mensajeError(null, "Apellido no puede estar vacio");
@@ -360,34 +358,45 @@ public class GUIAsociados extends javax.swing.JDialog {
                 mensajero.mensajeError(null, "telefono no puede estar vacio");
             } else if (cDni) {
                 mensajero.mensajeError(null, "dni no puede estar vacio");
-            } 
-        } else {
-                   asociado.setLegajo(Integer.parseInt(txtLegajo.getText()));
+            }
+
+        }
+        return vacio;
+    }
+
+    private void getDatosaFormulario() {
+       
+           
+            
         asociado.setCuit(txtCuit.getText());
         asociado.setDni(Integer.valueOf(txtDNI.getText()));
         asociado.setApellido(txtApellido.getText());
         asociado.setNombre(txtNombre.getText());
         asociado.setIngreso(dateIngreso.getDate());
         asociado.setTelefono(txtTelefono.getText());
-          /*proveedor.setRazonSocial(txtRazonSocial.getText().toUpperCase());
-          proveedor.setTelefono(txtTelefono.getText().toUpperCase());*/
-            setAgregado(true);
-            //se crea un proveedor nuevo
-            if (modificar == false) {
-                asociadoDAO.addAsociado(asociado);
-            } else {
-                //se carga un proveedor para editarlo
-                asociadoDAO.upDateAsociado(asociado);
-                
-            }
-            //setAgregado(true);
-            JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
-            this.dispose();
-        } }catch (NullPointerException e) {
-        JOptionPane.showMessageDialog(null, "Debes completar todos los campos");
-        modificar = false;
-        this.dispose();
-}
+        asociado.setLegajo(Integer.parseInt(txtLegajo.getText())); 
+        
+    }
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+      try{
+        if (!isCamposVacios()) {
+            getDatosaFormulario();
+        }
+        if (modificar == false) {
+            new AsociadoDaoImp().addAsociado(asociado);
+        } else {
+            //se carga un proveedor para editarlo
+            new AsociadoDaoImp().upDateAsociado(asociado);
+        }
+        setAgregado(true);
+        JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
+        this.dispose();  
+      }catch(org.hibernate.exception.ConstraintViolationException e){
+           mensajero.mensajeError(null, "El legajo o Cuil de la persona ya existe, por favor revise");
+      }
+        
+//          
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -399,7 +408,6 @@ public class GUIAsociados extends javax.swing.JDialog {
     }//GEN-LAST:event_txtApellidoActionPerformed
 
     private void txtCuitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyPressed
-     
     }//GEN-LAST:event_txtCuitKeyPressed
 
     private void txtCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuitKeyTyped
@@ -446,40 +454,40 @@ public class GUIAsociados extends javax.swing.JDialog {
             }
         });
     }
-/*
- * Permite validar que solo se ingrese a un jtxtfields letras o numeros 
- * dependiento el tipo.
- * La parte importante de esta funcion es Character.isDigit
- */    
-    public void SLetras(JTextField a){
-    a.addKeyListener(new KeyAdapter() {
-        @Override
-        public void keyTyped(KeyEvent v){
-            char c=v.getKeyChar();
-            
-            if (Character.isDigit(c)&& c!='\b'){
-                getToolkit().beep();
-                JOptionPane.showMessageDialog(null, "Solo Letras...");
-                v.consume();
+    /*
+     * Permite validar que solo se ingrese a un jtxtfields letras o numeros 
+     * dependiento el tipo.
+     * La parte importante de esta funcion es Character.isDigit
+     */
+
+    public void SLetras(JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent v) {
+                char c = v.getKeyChar();
+
+                if (Character.isDigit(c) && c != '\b') {
+                    getToolkit().beep();
+                    JOptionPane.showMessageDialog(null, "Solo Letras...");
+                    v.consume();
+                }
             }
-        }
-    });
+        });
+    }
+
+    public void SNumeros(JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent v) {
+                char c = v.getKeyChar();
+                if (!Character.isDigit(c) && c != '\b') {
+                    getToolkit().beep();
+                    JOptionPane.showMessageDialog(null, "Solo Nùmeros...");
+                    v.consume();
+                }
             }
-      public void SNumeros(JTextField a){
-    a.addKeyListener(new KeyAdapter() {
-        @Override
-        public void keyTyped(KeyEvent v){
-            char c=v.getKeyChar();
-            if (!Character.isDigit(c)&& c!='\b'){
-                getToolkit().beep();
-                JOptionPane.showMessageDialog(null, "Solo Nùmeros...");
-                v.consume();
-            }
-        }
-    });
-            }
-    
-    
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.label.LabelMetric Apellido1;
     private org.edisoncor.gui.label.LabelMetric Apellido2;

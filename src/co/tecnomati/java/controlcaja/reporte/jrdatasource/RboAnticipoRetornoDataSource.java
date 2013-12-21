@@ -165,7 +165,7 @@ public class RboAnticipoRetornoDataSource implements JRDataSource {
         }
          else if ("neto".equals(jrf.getName())) {
             // ingreso - egreso
-            valor = neto;
+            valor = getNeto();
         }
 
 

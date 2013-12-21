@@ -956,7 +956,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 //modificar
                 new ComprobanteDaoImp().upDateFormulario(comprobante);
                 //update para los conceptos del formulario
-                for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
+                for (Iterator<Comprobanteconcepto> it = comprobante.getComprobanteconceptos().iterator(); it.hasNext();) {
                     comprobanteconcepto = it.next();
 
                     if (comprobanteconcepto.getConcepto().getCodigoConcepto() == Constantes.CONCEPTO_CODIGO_MONOTRIBUTO) {
@@ -1009,7 +1009,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 }
                 // si saliio todo ok entonces actualizo el contador de comprobante 
                 actualizarNumeroDeSerie(tipoComprobante);
-
+                
             }
             agregado = true;
 
@@ -1021,9 +1021,10 @@ public class GUIComprobante extends javax.swing.JDialog {
             btnGuardar.setEnabled(false);
             btnNuevo.setEnabled(true);
             btnEditar.setEnabled(true);
-
+            
+            // 
             setEnabledBotonImprimir(tipoComprobante.getCodigo());
-//        this.dispose();     
+ 
         }
     }
     
@@ -1631,6 +1632,9 @@ public class GUIComprobante extends javax.swing.JDialog {
         
     }
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // mapeo de nuevo el comprobante para que ahira el comprbane tenga cargadas sus colecciones perisistentes
+        comprobante = new ComprobanteDaoImp().getFormulario(comprobante.getId());
+        // ahora edito
         editarComprobante();
     }//GEN-LAST:event_btnEditarActionPerformed
 

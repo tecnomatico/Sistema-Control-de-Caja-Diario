@@ -16,4 +16,5 @@ public interface AsociadoDAO {
   public void deleteAsociado(Asociado a);
   public void upDateAsociado(Asociado a);
   public Asociado getAsociado(int idAsociado);
+  public int getLastID();
 }

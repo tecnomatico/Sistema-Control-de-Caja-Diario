@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 11/11/2013 20:28:15 by Hibernate Tools 3.2.1.GA
+// Generated 21/12/2013 09:49:52 by Hibernate Tools 3.2.1.GA
 
 
 

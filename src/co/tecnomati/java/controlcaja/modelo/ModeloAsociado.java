@@ -17,7 +17,7 @@ import java.util.Iterator;
  */
 public class ModeloAsociado extends AbstractTableModel{
     Asociado persona = new Asociado();
-    AsociadoDaoImp personaDAO = new AsociadoDaoImp();
+    
     ArrayList<Asociado> listaPersonas = new ArrayList<Asociado>();
     
     
@@ -25,7 +25,7 @@ public class ModeloAsociado extends AbstractTableModel{
    // Asociado ahijado = new Asociado();
             public ModeloAsociado() {            
         try {
-            listaPersonas = (ArrayList<Asociado>) personaDAO.listarAsociado();
+            listaPersonas = (ArrayList<Asociado>) new AsociadoDaoImp().listarAsociado();
         } catch (ClassCastException ex) {
             listaPersonas = new ArrayList<Asociado>();            
         }finally{

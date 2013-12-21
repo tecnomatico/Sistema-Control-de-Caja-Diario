@@ -75,6 +75,7 @@ public class ModeloReciboJRDataSource implements JRDataSource {
         setComprobanteConcepto1(conjuntoConceptos);
         monto = comprobanteconcepto1.getMonto();
        
+        
          if ("nroRecibo".equals(jrf.getName())) {
              valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq())+"-"+ ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
         } else if ("matriculaInaes".equals(jrf.getName())) {

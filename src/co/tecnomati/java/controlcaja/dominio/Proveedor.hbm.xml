@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 11/11/2013 20:28:16 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 21/12/2013 09:49:53 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="co.tecnomati.java.controlcaja.dominio.Proveedor" table="proveedor" catalog="control_caja">
         <id name="idProveedor" type="java.lang.Integer">

@@ -101,13 +101,13 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txtLegajo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtDNI" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtApellido" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtTelefono" max="32767" attributes="0"/>
-                          <Component id="txtCuit" max="32767" attributes="0"/>
                           <Component id="dateIngreso" min="-2" pref="199" max="-2" attributes="0"/>
+                          <Component id="txtCuit" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
+                          <Component id="txtDNI" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                          <Component id="txtLegajo" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
@@ -168,10 +168,6 @@
                   <Font name="Arial" size="18" style="1"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCuitKeyPressed"/>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCuitKeyTyped"/>
-              </Events>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="Apellido4">
               <Properties>
@@ -182,8 +178,13 @@
               </Properties>
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtDNI">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="18" style="1"/>
+                </Property>
+              </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDNIActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDNIKeyTyped"/>
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric5">
@@ -195,6 +196,11 @@
               </Properties>
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtTelefono">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="18" style="1"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="Apellido3">
               <Properties>
@@ -214,15 +220,15 @@
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtLegajo">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
                 <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="18" style="1"/>
+                </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtLegajoActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtLegajoKeyTyped"/>
               </Events>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="Apellido1">
@@ -250,14 +256,18 @@
               </Properties>
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtApellido">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtApellidoActionPerformed"/>
-              </Events>
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="18" style="1"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtNombre">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreActionPerformed"/>
-              </Events>
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="18" style="1"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="dateIngreso">
               <Properties>

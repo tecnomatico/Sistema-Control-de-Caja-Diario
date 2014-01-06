@@ -61,6 +61,14 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
         sorter = new TableRowSorter(modeloasociado);
         tblAsociado.setModel(modeloasociado); 
         TablaUtil.ocultarIdTabla(tblAsociado);
+        // tamaño de lacolumna legajo
+        TablaUtil.setSizeColumnaTabla(tblAsociado,1 , 50);
+        // tamaño de la columna nombre
+        TablaUtil.setSizeColumnaTabla(tblAsociado,2 , 270);
+        // tamaño de la columna cuit
+        TablaUtil.setSizeColumnaTabla(tblAsociado,3 , 150);
+        // tamaño de la columna telefono
+       // se presentaba mal asiq no lo setie al telefono
     }
     
     @SuppressWarnings("unchecked")
@@ -111,6 +119,7 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
         jPanel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jPanel1.setOpaque(false);
 
+        txtRazonSocial.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtRazonSocial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRazonSocialActionPerformed(evt);
@@ -122,6 +131,7 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
             }
         });
 
+        txtId.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);
@@ -170,8 +180,7 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tblAsociado.setBackground(new java.awt.Color(204, 204, 204));
-        tblAsociado.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
+        tblAsociado.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         tblAsociado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -193,6 +202,9 @@ public class GUIGestorAsociado extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblAsociado.setAlignmentX(0.8F);
+        tblAsociado.setAlignmentY(0.8F);
+        tblAsociado.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tblAsociado);
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);

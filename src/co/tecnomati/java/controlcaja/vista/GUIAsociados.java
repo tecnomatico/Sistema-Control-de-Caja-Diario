@@ -34,7 +34,13 @@ public class GUIAsociados extends javax.swing.JDialog {
         // nuevo asociado 
         asociado = new Asociado();
         txtLegajo.setText(new AsociadoDaoImp().getLastID()+1+"");
-       
+        SNumeros(txtCuit);
+        SNumeros(txtTelefono);
+        //SLetras(txtDomicilio);
+        SLetras(txtNombre);
+        SNumeros(txtDNI);
+        SLetras(txtApellido);
+        
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -128,7 +134,7 @@ public class GUIAsociados extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Asociado");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", 0, 0, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.setOpaque(false);
 
         txtCuit.setBackground(new java.awt.Color(204, 204, 204));
@@ -379,6 +385,8 @@ public class GUIAsociados extends javax.swing.JDialog {
         this.dispose();
         }
       }catch(org.hibernate.exception.ConstraintViolationException e){
+//          http://cursohibernate.es/doku.php?id=unidades:06_objetos_validaciones:03_columna_unica
+          
            mensajero.mensajeError(null, "El legajo o Cuil de la persona ya existe, por favor revise");
       }
         
@@ -393,6 +401,32 @@ public class GUIAsociados extends javax.swing.JDialog {
         MyUtil.consumirLetras(evt, txtLegajo, 3);
     }//GEN-LAST:event_txtLegajoKeyTyped
 
+        public void SLetras(JTextField a){
+    a.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyTyped(KeyEvent v){
+            char c=v.getKeyChar();
+            if (Character.isDigit(c)&& c!='\b'){
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(null, "Ingrese solo Letras...");
+                v.consume();
+            }
+        }
+    });
+            }
+      public void SNumeros(JTextField a){
+    a.addKeyListener(new KeyAdapter() {
+        @Override
+        public void keyTyped(KeyEvent v){
+            char c=v.getKeyChar();
+            if (!Character.isDigit(c)&& c!='\b'){
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(null, "Ingrese solo Nùmeros...");
+                v.consume();
+            }
+        }
+    });
+            }
     /**
      * @param args the command line arguments
      */

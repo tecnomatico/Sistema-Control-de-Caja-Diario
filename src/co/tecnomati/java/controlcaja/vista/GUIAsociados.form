@@ -85,17 +85,17 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                              <Component id="Apellido1" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelNombres" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="Apellido2" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="Apellido3" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="Apellido4" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelFechaIngreso" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelTelefono" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="69" pref="69" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="labelLegajo" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelMetric4" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelMetric5" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelCuit" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelDni" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -123,16 +123,16 @@
                       </Group>
                       <EmptySpace type="unrelated" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelMetric4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelCuit" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCuit" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtDNI" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="labelMetric5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelDni" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Apellido1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelNombres" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNombre" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -142,12 +142,12 @@
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Apellido3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelFechaIngreso" min="-2" max="-2" attributes="0"/>
                           <Component id="dateIngreso" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="Apellido4" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelTelefono" min="-2" max="-2" attributes="0"/>
                           <Component id="txtTelefono" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
@@ -169,7 +169,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="org.edisoncor.gui.label.LabelMetric" name="Apellido4">
+            <Component class="org.edisoncor.gui.label.LabelMetric" name="labelTelefono">
               <Properties>
                 <Property name="text" type="java.lang.String" value="TELEFONO"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -187,7 +187,7 @@
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDNIKeyTyped"/>
               </Events>
             </Component>
-            <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric5">
+            <Component class="org.edisoncor.gui.label.LabelMetric" name="labelDni">
               <Properties>
                 <Property name="text" type="java.lang.String" value="D.N.I."/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -202,7 +202,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="org.edisoncor.gui.label.LabelMetric" name="Apellido3">
+            <Component class="org.edisoncor.gui.label.LabelMetric" name="labelFechaIngreso">
               <Properties>
                 <Property name="text" type="java.lang.String" value="FECHA INGRESO"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -231,7 +231,7 @@
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtLegajoKeyTyped"/>
               </Events>
             </Component>
-            <Component class="org.edisoncor.gui.label.LabelMetric" name="Apellido1">
+            <Component class="org.edisoncor.gui.label.LabelMetric" name="labelNombres">
               <Properties>
                 <Property name="text" type="java.lang.String" value="NOMBRES"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -239,7 +239,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric4">
+            <Component class="org.edisoncor.gui.label.LabelMetric" name="labelCuit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="CUIT"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

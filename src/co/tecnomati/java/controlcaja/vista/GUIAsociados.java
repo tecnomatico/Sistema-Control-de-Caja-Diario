@@ -114,15 +114,15 @@ public class GUIAsociados extends javax.swing.JDialog {
         panel1 = new org.edisoncor.gui.panel.Panel();
         jPanel1 = new javax.swing.JPanel();
         txtCuit = new javax.swing.JFormattedTextField();
-        Apellido4 = new org.edisoncor.gui.label.LabelMetric();
+        labelTelefono = new org.edisoncor.gui.label.LabelMetric();
         txtDNI = new org.edisoncor.gui.textField.TextField();
-        labelMetric5 = new org.edisoncor.gui.label.LabelMetric();
+        labelDni = new org.edisoncor.gui.label.LabelMetric();
         txtTelefono = new org.edisoncor.gui.textField.TextField();
-        Apellido3 = new org.edisoncor.gui.label.LabelMetric();
+        labelFechaIngreso = new org.edisoncor.gui.label.LabelMetric();
         labelLegajo = new org.edisoncor.gui.label.LabelMetric();
         txtLegajo = new org.edisoncor.gui.textField.TextField();
-        Apellido1 = new org.edisoncor.gui.label.LabelMetric();
-        labelMetric4 = new org.edisoncor.gui.label.LabelMetric();
+        labelNombres = new org.edisoncor.gui.label.LabelMetric();
+        labelCuit = new org.edisoncor.gui.label.LabelMetric();
         Apellido2 = new org.edisoncor.gui.label.LabelMetric();
         txtApellido = new org.edisoncor.gui.textField.TextField();
         txtNombre = new org.edisoncor.gui.textField.TextField();
@@ -145,8 +145,8 @@ public class GUIAsociados extends javax.swing.JDialog {
         }
         txtCuit.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
-        Apellido4.setText("TELEFONO");
-        Apellido4.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        labelTelefono.setText("TELEFONO");
+        labelTelefono.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         txtDNI.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -155,13 +155,13 @@ public class GUIAsociados extends javax.swing.JDialog {
             }
         });
 
-        labelMetric5.setText("D.N.I.");
-        labelMetric5.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        labelDni.setText("D.N.I.");
+        labelDni.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         txtTelefono.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
-        Apellido3.setText("FECHA INGRESO");
-        Apellido3.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        labelFechaIngreso.setText("FECHA INGRESO");
+        labelFechaIngreso.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         labelLegajo.setText("LEGAJO");
         labelLegajo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -174,11 +174,11 @@ public class GUIAsociados extends javax.swing.JDialog {
             }
         });
 
-        Apellido1.setText("NOMBRES");
-        Apellido1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        labelNombres.setText("NOMBRES");
+        labelNombres.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
-        labelMetric4.setText("CUIT");
-        labelMetric4.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        labelCuit.setText("CUIT");
+        labelCuit.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         Apellido2.setText("APELLIDO");
         Apellido2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -197,16 +197,16 @@ public class GUIAsociados extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Apellido1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelNombres, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Apellido2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Apellido3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Apellido4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(labelFechaIngreso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelLegajo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMetric4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMetric5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(labelCuit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelDni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -227,14 +227,14 @@ public class GUIAsociados extends javax.swing.JDialog {
                     .addComponent(txtLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -242,11 +242,11 @@ public class GUIAsociados extends javax.swing.JDialog {
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Apellido3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Apellido4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(105, 105, 105))
         );
@@ -470,18 +470,18 @@ public class GUIAsociados extends javax.swing.JDialog {
     }
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.edisoncor.gui.label.LabelMetric Apellido1;
     private org.edisoncor.gui.label.LabelMetric Apellido2;
-    private org.edisoncor.gui.label.LabelMetric Apellido3;
-    private org.edisoncor.gui.label.LabelMetric Apellido4;
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnGuardar;
     private com.toedter.calendar.JDateChooser dateIngreso;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private org.edisoncor.gui.label.LabelMetric labelCuit;
+    private org.edisoncor.gui.label.LabelMetric labelDni;
+    private org.edisoncor.gui.label.LabelMetric labelFechaIngreso;
     private org.edisoncor.gui.label.LabelMetric labelLegajo;
-    private org.edisoncor.gui.label.LabelMetric labelMetric4;
-    private org.edisoncor.gui.label.LabelMetric labelMetric5;
+    private org.edisoncor.gui.label.LabelMetric labelNombres;
+    private org.edisoncor.gui.label.LabelMetric labelTelefono;
     private org.edisoncor.gui.panel.Panel panel1;
     private org.edisoncor.gui.textField.TextField txtApellido;
     private javax.swing.JFormattedTextField txtCuit;

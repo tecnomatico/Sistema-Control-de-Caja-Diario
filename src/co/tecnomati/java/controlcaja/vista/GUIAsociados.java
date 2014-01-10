@@ -167,6 +167,7 @@ public class GUIAsociados extends javax.swing.JDialog {
         labelLegajo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         txtLegajo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtLegajo.setEnabled(false);
         txtLegajo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtLegajo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

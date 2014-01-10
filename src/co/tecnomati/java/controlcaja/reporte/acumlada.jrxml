@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="acumlada" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="de625bb6-bd28-452d-b171-9464dd134a45">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select  a.idComprobante, a.idConcepto, a.monto, sum(b.monto) as monto_acumulado
+from comprobanteconcepto as a left join comprobanteconcepto as b on a.monto < b.monto
+or (a.monto = b.monto and a.idComprobante >= b.idComprobante)
+group by a.idComprobante, a.idConcepto, a.monto
+order by a.monto desc, a.idComprobante]]>
+	</queryString>
+	<field name="idComprobante" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idConcepto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto_acumulado" class="java.lang.Double"/>
+	<group name="idComprobante">
+		<groupExpression><![CDATA[$F{idComprobante}]]></groupExpression>
+	</group>
+	<group name="idConcepto">
+		<groupExpression><![CDATA[$F{idConcepto}]]></groupExpression>
+	</group>
+	<group name="monto">
+		<groupExpression><![CDATA[$F{monto}]]></groupExpression>
+	</group>
+	<group name="monto_acumulado">
+		<groupExpression><![CDATA[$F{monto_acumulado}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="417413e3-d42d-43ee-b4b3-c2e32526d8fb" x="78" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[idComprobante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f64d43fa-126d-4921-ae97-507bf96f5588" x="201" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[idConcepto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5af1127f-a0b8-4fdc-a62b-f3265795fec5" x="325" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b43476d1-1393-49b2-9eff-f1b805990e8c" x="463" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[monto_acumulado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="2aaa5113-b232-4ceb-aa6d-2886888b60b1" x="78" y="14" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{idComprobante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="367bf157-e860-4557-8a05-7a03df1a663b" x="201" y="14" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{idConcepto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8ff07c8f-d7bc-4e5e-aa68-e17402967910" x="325" y="14" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8b580edf-eac8-4f2b-b013-af439b7b1c00" x="463" y="14" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{monto_acumulado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

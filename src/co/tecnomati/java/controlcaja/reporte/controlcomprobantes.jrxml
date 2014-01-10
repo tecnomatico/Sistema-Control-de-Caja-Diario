@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="controlcomprobantes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1f8ee5b5-4611-495b-be34-2819f3fdfb1a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     comprobante.`numeroSerie` AS comprobante_numeroSerie,
+     comprobante.`fecha` AS comprobante_fecha,
+     comprobante.`codigoTipoComprob` AS comprobante_codigoTipoComprob,
+     comprobanteconcepto.`idComprobante` AS comprobanteconcepto_idComprobante,
+     comprobante.`estado` AS comprobante_estado,
+     comprobanteconcepto.`monto` AS comprobanteconcepto_monto,
+     comprobanteconcepto.`estado` AS comprobanteconcepto_estado,
+     categoriacomprobante.`codigoCategoria` AS categoriacomprobante_codigoCategoria,
+     categoriacomprobante.`descripcion` AS categoriacomprobante_descripcion,
+     categoriacomprobante.`estado` AS categoriacomprobante_estado
+FROM
+     `comprobante` comprobante INNER JOIN `comprobanteconcepto` comprobanteconcepto ON comprobante.`id` = comprobanteconcepto.`idComprobante`,
+     `categoriacomprobante` categoriacomprobante]]>
+	</queryString>
+	<field name="comprobante_fecha" class="java.sql.Date"/>
+	<field name="comprobante_codigoTipoComprob" class="java.lang.Integer"/>
+	<field name="comprobante_numeroSerie" class="java.lang.String"/>
+	<field name="comprobanteconcepto_monto" class="java.lang.Double"/>
+	<field name="categoriacomprobante_descripcion" class="java.lang.String"/>
+	<field name="comprobanteconcepto_estado" class="java.lang.Boolean"/>
+	<group name="comprobante_codigoTipoComprob">
+		<groupExpression><![CDATA[$F{comprobante_codigoTipoComprob}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="74" splitType="Stretch">
+			<textField>
+				<reportElement uuid="fb7fe38f-dbdd-48e9-9cfb-bb8a7eecb5b1" x="16" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{comprobante_codigoTipoComprob}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e15d7440-3c41-468b-8d64-36e8b341b02a" x="16" y="44" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[comprobante_fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d9c4f859-1bf0-45a0-8893-023fa6143446" x="116" y="44" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[comprobante_numeroSerie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e3cfac99-8465-4151-a050-62ccfc9d1dd0" x="216" y="44" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[comprobanteconcepto_monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b5a83bd5-36e0-4243-b787-431b62b2196c" x="316" y="44" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[categoriacomprobante_descripcion]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="91be4e83-ee0d-47c2-bd55-0c12a2a0248d" x="16" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{comprobante_fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fb3b9b32-ec67-41b5-9937-7d8d63da59fd" x="116" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{comprobante_numeroSerie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0d056894-bdd3-4380-b310-c4277ce258d5" x="216" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{comprobanteconcepto_monto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a389a338-6f4a-4b7d-903c-674d51752213" x="316" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{categoriacomprobante_descripcion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

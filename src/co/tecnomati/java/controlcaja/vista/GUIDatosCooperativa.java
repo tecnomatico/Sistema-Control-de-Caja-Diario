@@ -424,9 +424,9 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-//       if(txtNombre.getText().length()>=12){
-//            evt.consume();
-//       }
+       if(txtNombre.getText().length()>=25){
+            evt.consume();
+       }
 //        
 //       char TipoDeTecla = evt.getKeyChar();
 //       if(Character.isDigit(TipoDeTecla)){
@@ -436,16 +436,22 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
 
     private void txtMatriculaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatriculaKeyTyped
         permitirSoloNumero(evt);
+                if(txtMatricula.getText().length()>=10){
+            evt.consume();
+        }
     }//GEN-LAST:event_txtMatriculaKeyTyped
 
     private void txtIngresoBrutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIngresoBrutoKeyTyped
         //permitirSoloNumero(evt);
+                if(txtIngresoBruto.getText().length()>=12){
+            evt.consume();
+        }
     }//GEN-LAST:event_txtIngresoBrutoKeyTyped
 
     private void txtDomicilioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDomicilioKeyTyped
-//        if(txtIngresoBruto.getText().length()>=12){
-//            evt.consume();
-//        }        
+        if(txtDomicilio.getText().length()>=12){
+            evt.consume();
+        }        
 //        char TipoDeTecla = evt.getKeyChar();
 //        if(Character.isDigit(TipoDeTecla)){
 //            evt.consume();
@@ -459,10 +465,16 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
     private void txtInicioCajaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInicioCajaKeyTyped
      
         permitirSoloNumero(evt);
+                if(txtInicioCaja.getText().length()>=12){
+            evt.consume();
+        }
     }//GEN-LAST:event_txtInicioCajaKeyTyped
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
         permitirSoloNumero(evt);
+                if(txtTelefono.getText().length()>=12){
+            evt.consume();
+        }
     }//GEN-LAST:event_txtTelefonoKeyTyped
 
     private void txtNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMouseClicked

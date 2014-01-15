@@ -13,7 +13,7 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 
 public class mensajero extends JOptionPane{
-   public static final String NOMBRE_SISTEMA = "Certificado de Bautismo - Parroquia San Pedro y San Pablo";
+   public static final String NOMBRE_SISTEMA = "Gestor de Caja";
    public static final String ACCION_ALTA = "ALTA";
    public static final String ACCION_BAJA = "BAJA";
    public static final String ACCION_ACTUALIZACION = "ACTUALIZACION";

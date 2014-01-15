@@ -37,6 +37,11 @@ public class GUIGestorComprobante extends javax.swing.JDialog {
     boolean agregado = false;
     private TableRowSorter sorter;
 boolean bandera; 
+
+
+//boolean controlPrimerWhere = true;
+
+
     public boolean isAgregado() {
         return agregado;
     }
@@ -225,12 +230,22 @@ boolean bandera;
 
         cmbOperacion.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         cmbOperacion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "ENTRADA", "SALIDA" }));
+        cmbOperacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbOperacionActionPerformed(evt);
+            }
+        });
 
         labelMetric5.setText("Por Periodo");
         labelMetric5.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         cmbTipoComprobante.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         cmbTipoComprobante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Item 2", "Item 3", "Item 4" }));
+        cmbTipoComprobante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoComprobanteActionPerformed(evt);
+            }
+        });
 
         labelMetric6.setText("Hasta");
         labelMetric6.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -267,6 +282,11 @@ boolean bandera;
 
         cmbEstado.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "ACTIVO", "ANULADO" }));
+        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEstadoActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/search_32.png"))); // NOI18N
         jButton2.setText("Filtro");
@@ -283,6 +303,11 @@ boolean bandera;
             ex.printStackTrace();
         }
         txtFNumSerie.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtFNumSerie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFNumSerieActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -466,7 +491,9 @@ boolean bandera;
         }
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        inicializarTablaxFiltro();
+        if(bandera){
+        inicializarTablaxFiltro();   
+       }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
@@ -474,10 +501,35 @@ boolean bandera;
         if (bandera) {
             if (!cmbCategoria.getSelectedItem().toString().equals(Constantes.SELECCIONE)) {
                 setDatosCmbTipocomprobantexCategoria();
+                 inicializarTablaxFiltro();
             }
             
         }
     }//GEN-LAST:event_cmbCategoriaActionPerformed
+
+    private void cmbTipoComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoComprobanteActionPerformed
+        if (bandera) {
+        inicializarTablaxFiltro();   
+       
+        }
+    }//GEN-LAST:event_cmbTipoComprobanteActionPerformed
+
+    private void cmbOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOperacionActionPerformed
+      
+        inicializarTablaxFiltro();   
+          }//GEN-LAST:event_cmbOperacionActionPerformed
+
+    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
+        
+        inicializarTablaxFiltro();   
+      
+    }//GEN-LAST:event_cmbEstadoActionPerformed
+
+    private void txtFNumSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFNumSerieActionPerformed
+        
+        inicializarTablaxFiltro();   
+       
+    }//GEN-LAST:event_txtFNumSerieActionPerformed
 
     /**
      * @param args the command line arguments

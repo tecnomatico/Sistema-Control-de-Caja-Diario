@@ -322,6 +322,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbOperacionActionPerformed"/>
+              </Events>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric5">
               <Properties>
@@ -345,6 +348,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbTipoComprobanteActionPerformed"/>
+              </Events>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric6">
               <Properties>
@@ -444,6 +450,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbEstadoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
@@ -466,6 +475,9 @@
                   <Font name="Arial" size="18" style="1"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFNumSerieActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

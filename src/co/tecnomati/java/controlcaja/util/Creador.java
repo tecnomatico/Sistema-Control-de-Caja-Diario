@@ -137,7 +137,7 @@ public class Creador {
     }
     public static void CrearCooperativayAsociado(){
         Cooperativa coop = new Cooperativa();
-        String cuit = "12345";
+        String cuit = "12-34576787-8";
         coop.setCuit(cuit);
         coop.setDomicilio("Pandora Inc");
         coop.setIngresoBruto("aaa");
@@ -153,7 +153,7 @@ public class Creador {
        
         a.setApellido("Pelaez");
         a.setCooperativa(coop);
-        a.setCuit(cuit+76);
+        a.setCuit("22-34576787-9");
         a.setDni(32369235);
         a.setIngreso(new Date());
         a.setLegajo(1);
@@ -163,7 +163,7 @@ public class Creador {
 
         a.setApellido("Aramayo");
         a.setCooperativa(coop);
-        a.setCuit(cuit+87);
+        a.setCuit("22-34576227-9");
         a.setDni(32369235);
         a.setIngreso(new Date());
         a.setLegajo(4);
@@ -173,7 +173,7 @@ public class Creador {
         
         a.setApellido("Portal");
         a.setCooperativa(coop);
-        a.setCuit(cuit+9);
+        a.setCuit("22-34576587-4");
         a.setDni(32369235);
         a.setIngreso(new Date());
         a.setLegajo(2);
@@ -183,7 +183,7 @@ public class Creador {
         new AsociadoDaoImp().addAsociado(a);
         a.setApellido("Risco");
         a.setCooperativa(coop);
-        a.setCuit(cuit+1);
+        a.setCuit("22-31276487-3");
         a.setDni(32369235);
         a.setIngreso(new Date());
         a.setLegajo(3);

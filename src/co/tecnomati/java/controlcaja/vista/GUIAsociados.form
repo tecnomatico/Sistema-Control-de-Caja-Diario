@@ -201,6 +201,9 @@
                   <Font name="Arial" size="18" style="1"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTelefonoKeyTyped"/>
+              </Events>
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelFechaIngreso">
               <Properties>
@@ -262,6 +265,9 @@
                   <Font name="Arial" size="18" style="1"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtApellidoKeyTyped"/>
+              </Events>
             </Component>
             <Component class="org.edisoncor.gui.textField.TextField" name="txtNombre">
               <Properties>

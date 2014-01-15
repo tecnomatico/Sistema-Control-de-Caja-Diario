@@ -35,7 +35,7 @@ public class GUIAsociados extends javax.swing.JDialog {
         asociado = new Asociado();
         txtLegajo.setText(new AsociadoDaoImp().getLastID()+1+"");
         SNumeros(txtCuit);
-        SNumeros(txtTelefono);
+        //SNumeros(txtTelefono);
         //SLetras(txtDomicilio);
         SLetras(txtNombre);
         SNumeros(txtDNI);
@@ -159,6 +159,11 @@ public class GUIAsociados extends javax.swing.JDialog {
         labelDni.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         txtTelefono.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
 
         labelFechaIngreso.setText("FECHA INGRESO");
         labelFechaIngreso.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -185,6 +190,11 @@ public class GUIAsociados extends javax.swing.JDialog {
         Apellido2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         txtApellido.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyTyped(evt);
+            }
+        });
 
         txtNombre.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
@@ -402,6 +412,17 @@ public class GUIAsociados extends javax.swing.JDialog {
         MyUtil.consumirLetras(evt, txtLegajo, 3);
     }//GEN-LAST:event_txtLegajoKeyTyped
 
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        // TODO add your handling code here:
+                                                   
+        MyUtil.consumirLetras(evt, txtTelefono, 14);
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
+        // TODO add your handling code here:
+        MyUtil.consumirLetras(evt, txtApellido, 2);
+    }//GEN-LAST:event_txtApellidoKeyTyped
+
         public void SLetras(JTextField a){
     a.addKeyListener(new KeyAdapter() {
         @Override
@@ -409,7 +430,7 @@ public class GUIAsociados extends javax.swing.JDialog {
             char c=v.getKeyChar();
             if (Character.isDigit(c)&& c!='\b'){
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(null, "Ingrese solo Letras...");
+             //   JOptionPane.showMessageDialog(null, "Ingrese solo Letras...");
                 v.consume();
             }
         }
@@ -422,7 +443,7 @@ public class GUIAsociados extends javax.swing.JDialog {
             char c=v.getKeyChar();
             if (!Character.isDigit(c)&& c!='\b'){
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(null, "Ingrese solo Nùmeros...");
+          //      JOptionPane.showMessageDialog(null, "Ingrese solo Nùmeros...");
                 v.consume();
             }
         }

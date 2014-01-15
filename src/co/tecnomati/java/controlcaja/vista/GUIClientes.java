@@ -86,6 +86,7 @@ private boolean modificar=false;
         txtCuit = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         labelCuit.setText("CUIT");
 
@@ -337,7 +338,7 @@ private boolean modificar=false;
             char c=v.getKeyChar();
             if (Character.isDigit(c)&& c!='\b'){
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(null, "Solo Letras...");
+                //JOptionPane.showMessageDialog(null, "Solo Letras...");
                 v.consume();
             }
         }
@@ -350,7 +351,7 @@ private boolean modificar=false;
             char c=v.getKeyChar();
             if (!Character.isDigit(c)&& c!='\b'){
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(null, "Solo Nùmeros...");
+                //JOptionPane.showMessageDialog(null, "Solo Nùmeros...");
                 v.consume();
             }
         }

@@ -36,11 +36,9 @@ public class GUIAsociados extends javax.swing.JDialog {
         txtLegajo.setText(new AsociadoDaoImp().getLastID()+1+"");
         SNumeros(txtCuit);
         //SNumeros(txtTelefono);
-        //SLetras(txtDomicilio);
-        SLetras(txtNombre);
         SNumeros(txtDNI);
         SLetras(txtApellido);
-        
+        SLetras(txtNombre);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -133,6 +131,7 @@ public class GUIAsociados extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Asociado");
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", 0, 0, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.setOpaque(false);
@@ -197,6 +196,11 @@ public class GUIAsociados extends javax.swing.JDialog {
         });
 
         txtNombre.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         dateIngreso.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
@@ -415,16 +419,33 @@ public class GUIAsociados extends javax.swing.JDialog {
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
         // TODO add your handling code here:
                                                    
-        MyUtil.consumirLetras(evt, txtTelefono, 14);
+        //MyUtil.consumirLetras(evt, txtTelefono, 14);
+        if (txtTelefono.getText().length() == 14) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtTelefonoKeyTyped
 
     private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
         // TODO add your handling code here:
-        MyUtil.consumirLetras(evt, txtApellido, 2);
+        
+        //MyUtil.consumirLetras(evt, txtApellido, 8);
+        SLetras(txtApellido);
+        if (txtApellido.getText().length() == 15) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtApellidoKeyTyped
 
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        //MyUtil.consumirLetras(evt, txtNombre, 8);
+        SLetras(txtNombre);
+        if (txtNombre.getText().length() == 16) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
         public void SLetras(JTextField a){
-    a.addKeyListener(new KeyAdapter() {
+            a.addKeyListener(new KeyAdapter() {
         @Override
         public void keyTyped(KeyEvent v){
             char c=v.getKeyChar();

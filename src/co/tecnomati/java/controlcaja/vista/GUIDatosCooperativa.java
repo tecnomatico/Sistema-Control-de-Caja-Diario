@@ -97,6 +97,9 @@ public class GUIDatosCooperativa extends javax.swing.JDialog {
         txtCuit = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(537, 417));
+        setMinimumSize(new java.awt.Dimension(537, 417));
+        setResizable(false);
 
         labelMetric1.setText("NOMBRE");
         labelMetric1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N

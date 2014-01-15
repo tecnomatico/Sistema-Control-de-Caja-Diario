@@ -8,6 +8,7 @@ import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Proveedor;
 import co.tecnomati.java.controlcaja.dominio.dao.ProveedorDAO;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.ProveedorDaoImp;
+import co.tecnomati.java.controlcaja.util.MyUtil;
 import co.tecnomati.java.controlcaja.util.mensajero;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -33,9 +34,9 @@ public class GUIProveedor extends javax.swing.JDialog {
         proveedor = new Proveedor();
         this.setTitle(Constantes.NAME_NUEVO_PROVEEDOR);
         SNumeros(txtCuit);
-        SNumeros(txtTelefono);
+        //SNumeros(txtTelefono);
         //SLetras(txtDomicilio);
-        SLetras(txtRazonSocial);
+        //SLetras(txtRazonSocial);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -48,9 +49,9 @@ public class GUIProveedor extends javax.swing.JDialog {
         this.setTitle(Constantes.NAME_NUEVO_PROVEEDOR);
         setDatos(proveedor);
         SNumeros(txtCuit);
-        SNumeros(txtTelefono);
+       // SNumeros(txtTelefono);
         //SLetras(txtDomicilio);
-        SLetras(txtRazonSocial);
+      //  SLetras(txtRazonSocial);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }

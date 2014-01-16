@@ -38,8 +38,7 @@ int numeroSeleccion;
 public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        inicializarTabla();
-        
+        inicializarTabla();        
         this.setTitle(Constantes.NAME_GESTOR_CONCEPTOS);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -99,12 +98,11 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         btnNuevoConcepto = new org.edisoncor.gui.button.ButtonIpod();
         btnEditar = new org.edisoncor.gui.button.ButtonIpod();
         jPanel3 = new javax.swing.JPanel();
-        labelCodigo = new org.edisoncor.gui.label.LabelMetric();
         txtCodigo = new javax.swing.JTextField();
-        txtDescripcion = new javax.swing.JTextField();
         labelDescripcion = new org.edisoncor.gui.label.LabelMetric();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         tblConcepto.setBackground(new java.awt.Color(204, 204, 204));
         tblConcepto.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
@@ -169,8 +167,6 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
         jPanel3.setOpaque(false);
 
-        labelCodigo.setText("Codigo:");
-
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);
@@ -182,18 +178,7 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
             }
         });
 
-        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescripcionActionPerformed(evt);
-            }
-        });
-        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtDescripcionKeyPressed(evt);
-            }
-        });
-
-        labelDescripcion.setText("Descripcion:");
+        labelDescripcion.setText("Filtro:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -201,13 +186,9 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(labelDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCodigo)
-                    .addComponent(txtDescripcion))
+                .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -215,13 +196,9 @@ public GUIGestordeConcepto(java.awt.Frame parent, boolean modal) {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
@@ -341,14 +318,6 @@ private void inicializarGestorModeloTabla(){
         filtro(txtCodigo);
     }//GEN-LAST:event_txtCodigoKeyPressed
 
-    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescripcionActionPerformed
-
-    private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
-        filtro(txtDescripcion);
-    }//GEN-LAST:event_txtDescripcionKeyPressed
-
     private void getConceptodeJTable(){
          int fila = tblConcepto.getSelectedRow();
         if (tblConcepto.getSelectedRow() != -1) {
@@ -365,18 +334,18 @@ private void inicializarGestorModeloTabla(){
     }
     
     private void tblConceptoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConceptoMouseClicked
-
+ 
         // si hace doble click entnoces se seleecciona el la fila de  la tabla
-       if (evt.getClickCount()==2) {
+       /*if (evt.getClickCount()==2) {
             // hizo doble clik con el mouse 
             getConceptodeJTable();
-        }
+        }*/
     }//GEN-LAST:event_tblConceptoMouseClicked
 
     private void tblConceptoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblConceptoKeyPressed
-        if (evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER ) {
+        /*if (evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER ) {
             getConceptodeJTable();
-        }
+        }*/
     }//GEN-LAST:event_tblConceptoKeyPressed
 
     /**
@@ -426,11 +395,9 @@ private void inicializarGestorModeloTabla(){
     private org.edisoncor.gui.button.ButtonIpod btnNuevoConcepto;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private org.edisoncor.gui.label.LabelMetric labelCodigo;
     private org.edisoncor.gui.label.LabelMetric labelDescripcion;
     private org.edisoncor.gui.panel.Panel panel1;
     private javax.swing.JTable tblConcepto;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtDescripcion;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,6 +25,7 @@ public class GUITipoComprobante extends javax.swing.JDialog {
     boolean agregado=false;
     private Categoriacomprobante categoria;
     
+    //constructor para un NUEVO COMPROBANTE
     public GUITipoComprobante(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -33,7 +34,8 @@ public class GUITipoComprobante extends javax.swing.JDialog {
          this.setLocationRelativeTo(null);
          this.setVisible(true);
     }
-
+    
+    //constructor par EDITAR COMPROBANTE
     public GUITipoComprobante( Frame owner, boolean modal,Tipocomprobante doc) {
         super(owner, modal);
         initComponents();
@@ -45,7 +47,7 @@ public class GUITipoComprobante extends javax.swing.JDialog {
         cmbOperacion.setSelectedIndex(doc.getOperacion());
         cmbCategoria.setSelectedItem(doc.getCategoriacomprobante().getDescripcion());
         
-        this.setTitle(Constantes.NAME_NUEVO_DOCUMENTO);
+        this.setTitle(Constantes.NAME_EDITAR_DOCUMENTO);
        
         this.setLocationRelativeTo(null);
          this.setVisible(true);
@@ -88,6 +90,7 @@ public class GUITipoComprobante extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         panel1 = new org.edisoncor.gui.panel.Panel();
         txtDescripcion = new org.edisoncor.gui.textField.TextField();
         labelMetric4 = new org.edisoncor.gui.label.LabelMetric();
@@ -101,7 +104,10 @@ public class GUITipoComprobante extends javax.swing.JDialog {
         labelMetric3 = new org.edisoncor.gui.label.LabelMetric();
         cmbOperacion = new javax.swing.JComboBox();
 
+        jTextField1.setText("jTextField1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         panel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -156,23 +162,23 @@ public class GUITipoComprobante extends javax.swing.JDialog {
                     .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(panel1Layout.createSequentialGroup()
                             .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
                             .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtAtajo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(txtAtajo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(panel1Layout.createSequentialGroup()
                             .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(36, 36, 36)
                             .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(cmbCategoria, 0, 167, Short.MAX_VALUE)
                                 .addComponent(cmbOperacion, 0, 167, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNuevaCategoria)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +195,7 @@ public class GUITipoComprobante extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,7 +212,7 @@ public class GUITipoComprobante extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -217,9 +223,13 @@ public class GUITipoComprobante extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    private void btnNuevaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCategoriaActionPerformed
+        GUICategoriaComprobante guiCategoria = new GUICategoriaComprobante(null, true);
+        if (guiCategoria.isAgregado()) {
+            setDatosCmbTipoFormulario();
+            cmbCategoria.setSelectedItem(guiCategoria.getCategoria().getDescripcion());
+        }
+    }//GEN-LAST:event_btnNuevaCategoriaActionPerformed
 
 //    public void getCategoriaComprobante(){
 //        String cat = ;
@@ -229,32 +239,28 @@ public class GUITipoComprobante extends javax.swing.JDialog {
     
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (!modificar) {
-             doc = new Tipocomprobante();
+            doc = new Tipocomprobante();
         }
-        //almacena los datos   
+        //almacena los datos
         doc.setFormulario(txtDescripcion.getText().toUpperCase());
         doc.setReferencia(txtAtajo.getText().toUpperCase());
         doc.setCategoriacomprobante(new CategoriaComprobanteDaoImp().getCategoriaComprobanteXdescripcion((String)cmbCategoria.getSelectedItem()));
         doc.setOperacion(cmbOperacion.getSelectedIndex());
         if (modificar) {
-             new TipoComprobanteDaoImp().upDateTipoFormulario(doc);
+            new TipoComprobanteDaoImp().upDateTipoFormulario(doc);
         } else {
-             new TipoComprobanteDaoImp().addTipoFormulario(doc);
+            new TipoComprobanteDaoImp().addTipoFormulario(doc);
 
         }
-            
-            setAgregado(true);
-            JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
-            this.dispose();
+
+        setAgregado(true);
+        JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnNuevaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCategoriaActionPerformed
-         GUICategoriaComprobante guiCategoria = new GUICategoriaComprobante(null, true);
-         if (guiCategoria.isAgregado()) {
-            setDatosCmbTipoFormulario();
-            cmbCategoria.setSelectedItem(guiCategoria.getCategoria().getDescripcion());
-        }
-    }//GEN-LAST:event_btnNuevaCategoriaActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,6 +309,7 @@ public class GUITipoComprobante extends javax.swing.JDialog {
     private javax.swing.JButton btnNuevaCategoria;
     private javax.swing.JComboBox cmbCategoria;
     private javax.swing.JComboBox cmbOperacion;
+    private javax.swing.JTextField jTextField1;
     private org.edisoncor.gui.label.LabelMetric labelMetric3;
     private org.edisoncor.gui.label.LabelMetric labelMetric4;
     private org.edisoncor.gui.label.LabelMetric labelMetric5;

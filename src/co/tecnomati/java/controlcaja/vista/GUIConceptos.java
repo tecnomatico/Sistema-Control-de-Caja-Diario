@@ -56,7 +56,7 @@ private boolean modificar=false;
         this.asociado = asociado;
         // se indica que se utiliza este formulario para modificar datos
          modificar = true;
-        this.setTitle(Constantes.NAME_EDITAR_ASOCIADO);
+        this.setTitle(Constantes.NAME_EDITAR_CONCEPTO);
 //        txtCodigo.setText(String.valueOf(asociado.getCodigo()));
         txtDescripcion.setText(asociado.getDescripcion()+"");
         
@@ -87,6 +87,7 @@ private boolean modificar=false;
         btnEliminar = new org.edisoncor.gui.button.ButtonIpod();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         panel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -158,7 +159,9 @@ private boolean modificar=false;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

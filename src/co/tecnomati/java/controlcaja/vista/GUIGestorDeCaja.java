@@ -117,7 +117,7 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
         tabbedSelector21.addTab("Control Diario", panel1);
 
         btnDocumento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/formularios.png"))); // NOI18N
-        btnDocumento.setText("Tipo Formulario");
+        btnDocumento.setText("Tipo Comprobantes");
         btnDocumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDocumentoActionPerformed(evt);
@@ -152,7 +152,7 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86)
                 .addComponent(btnGestorConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(201, 201, 201))

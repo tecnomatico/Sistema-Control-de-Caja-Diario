@@ -59,8 +59,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" pref="306" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jPanel2" min="-2" pref="89" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel2" min="-2" pref="100" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -70,7 +69,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Datos Generales">
+                <TitledBorder title="Datos Generales del Asociado">
                   <Font PropertyName="font" name="Arial" size="14" style="1"/>
                   <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
                 </TitledBorder>
@@ -105,10 +104,10 @@
                           <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtApellido" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtTelefono" max="32767" attributes="0"/>
-                          <Component id="dateIngreso" min="-2" pref="199" max="-2" attributes="0"/>
-                          <Component id="txtCuit" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
-                          <Component id="txtDNI" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
-                          <Component id="txtLegajo" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="dateIngreso" alignment="0" pref="199" max="32767" attributes="0"/>
+                          <Component id="txtDNI" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtCuit" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtLegajo" alignment="0" min="-2" pref="99" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
@@ -303,11 +302,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

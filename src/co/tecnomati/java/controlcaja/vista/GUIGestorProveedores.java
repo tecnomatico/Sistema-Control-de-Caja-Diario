@@ -164,8 +164,6 @@ public class GUIGestorProveedores extends javax.swing.JDialog {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        txtRazonSocial.getAccessibleContext().setAccessibleName("Filtro");
-
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(

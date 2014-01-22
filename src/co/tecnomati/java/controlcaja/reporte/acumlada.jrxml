@@ -4,13 +4,16 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[select  a.idComprobante, a.idConcepto, a.monto, sum(b.monto) as monto_acumulado
-from comprobanteconcepto as a left join comprobanteconcepto as b on a.monto < b.monto
-or (a.monto = b.monto and a.idComprobante >= b.idComprobante)
+		<![CDATA[select  a.idComprobante,c.formulario, a.idConcepto, a.monto, sum(b.monto) as monto_acumulado, d.estado
+from comprobante as d, tipocomprobante as c, comprobanteconcepto as a left join comprobanteconcepto as b on a.monto < b.monto or (a.monto = b.monto and a.idComprobante >= b.idComprobante)
+where a.idComprobante=c.codigo and a.idComprobante=d.id
 group by a.idComprobante, a.idConcepto, a.monto
 order by a.monto desc, a.idComprobante]]>
 	</queryString>
 	<field name="idComprobante" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="formulario" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="idConcepto" class="java.lang.Integer">
@@ -20,6 +23,9 @@ order by a.monto desc, a.idComprobante]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="monto_acumulado" class="java.lang.Double"/>
+	<field name="estado" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<group name="idComprobante">
 		<groupExpression><![CDATA[$F{idComprobante}]]></groupExpression>
 	</group>
@@ -44,48 +50,68 @@ order by a.monto desc, a.idComprobante]]>
 	<columnHeader>
 		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="417413e3-d42d-43ee-b4b3-c2e32526d8fb" x="78" y="2" width="100" height="20"/>
+				<reportElement uuid="417413e3-d42d-43ee-b4b3-c2e32526d8fb" x="0" y="2" width="100" height="20"/>
 				<textElement/>
 				<text><![CDATA[idComprobante]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="f64d43fa-126d-4921-ae97-507bf96f5588" x="201" y="2" width="100" height="20"/>
+				<reportElement uuid="f64d43fa-126d-4921-ae97-507bf96f5588" x="245" y="2" width="100" height="20"/>
 				<textElement/>
 				<text><![CDATA[idConcepto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="5af1127f-a0b8-4fdc-a62b-f3265795fec5" x="325" y="2" width="100" height="20"/>
+				<reportElement uuid="5af1127f-a0b8-4fdc-a62b-f3265795fec5" x="361" y="2" width="100" height="20"/>
 				<textElement/>
 				<text><![CDATA[monto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b43476d1-1393-49b2-9eff-f1b805990e8c" x="463" y="2" width="100" height="20"/>
+				<reportElement uuid="b43476d1-1393-49b2-9eff-f1b805990e8c" x="480" y="2" width="100" height="20"/>
 				<textElement/>
 				<text><![CDATA[monto_acumulado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6b54a35e-c52f-4f38-8dd2-a0bd6b7e37dc" x="590" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="af692af3-d227-4a3e-b2e7-bde75d9a774c" x="122" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[formulario]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="125" splitType="Stretch">
 			<textField>
-				<reportElement uuid="2aaa5113-b232-4ceb-aa6d-2886888b60b1" x="78" y="14" width="100" height="20"/>
+				<reportElement uuid="2aaa5113-b232-4ceb-aa6d-2886888b60b1" x="0" y="3" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{idComprobante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="367bf157-e860-4557-8a05-7a03df1a663b" x="201" y="14" width="100" height="20"/>
+				<reportElement uuid="367bf157-e860-4557-8a05-7a03df1a663b" x="245" y="3" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{idConcepto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="8ff07c8f-d7bc-4e5e-aa68-e17402967910" x="325" y="14" width="100" height="20"/>
+				<reportElement uuid="8ff07c8f-d7bc-4e5e-aa68-e17402967910" x="361" y="3" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="8b580edf-eac8-4f2b-b013-af439b7b1c00" x="463" y="14" width="100" height="20"/>
+				<reportElement uuid="8b580edf-eac8-4f2b-b013-af439b7b1c00" x="480" y="0" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{monto_acumulado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d68a4b52-3835-4b3c-ae47-733703930d14" x="590" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d567582d-103c-4ea1-a54d-4e89f5a9256e" x="122" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{formulario}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

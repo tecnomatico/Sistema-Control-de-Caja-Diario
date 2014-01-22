@@ -32,35 +32,40 @@ FROM
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="25" splitType="Stretch"/>
 	</title>
 	<pageHeader>
-		<band height="74" splitType="Stretch">
+		<band height="55" splitType="Stretch">
 			<textField>
 				<reportElement uuid="fb7fe38f-dbdd-48e9-9cfb-bb8a7eecb5b1" x="16" y="0" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{comprobante_codigoTipoComprob}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="e15d7440-3c41-468b-8d64-36e8b341b02a" x="16" y="44" width="100" height="20"/>
+				<reportElement uuid="e15d7440-3c41-468b-8d64-36e8b341b02a" x="16" y="30" width="100" height="20"/>
 				<textElement/>
 				<text><![CDATA[comprobante_fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d9c4f859-1bf0-45a0-8893-023fa6143446" x="116" y="44" width="100" height="20"/>
+				<reportElement uuid="d9c4f859-1bf0-45a0-8893-023fa6143446" x="116" y="30" width="100" height="20"/>
 				<textElement/>
 				<text><![CDATA[comprobante_numeroSerie]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="e3cfac99-8465-4151-a050-62ccfc9d1dd0" x="216" y="44" width="100" height="20"/>
+				<reportElement uuid="e3cfac99-8465-4151-a050-62ccfc9d1dd0" x="216" y="30" width="100" height="20"/>
 				<textElement/>
 				<text><![CDATA[comprobanteconcepto_monto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b5a83bd5-36e0-4243-b787-431b62b2196c" x="316" y="44" width="100" height="20"/>
+				<reportElement uuid="b5a83bd5-36e0-4243-b787-431b62b2196c" x="316" y="30" width="100" height="20"/>
 				<textElement/>
 				<text><![CDATA[categoriacomprobante_descripcion]]></text>
 			</staticText>
+			<textField>
+				<reportElement uuid="144ea41e-5b1a-46a4-8817-5bd02165af87" x="116" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{categoriacomprobante_descripcion}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<detail>

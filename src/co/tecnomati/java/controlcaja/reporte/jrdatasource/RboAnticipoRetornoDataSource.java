@@ -76,17 +76,6 @@ public class RboAnticipoRetornoDataSource implements JRDataSource {
 
     }
 
-    private double getNeto() {
-        double neto = 0;
-
-        if (comprobanteconcepto2 != null) {
-            neto = comprobanteconcepto1.getMonto() - comprobanteconcepto2.getMonto();
-        } else {
-            neto = comprobanteconcepto1.getMonto();
-        }
-
-        return neto;
-    }
 
     @Override
     public boolean next() throws JRException {
@@ -96,7 +85,6 @@ public class RboAnticipoRetornoDataSource implements JRDataSource {
             b = true;
             comprobante = listaComprobante.get(index);
             setearComprobantesConceptos(comprobante.getComprobanteconceptos());
-            System.out.println("tamaño del conjunto de concepto " + comprobante.getComprobanteconceptos().size());
             Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
             asociado = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
             
@@ -109,17 +97,11 @@ public class RboAnticipoRetornoDataSource implements JRDataSource {
     public Object getFieldValue(JRField jrf) throws JRException {
         Object valor = null;
 
-//        comprobante = listaComprobante.get(index);
-//        Asociado asociado = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
-//        Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
-//        Set<Comprobanteconcepto> conjuntoConceptos = comprobante.getComprobanteconceptos();
-//        setearComprobantesConceptos(conjuntoConceptos);
-//        double neto = getNeto();
         if ("nroRecibo".equals(jrf.getName())) {
             valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq()) + "-" + ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
         } else if ("matriculaInaes".equals(jrf.getName())) {
             valor = coop.getMatricula();
-        } else if ("inicioActividad".equals(jrf.getName())) {
+        } else if ("inicioActividades".equals(jrf.getName())) {
             valor = MyUtil.getFechaString10DDMMAAAA(coop.getInicioActividad());
         } else if ("cuitCooperativa".equals(jrf.getName())) {
             valor = coop.getCuit();
@@ -158,7 +140,7 @@ public class RboAnticipoRetornoDataSource implements JRDataSource {
 
             valor = MyUtil.getFechaString10DDMMAAAA(asociado.getIngreso());
         } // ejercicio economico que esta en comprobante
-        else if ("ano".equals(jrf.getName())) {
+        else if ("ejercicioEconomico".equals(jrf.getName())) {
 
             valor = "FALTA";
         } else if ("periodoFecha".equals(jrf.getName())) {

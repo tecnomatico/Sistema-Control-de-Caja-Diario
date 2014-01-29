@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RboIntegracionCuotas" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="caf02fa3-b20f-4a74-9c05-4bbe715dc0d6">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="20"/>
-	<property name="ireport.y" value="81"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="logo2" class="java.io.InputStream"/>
 	<field name="nroRecibo" class="java.lang.String"/>
@@ -170,7 +170,7 @@
 				<reportElement uuid="7a3cbd88-78c7-4c37-9d92-8b7b523b8afa" x="1" y="368" width="180" height="60"/>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="86cbccbe-30e4-496d-b9b2-8ed8ec63a779" x="110" y="21" width="253" height="67"/>
+				<reportElement uuid="86cbccbe-30e4-496d-b9b2-8ed8ec63a779" x="110" y="21" width="251" height="67"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -292,12 +292,16 @@
 			</textField>
 			<textField>
 				<reportElement uuid="98643d5b-2129-45a7-a84f-b8be55e7263c" x="97" y="148" width="78" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{matriculaInaes}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="2ba6fb37-fecd-4b0b-8f4e-8d8542ceaa8a" x="277" y="148" width="77" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{cuitCooperativa}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -315,13 +319,6 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lugarPago}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement uuid="94f5b494-1bf9-4379-bb61-5c57fe05f434" x="550" y="21" width="253" height="67"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Coop. de Trabajo Tecnomatica Ltda.]]></text>
-			</staticText>
 			<rectangle>
 				<reportElement uuid="0fec86e9-0379-43c4-8041-f783637bb3c3" x="441" y="88" width="360" height="20"/>
 			</rectangle>
@@ -335,9 +332,6 @@
 			</staticText>
 			<rectangle>
 				<reportElement uuid="1e571105-5e9a-4f84-818a-d988e9ec1ec9" x="441" y="21" width="107" height="67"/>
-			</rectangle>
-			<rectangle>
-				<reportElement uuid="450b26c6-43e5-4ff9-9fc9-74e7eaf3c3c7" x="548" y="21" width="253" height="67"/>
 			</rectangle>
 			<staticText>
 				<reportElement uuid="e4d7c4d4-1091-4173-8d2d-ea04655880fb" x="448" y="88" width="346" height="20"/>
@@ -422,7 +416,9 @@
 			</textField>
 			<textField>
 				<reportElement uuid="826cd814-7d27-4f2e-9822-f59db6ccaa6c" x="537" y="148" width="78" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{matriculaInaes}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -432,7 +428,9 @@
 			</textField>
 			<textField>
 				<reportElement uuid="497900e9-babb-4a8b-abf9-ade94d882b63" x="718" y="148" width="77" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{cuitCooperativa}]]></textFieldExpression>
 			</textField>
 			<rectangle>
@@ -597,6 +595,16 @@
 				<reportElement uuid="ceb4aada-e4eb-491c-a164-11d6a79095a0" x="15" y="22" width="90" height="65"/>
 				<imageExpression><![CDATA[$P{logo2}]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement uuid="da545822-7c3a-4e33-a15d-00bcedef7917" mode="Transparent" x="548" y="23" width="253" height="67"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Coop. de Trabajo Tecnomatica Ltda.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="bbb16069-a708-46d9-b793-29b5ea4bfa41" mode="Transparent" x="548" y="21" width="253" height="67"/>
+			</rectangle>
 		</band>
 	</detail>
 </jasperReport>

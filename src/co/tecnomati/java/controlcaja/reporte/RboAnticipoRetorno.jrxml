@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RboAnticipoRetorno" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a27639b2-697f-461d-abe8-2781993ade38">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="20"/>
+	<property name="ireport.y" value="28"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="logo2" class="java.io.InputStream"/>
 	<field name="nroRecibo" class="java.lang.String"/>
@@ -42,7 +42,7 @@
 	<field name="neto" class="java.lang.String"/>
 	<field name="cantidadPago" class="java.lang.String"/>
 	<field name="sonPesos" class="java.lang.String"/>
-	<field name="ano" class="java.lang.String"/>
+	<field name="ejercicioEconomico" class="java.lang.String"/>
 	<field name="matriculaInaes" class="java.lang.String"/>
 	<field name="cuitCooperativa" class="java.lang.String"/>
 	<field name="ingresosBrutos" class="java.lang.String"/>
@@ -344,9 +344,9 @@
 				<reportElement uuid="1ac2e980-e7aa-4b56-91a3-b9f07deb6d4b" x="271" y="388" width="90" height="20"/>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="550861f6-73c0-420c-bdbe-ced96e14b193" x="239" y="532" width="67" height="20"/>
+				<reportElement uuid="550861f6-73c0-420c-bdbe-ced96e14b193" x="239" y="532" width="87" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Firma]]></text>
+				<text><![CDATA[Firma Asociado]]></text>
 			</staticText>
 			<line>
 				<reportElement uuid="e87fdeb7-6aaf-4358-84e6-b113ea308856" x="239" y="532" width="67" height="1"/>
@@ -586,7 +586,7 @@
 			<textField isBlankWhenNull="true">
 				<reportElement uuid="cbe24a3f-2edf-4cc2-bf2b-2f17abbb2c64" x="295" y="483" width="61" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{ano}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ejercicioEconomico}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="25ea1f4a-17e6-4357-8b52-7ce292563087" x="97" y="138" width="79" height="20"/>
@@ -1141,7 +1141,7 @@
 			<textField isBlankWhenNull="true">
 				<reportElement uuid="7e368261-8f84-48df-82cd-d5b454a98361" x="736" y="483" width="61" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{ano}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ejercicioEconomico}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement uuid="80810e28-7ede-47db-8c28-11885b23e2bf" x="448" y="469" width="154" height="16"/>
@@ -1175,9 +1175,9 @@
 				<textFieldExpression><![CDATA[$F{fechaPago}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="d724e3e6-89a2-45f0-ae8e-31f3284a39bd" x="680" y="532" width="67" height="20"/>
+				<reportElement uuid="d724e3e6-89a2-45f0-ae8e-31f3284a39bd" x="680" y="532" width="86" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Firma]]></text>
+				<text><![CDATA[Firma Tesorero]]></text>
 			</staticText>
 			<line>
 				<reportElement uuid="0afb33d6-f134-4a52-a979-c97241adcbf1" x="680" y="532" width="67" height="1"/>

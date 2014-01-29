@@ -35,6 +35,8 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
     Set<Comprobanteconcepto> conjuntoConceptos;
     private Comprobanteconcepto comprobanteconcepto1;
     private Double monto;
+    private Asociado a;
+    private Cooperativa cooperativa;
 
     
      private void setComprobanteConcepto1(Set<Comprobanteconcepto> conjuntoConceptos) {
@@ -45,21 +47,26 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
      }
     @Override
     public boolean next() throws JRException {
-        return ++index < listaComprobantes.size();
-    }
+        boolean b = false;
+        ++index;
+        if (index < listaComprobantes.size()) {
+            b = true;
+           comprobante = listaComprobantes.get(index);
+
+        Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
+        setComprobanteConcepto1(comprobante.getComprobanteconceptos());
+        monto= comprobanteconcepto1.getMonto();
+        cooperativa = new CooperativaDaoImp().listarCooperativa().get(0);
+        a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+            
+        }
+        return b;    }
 
     @Override
     public Object getFieldValue(JRField jrf) throws JRException {
         Object valor = null;
 
-        comprobante = listaComprobantes.get(index);
-
-        Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
-        Set<Comprobanteconcepto> conjuntoConceptos = comprobante.getComprobanteconceptos();//Obtengo el conjunto de ComprobanteConceptos vinculados al Comprobante
-        setComprobanteConcepto1(conjuntoConceptos);
-        monto= comprobanteconcepto1.getMonto();
-        Cooperativa cooperativa = new CooperativaDaoImp().listarCooperativa().get(0);
-        Asociado a = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+        
                       
         if ("nroRecibo".equals(jrf.getName())) {
              valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq())+"-"+ ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
@@ -68,7 +75,7 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
             valor = cooperativa.getMatricula();
         } else if ("cuitCooperativa".equals(jrf.getName())) {
             valor = cooperativa.getCuit();
-        } else if ("inicioActividad".equals(jrf.getName())) {
+        } else if ("inicioActividades".equals(jrf.getName())) {
             valor = MyUtil.getFechaString10DDMMAAAA(cooperativa.getInicioActividad());
         } else if ("ingresosBrutos".equals(jrf.getName())) {
             valor = cooperativa.getIngresoBruto();
@@ -87,7 +94,7 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
         } else if ("cuitAsociado".equals(jrf.getName())) {
             valor= a.getCuit();
         } else if ("ejercicioEconomico".equals(jrf.getName())) {
-            valor = comprobante.getEjercicioEconomico();
+            valor = "FALTA";
         } 
          else if ("sonPesos".equals(jrf.getName())) {
             valor = valor = "(" + new Numero_a_Letra().Convertir(String.valueOf(monto), true) + ")";
@@ -97,9 +104,7 @@ public class RboDistribucionExcedentesDataSource implements JRDataSource {
         } else if ("fechaPago".equals(jrf.getName())) {
             valor = MyUtil.getFechaString10DDMMAAAA(comprobante.getFecha());
         }
-         else if ("inicioActividad".equals(jrf.getName())) {
-            valor = MyUtil.getFechaString10DDMMAAAA(cooperativa.getInicioActividad());
-        }
+        
 
         return valor;
     }

@@ -39,6 +39,8 @@ public class ModeloReciboJRDataSource implements JRDataSource {
     Concepto concepto;
     private Double monto = 0.0;
     Comprobanteconcepto comprobanteconcepto1;
+    private Entidad entidad;
+    private Tipocomprobante tipoComprobante;
 
     /**
      * Carga en comprobante concepto el contenido del conjunto de
@@ -57,7 +59,19 @@ public class ModeloReciboJRDataSource implements JRDataSource {
     //metodo ue recorre la lista de comprobantes mientras el indice sea menor que el tamaño de la lista
     @Override
     public boolean next() throws JRException {
-        return ++index < listaComprobante.size();
+         boolean b = false;
+        ++index;
+        if (index < listaComprobante.size()) {
+            b = true;
+            comprobante = listaComprobante.get(index);
+            // obtengo la entida del comprobante
+             entidad = new Entidad(comprobante);
+             tipoComprobante = comprobante.getTipocomprobante();
+             setComprobanteConcepto1(comprobante.getComprobanteconceptos());
+             monto = comprobanteconcepto1.getMonto();
+
+        }
+        return b;
     }
 
     //metodo que conecta una variable de nuestro  reporte ireport con un valor que le pasemos 
@@ -65,16 +79,6 @@ public class ModeloReciboJRDataSource implements JRDataSource {
     @Override
     public Object getFieldValue(JRField jrf) throws JRException {
         Object valor = null;
-
-        comprobante = listaComprobante.get(index);
-        // obtengo la entida del comprobante
-        Entidad entidad = new Entidad(comprobante);
-        Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
-        Set<Comprobanteconcepto> conjuntoConceptos = comprobante.getComprobanteconceptos();
-        System.out.println("tamaño del conjunto de conceppto "+ conjuntoConceptos.size());
-        setComprobanteConcepto1(conjuntoConceptos);
-        monto = comprobanteconcepto1.getMonto();
-
 
         if ("nroRecibo".equals(jrf.getName())) {
             valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq()) + "-" + ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());

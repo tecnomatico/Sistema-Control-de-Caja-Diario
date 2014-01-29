@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RboReembolsoCuotasSociales" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="246c9b70-cb7a-46ca-9299-2db62e700448">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="488"/>
-	<property name="ireport.y" value="335"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="logo2" class="java.io.InputStream"/>
 	<field name="nroRecibo" class="java.lang.String"/>
@@ -227,9 +227,9 @@
 					<text><![CDATA[Recibo Nro.:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="4ac85ef9-e7c4-4c0c-8e83-92bb1edd3b4f" x="239" y="408" width="67" height="20"/>
+					<reportElement uuid="4ac85ef9-e7c4-4c0c-8e83-92bb1edd3b4f" x="239" y="408" width="78" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[Tesorero]]></text>
+					<text><![CDATA[Firma Asociado]]></text>
 				</staticText>
 				<line>
 					<reportElement uuid="f206580e-a82f-4681-a9cd-edda8837c829" x="238" y="410" width="67" height="1"/>
@@ -271,12 +271,16 @@
 			</textField>
 			<textField>
 				<reportElement uuid="b6dbc960-5cc1-4b87-8c55-f73fb003b803" x="96" y="148" width="78" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{matriculaInaes}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="7a889a23-e4c8-4705-abaa-4867ac4166c3" x="276" y="148" width="78" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{cuitCooperativa}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -299,11 +303,6 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{domicilioCooperativa}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement uuid="6a573c72-623f-440a-a3d9-9fc69bd31f95" x="276" y="269" width="78" height="20"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[cuitAsociado]]></text>
-			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement uuid="3af251ac-82fd-44cb-96c0-f79d2f9af36f" x="7" y="384" width="167" height="20"/>
 				<textElement verticalAlignment="Middle"/>
@@ -416,7 +415,9 @@
 			</textField>
 			<textField>
 				<reportElement uuid="7083e6bf-f721-4d5e-beb9-05b7186608fd" x="536" y="148" width="78" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{matriculaInaes}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -426,7 +427,9 @@
 			</textField>
 			<textField>
 				<reportElement uuid="bf7e1944-35f1-4e37-a2eb-24cfd28653cd" x="716" y="148" width="78" height="20"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{cuitCooperativa}]]></textFieldExpression>
 			</textField>
 			<rectangle>
@@ -514,11 +517,6 @@
 				<reportElement uuid="76963055-a85d-4d0c-944d-a3f3bf845c6b" x="620" y="248" width="90" height="20"/>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="838c1800-858b-4d7b-a576-744a10a50149" x="716" y="269" width="78" height="20"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[cuitAsociado]]></text>
-			</staticText>
-			<staticText>
 				<reportElement uuid="383dc3af-06c9-479a-ae3e-1fd01b6adb49" x="625" y="248" width="85" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Fecha de Ingreso:]]></text>
@@ -561,9 +559,9 @@
 				<text><![CDATA[Lugar de Pago: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d556b799-2523-4e68-86b2-9f4e60dbf037" x="679" y="408" width="67" height="20"/>
+				<reportElement uuid="d556b799-2523-4e68-86b2-9f4e60dbf037" x="679" y="408" width="77" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Tesorero]]></text>
+				<text><![CDATA[Firma Asociado]]></text>
 			</staticText>
 			<line>
 				<reportElement uuid="cd2ae4db-d90a-48c4-b0d4-4836f5575816" x="678" y="410" width="67" height="1"/>
@@ -587,6 +585,16 @@
 				<reportElement uuid="d422cf7f-231f-4d0f-a0a0-9cb8a0f99e09" x="457" y="23" width="90" height="65"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement uuid="7d002d90-02db-4530-afd8-ebde1f193cb5" x="276" y="268" width="77" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cuitAsociado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e03f661f-02cc-42c0-96a3-1317a795ecfa" x="716" y="269" width="78" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cuitAsociado}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>

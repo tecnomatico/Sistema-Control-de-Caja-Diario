@@ -17,6 +17,7 @@ import java.util.Set;
  */
 public interface ComprobanteDAO {
   java.util.List<Comprobante> listarFormulario();
+  java.util.List<Comprobante> listarFormularioActivo();
   java.util.List<Comprobante> listarFormularioxCategoria(String categoria);
   java.util.List<Comprobante> listarFormularioxFiltro(String where);
   /**

@@ -6,7 +6,7 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="logo2" class="java.io.InputStream"/>
 	<field name="nroRecibo" class="java.lang.String"/>
-	<field name="inicioActividad" class="java.lang.String"/>
+	<field name="inicioActividades" class="java.lang.String"/>
 	<field name="periodoFecha" class="java.lang.String"/>
 	<field name="nombreApellido" class="java.lang.String"/>
 	<field name="nroAsociado" class="java.lang.String"/>
@@ -411,7 +411,7 @@
 			<textField>
 				<reportElement uuid="1f8b1ac6-80fa-4816-9685-5b4023a8fdb6" x="98" y="159" width="76" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{inicioActividad}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{inicioActividades}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="37a9f53d-c97d-422d-adcb-6df0e9e71b34" x="98" y="218" width="255" height="20"/>
@@ -579,7 +579,7 @@
 				<textFieldExpression><![CDATA[$F{neto}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="91e69bed-ee5b-46e0-91b7-742101cbeebe" x="165" y="471" width="100" height="20"/>
+				<reportElement uuid="91e69bed-ee5b-46e0-91b7-742101cbeebe" x="165" y="471" width="186" height="20"/>
 				<textElement verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$F{sonPesos}]]></textFieldExpression>
 			</textField>
@@ -741,7 +741,7 @@
 			<textField>
 				<reportElement uuid="12e6cb92-9ac5-4b39-8161-fdfdae342cb6" x="539" y="159" width="76" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{inicioActividad}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{inicioActividades}]]></textFieldExpression>
 			</textField>
 			<rectangle>
 				<reportElement uuid="0ea86a14-1ca8-41d1-b873-a52a260f7824" x="442" y="178" width="90" height="20"/>
@@ -1134,7 +1134,7 @@
 				<text><![CDATA[En concepto de anticipo de retornos correspondiente al ejercicio:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="1a53148d-fe89-4c9c-83b0-67d06b5d8bb9" x="606" y="471" width="100" height="20"/>
+				<reportElement uuid="1a53148d-fe89-4c9c-83b0-67d06b5d8bb9" x="606" y="471" width="184" height="20"/>
 				<textElement verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$F{sonPesos}]]></textFieldExpression>
 			</textField>

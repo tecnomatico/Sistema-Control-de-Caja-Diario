@@ -9,13 +9,11 @@ import co.tecnomati.java.controlcaja.dominio.Comprobanteconcepto;
 import co.tecnomati.java.controlcaja.dominio.Concepto;
 import co.tecnomati.java.controlcaja.dominio.Cooperativa;
 import co.tecnomati.java.controlcaja.dominio.Tipocomprobante;
-import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.dominio.dao.imp.CooperativaDaoImp;
 import co.tecnomati.java.controlcaja.util.ComprobanteUtil;
+import co.tecnomati.java.controlcaja.util.Entidad;
 import co.tecnomati.java.controlcaja.util.MyUtil;
-import co.tecnomati.java.controlcaja.util.NumberToLetterConverter;
 import co.tecnomati.java.controlcaja.util.Numero_a_Letra;
-import com.mysql.jdbc.Util;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -67,17 +65,19 @@ public class ModeloReciboJRDataSource implements JRDataSource {
     @Override
     public Object getFieldValue(JRField jrf) throws JRException {
         Object valor = null;
-       
+
         comprobante = listaComprobante.get(index);
-        
+        // obtengo la entida del comprobante
+        Entidad entidad = new Entidad(comprobante);
         Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
         Set<Comprobanteconcepto> conjuntoConceptos = comprobante.getComprobanteconceptos();
+        System.out.println("tamaño del conjunto de conceppto "+ conjuntoConceptos.size());
         setComprobanteConcepto1(conjuntoConceptos);
         monto = comprobanteconcepto1.getMonto();
-       
-        
-         if ("nroRecibo".equals(jrf.getName())) {
-             valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq())+"-"+ ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
+
+
+        if ("nroRecibo".equals(jrf.getName())) {
+            valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq()) + "-" + ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
         } else if ("matriculaInaes".equals(jrf.getName())) {
             valor = coop.getMatricula();
         } else if ("inicioActividades".equals(jrf.getName())) {
@@ -89,7 +89,7 @@ public class ModeloReciboJRDataSource implements JRDataSource {
         } else if ("domicilioCooperativa".equals(jrf.getName())) {
             valor = coop.getDomicilio();
         } else if ("cantidadPago".equals(jrf.getName())) {
-             valor = "(" + new Numero_a_Letra().Convertir(String.valueOf(monto), true) + ")";
+            valor = "(" + new Numero_a_Letra().Convertir(String.valueOf(monto), true) + ")";
 //                valor = NumberToLetterConverter.getConvertirPesosEnString(monto);
         } else if ("conceptoDe".equals(jrf.getName())) {
 
@@ -106,10 +106,10 @@ public class ModeloReciboJRDataSource implements JRDataSource {
         } // aqui va quien firma el recibo Tesorero o quien?
         else if ("nombreApellido".equals(jrf.getName())) {
 
-            valor = "Fernadez Daniel Pandora";
+            valor = entidad.getNombre();
         } else if ("nroDNI".equals(jrf.getName())) {
 
-            valor = "2345678890";
+            valor = entidad.getDni();
         }
 
 

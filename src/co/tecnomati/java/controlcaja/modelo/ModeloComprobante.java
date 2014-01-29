@@ -36,9 +36,9 @@ public class ModeloComprobante extends AbstractTableModel {
     
       public ModeloComprobante() {            
         try {
-            listaComprobante = (ArrayList<Comprobante>) comprobanteDAO.listarFormulario();
+            listaComprobante = (ArrayList<Comprobante>) comprobanteDAO.listarFormularioActivo();
         } catch (ClassCastException ex) {
-            listaComprobante=(ArrayList<Comprobante>)comprobanteDAO.listarFormulario();          
+            listaComprobante=(ArrayList<Comprobante>)comprobanteDAO.listarFormularioActivo();          
         }finally{
         }
     }

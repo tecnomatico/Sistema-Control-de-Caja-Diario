@@ -6,6 +6,7 @@ package co.tecnomati.java.controlcaja.util;
 
 import co.tecnomati.java.controlcaja.cons.Constantes;
 import co.tecnomati.java.controlcaja.dominio.Comprobante;
+import co.tecnomati.java.controlcaja.dominio.dao.imp.ComprobanteDaoImp;
 import co.tecnomati.java.controlcaja.reporte.jrdatasource.ModeloReciboJRDataSource;
 import co.tecnomati.java.controlcaja.reporte.jrdatasource.RboAnticipoRetornoDataSource;
 import co.tecnomati.java.controlcaja.reporte.jrdatasource.RboDistribucionExcedentesDataSource;
@@ -50,8 +51,8 @@ public class Impresora {
      * @param comprobante representa uno de los 5 recibos a imprimir
      * @param tipo es el tipo de comprobante ej: recibo de pago, recibo anticipo retorno.....
      */
-    public Impresora(Comprobante comprobante) {
-        this.comprobante = comprobante;
+    public Impresora(int   idcomprobante) {
+        this.comprobante =new ComprobanteDaoImp().getFormulario(idcomprobante);
         this.tipoComprobante= comprobante.getTipocomprobante().getCodigo();
     }
     public Impresora(List<Comprobante> lista) {

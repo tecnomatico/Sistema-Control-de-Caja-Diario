@@ -39,7 +39,25 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
                 + "join fetch c.comprobanteconceptos as cc\n"
                 + "join fetch cc.concepto as concep\n"
                 + "order by c.id asc and c.fecha asc\n"
-                + "group by c.numeroSerie").list();
+                ).list();
+        session.close();
+        return comprobante;
+    }
+    @Override
+    public List<Comprobante> listarFormularioActivo() {
+
+        Session session = HibernateUtil.getSession();
+
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Comprobante.class);
+
+        ArrayList<Comprobante> comprobante = (ArrayList<Comprobante>) session.createQuery("FROM Comprobante c\n"
+                + "join fetch c.tipocomprobante  as tipo\n"
+                + "join fetch c.comprobanteconceptos as cc\n"
+                + "join fetch cc.concepto as concep\n"
+                +" where c.estado=1 \n"
+                + "order by c.id asc and c.fecha asc\n"
+              ).list();
         session.close();
         return comprobante;
     }
@@ -97,7 +115,7 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
                 + "join fetch c.comprobanteconceptos as cc\n"
                 + "join fetch cc.concepto as concep\n"
                 + "where c.id = '"+idComprobante+"' \n"
-                + "group by c.numeroSerie").uniqueResult();
+                ).uniqueResult();
         session.close();
         return comprobante;
     }
@@ -144,7 +162,8 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
                 + "join fetch c.comprobanteconceptos as comprobanteconcepto\n"
                 + "join fetch comprobanteconcepto.concepto as concepto\n"
                 + "join fetch tipocomprobante.categoriacomprobante as categoria\n"
-                + "where categoria.descripcion='" + categoria + "'").list();
+                + "where categoria.descripcion='" + categoria + "'"
+              ).list();
         session.close();
         return comprobante;
     }
@@ -163,7 +182,8 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
                 + "join fetch c.comprobanteconceptos as cc\n"
                 + "join fetch cc.concepto as conce\n"
                 + "join fetch tipo.categoriacomprobante as categ\n"
-                + "where c.fecha<='" + hastaS + "' and c.fecha>='" + desdeS + "'").list();
+                + "where c.fecha<='" + hastaS + "' and c.fecha>='" + desdeS + "'"
+                ).list();
         session.close();
         return comprobante;
     }
@@ -211,7 +231,8 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
                 + "join fetch c.comprobanteconceptos as comprobanteconcepto\n"
                 + "join fetch comprobanteconcepto.concepto as concepto\n"
                 + "join fetch tipocomprobante.categoriacomprobante as categoria\n"
-                + where).list();
+                + where
+               ).list();
         session.close();
         return comprobante;
     }
@@ -238,3 +259,6 @@ public class ComprobanteDaoImp extends HibernateUtil implements ComprobanteDAO {
 //        return c;
 //    }
 }
+
+// si coloco este filtro en un list entonces solo se mostrarara un solo elelmento del conjunto que tenga un comprobante
+// + " group by c.numeroSerie"

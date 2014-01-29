@@ -26,8 +26,7 @@ import net.sf.jasperreports.engine.JRField;
 
 /**
  *
- * @author dario Asociado
- * OK
+ * @author dario Asociado OK
  */
 public class RboAnticipoRetornoDataSource implements JRDataSource {
     //indice para recorrer la lista de comprobante
@@ -40,60 +39,84 @@ public class RboAnticipoRetornoDataSource implements JRDataSource {
 //    datos de la cooperativa
     Cooperativa coop = new CooperativaDaoImp().listarCooperativa().get(0);
     Concepto concepto;
-    private Double monto = 0.0;
+//    private Double monto = 0.0;
     // corresponde a este comprobante
     Comprobanteconcepto comprobanteconcepto1, comprobanteconcepto2;
+    Asociado asociado;
+    private double neto;
 
-    
-    
-    
     /**
-     * setea  comprobanteconcepto1 y comprobanteconcepto2  con los datos que tiene comprobante
-     * @param conjuntoConceptos conjunto de comprobantes concetos que representan los detalles del comprobante
-     * 
+     * setea comprobanteconcepto1 y comprobanteconcepto2 con los datos que tiene
+     * comprobante
+     *
+     * @param conjuntoConceptos conjunto de comprobantes concetos que
+     * representan los detalles del comprobante
+     *
      */
-    private void setearComprobantesConceptos (Set<Comprobanteconcepto> conjuntoConceptos){
+    private void setearComprobantesConceptos(Set<Comprobanteconcepto> conjuntoConceptos) {
         for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
             Comprobanteconcepto comprobanteconcepto = it.next();
-            monto = comprobanteconcepto.getMonto()+monto;
-            if (comprobanteconcepto.getConcepto().getCodigoConcepto() == Constantes.CONCEPTO_CODIGO_MONOTRIBUTO) {
-                // detalle o concepto 2  monotributo
-                comprobanteconcepto2 = comprobanteconcepto;
-            } else {
+            neto = comprobanteconcepto.getMonto() + neto;
+            if (comprobanteconcepto.getConcepto().getCodigoConcepto() != Constantes.CONCEPTO_CODIGO_MONOTRIBUTO) {
                 //detalle 1 o concepto 1
+
                 comprobanteconcepto1 = comprobanteconcepto;
+
+                System.out.println("codigo monotributo concepto1");
+            } else {
+                // detalle o concepto 2  monotributo
+
+                comprobanteconcepto2 = comprobanteconcepto;
+                System.out.println("codigo monotributo concepto2" );
+
             }
         }
+
+
+
     }
-    private double getNeto(){
-        double neto=0;
-        
-        if (comprobanteconcepto2!=null) {
-            neto= comprobanteconcepto1.getMonto()-comprobanteconcepto2.getMonto();
+
+    private double getNeto() {
+        double neto = 0;
+
+        if (comprobanteconcepto2 != null) {
+            neto = comprobanteconcepto1.getMonto() - comprobanteconcepto2.getMonto();
         } else {
-            neto= comprobanteconcepto1.getMonto();
+            neto = comprobanteconcepto1.getMonto();
         }
-        
+
         return neto;
     }
-    
+
     @Override
     public boolean next() throws JRException {
-        return ++index < listaComprobante.size();
+        boolean b = false;
+        ++index;
+        if (index < listaComprobante.size()) {
+            b = true;
+            comprobante = listaComprobante.get(index);
+            setearComprobantesConceptos(comprobante.getComprobanteconceptos());
+            System.out.println("tamaño del conjunto de concepto " + comprobante.getComprobanteconceptos().size());
+            Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
+            asociado = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+            
+        }
+        return b;
+
     }
 
     @Override
     public Object getFieldValue(JRField jrf) throws JRException {
         Object valor = null;
 
-        comprobante = listaComprobante.get(index);
-        Asociado asociado = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
-        Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
-        Set<Comprobanteconcepto> conjuntoConceptos = comprobante.getComprobanteconceptos();
-        setearComprobantesConceptos(conjuntoConceptos);
-        double neto = getNeto();
+//        comprobante = listaComprobante.get(index);
+//        Asociado asociado = new AsociadoDaoImp().getAsociado(comprobante.getIdEntidad());
+//        Tipocomprobante tipoComprobante = comprobante.getTipocomprobante();
+//        Set<Comprobanteconcepto> conjuntoConceptos = comprobante.getComprobanteconceptos();
+//        setearComprobantesConceptos(conjuntoConceptos);
+//        double neto = getNeto();
         if ("nroRecibo".equals(jrf.getName())) {
-             valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq())+"-"+ ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
+            valor = ComprobanteUtil.formatearNumSerieIzq(comprobante.getNumeroSerieIzq()) + "-" + ComprobanteUtil.formatearNumSerieDer(comprobante.getNumeroSerieDer());
         } else if ("matriculaInaes".equals(jrf.getName())) {
             valor = coop.getMatricula();
         } else if ("inicioActividad".equals(jrf.getName())) {
@@ -105,14 +128,13 @@ public class RboAnticipoRetornoDataSource implements JRDataSource {
         } else if ("domicilioCooperativa".equals(jrf.getName())) {
             valor = coop.getDomicilio();
         } else if ("cantidadPago".equals(jrf.getName())) {
-
 //            valor = "("+new Numero_a_Letra().Convertir(String.valueOf(monto).toLowerCase(), true)+ ")";
 //                valor = NumberToLetterConverter.getConvertirPesosEnString(monto);
         } else if ("conceptoDe".equals(jrf.getName())) {
             valor = comprobanteconcepto1.getConcepto().getDescripcion();
         } else if ("sonPesos".equals(jrf.getName())) {
             // Dato constante para la configuarcion
-            valor = "("+new Numero_a_Letra().Convertir(String.valueOf(neto), true)+ ")";
+            valor = "(" + new Numero_a_Letra().Convertir(String.valueOf(neto), true) + ")";
         } else if ("fechaPago".equals(jrf.getName())) {
 
             valor = MyUtil.getFechaString10DDMMAAAA(comprobante.getFecha());
@@ -150,22 +172,21 @@ public class RboAnticipoRetornoDataSource implements JRDataSource {
 
             valor = comprobanteconcepto1.getMonto();
         } //conectpo monotributo
-        else if ("concepto2".equals(jrf.getName())&& comprobanteconcepto2!=null) {
+        else if ("concepto2".equals(jrf.getName()) && comprobanteconcepto2 != null) {
 
             valor = comprobanteconcepto2.getConcepto().getDescripcion();
-        } else if ("importe2".equals(jrf.getName())&& comprobanteconcepto2!=null) {
+        } else if ("importe2".equals(jrf.getName()) && comprobanteconcepto2 != null) {
 
             valor = "";
-        } else if ("descuento2".equals(jrf.getName())&& comprobanteconcepto2!=null) {
+        } else if ("descuento2".equals(jrf.getName()) && comprobanteconcepto2 != null) {
 
-            valor = comprobanteconcepto2.getMonto();
+            valor = ((-1)*comprobanteconcepto2.getMonto());
         } else if ("totalImporte".equals(jrf.getName())) {
             // total de los importes  que en este caso es solo es 1 , si hay mas habra que reemplazar esto
             valor = comprobanteconcepto1.getMonto();
-        }
-         else if ("neto".equals(jrf.getName())) {
+        } else if ("neto".equals(jrf.getName())) {
             // ingreso - egreso
-            valor = getNeto();
+            valor = neto;
         }
 
 

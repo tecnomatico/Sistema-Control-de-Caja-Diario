@@ -37,6 +37,7 @@ public class GUIGestorComprobante extends javax.swing.JDialog {
     boolean agregado = false;
     private TableRowSorter sorter;
 boolean bandera; 
+    private boolean banderaCategoria;
 
 
 //boolean controlPrimerWhere = true;
@@ -65,17 +66,21 @@ boolean bandera;
         initComponents();
         bandera = false; 
         setDatosCategoriaComprobante();
-        setDatosCmbTipocomprobante();
+        setDatosCmbTipocomprobantexCategoria(cmbCategoria.getSelectedItem().toString());
         inicializarTabla();
         bandera= true;
         dateDesde.setDate(new Date());
         dateHasta.setDate(new Date());
         this.setTitle("Busqueda");
-         txtFNumSerie.setFocusLostBehavior(JFormattedTextField.PERSIST);
+//         txtFNumSerie2.setFocusLostBehavior(JFormattedTextField.PERSIST);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
+    
+    /**
+     * Carga el cmb categoria con los datos de categoria
+     */
     public void setDatosCategoriaComprobante() {
         cmbCategoria.removeAllItems();
 
@@ -93,37 +98,29 @@ boolean bandera;
         }
     }
 
-    public void setDatosCmbTipocomprobante() {
+
+   /**
+    *  Setea una lista en el combobox tipo de comprobante de acuerdo a la categoria recibida como parametro 
+    * @param categoria recibida
+    */
+    public void setDatosCmbTipocomprobantexCategoria(String categoria) {
         cmbTipoComprobante.removeAllItems();
-
-        if (new TipoComprobanteDaoImp().listarTipoComprobante().isEmpty()) {
+         cmbTipoComprobante.addItem("Seleccione");
+         
+         
+        if (new TipoComprobanteDaoImp().listarTipoComprobantexCategoria(categoria).isEmpty()) {
+             // si la lista de tipodecomprobante por categoria esta vacia
             cmbTipoComprobante.setEditable(false);
+//          cmbTipoComprobante.setEnabled(false);
         } else {
-            cmbTipoComprobante.addItem("Seleccione");
-            for (Tipocomprobante o : new TipoComprobanteDaoImp().listarTipoComprobante()) {
-
-                cmbTipoComprobante.addItem(o.getFormulario());
-            }
-            AutoCompleteDecorator.decorate(this.cmbTipoComprobante);
-            cmbTipoComprobante.setEditable(true);
-
-        }
-    }
-    public void setDatosCmbTipocomprobantexCategoria() {
-        cmbTipoComprobante.removeAllItems();
-
-        if (new TipoComprobanteDaoImp().listarTipoComprobantexCategoria(cmbCategoria.getSelectedItem().toString()).isEmpty()) {
-            cmbTipoComprobante.addItem("Seleccione");
-            cmbTipoComprobante.setEditable(false);
-//            cmbTipoComprobante.setEnabled(false);
-        } else {
-            cmbTipoComprobante.addItem("Seleccione");
+           
             for (Tipocomprobante o : new TipoComprobanteDaoImp().listarTipoComprobantexCategoria(cmbCategoria.getSelectedItem().toString())) {
 
                 cmbTipoComprobante.addItem(o.getFormulario());
             }
             AutoCompleteDecorator.decorate(this.cmbTipoComprobante);
             cmbTipoComprobante.setEditable(true);
+//          cmbTipoComprobante.setEnabled(true);
 
         }
     }
@@ -148,7 +145,6 @@ boolean bandera;
         jPanel1 = new javax.swing.JPanel();
         cmbOperacion = new javax.swing.JComboBox();
         labelMetric5 = new org.edisoncor.gui.label.LabelMetric();
-        cmbTipoComprobante = new javax.swing.JComboBox();
         labelMetric6 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric2 = new org.edisoncor.gui.label.LabelMetric();
         dateDesde = new com.toedter.calendar.JDateChooser();
@@ -158,10 +154,9 @@ boolean bandera;
         cmbCategoria = new javax.swing.JComboBox();
         labelMetric7 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric8 = new org.edisoncor.gui.label.LabelMetric();
-        labelMetric9 = new org.edisoncor.gui.label.LabelMetric();
         cmbEstado = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
-        txtFNumSerie = new javax.swing.JFormattedTextField();
+        btnFiltroBusquedaComprobante = new javax.swing.JButton();
+        cmbTipoComprobante = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setFont(new java.awt.Font("Agency FB", 0, 12)); // NOI18N
@@ -239,14 +234,6 @@ boolean bandera;
         labelMetric5.setText("Por Periodo");
         labelMetric5.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
-        cmbTipoComprobante.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        cmbTipoComprobante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Item 2", "Item 3", "Item 4" }));
-        cmbTipoComprobante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbTipoComprobanteActionPerformed(evt);
-            }
-        });
-
         labelMetric6.setText("Hasta");
         labelMetric6.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
@@ -265,9 +252,19 @@ boolean bandera;
 
         cmbCategoria.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione" }));
+        cmbCategoria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbCategoriaItemStateChanged(evt);
+            }
+        });
         cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCategoriaActionPerformed(evt);
+            }
+        });
+        cmbCategoria.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cmbCategoriaFocusLost(evt);
             }
         });
 
@@ -277,9 +274,6 @@ boolean bandera;
         labelMetric8.setText("Por Estado");
         labelMetric8.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
-        labelMetric9.setText("Por Numero de Serie");
-        labelMetric9.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-
         cmbEstado.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "ACTIVO", "ANULADO" }));
         cmbEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -288,24 +282,28 @@ boolean bandera;
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/search_32.png"))); // NOI18N
-        jButton2.setText("Filtro");
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnFiltroBusquedaComprobante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/search_32.png"))); // NOI18N
+        btnFiltroBusquedaComprobante.setText("Filtro");
+        btnFiltroBusquedaComprobante.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFiltroBusquedaComprobante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnFiltroBusquedaComprobanteActionPerformed(evt);
             }
         });
 
-        try {
-            txtFNumSerie.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtFNumSerie.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        txtFNumSerie.addActionListener(new java.awt.event.ActionListener() {
+        cmbTipoComprobante.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        cmbTipoComprobante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione" }));
+        cmbTipoComprobante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFNumSerieActionPerformed(evt);
+                cmbTipoComprobanteActionPerformed(evt);
+            }
+        });
+        cmbTipoComprobante.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cmbTipoComprobanteFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cmbTipoComprobanteFocusLost(evt);
             }
         });
 
@@ -317,85 +315,70 @@ boolean bandera;
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labelMetric1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelMetric2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelMetric9, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(labelMetric2, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                     .addComponent(labelMetric5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtFNumSerie))
-                        .addGap(18, 18, 18)
+                        .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(cmbOperacion, 0, 249, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(32, 32, 32)))
+                                .addComponent(cmbOperacion, 0, 249, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbTipoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(97, 97, 97))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(310, 310, 310))))
+                            .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbTipoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(btnFiltroBusquedaComprobante)
+                        .addGap(153, 153, 153))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmbTipoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbTipoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelMetric8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnFiltroBusquedaComprobante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(labelMetric5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelMetric7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelMetric9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(28, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                            .addComponent(labelMetric6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
@@ -416,7 +399,7 @@ boolean bandera;
                 .addGap(24, 24, 24)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1028, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1184, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
@@ -427,7 +410,7 @@ boolean bandera;
                 .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(44, 44, 44)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -490,46 +473,60 @@ boolean bandera;
             tblComprobante.setRowSorter(sorter);
         }
     }
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnFiltroBusquedaComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroBusquedaComprobanteActionPerformed
         if(bandera){
         inicializarTablaxFiltro();   
        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
-        // aqui modificar el cmbTipo comprobante para que solo refleje a elementos de su categoria
-        if (bandera) {
-            if (!cmbCategoria.getSelectedItem().toString().equals(Constantes.SELECCIONE)) {
-                setDatosCmbTipocomprobantexCategoria();
-                 inicializarTablaxFiltro();
-            }
-            
-        }
-    }//GEN-LAST:event_cmbCategoriaActionPerformed
-
-    private void cmbTipoComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoComprobanteActionPerformed
-        if (bandera) {
-        inicializarTablaxFiltro();   
-       
-        }
-    }//GEN-LAST:event_cmbTipoComprobanteActionPerformed
+    }//GEN-LAST:event_btnFiltroBusquedaComprobanteActionPerformed
 
     private void cmbOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOperacionActionPerformed
       
-        inicializarTablaxFiltro();   
+//        inicializarTablaxFiltro();   
           }//GEN-LAST:event_cmbOperacionActionPerformed
 
     private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
         
-        inicializarTablaxFiltro();   
+//        inicializarTablaxFiltro();   
       
     }//GEN-LAST:event_cmbEstadoActionPerformed
 
-    private void txtFNumSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFNumSerieActionPerformed
-        
-        inicializarTablaxFiltro();   
+    private void cmbTipoComprobanteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbTipoComprobanteFocusGained
+//        System.out.println("CmbtipoCompro Focus Gained"+ cmbCategoria.getSelectedItem().toString());
+//        setDatosCmbTipocomprobantexCategoria(cmbCategoria.getSelectedItem().toString());
+    }//GEN-LAST:event_cmbTipoComprobanteFocusGained
+
+    private void cmbTipoComprobanteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbTipoComprobanteFocusLost
+//           if (!cmbCategoria.getSelectedItem().toString().equals(Constantes.SELECCIONE)) {
+//                
+////                setDatosCmbTipocomprobantexCategoria(cmbCategoria.getSelectedItem().toString());
+//        System.err.println("cmbTipoComprobanteFocusLost");         
+//        inicializarTablaxFiltro();
+//                 
+//            }
+    }//GEN-LAST:event_cmbTipoComprobanteFocusLost
+
+    private void cmbCategoriaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbCategoriaFocusLost
+//        System.out.println("focus lost d categoria");
+//        cmbTipoComprobante.removeAll();
+//        cmbTipoComprobante.addItem("Seleccione");
+    }//GEN-LAST:event_cmbCategoriaFocusLost
+
+    private void cmbTipoComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoComprobanteActionPerformed
        
-    }//GEN-LAST:event_txtFNumSerieActionPerformed
+//        System.out.println("cmbtipocomprobante acccion");
+//        inicializarTablaxFiltro();
+    }//GEN-LAST:event_cmbTipoComprobanteActionPerformed
+
+    private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
+     
+    }//GEN-LAST:event_cmbCategoriaActionPerformed
+
+    private void cmbCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCategoriaItemStateChanged
+        if (bandera) {
+                    setDatosCmbTipocomprobantexCategoria(cmbCategoria.getSelectedItem().toString());
+
+        }
+    }//GEN-LAST:event_cmbCategoriaItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -575,6 +572,7 @@ boolean bandera;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonIpod btnCancelar;
     private org.edisoncor.gui.button.ButtonIpod btnEditar;
+    private javax.swing.JButton btnFiltroBusquedaComprobante;
     private org.edisoncor.gui.button.ButtonIpod btnNuevo;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cmbCategoria;
@@ -583,7 +581,6 @@ boolean bandera;
     private javax.swing.JComboBox cmbTipoComprobante;
     private com.toedter.calendar.JDateChooser dateDesde;
     private com.toedter.calendar.JDateChooser dateHasta;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private org.edisoncor.gui.label.LabelMetric labelMetric1;
@@ -594,35 +591,16 @@ boolean bandera;
     private org.edisoncor.gui.label.LabelMetric labelMetric6;
     private org.edisoncor.gui.label.LabelMetric labelMetric7;
     private org.edisoncor.gui.label.LabelMetric labelMetric8;
-    private org.edisoncor.gui.label.LabelMetric labelMetric9;
     private org.edisoncor.gui.panel.Panel panel1;
     private javax.swing.JTable tblComprobante;
-    private javax.swing.JFormattedTextField txtFNumSerie;
     // End of variables declaration//GEN-END:variables
 
-//    private void inicializarTablaxCategoria(String string) {
-//        modeloComprobante = new ModeloComprobante(string);
-//        sorter = new TableRowSorter(modeloComprobante);
-//        tblComprobante.setModel(modeloComprobante);
-//    }
-//
+
     private void inicializarTablaxFecha(Date dateDesde, Date dateHasta) {
         modeloComprobante = new ModeloComprobante(dateDesde, dateHasta);
         sorter = new TableRowSorter(modeloComprobante);
         tblComprobante.setModel(modeloComprobante);
     }
-//
-//    private void inicializarTablaxOperacion(String string) {
-//        modeloComprobante = new ModeloComprobante(string);
-//        sorter = new TableRowSorter(modeloComprobante);
-//        tblComprobante.setModel(modeloComprobante);
-//    }
-//
-//    private void inicializarTablaxTipoComprobante(String string) {
-//        modeloComprobante = new ModeloComprobante(string);
-//        sorter = new TableRowSorter(modeloComprobante);
-//        tblComprobante.setModel(modeloComprobante);
-//    }
 
     private void inicializarTablaxFiltro() {
         modeloComprobante = new ModeloComprobante(generarWhere());
@@ -635,7 +613,7 @@ boolean bandera;
     private String generarWhere() {
         String where = "";
         boolean controlPrimerWhere = true;
-        if (!cmbCategoria.getSelectedItem().equals(Constantes.SELECCIONE) || !cmbTipoComprobante.getSelectedItem().equals(Constantes.SELECCIONE) || !cmbOperacion.getSelectedItem().equals(Constantes.SELECCIONE) || !cmbEstado.getSelectedItem().equals(Constantes.SELECCIONE)||(dateDesde.getDate()!=null && dateHasta.getDate()!=null)|| isCorrectojFormSerie(txtFNumSerie)) {
+        if (!cmbCategoria.getSelectedItem().equals(Constantes.SELECCIONE) || !cmbTipoComprobante.getSelectedItem().equals(Constantes.SELECCIONE) || !cmbOperacion.getSelectedItem().equals(Constantes.SELECCIONE) || !cmbEstado.getSelectedItem().equals(Constantes.SELECCIONE)||(dateDesde.getDate()!=null && dateHasta.getDate()!=null)) {
             where = " where ";
 
             if (!cmbCategoria.getSelectedItem().equals(Constantes.SELECCIONE)) {
@@ -683,14 +661,15 @@ boolean bandera;
                     where = where + "and " + getWhereFecha();
 
                 }
-            if (isCorrectojFormSerie(txtFNumSerie)) {
-                 if (controlPrimerWhere) {
-                where= where + getWhereNumSerie();
-                controlPrimerWhere=false;
-            }else{
-                 where = where + "and " + getWhereNumSerie();
-            }
-            }
+//            if (isCorrectojFormSerie(txtFNumSerie2)) {
+//                 if (controlPrimerWhere) {
+//                where= where + getWhereNumSerie();
+//                controlPrimerWhere=false;
+//            }else{
+          
+//                 where = where + "and " + getWhereNumSerie();
+//            }
+//            }
            
 //            try{
                 
@@ -781,10 +760,10 @@ boolean bandera;
         
       return b;
     }
-    private String getWhereNumSerie() {
-        int izq = Integer.valueOf(txtFNumSerie.getText().substring(0,4));
-        int der = Integer.valueOf(txtFNumSerie.getText().substring(5,13));
-        return "c.numeroSerieIzq='" + izq + "' and c.numeroSerieDer='" + der + "'";
-    }
+//    private String getWhereNumSerie() {
+//        int izq = Integer.valueOf(txtFNumSerie2.getText().substring(0,4));
+//        int der = Integer.valueOf(txtFNumSerie2.getText().substring(5,13));
+//        return "c.numeroSerieIzq='" + izq + "' and c.numeroSerieDer='" + der + "'";
+//    }
     
 }

@@ -56,6 +56,8 @@ public class GUIComprobante extends javax.swing.JDialog {
     // guarda la numeracion del numerod de serie del comprobante
     private long numIzq;
     private long numDer;
+    private String refComprobante;
+   
 
   
     public boolean isElimiado() {
@@ -258,7 +260,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                 System.out.println("elemento nro 2 del conjunto");
 
                 // existe el aporte de monotribbuto ademas
-                txtAporteMonotributo.setText(String.valueOf(comprobanteconcepto.getMonto()));
+                txtAporteMonotributo.setText(String.valueOf((-1)*comprobanteconcepto.getMonto()));// lo multiplico para que aparesca positivo
                 chkAporteMonotributo.setSelected(true);
             }
 
@@ -427,6 +429,11 @@ public class GUIComprobante extends javax.swing.JDialog {
         txtRefTipoCompr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtRefTipoCompr.setText("a");
         txtRefTipoCompr.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtRefTipoCompr.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtRefTipoComprFocusGained(evt);
+            }
+        });
         txtRefTipoCompr.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtRefTipoComprKeyPressed(evt);
@@ -963,7 +970,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
                         if (chkAporteMonotributo.isSelected()) {
                             // actualiza
-                            comprobanteconcepto.setMonto(Double.parseDouble(txtAporteMonotributo.getText().trim()));
+                            comprobanteconcepto.setMonto(- Double.parseDouble(txtAporteMonotributo.getText().trim()));
                             new ComprobanteconceptoDaoImp().upDateComprobanteconcepto(comprobanteconcepto);
                             System.out.println("Se actualizo el monotributo");
                         } else {
@@ -976,7 +983,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                     } else {
                         // es otro concepto
                         comprobanteconcepto.setConcepto(new ConceptoDaoImp().getConcepto(Integer.parseInt(txtCodigoConcepto.getText())));
-                        comprobanteconcepto.setMonto(Double.parseDouble(txtMonto.getText()));
+                        comprobanteconcepto.setMonto( Double.parseDouble(txtMonto.getText()));
                         new ComprobanteconceptoDaoImp().upDateComprobanteconcepto(comprobanteconcepto);
                         System.out.println("Se actualizo el concepto 1");
                     }
@@ -1002,7 +1009,7 @@ public class GUIComprobante extends javax.swing.JDialog {
                     Comprobanteconcepto detalleMonotributo = new Comprobanteconcepto();
                     detalleMonotributo.setConcepto(new ConceptoDaoImp().getConcepto(Constantes.CONCEPTO_CODIGO_MONOTRIBUTO));
                     detalleMonotributo.setComprobante(comprobante);
-                    detalleMonotributo.setMonto(Double.parseDouble(txtAporteMonotributo.getText()));
+                    detalleMonotributo.setMonto(- Double.parseDouble(txtAporteMonotributo.getText()));
                     new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalleMonotributo);
                     System.out.print("Se guardo el detalle 2");
 
@@ -1419,7 +1426,17 @@ public class GUIComprobante extends javax.swing.JDialog {
          if (evt.getKeyCode() == KeyEvent.VK_TAB ) {
              System.out.println("entro al tab");
             if (!txtRefTipoCompr.getText().trim().isEmpty()) {
-              getProcessComprobante();    
+               
+                // esto chequea cuando ya ingreso anteriormente un codigo
+                if (!refComprobante.equals(txtRefTipoCompr.getText().trim())) {
+                                     getProcessComprobante();    
+  
+                }else{
+                    // si ingreso anteriormente y no modifico el codigo
+                    //paso al numero de serie
+                    txtnumSerie1.requestFocus();
+                } 
+                                   
             }else{
             mensajero.mensajeError(null, "NO PUEDE ESTAR VACIO");
             txtRefTipoCompr.requestFocus();
@@ -1431,8 +1448,8 @@ public class GUIComprobante extends javax.swing.JDialog {
      */
     private void imprimirComprobante() {
         // lo vuelvo a traer de la bd para q comprobante este con el conjunto concepto.
-        comprobante = new ComprobanteDaoImp().getFormulario(comprobante.getId());
-        new Impresora(comprobante).Imprimir();
+//        comprobante = new ComprobanteDaoImp().getFormulario(comprobante.getId());
+        new Impresora(comprobante.getId()).Imprimir();
     }
     private void btnImprimiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimiActionPerformed
         imprimirComprobante();
@@ -1715,6 +1732,11 @@ public class GUIComprobante extends javax.swing.JDialog {
             buscarEntidad();
         }
     }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtRefTipoComprFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRefTipoComprFocusGained
+        refComprobante = txtRefTipoCompr.getText().trim();
+//        System.out.println("coidgo de tipode comproabante"+ txtRefComprobante);
+    }//GEN-LAST:event_txtRefTipoComprFocusGained
 
     /**
      * @param args the command line arguments

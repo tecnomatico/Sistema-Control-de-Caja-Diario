@@ -19,7 +19,7 @@ public class ComprobanteUtil {
      */
     public static boolean isReciboParaAsociado(int codTipoCompr) {
         boolean b = false;
-        if (codTipoCompr == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO || codTipoCompr == Constantes.CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE || codTipoCompr == Constantes.CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES) {
+        if (codTipoCompr == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO || codTipoCompr == Constantes.CODIGO_RECIBO_DISTRIBUCION_EXCEDENTE || codTipoCompr == Constantes.CODIGO_RECIBO_REEMBOLSO_CUOTA_SOCIALES || codTipoCompr == Constantes.CODIGO_RECIBO_INTEGRACION_CUOTA ) {
             b = true;
 
         }

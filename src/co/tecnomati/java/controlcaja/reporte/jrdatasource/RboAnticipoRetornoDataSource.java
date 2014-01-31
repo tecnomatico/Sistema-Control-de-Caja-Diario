@@ -57,6 +57,8 @@ public class RboAnticipoRetornoDataSource implements JRDataSource {
         for (Iterator<Comprobanteconcepto> it = conjuntoConceptos.iterator(); it.hasNext();) {
             Comprobanteconcepto comprobanteconcepto = it.next();
             neto = comprobanteconcepto.getMonto() + neto;
+            neto= MyUtil.Redondear(neto, 2);
+            System.out.println("redondeo del neto a "+ MyUtil.Redondear(neto, 2));
             if (comprobanteconcepto.getConcepto().getCodigoConcepto() != Constantes.CONCEPTO_CODIGO_MONOTRIBUTO) {
                 //detalle 1 o concepto 1
 
@@ -161,8 +163,12 @@ public class RboAnticipoRetornoDataSource implements JRDataSource {
 
             valor = "";
         } else if ("descuento2".equals(jrf.getName()) && comprobanteconcepto2 != null) {
-
-            valor = ((-1)*comprobanteconcepto2.getMonto());
+              double monto = comprobanteconcepto2.getMonto();
+              if (monto!=0) {
+//                  System.out.println("entro a cambiar el signo de monto para imprimir el monotributo");
+                monto = ((-1)*monto);
+              }
+             valor = monto;
         } else if ("totalImporte".equals(jrf.getName())) {
             // total de los importes  que en este caso es solo es 1 , si hay mas habra que reemplazar esto
             valor = comprobanteconcepto1.getMonto();

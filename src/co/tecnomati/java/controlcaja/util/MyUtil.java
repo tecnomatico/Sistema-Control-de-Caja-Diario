@@ -74,4 +74,27 @@ public class MyUtil {
      public static int countChar(String c, String s){
         return s.split(c).length - 1;
      }
+     
+     /**
+      * 
+      * @param numero es el numero que se quiere rendondear
+      * @param digitos la cantidad de cifras decimales a la que se quiere redondear el numero
+      * @return numero double rendondeado a (digitos) decimales
+      */
+     public static double Redondear(double numero,int digitos)
+{
+      int cifras=(int) Math.pow(10,digitos);
+      return Math.rint(numero*cifras)/cifras;
+}
+     /**
+      * comparara el primer argumento con el segundo argumento
+      * @param x primer argumento double
+      * @param y segundo argumento double
+      * @return  true si x<= y 
+      *          false en otro caso
+      */ 
+     public static boolean isMenorOrIgual(double x, double y){
+       
+        return x<=y;
+    }
 }

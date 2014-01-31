@@ -453,16 +453,18 @@ boolean bandera;
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         if (tblComprobante.getSelectedRow() != -1) {
+            // se selecciono una fila 
             numeroSeleccion = sorter.convertRowIndexToModel(tblComprobante.getSelectedRow());
             comprobante = modeloComprobante.getAsociado(numeroSeleccion);
             // abrir el formulario alta de persona para editar los datos de persona
             GUIComprobante modificarComprobante = new GUIComprobante(null, true, comprobante);
-            // actulizar la tabla con los datos modificados
+            // actulizar la tabla con los datos modificados o creados
             if (modificarComprobante.isAgregado() || modificarComprobante.isElimiado()) {
                 inicializarTabla();
             }
 
         } else {
+            // apreto el boton editar pero no selecciono ninguna fila
             JOptionPane.showMessageDialog(this, "Seleccione una fila");
         }
     }//GEN-LAST:event_btnEditarActionPerformed

@@ -137,14 +137,14 @@ public class Creador {
     }
     public static void CrearCooperativayAsociado(){
         Cooperativa coop = new Cooperativa();
-        String cuit = "12-34576787-8";
+        String cuit = "30-71417115-8";
         coop.setCuit(cuit);
-        coop.setDomicilio("Pandora Inc");
-        coop.setIngresoBruto("aaa");
-        coop.setInicioActividad(new Date());
+        coop.setDomicilio("Av. Rio Bamba Nº 144 – Cnel. Arias – S.S. de Jujuy");
+        coop.setIngresoBruto("A-1-51004");
+        coop.setInicioActividad(new Date(2013-1900,7,1));
         coop.setInicioCaja(0.0);
-        coop.setMatricula(345);
-        coop.setRazonSocial("Tecnomatica Lda");
+        coop.setMatricula(47735);
+        coop.setRazonSocial("Coop. de Trabajo Tecnomatica Lda");
         coop.setTelefono("154729680");
         new CooperativaDaoImp().addCooperativa(coop);
         
@@ -153,12 +153,12 @@ public class Creador {
        
         a.setApellido("Pelaez");
         a.setCooperativa(coop);
-        a.setCuit("22-34576787-9");
+        a.setCuit("20-32369235-2");
         a.setDni(32369235);
-        a.setIngreso(new Date());
+        a.setIngreso(new Date(2012-1900,9,1));
         a.setLegajo(1);
         a.setNombre("Joel Alfredo Ismael");
-        a.setTelefono("154729680");
+        a.setTelefono("388-154729680");
         new AsociadoDaoImp().addAsociado(a);
 
         a.setApellido("Aramayo");

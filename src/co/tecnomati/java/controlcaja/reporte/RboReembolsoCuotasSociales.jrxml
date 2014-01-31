@@ -100,7 +100,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
-					<text><![CDATA[RECIBO DE INTEGRACION DE CUOTAS SOCIALES]]></text>
+					<text><![CDATA[RECIBO DE REEMBOLSO DE CUOTAS SOCIALES]]></text>
 				</staticText>
 				<staticText>
 					<reportElement uuid="b61a970e-002e-40c2-b15d-2d4dfef373b9" x="6" y="347" width="344" height="16"/>
@@ -330,7 +330,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[RECIBO DE INTEGRACION DE CUOTAS SOCIALES]]></text>
+				<text><![CDATA[RECIBO DE REEMBOLSO DE CUOTAS SOCIALES]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="7a31c1f4-c14e-495c-a990-c2b1a5296c96" x="549" y="21" width="253" height="67"/>

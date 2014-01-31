@@ -57,6 +57,9 @@ public class GUIComprobante extends javax.swing.JDialog {
     private long numIzq;
     private long numDer;
     private String refComprobante;
+    private boolean visualizar = false;
+  // almacena el valor del monotributo en caso de recien creado su valor es 0
+    private double monotributo;
    
 
   
@@ -77,7 +80,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         newComprobante();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-
+      
     }
 
     /**
@@ -92,6 +95,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         modificar = true;
+        visualizar= true;
         this.comprobante = compr;
 
         setDatos();
@@ -260,7 +264,11 @@ public class GUIComprobante extends javax.swing.JDialog {
                 System.out.println("elemento nro 2 del conjunto");
 
                 // existe el aporte de monotribbuto ademas
-                txtAporteMonotributo.setText(String.valueOf((-1)*comprobanteconcepto.getMonto()));// lo multiplico para que aparesca positivo
+                monotributo=comprobanteconcepto.getMonto();
+                if (monotributo!=0) {
+                    monotributo= (-1)*comprobanteconcepto.getMonto();
+               
+                txtAporteMonotributo.setText(String.valueOf(monotributo));// lo multiplico para que aparesca positivo
                 chkAporteMonotributo.setSelected(true);
             }
 
@@ -288,11 +296,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         }
     }
 
-    /**
-     * Tiene que realizar la captura de datos de la ventana y pasarsela al
-     * Objeto Comprobante para su posterior Carga o Actualizacion en la bd
-     */
-    public void getDatos() {
+    
     }
 
     public boolean isAgregado() {
@@ -723,8 +727,17 @@ public class GUIComprobante extends javax.swing.JDialog {
         });
 
         txtAporteMonotributo.setEditable(false);
+        txtAporteMonotributo.setBackground(new java.awt.Color(255, 255, 255));
         txtAporteMonotributo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtAporteMonotributo.setText("0");
+        txtAporteMonotributo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtAporteMonotributo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtAporteMonotributo.setSelectedTextColor(new java.awt.Color(0, 0, 0));
+        txtAporteMonotributo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAporteMonotributoActionPerformed(evt);
+            }
+        });
         txtAporteMonotributo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtAporteMonotributoKeyTyped(evt);
@@ -889,6 +902,14 @@ public class GUIComprobante extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbTipoProcesoActionPerformed
 
+    
+   
+    
+    /**
+     * Se encarga de verificar que los campos del comprobante se hayan cargados si encuentra algun campo vacio te aparece un mje donde falta completar
+     * @return true si se cargo todos los campos
+     *          false si falta llenar algun campo.
+     */
     public boolean validarCamposVacio() {
         boolean b = false;
 
@@ -930,7 +951,11 @@ public class GUIComprobante extends javax.swing.JDialog {
      * metodo que se encarga de realizar la accion del boton Guardar Comprobante
      */
     private void guardarComprobante() {
-        if (validarCamposVacio()) {
+        if (validarCamposVacio() ) {
+            if ( MyUtil.isMenorOrIgual(Double.valueOf(txtAporteMonotributo.getText().trim()),Double.valueOf(txtMonto.getText().trim()))) {
+                
+            
+ 
             //cargo los datos en el objeto comprobante
             comprobante.setIdEntidad(entidad.getId());
             comprobante.setTipoPersona(entidad.getTipoEntidad());
@@ -959,7 +984,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
             //realizo el almacenamiento o actualizacion de los datos segun corresponda
             if (modificar) {
-
+                System.out.println("...Actualizando..");
                 //modificar
                 new ComprobanteDaoImp().upDateFormulario(comprobante);
                 //update para los conceptos del formulario
@@ -967,18 +992,26 @@ public class GUIComprobante extends javax.swing.JDialog {
                     comprobanteconcepto = it.next();
 
                     if (comprobanteconcepto.getConcepto().getCodigoConcepto() == Constantes.CONCEPTO_CODIGO_MONOTRIBUTO) {
-
-                        if (chkAporteMonotributo.isSelected()) {
-                            // actualiza
-                            comprobanteconcepto.setMonto(- Double.parseDouble(txtAporteMonotributo.getText().trim()));
+                        
+                            monotributo=  - Double.parseDouble(txtAporteMonotributo.getText().trim());
+                            comprobanteconcepto.setMonto(monotributo);
                             new ComprobanteconceptoDaoImp().upDateComprobanteconcepto(comprobanteconcepto);
                             System.out.println("Se actualizo el monotributo");
-                        } else {
-                            // quiere decir que no aplicara monotributo , por ende debemos eliminarlo 
-                            new ComprobanteconceptoDaoImp().deleteComprobanteconcepto(comprobanteconcepto);
-                            System.out.println("Se borro el monotributo");
+                          
+//                        if (chkAporteMonotributo.isSelected()) {
+//                            System.out.println("monotributo chequeado");
+//                            // actualiza
+//                           monotributo=  - Double.parseDouble(txtAporteMonotributo.getText().trim());
+//                          
+//                            comprobanteconcepto.setMonto(monotributo);
+//                            new ComprobanteconceptoDaoImp().upDateComprobanteconcepto(comprobanteconcepto);
+//                            System.out.println("Se actualizo el monotributo");
+//                        } else {
+//                            // quiere decir que no aplicara monotributo , por ende debemos eliminarlo 
+//                            new ComprobanteconceptoDaoImp().deleteComprobanteconcepto(comprobanteconcepto);
+//                            System.out.println("Se borro el monotributo");
 
-                        }
+//                        }
 
                     } else {
                         // es otro concepto
@@ -1003,13 +1036,19 @@ public class GUIComprobante extends javax.swing.JDialog {
                 new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalle);
                 System.out.print("Se guardo el detalle 1");
                 // carga el segundo detalle si es un recibo anticipo de retorno
-                if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO && chkAporteMonotributo.isSelected()) {
+//                if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO && chkAporteMonotributo.isSelected()) {
+                if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO ) {
+                    if (chkAporteMonotributo.isSelected()) {
+                        monotributo=  - Double.parseDouble(txtAporteMonotributo.getText().trim());
+                    } else {
+                        monotributo=  0;
+                    }
                     System.out.println(Constantes.CONCEPTO_DESCRIPCION_ANTICIPO_RETORNO);
-
                     Comprobanteconcepto detalleMonotributo = new Comprobanteconcepto();
                     detalleMonotributo.setConcepto(new ConceptoDaoImp().getConcepto(Constantes.CONCEPTO_CODIGO_MONOTRIBUTO));
                     detalleMonotributo.setComprobante(comprobante);
-                    detalleMonotributo.setMonto(- Double.parseDouble(txtAporteMonotributo.getText()));
+//                    monotributo=  - Double.parseDouble(txtAporteMonotributo.getText().trim());
+                    detalleMonotributo.setMonto(monotributo);
                     new ComprobanteconceptoDaoImp().addComprobanteconcepto(detalleMonotributo);
                     System.out.print("Se guardo el detalle 2");
 
@@ -1021,6 +1060,7 @@ public class GUIComprobante extends javax.swing.JDialog {
             agregado = true;
 
             JOptionPane.showMessageDialog(null, "Se cargo correctamente...");
+            visualizar= true;
             setEditableComprobante(false);
             // botones que deben figurar cuando se guarda
             btnEditar.setEnabled(false);
@@ -1032,6 +1072,9 @@ public class GUIComprobante extends javax.swing.JDialog {
             // 
             setEnabledBotonImprimir(tipoComprobante.getCodigo());
  
+        }else{
+               mensajero.mensajeError(null, "El aporte de monotributo no puede superar al monto del Anticipo de Retorno");
+            }
         }
     }
     
@@ -1318,15 +1361,28 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     }
 
+    
     /**
      * Controla de que no se pueda editar este panel si el Tipo de Cmprobante no
      * es Uno de Anticipo de REtorno
+     * 
      */
     public void controlarPanelMonotributo() {
         if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO) {
 //            panelContendedorPanelMonotrib.setVisible(true);
-            chkAporteMonotributo.setEnabled(true);
-            txtAporteMonotributo.setEnabled(true);
+            if (modificar && visualizar) {
+                // si se llama esta ventana desde la gestora entonces no se debe editar ya que solo visualiza 
+                chkAporteMonotributo.setEnabled(false);
+                txtAporteMonotributo.setEnabled(false);
+   
+            } else {
+                 chkAporteMonotributo.setEnabled(true);
+                 txtAporteMonotributo.setEnabled(true);
+                 txtAporteMonotributo.setEditable(true);
+                 
+                 
+            }
+           
 
 
         } else {
@@ -1463,11 +1519,21 @@ public class GUIComprobante extends javax.swing.JDialog {
 
     private void chkAporteMonotributoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAporteMonotributoActionPerformed
         if (chkAporteMonotributo.isSelected()) {
-            txtAporteMonotributo.setText("0");
+            if (modificar) {
+                txtAporteMonotributo.setText(String.valueOf(monotributo));
+            } else {
+               txtAporteMonotributo.setText("0");    
+            }
+            
             txtAporteMonotributo.setEditable(true);
 
         } else {
-            txtAporteMonotributo.setText("");
+//            if (modificar) {
+//                txtAporteMonotributo.setText(String.valueOf(monotributo));
+//            } else {
+//               txtAporteMonotributo.setText("0");    
+//            }
+            txtAporteMonotributo.setText("0"); 
             txtAporteMonotributo.setEditable(false);
 
         }
@@ -1587,6 +1653,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         concepto = null;
         numDer = 0;
         numIzq = 0;
+        monotributo= 0;
         limpiarDatosComprobante();
 
         //botones
@@ -1624,6 +1691,8 @@ public class GUIComprobante extends javax.swing.JDialog {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // mapeo de nuevo el comprobante para que ahira el comprbane tenga cargadas sus colecciones perisistentes
         comprobante = new ComprobanteDaoImp().getFormulario(comprobante.getId());
+       // pongo visualizar en false debido a que ahora se edita no se visualiza
+        visualizar= false;
         // ahora edito
         editarComprobante();
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -1738,6 +1807,10 @@ public class GUIComprobante extends javax.swing.JDialog {
 //        System.out.println("coidgo de tipode comproabante"+ txtRefComprobante);
     }//GEN-LAST:event_txtRefTipoComprFocusGained
 
+    private void txtAporteMonotributoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAporteMonotributoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAporteMonotributoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1846,7 +1919,7 @@ public class GUIComprobante extends javax.swing.JDialog {
 
         chkAporteMonotributo.setEnabled(false);
         chkAporteMonotributo.setSelected(false);
-        txtAporteMonotributo.setText("");
+        txtAporteMonotributo.setText("0");
 
     }
 
@@ -1854,15 +1927,15 @@ public class GUIComprobante extends javax.swing.JDialog {
      * si es un comprobante con monotributo entonces permite que se pueda ediar
      * el panel monotributo
      */
-    private void controlarEditableMonotributo() {
-        if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO) {
-            chkAporteMonotributo.setEnabled(true);
-            txtAporteMonotributo.setEditable(true);
-        } else {
-            chkAporteMonotributo.setEnabled(false);
-            txtAporteMonotributo.setEditable(false);
-        }
-    }
+//    private void controlarEditableMonotributo() {
+//        if (tipoComprobante.getCodigo() == Constantes.CODIGO_RECIBO_ANTICIPO_RETORNO) {
+//            chkAporteMonotributo.setEnabled(true);
+//            txtAporteMonotributo.setEditable(true);
+//        } else {
+//            chkAporteMonotributo.setEnabled(false);
+//            txtAporteMonotributo.setEditable(false);
+//        }
+//    }
 
     
     private void setEditableComprobante(boolean b) {
@@ -1883,7 +1956,8 @@ public class GUIComprobante extends javax.swing.JDialog {
 //        txtDescripcionConcepto.setEditable(b);
         txtMonto.setEditable(b);
 //       
-        controlarEditableMonotributo();
+        controlarPanelMonotributo();
+        // controlareditable monotributo
 
     }
 }

@@ -745,8 +745,7 @@ public class GUIComprobante extends javax.swing.JDialog {
         );
 
         panelMonotributo1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 102)));
-        panelMonotributo1.setColorPrimario(new java.awt.Color(0, 102, 102));
-        panelMonotributo1.setColorSecundario(new java.awt.Color(0, 204, 255));
+        panelMonotributo1.setColorPrimario(new java.awt.Color(0, 51, 51));
         panelMonotributo1.setEnabled(false);
         panelMonotributo1.setMaximumSize(new java.awt.Dimension(414, 62));
         panelMonotributo1.setMinimumSize(new java.awt.Dimension(414, 62));

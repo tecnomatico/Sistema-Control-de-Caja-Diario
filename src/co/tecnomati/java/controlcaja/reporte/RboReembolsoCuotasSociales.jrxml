@@ -245,7 +245,7 @@
 				<textFieldExpression><![CDATA[$F{nroDNI}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="ae97ef7e-ff12-44c2-91d6-fc1ef7ae14d5" x="6" y="325" width="299" height="20"/>
+				<reportElement uuid="ae97ef7e-ff12-44c2-91d6-fc1ef7ae14d5" x="6" y="325" width="344" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{cantidadPago}]]></textFieldExpression>
 			</textField>
@@ -543,7 +543,7 @@
 				<text><![CDATA[En concepto de reembolso de las cuotas sociales integradas.]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="b77f0816-4962-4f14-b537-44a869f39bb7" x="446" y="325" width="299" height="20"/>
+				<reportElement uuid="b77f0816-4962-4f14-b537-44a869f39bb7" x="446" y="325" width="344" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{cantidadPago}]]></textFieldExpression>
 			</textField>

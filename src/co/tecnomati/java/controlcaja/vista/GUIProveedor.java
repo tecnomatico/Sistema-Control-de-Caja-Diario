@@ -85,7 +85,7 @@ public class GUIProveedor extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", 0, 0, null, new java.awt.Color(255, 255, 255)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(255, 255, 255)));
         jPanel1.setOpaque(false);
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/tecnomati/java/controlcaja/imagen/Atras.png"))); // NOI18N
@@ -125,7 +125,7 @@ public class GUIProveedor extends javax.swing.JDialog {
                 .addGap(10, 10, 10))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales del Proveedor", 0, 0, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales del Proveedor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel2.setOpaque(false);
 
         labelCuit.setText("CUIT");
@@ -253,9 +253,11 @@ public class GUIProveedor extends javax.swing.JDialog {
             cD = txtDomicilio.getText().trim().isEmpty();
             cT = txtTelefono.getText().trim().isEmpty();
             //corroboro que no este vacio
-            if (cA || cRS || cT || cD) {
+//            if (cA || cRS || cT || cD) {
+            if ( cRS ) {
                if (cA) {
-                mensajero.mensajeError(null, "Tipo cuit no puede estar vacio");
+//                mensajero.mensajeError(null, "Tipo cuit no puede estar vacio");
+//                  txtCuit.setText("");
             } else if (cRS) {
                 mensajero.mensajeError(null, "razon no puede estar vacio");
             } else if (cD) {

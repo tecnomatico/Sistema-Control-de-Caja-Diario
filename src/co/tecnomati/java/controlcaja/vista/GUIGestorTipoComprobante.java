@@ -19,13 +19,16 @@ import javax.swing.table.TableRowSorter;
  * @author Joel
  */
 public class GUIGestorTipoComprobante extends javax.swing.JDialog {
+
     private int numeroSeleccion;
     private Tipocomprobante tipoComp;
     private ModeloTipoComprobante modeloTipoComp = new ModeloTipoComprobante();
-    
-    private  TableRowSorter sorter;
+    private TableRowSorter sorter;
+    private boolean agregado = false;
+    // determina desde donde se invoco esta ventana
+    // desde ventana control de caja o desde Registro Comprobante
+    String i;
 
-    private boolean agregado= false;
     /**
      * Creates new form GUIGestorTipoComprobante
      */
@@ -34,8 +37,19 @@ public class GUIGestorTipoComprobante extends javax.swing.JDialog {
         initComponents();
         inicializarTabla();
         this.setTitle(Constantes.NAME_GESTOR_TIPO_DOCUMENTO);
-         this.setLocationRelativeTo(null);
-         btnSeleccionar.setVisible(false); //vanesa
+        this.setLocationRelativeTo(null);
+        btnSeleccionar.setVisible(false); //vanesa
+        this.setVisible(true);
+    }
+
+    public GUIGestorTipoComprobante(java.awt.Frame parent, boolean modal, String dondeSeLlamo) {
+        super(parent, modal);
+        initComponents();
+        inicializarTabla();
+        this.i = dondeSeLlamo;
+        this.setTitle(Constantes.NAME_GESTOR_TIPO_DOCUMENTO);
+        this.setLocationRelativeTo(null);
+        btnSeleccionar.setVisible(false); //vanesa
         this.setVisible(true);
     }
 
@@ -51,9 +65,6 @@ public class GUIGestorTipoComprobante extends javax.swing.JDialog {
         return tipoComp;
     }
 
-   
- 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,6 +115,11 @@ public class GUIGestorTipoComprobante extends javax.swing.JDialog {
         tblDocumento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDocumentoMouseClicked(evt);
+            }
+        });
+        tblDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblDocumentoKeyPressed(evt);
             }
         });
         jScrollPane2.setViewportView(tblDocumento);
@@ -233,84 +249,106 @@ public class GUIGestorTipoComprobante extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-       GUITipoComprobante nuevoDocumento = new GUITipoComprobante(null, true);
+        GUITipoComprobante nuevoDocumento = new GUITipoComprobante(null, true);
         if (nuevoDocumento.isAgregado()) {
             inicializarTabla();
         }
-       
+
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-            if (tblDocumento.getSelectedRow() != -1) {
+        if (tblDocumento.getSelectedRow() != -1) {
             numeroSeleccion = sorter.convertRowIndexToModel(tblDocumento.getSelectedRow());
             tipoComp = modeloTipoComp.getTipoComp(numeroSeleccion);
             // abrir el formulario alta de persona para editar los datos de persona
             GUITipoComprobante modificarPersona = new GUITipoComprobante(null, true, tipoComp);
             // actulizar la tabla con los datos modificados
-                if (modificarPersona.isAgregado()) {
-                    inicializarTabla();
-                }
-            
+            if (modificarPersona.isAgregado()) {
+                inicializarTabla();
+            }
+
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione una fila");
-       }
+        }
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-          if (tblDocumento.getSelectedRow() != -1) {
+        if (tblDocumento.getSelectedRow() != -1) {
             numeroSeleccion = sorter.convertRowIndexToModel(tblDocumento.getSelectedRow());
             tipoComp = modeloTipoComp.getTipoComp(numeroSeleccion);
-            
+
             //indico qe si se selecciono
             setAgregado(true);
-                       
+
             // cierro la ventna
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione una fila");
-       }
+        }
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescripcionActionPerformed
 
-        public void filtro(JTextField caja){
-          if (tblDocumento.getModel().getRowCount() != 0) {
+    public void filtro(JTextField caja) {
+        if (tblDocumento.getModel().getRowCount() != 0) {
             sorter.setRowFilter(RowFilter.regexFilter("(?i).*" + caja.getText() + ".*"));
             tblDocumento.setRowSorter(sorter);
 
+        }
     }
-    }
-    
+
     private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
 
         filtro(txtDescripcion);
     }//GEN-LAST:event_txtDescripcionKeyPressed
 
+    public void getTipoComprobanteDeJtable(){
+        if (tblDocumento.getSelectedRow() != -1) {
+                    numeroSeleccion = sorter.convertRowIndexToModel(tblDocumento.getSelectedRow());
+                    tipoComp = modeloTipoComp.getTipoComp(numeroSeleccion);
+
+                    //indico qe si se selecciono
+                    setAgregado(true);
+
+                    // cierro la ventna
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Seleccione una fila");
+                }
+    }
+    
+    
     private void tblDocumentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDocumentoMouseClicked
         // TODO add your handling code here:
-        if (tblDocumento.getSelectedRow() != -1) {
-            numeroSeleccion = sorter.convertRowIndexToModel(tblDocumento.getSelectedRow());
-            tipoComp = modeloTipoComp.getTipoComp(numeroSeleccion);
-            
-            //indico qe si se selecciono
-            setAgregado(true);
-                       
-            // cierro la ventna
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una fila");
-       }
-        
-        
-        
+        if (i == Constantes.NAME_NUEVO_REGISTRO) {
+//             System.out.println("Se inibio el el doble click");
+            if (evt.getClickCount() == 2) {
+//             hizo doble clik con el mouse 
+                getTipoComprobanteDeJtable();
+            }
+        }
+
+
+
+
+
+
     }//GEN-LAST:event_tblDocumentoMouseClicked
 
     private void panel1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_panel1ComponentResized
         // TODO add your handling code here:
     }//GEN-LAST:event_panel1ComponentResized
+
+    private void tblDocumentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblDocumentoKeyPressed
+        if (i==Constantes.NAME_NUEVO_REGISTRO) {
+        if (evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER ) {
+            getTipoComprobanteDeJtable();
+        }
+        }
+    }//GEN-LAST:event_tblDocumentoKeyPressed
 
     /**
      * @param args the command line arguments

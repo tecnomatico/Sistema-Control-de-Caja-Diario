@@ -1,5 +1,5 @@
 package co.tecnomati.java.controlcaja.dominio;
-// Generated 29/01/2014 13:32:38 by Hibernate Tools 3.2.1.GA
+// Generated 31/01/2014 14:12:22 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -14,16 +14,17 @@ public class Proveedor  implements java.io.Serializable {
      private String razonSocial;
      private String domicilio;
      private String telefono;
-     private Boolean estado;
+     private boolean estado;
 
     public Proveedor() {
     }
 
 	
-    public Proveedor(String cuit) {
-        this.cuit = cuit;
+    public Proveedor(String razonSocial, boolean estado) {
+        this.razonSocial = razonSocial;
+        this.estado = estado;
     }
-    public Proveedor(String cuit, String razonSocial, String domicilio, String telefono, Boolean estado) {
+    public Proveedor(String cuit, String razonSocial, String domicilio, String telefono, boolean estado) {
        this.cuit = cuit;
        this.razonSocial = razonSocial;
        this.domicilio = domicilio;
@@ -66,11 +67,11 @@ public class Proveedor  implements java.io.Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    public Boolean getEstado() {
+    public boolean isEstado() {
         return this.estado;
     }
     
-    public void setEstado(Boolean estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 

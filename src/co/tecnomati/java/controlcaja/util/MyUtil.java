@@ -97,4 +97,17 @@ public class MyUtil {
        
         return x<=y;
     }
+     
+     /**
+      * 
+      * @param monotributo valar con signo negativo
+      * @return retorna la parte positiva del valor
+      */
+     public static double convertirPositivoDouble(double monotributo){
+         if ((monotributo==0   || monotributo<0)) {
+            monotributo= (-1)*monotributo;
+         }
+         return monotributo;
+      }
+     
 }

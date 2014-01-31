@@ -335,7 +335,7 @@ public class GUIGestorDeCaja extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestorConceptoActionPerformed
 
     private void btnDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentoActionPerformed
-        GUIGestorTipoComprobante gestorDocumento = new GUIGestorTipoComprobante(this, true);
+        GUIGestorTipoComprobante gestorDocumento = new GUIGestorTipoComprobante(this, true,Constantes.NAME_GESTOR_CAJA);
 
     }//GEN-LAST:event_btnDocumentoActionPerformed
 

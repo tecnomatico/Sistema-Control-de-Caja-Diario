@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 29/01/2014 13:32:39 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 31/01/2014 14:12:23 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="co.tecnomati.java.controlcaja.dominio.Proveedor" table="proveedor" catalog="control_caja">
         <id name="idProveedor" type="java.lang.Integer">
@@ -9,10 +9,10 @@
             <generator class="identity" />
         </id>
         <property name="cuit" type="string">
-            <column name="cuit" length="14" not-null="true" unique="true" />
+            <column name="cuit" length="14" />
         </property>
         <property name="razonSocial" type="string">
-            <column name="razonSocial" length="100" />
+            <column name="razonSocial" length="100" not-null="true" />
         </property>
         <property name="domicilio" type="string">
             <column name="domicilio" length="200" />
@@ -20,8 +20,8 @@
         <property name="telefono" type="string">
             <column name="telefono" length="20" />
         </property>
-        <property name="estado" type="java.lang.Boolean">
-            <column name="estado" />
+        <property name="estado" type="boolean">
+            <column name="estado" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

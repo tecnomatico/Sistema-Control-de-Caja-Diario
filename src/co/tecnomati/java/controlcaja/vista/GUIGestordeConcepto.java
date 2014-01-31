@@ -334,18 +334,23 @@ private void inicializarGestorModeloTabla(){
     }
     
     private void tblConceptoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConceptoMouseClicked
- 
-        // si hace doble click entnoces se seleecciona el la fila de  la tabla
-       /*if (evt.getClickCount()==2) {
-            // hizo doble clik con el mouse 
+        if (i!=Constantes.MODELO_TODOS_LOS_CONCEPTOS) {
+//             System.out.println("Se inibio el el doble click");
+        if (evt.getClickCount()==2) {
+//             hizo doble clik con el mouse 
             getConceptodeJTable();
-        }*/
+           }     
+        }
+//         si hace doble click entnoces se seleecciona el la fila de  la tabla
+       
     }//GEN-LAST:event_tblConceptoMouseClicked
 
     private void tblConceptoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblConceptoKeyPressed
-        /*if (evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER ) {
+        if (i!=Constantes.MODELO_TODOS_LOS_CONCEPTOS) {
+        if (evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER ) {
             getConceptodeJTable();
-        }*/
+        }
+        }
     }//GEN-LAST:event_tblConceptoKeyPressed
 
     /**

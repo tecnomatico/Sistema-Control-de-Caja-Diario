@@ -9,11 +9,6 @@
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
 -- Base de datos: `control_caja`
 --
@@ -65,14 +60,13 @@ CREATE TABLE IF NOT EXISTS `categoriacomprobante` (
 
 CREATE TABLE IF NOT EXISTS `cliente` (
   `idCliente` int(11) NOT NULL AUTO_INCREMENT,
-  `cuit` varchar(14) COLLATE utf8_spanish_ci NOT NULL,
-  `razonSocial` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cuit` varchar(14) COLLATE utf8_spanish_ci  NULL,
+  `razonSocial` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `domicilio` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `estado` bit(1) DEFAULT NULL,
+  `estado` bit(1) NOT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`idCliente`),
-  UNIQUE KEY `cuit` (`cuit`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`idCliente`)
+  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -157,13 +151,13 @@ CREATE TABLE IF NOT EXISTS `cooperativa` (
 
 CREATE TABLE IF NOT EXISTS `proveedor` (
   `idProveedor` int(11) NOT NULL AUTO_INCREMENT,
-  `cuit` varchar(14) COLLATE utf8_spanish_ci NOT NULL,
-  `razonSocial` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cuit` varchar(14) COLLATE utf8_spanish_ci  NULL,
+  `razonSocial` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `domicilio` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `estado` bit(1) DEFAULT NULL,
-  PRIMARY KEY (`idProveedor`),
-  UNIQUE KEY `cuit` (`cuit`)
+  `estado` bit(1) NOT NULL,
+  PRIMARY KEY (`idProveedor`)
+  
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
@@ -214,10 +208,6 @@ ALTER TABLE `comprobanteconcepto`
 --
 ALTER TABLE `tipocomprobante`
   ADD CONSTRAINT `tipocomprobante_ibfk_1` FOREIGN KEY (`codigoCategoria`) REFERENCES `categoriacomprobante` (`codigoCategoria`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 ALTER TABLE tipocomprobante AUTO_INCREMENT=1;
 ALTER TABLE comprobanteconcepto AUTO_INCREMENT=1;

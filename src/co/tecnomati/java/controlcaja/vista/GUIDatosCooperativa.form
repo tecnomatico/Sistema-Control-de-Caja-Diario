@@ -27,7 +27,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="panel1" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -43,23 +43,23 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jPanel2" max="32767" attributes="0"/>
+                      <Component id="jPanel2" min="-2" pref="508" max="-2" attributes="0"/>
                       <Component id="jPanel1" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="19" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -81,11 +81,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -116,6 +116,9 @@
             </Component>
             <Component class="org.edisoncor.gui.button.ButtonIpod" name="btnGuardar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/co/tecnomati/java/controlcaja/imagen/GUARDAR.jpg"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
@@ -151,14 +154,9 @@
                               </Group>
                               <Component id="labelMetric4" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="71" pref="71" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="labelMetric3" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelMetric1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelMetric2" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="labelMetric3" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelMetric1" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelMetric2" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -182,6 +180,11 @@
                           <Component id="lblImgDomicilio" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="labelRazonSocial3" min="-2" pref="164" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -246,6 +249,8 @@
                           </Group>
                           <Component id="lblImgDomicilio" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="labelRazonSocial3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -268,7 +273,7 @@
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="INICIO DE CAJA"/>
+                <Property name="text" type="java.lang.String" value="INICIO DE CAJA  *"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="16" style="1"/>
                 </Property>
@@ -296,7 +301,7 @@
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="INICIO DE ACTIVIDAD"/>
+                <Property name="text" type="java.lang.String" value="INICIO DE ACTIVIDAD  *"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="16" style="1"/>
                 </Property>
@@ -304,7 +309,7 @@
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="INGRESO BRUTOS"/>
+                <Property name="text" type="java.lang.String" value="INGRESO BRUTOS  *"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="16" style="1"/>
                 </Property>
@@ -417,7 +422,7 @@
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="NOMBRE"/>
+                <Property name="text" type="java.lang.String" value="NOMBRE  *"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="16" style="1"/>
                 </Property>
@@ -425,7 +430,7 @@
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="C.U.I.T."/>
+                <Property name="text" type="java.lang.String" value="C.U.I.T.  *"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="16" style="1"/>
                 </Property>
@@ -440,7 +445,7 @@
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="MATRICULA"/>
+                <Property name="text" type="java.lang.String" value="MATRICULA  *"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="16" style="1"/>
                 </Property>
@@ -449,6 +454,7 @@
             <Component class="org.edisoncor.gui.textField.TextField" name="txtNombre">
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtNombreMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreActionPerformed"/>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNombreFocusLost"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreKeyPressed"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreKeyTyped"/>
@@ -463,9 +469,17 @@
             </Component>
             <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="DOMICILIO"/>
+                <Property name="text" type="java.lang.String" value="DOMICILIO  *"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="16" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="org.edisoncor.gui.label.LabelMetric" name="labelRazonSocial3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="(*) Datos Obligatorios"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
             </Component>
